@@ -1,0 +1,34 @@
++createList()
+// Creëert een lege lijst.
+
++destroyList()
+// Wist een lijst.
+
++isEmpty(): boolean
+// Bepaalt of een lijst leeg is.
+
++getLength(): integer
+// Geeft het aantal elementen in de lijst.
+
++insert(in index:integer, in newItem:ListItemType, out success:boolean)
+// Voegt het element ‘newItem’ toe op positie ‘index’ in een lijst, indien
+// 0 <= index <= getLength()+1. Als index <= getLength(), dan worden de
+// elementen als volgt hernummerd: het element op ‘index’ wordt het element op
+// ‘index+1’, het element op ‘index+1’ wordt het element op ‘index+2’, enz..
+// ‘Success’ duidt aan of het toevoegen gelukt is.
+// precondition: 0 <= index <= getLength()+1
+
++delete(in index:integer, out success:boolean)
+// Verwijdert het element op positie ‘index’ uit een lijst, indien
+// 0 <= index <= getLength(). Als index < getLength(), dan worden de elementen
+// als volgt hernummerd: het element op ‘index+1’ wordt het element op ‘index’,
+// het element op ‘index+2’ wordt het element op ‘index+1’, enz.. ‘Success’ duidt
+// aan of het verwijderen gelukt is.
+// precondition: 0 <= index <= getLength()+1
+
++retrieve(in index:integer, out dataItem:ListItemType)
+// Plaatst het element op positie ‘index’ van een lijst in ‘dataItem’, indien
+// 0 <= index <= getLength(). De lijst blijft onveranderd bij deze bewerking.
+// ‘Success’ duidt aan of het opvragen gelukt is.
+// precondition: 0 <= index <= getLength()+1
+// postcondition: De waarde van het dataitem op de gegeven index wordt gereturnt

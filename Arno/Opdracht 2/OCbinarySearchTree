@@ -1,0 +1,34 @@
+// TreeItemType is het type van de elementen die in de binaire zoekboom
+// worden opgeslagen. Een element van dit type heeft een search key veld van
+// het type KeyType.
+
++createSearchTree()
+
++destroySearchTree()
+
++isEmpty(): boolean {query}
+
++searchTreeInsert(in newItem: TreeItemType, out success: boolean)
+// Voegt newItem toe aan een binaire zoekboom met items met verschillende
+// search key waarden, verschillend van de search key van newItem. Success
+// geeft weer of het toevoegen gelukt is.
+
++searchTreeDelete(in searchKey: KeyType, out success: boolean)
+// Verwijdert het eerste item met de zoeksleutel "KeyType uit de boom"
+// precondition: KeyType is de zoeksleutel van een element in de boom
+// postcondition: true indien het verwijderen gelukt is
+
++searchTreeRetrieve(in searchKey:KeyType, out treeItem: TreeItemType)
+// precondition: KeyType is de zoeksleutel voor het opgevraagde element
+// postcondition: De waarde die bij de opgevraagde zoeksleutel hoort
+
+
++preorderTraverse(in visit: FunctionType)
+// overloopt alle knopen, beginnend bij de wortel, gevolgd door de linkerdeelboom en eindigend bij de rechterdeelboom
+// de functie die je eraan meegeeft werkt momenteel nog niet
+
++inorderTraverse(in visit: FunctionType)
+// overloopt alle knopen, beginnend bij de linkerdeelboom,  gevolgd door de root en eindigend bij de rechterdeelboom
+
++postorderTraverse(in visit: FunctionType)
+// overloopt alle knopen, beginnend bij de linkerdeelboom, gevolgd door de rechterdeelboom en eindigend bij de root

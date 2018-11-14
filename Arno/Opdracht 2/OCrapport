@@ -1,0 +1,18 @@
+// De overekoepelende klasse waarin alles gaat gebruikt worden
+// Een rapport kan opgevraagd woorden per maand, bv. M3, of per examenperiode, bv. E3
+// Bevat alle punten van iedereen
+
++ createRapport()
+// maakt een nieuwe blanco verzameling aan
+
++addToets(in toets, out succes)
+// plaatst een nieuwe toets in de lijst van toetsen
+// bekijkt ook op welk rapport de toets thuishoort
+// precondition: De nieuwe toets moet van het type toets zijn, de naam van de toets is verplicht
+// postcondition: true als het toevoegen succesvol verlopen is
+
++retrieve(in searchKey)
+// precondition: searchKey is samengesteld uit de periode en de index van de periode
+//               code start met een letter M of E, gevolgd door een number
+//               opmerking: het volgnummer moet nog binnen de periodes zijn die in het schooljaar vallen
+// postcondition: een html-bestand met daarin de gegevens voor iedereen

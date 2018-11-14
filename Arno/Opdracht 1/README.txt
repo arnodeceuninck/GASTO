@@ -1,0 +1,1 @@
+sample_instructions.py bevat een paar voorbeeldinstructies
