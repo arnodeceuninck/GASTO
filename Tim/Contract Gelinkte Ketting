@@ -1,0 +1,17 @@
++createLinkedChain()
+    maakt een dubbelgelinkte ketting aan doormiddel van een headpointer die naar een dummyhead wijst
+
++insert(in value: Intiger, in key: Intiger)
+    voegt een node toe achteraan de ketting met de value en key die worden meegegeven aan de insert functie
+
++retrieve(in key: Intiger)
+    geeft value terug van de key die overeenkomt met de input key
+
++traverse(out value: List)
+    gaat de hele lijst af en voegt elk element element toe aan de list en returned deze
+
++destroyChain()
+    verwijderd de lijst
+
++Sort()
+    sorteert de lijst op waarde van de key
