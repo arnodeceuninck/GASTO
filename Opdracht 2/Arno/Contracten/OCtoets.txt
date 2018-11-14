@@ -1,0 +1,12 @@
+// Iedere toets heeft een unieke naam zonder spaties, een maximum en een verzameling van punten
+
++createTest(in naam, in maximum, in punten, out succes)
+// precondition: naam bevat geen spaties
+//               maximum is het maximum haalbare aantal punten
+//               punten is een dictionary met resultaten, telkens gelinkt aan het studentennummer
+// postcondition: True als het aanmaken goed verlopen is
+
++editPunten(in punten, out succes)
+// een fout bij het verbeteren kan altijd, met deze functie kan je een nieuwe puntendictionary toevoegen
+// precondition: een dictionary met resultaten, telkens gelinkt aan het studentennummer
+// postcondition: True als het aanpassen goed verlopen is, in dit geval is de vorige lijst met punten overschreven

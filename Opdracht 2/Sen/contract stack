@@ -1,0 +1,27 @@
+//stack
+
++init()
+//Opent input.txt.
+//Maakt een lege bst aan.
+//Runt de functie lees.
+
++lees()
+//Maakt een lege string aan voor het opslaan van het type
+//Heeft een bool "operatie" voor wanneer het een operatie leest.
+//Loopt door het input.txt bestand.
+//indien het eerste karakter "#" is dan negeert het de lijn.
+//Indien er een type in de lijn staan wordt er nagekeken of het type bst is
+//indien het type niet gelijk is aan stack dan geeft het een foutmelding
+//indien het type wel bst is runt het de functie lees_operaties()
+
++lees_operatie()
+//Leest de operatie en kiest de juiste operatie functie.
+
++insert()
+//voegt een element toe vanachter aan de lijst.
+
++delete()
+//verwijdert het laatste element van de lijst.
+
++print()
+//Print de stack in een .dot file, beginnend bij de top.

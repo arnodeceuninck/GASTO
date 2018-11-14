@@ -1,0 +1,35 @@
+// TableItemType is het type van de elementen die in de tabel worden opgeslagen.
+// Een element heeft een search key veld van het type KeyType.
+
++createTable()
+// maakt een nieuwe, lege tabel aan
+
++destroyTable()
+// verwijdert heel de table
+
++tableIsEmpty: boolean {query}
+// kijkt of er elementen in de table zitten
+// postcondition: true als de tabel leeg is
+
++tableLength(): integer {query}
+// postcondition: returnt een int met het aantal elementen in de tabel
+
++tableInsert(in newItem: TableItemType, out success: boolean)
+// Voegt newItem toe aan een table met items met verschillende search key
+// waarden, verschillend van de search key van newItem. Success geeft weer
+// of het toevoegen gelukt is.
+// precondition: newItem is van TableItemType
+// postcondition: the item is inserted in the table if the succes boolean returns true
+
++tableDelete(in searchKey: KeyType, out success: boolean)
+// delete een item in de tabel
+// precondition: searchKey is de zoeksleutel van een item in de tabel
+// postcondition: returnt true indien alles gelukt is en het item dus uit de tabel verwijderd is
+
++tableRetrieve(in searchKey: KeyType, out tableItem: TableItemType,
+out success: boolean)
+// precondition: searchKey is de zoeksleutel van een item in de tabel
+// postcondition: als het item gevonden is, wordt succes True en krijg je de waarde van het gezochte item gereturnt
+
++traverseTable(in visit: FunctionType)
+// doorloopt alle items van de tabel een voor een

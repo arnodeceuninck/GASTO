@@ -1,0 +1,19 @@
++createSearchTree(in rootItem: Type, in rootKey: Intiger)
+    Creëert een binaire boom met 1 knoop, de wortel, deze wortel bevat een intiger die instaat als searchkey,µ
+    de key is dan gelinkt met het item dat meegegeven word door de gebruiker
+
++IsEmpty(): boolean {query}
+    geeft een True als de tree leeg is en een false als de tree niet leeg is.
+
++searchTreeInsert(in rootItem: Type, in rootKey: Integer)
+    het item met de key word geInsert op de juiste locatie aandehand van de waarde van de key.
+
++SearchTreeRetrieve(in rootKey: Intiger, out rootItem: Type)
+    zal door de Tree gaan en het item terug geven dat verbonden is met de key
+
++deleteSelf()
+    De boom zal zichzelf verwijderen
+
++print(in nummer: Intiger)
+    De tree word in een dot bestand geprint, dit kan dan gebruikt worden om een visuele representatie te maken. de input
+    nummer vraagt wat de file nummer moet zijn

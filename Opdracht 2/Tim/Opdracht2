@@ -1,0 +1,20 @@
+classe: Leeraar
+    elke leeraar zal een binaire zoekboom zijn waarin de namen van de leerlingen op alfabetische volgorde staan.
+    De namen van de leerlingen zullen als keys dienen en de waarde zal wijzen naar de puntenlijst van deze leerling.
+
+classe: leerling
+    een leerling zal voorgesteld worden door een dubbelgelinkte ketting, in deze ketting staan alle toetsen van het
+    overeenkomstige vak in de volgorde van de ketting. bv wiskunde testen is altijd op locatie 1, nederlands altijd op locatie 2.
+
+classe: Toets
+    een node met als values de naam van de test, het maximum en een verwijzing naar de verzameling punten. de test zal opgeslagen
+    worden in de puntenlijst, het punt van de leerling zal opgelagen zitten in een lijst met alle behaalde punten van alle leerlingen,
+    het punt kan gevonden worden door het stamboeknummer van de leerling
+
+classe: Puntenlijst
+    de puntenlijst is een circulaire ketting die alle toetsen van een bepaald vak bevatten, elke test heeft zijn eigen id
+    en word opgelagen in de dubbelgelinkte lijst van de leerling
+
++VoegPuntenToe(in Leeraar: classe: zoekboom, in leerling: string, in Toets: string, in Punt: Intiger)
+    De punten zullen worden toegevoegd doormiddel van de naam te zoeken in de zoekboom van de leerkracht. Als deze gevonden
+    is zal de test worden toegevoegd aan puntenlijst onder het juiste vak.

@@ -1,0 +1,15 @@
+digraph {
+head [label="head" shape=box]
+5 [label="5" shape=box]
+10 [label="10" shape=box]
+6 [label="6" shape=box]
+2 [label="2" shape=box]
+345 [label="345" shape=box]
+head -> 5 
+5 -> 10 
+10 -> 6 
+6 -> 2 
+2 -> 345 
+345 -> 5 
+rankdir=LR
+}

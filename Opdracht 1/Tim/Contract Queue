@@ -1,0 +1,17 @@
++createQueue()
+    maakt een nieuwe queue aan doormiddel van een gelinkte lijst.
+
++destroyQueue()
+    verwijderd de queue.
+
++isEmpty()boolean {query}
+    kijkt of de queue leeg is, als deze leeg is word true teruggegeven anders word false terug gegeven.
+
++enqueue(in value: Intiger)
+    voegt een nieuwe waarde toe achteraan de queue.
+
++dequeue(out value: Intiger, out bool)
+    verwijderd het voorste element van de queue.
+
++getFront(out value: Intiger, out bool)
+    geeft de value terug van de eerste node in de queue.

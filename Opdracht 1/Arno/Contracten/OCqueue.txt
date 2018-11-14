@@ -1,0 +1,37 @@
+// QueueItemType is het type van de elementen die in de queue
+// worden opgeslagen.
+
++createQueue()
+// Creëert een lege queue.
+
++destroyQueue()
+// Wist een queue.
+
++isEmpty(): boolean
+// Bepaalt of een queue leeg is
+// postcondition: Als de queue leeg is krijg je true gereturned, anders false
+
++enqueue(in newItem:QueueItemType, out success:boolean)
+// Voegt het element ‘newItem’ toe aan het eind (de staart) van de queue.
+// ‘success’ duidt aan of het toevoegen gelukt is.
+// precondition: QueueItemType is uniek, dwz dat het een unieke zoeksleutel bevat
+// postcondition: True als het toevoegen aan de queue goed verlopen is
+
++dequeue(out queueFront:QueueItemType)
+// Plaatst de kop van een queue (d.i. het eerst toegevoegde element) in
+// ‘queueFront’ en verwijdert dan deze kop.
+// ‘success’ duidt aan of het verwijderen gelukt is.
+// precondition: de queue is niet empty
+// postcondition: de eerste waarde is uit de queue verwijderd en wordt teruggestuurd als return-value
+
++getFront(out queueFront:QueueItemType)
+// Plaatst de kop van een queue (d.i. het eerst toegevoegde element) in
+// ‘queueFront’ en laat de queue ongewijzigd. ‘success’ duidt aan of het gelukt is.
+// precondition: de queue is niet empty
+// postcondition: de eerste waarde van de queue wordt teruggestuurd als return value, maar niet verwijderd
+
++visualize(out success:boolean)
+// Maakt een .dot file van deze grafiek
+// precondition: de queue bestaat, een lege queue kan ook gevisualized worden
+// postcondition: een .dot file is aangemaakt met de visualisatie erin
+                  returnt true indien het aanmaken succesvol verlopen is

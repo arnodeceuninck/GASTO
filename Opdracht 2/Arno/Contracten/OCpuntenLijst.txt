@@ -1,0 +1,2 @@
++createList(in id, in type, in period, in namecodes, in coursecode, in klas, in hours, in toetsen)
+// maakt een lijst aan met allemaal punten voor een bepaalde klas
