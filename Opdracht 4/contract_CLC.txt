@@ -1,12 +1,43 @@
 // CLC: Circular Linked Chain
-// verantwoordelijke implementeren:
-// verantwooedelijke testen:
+// verantwoordelijke implementeren: Arno
+// verantwooedelijke testen: Sen
+
+// Een circular linked chain is een ADT die gebasseerd is op een gelinkte ketting.
+// Het verschil met een gelinkte ketting is dat het laatste element van deze ketting
+// niet een nullptr bevat, maar terug naar het eerste element verwijst.
+// Zo kan je makkelijk blijven lopen 
 
 +createCLC()
-+destroyCLc()
-+isEmpty(): boolean 
-+getLength(): boolean
-+insert(in index: integer, in newitem: ListItemType): boolean
-+delete(in index: integer): boolean
-+retrieve(in index: integer): ListItemType
+// Precondition: Geen
+// Postcondition: Er is een nieuwe lege CLC aangemaakt met alle default waarden.
+ 
++destroyCLC()
+// Precondition: De CLC bestaat en moet verwijderd worden.
+// Postcondition: De CLC bestaat niet meer. Alle elementen ervan zijn verwijderd.
 
++isEmpty(): boolean 
+// Precondition: De queue bestaat en je wil weten of er elementen inzitten.
+// Postcondition: De method returnt true indien de queue elementen bevat.
+// als de queue geen elementen bevat zal je een false terugkrijgen.
+
++getLength(): integer
+// Precondition: De CLC bestaat en je wil er de lengte van weten.
+// Postcondition: De integer die gereturnd wordt is gelijk aan het aantal elementen in de CLC.
+
++insert(in index: integer, in newitem: ListItemType): boolean
+// Precondition: newItem is het item dat je wil toevoegen, van het zelfde datatype
+// als de andere elementen in de CLC. De index is de plaats waar je het element hebt toegevoegd. 
+// Postcondition: Indien er true gereturnd wordt is het element toegevoegd op index
+// index in de CLC. Van alle elementen die op een hogere index zaten is de index 
+// gestegen met 1.
+
++delete(in index: integer): boolean
+// Precondition: De CLC bevat een element op index index dat je wil verwijderen.
+// Postcondition: Het element op index index is verwijderd. Van alle elementen die op
+// een hogere index zaten is de index gedaald met 1.
+
++retrieve(in index: integer): ListItemType
+// Precondition: De CLC bevat een element op index index waarvan je de gegevens wil
+// opvragen. De index is dus minstens 0 en hoogstens 
+// (het aantal elementen van de queue)-1.
+// Postcondition: De gegevens van het element op index index worden gereturnd.
