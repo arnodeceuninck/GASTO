@@ -1,0 +1,10 @@
+// BST: Binary Search Tree
+// verantwoordelijke implementeren
+// verantwoordelijke testen
+
++createBST(in rootitem: ListItemType, in rootKey: Integer)
++destroyBST()
++isEmpty(): boolean
++insert(): boolean
++retrieve(in rootKey: integer): ListItemType
+

@@ -1,0 +1,6 @@
+// Stack
+// verantwoordelijke implementeren:
+// verantwoordelijke testen:
+
++createStack()
++destroyStack()

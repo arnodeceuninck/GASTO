@@ -1,0 +1,10 @@
+// DLC: Double Linked Chain
+// verantwoordelijke implementeren:
+// verantwoordelijke testen:
+
++createDLC()
++destroyDLC()
++isEmpty(): boolean
++insert(): boolean
++delete(): boolean
+

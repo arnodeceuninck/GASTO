@@ -1,0 +1,12 @@
+// CLC: Circular Linked Chain
+// verantwoordelijke implementeren:
+// verantwooedelijke testen:
+
++createCLC()
++destroyCLc()
++isEmpty(): boolean 
++getLength(): boolean
++insert(in index: integer, in newitem: ListItemType): boolean
++delete(in index: integer): boolean
++retrieve(in index: integer): ListItemType
+
