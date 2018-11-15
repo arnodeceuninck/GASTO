@@ -2,9 +2,41 @@
 // verantwoordelijke implementeren
 // verantwoordelijke testen
 
-+createBST(in rootitem: ListItemType, in rootKey: Integer)
-+destroyBST()
-+isEmpty(): boolean
-+insert(): boolean
-+retrieve(in rootKey: integer): ListItemType
+// Een Binary Search Tree is een ADT die bestaat uit drie disjuncte verzemelingen:
+// De root, de linkerdeelboom en de rechterdeelboom. De linker- en rechterdeelboom
+// zijn allebei ook instanties van een BST. Alle elementen in de linkerdeelboom
+// zijn kleiner dan de root. Alle elementen in de rechterdeelboom zijn groter
+// dan de root.
 
+
++createBST(in rootitem: ListItemType, in rootKey: Integer)
+// Precondition: Geen
+// Postcondition: Er is een nieuwe lege BST aangemaakt met alle default waarden.
+
++destroyBST()
+// Precondition: De BST bestaat en moet verwijderd worden.
+// Postcondition: De BST bestaat niet meer. Alle elementen ervan zijn verwijderd.
+
++isEmpty(): boolean
+// Precondition: De BST bestaat en je wil weten of er elementen inzitten.
+// Postcondition: De method returnt true indien de BST elementen bevat. Als de BST
+// geen elementen bevat, zal je een false terugkrijgen.
+
++insert(in newItem: BSTItemType): boolean
+// Precondition: newItem is het item dat je wil toevoegen, van hetzelde datatype als 
+// de andere elementen in de queue.
+// Postcondition: Indien er true gereturnt wordt is het element op de correcte positie
+// toegevoegd. De correcte positie is een blad, zodanig dat de eigenschappen van een 
+// BST bewaard blijft. (Hiermee bedoel ik onder andere volgende eigenschappen: Alle
+// elementen in de linkerdeelboom zijn kleiner dan de root. Alle elementen in de 
+// rechterdeelboom zijn groter dan de root.
+
++retrieve(in rootKey: integer): (boolean, BSTItemType)
+// Precondition: De BST bevat een element met als zoeksleutel rootKey.
+// Postcondition: Indien het eerste element van de tuple true is, bevat het
+// het tweede element het element uit de BST met als zoeksleutel rootKey. 
+
++getRoot(): BSTItemType
+// Precondition: Je wil weten wat er in de root van de BST zit
+// Postcondition: De gereturnde variabele bevat het element uit de root van de BST.
+// Indien de root van de BST None is, zal ook None gereturnd worden.
