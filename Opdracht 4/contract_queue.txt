@@ -13,12 +13,16 @@
 
 +destroyQueue()
 // Precondition: De queue bestaat en moet verwijderd worden.
-// Postcondition: De queue bestaat niet meer.
+// Postcondition: De queue bestaat niet meer. Alle elementen ervan zijn verwijderd.
 
 +isEmpty(): boolean
 // Precondition: De queue bestaat en je wil weten of er elementen inzitten.
 // Postcondition: De method returnt true indien de queue elementen bevat. 
 // als de queue geen elementen bevat zal je een false terugkrijgen.
+
++getLength(): integer
+// Precondition: De queue bestaat en je wil er de lengte van weten.
+// Postcondition: De integer die gereturnd wordt is gelijk aan het aantal elementen in de queue.
 
 +enqueue(in newItem: QueueItemType): boolean
 // Precondition: newItem is het item dat je wil toevoegen, van het zelfde datatype als de andere elementen in de queue. 
@@ -27,7 +31,7 @@
 +dequeue(): (boolean, QueueItemType)
 // Precondition: De queue bevat minstens één element
 // Postcondition: Het eerste item is verwijderd indien het eerste element van de gereturnde tuple true is.
-// Het tweede element in de queue is een kopie van het net verwijderde element.
+// Het tweede element in de tuple is een kopie van het net verwijderde element.
  
 +getFront(): (boolean, QueItemType)
 // Precondition: De queue bevat één of meer elementen.
