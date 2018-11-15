@@ -1,0 +1,4 @@
+# lijnen die beginnen met # worden genegeerd
+init
+vak WIS Wiskunde
+vak NED Nederlands

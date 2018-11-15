@@ -1,0 +1,14 @@
+// Queue
+// verantwoordelijke implementeren:
+// verantwoordelijke testen:
+
++createQueue()
++destroyQueue()
++isEmpty(): boolean
++enqueue(in newItem: QueueItemType): boolean
++dequeue(): boolean
++dequeue(): boolean + QueueItemType 
+// Probleem: 2 return values in python niet mogelijk
+// Probleem: 2 functies met dezelfde naam in python niet mogelijk
++getFront(): QueueItemType + boolean // Probleem
+
