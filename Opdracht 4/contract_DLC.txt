@@ -1,6 +1,6 @@
 // DLC: Double Linked Chain
-// verantwoordelijke implementeren:
-// verantwoordelijke testen:
+// verantwoordelijke implementeren: Tim
+// verantwoordelijke testen: Rob
 
 +createDLC()
 +destroyDLC()
