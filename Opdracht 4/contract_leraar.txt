@@ -11,28 +11,28 @@
 // meegegeven parameters. 
 
 +getAfkorting(): string
-// Precondition: Je wil de afkorting van de leerkraar weten.
+// Precondition: Je wil de afkorting van de leeraar weten.
 // Postcondition: De gereturnde value is de afkorting van de leerkracht.
 
 +setAfkorting(in afkorting: string): boolean
-// Precondition: Je wil de afkorting van een leerkraar veranderen naar afkorting.
+// Precondition: Je wil de afkorting van een leeraar veranderen naar afkorting.
 // Postcondition: Als de waarde die gereturnd wordt true is, dan is de afkorting
 // van de leeraar succesvol verandert in afkorting.
 
 +getNaam(): string
-// Precondition: Je wil de naam van de leerkraar weten.
+// Precondition: Je wil de naam van de leeraar weten.
 // Postcondition: De gereturnde value is de naam van de leerkracht.
 
 +setNaam(in naam: string): boolean
-// Precondition: Je wil de naam van een leerkraar veranderen naar naam.
+// Precondition: Je wil de naam van een leeraar veranderen naar naam.
 // Postcondition: Als de waarde die gereturnd wordt true is, dan is de naam
 // van de leeraar succesvol verandert in naam.
 
 +getAchternaam(): string
-// Precondition: Je wil de achternaam van de leerkraar weten.
+// Precondition: Je wil de achternaam van de leeraar weten.
 // Postcondition: De gereturnde value is de achternaam van de leerkracht.
 
 +setAchternaam(in achternaam: string): boolean
-// Precondition: Je wil de achteraam van een leerkraar veranderen naar achternaam.
+// Precondition: Je wil de achteraam van een leeraar veranderen naar achternaam.
 // Postcondition: Als de waarde die gereturnd wordt true is, dan is de achternaam
 // van de leeraar succesvol verandert in achternaam.
