@@ -2,9 +2,48 @@
 // verantwoordelijke implementeren: Tim
 // verantwoordelijke testen: Rob
 
+//de dubbelgelinkte kan overlopen worden naar 2 kanten waardoor we gemakkelijker terug naar de head van de ketting kunnen.
+
 +createDLC()
+// Precondition: geen
+// Postcondition: er word een nieuwe dubbel gelinkte ketting aangemaakt met een head pointer
+// die verwijst naar een dummyhead.
+
 +destroyDLC()
+// Precondition: een dubbel gelinkte ketting die verwijderd moet worden.
+// Postcondition: de lijst huidige dubbelgelinkte lijst word verwijderd samen met alle verwijzingen ernaar.
+
++retrieve(in key: Intiger, out value: DataType)
+// We zullen in de ketting zoeken naar de key en de waarde die hiermee verbonden is returnen.
+// Precondition: een key is een Integer die uniek is voor een overeenkomstig datatype, dit datatype is wat er zoekt met de key.
+// Postcondtion: er zal een datatype terug gegeven worden. 
+
 +isEmpty(): boolean
-+insert(): boolean
-+delete(): boolean
+// We kijken of de gelinkte ketting leeg is of niet.
+// Precondition: Een dubbelgelinktelijst waar je van wilt weten of hij leeg is, de head pointer en dummyhead tellen niet mee.
+// Postcondition: Er word een bolean gereturned die weer geeft of de gelinkte ketting leeg is of niet.
+
++insert(in value: DataType, in key: Intiger): boolean
+// De functie zal een nieuwe node toevoegen achteraan de ketting en de ketting sorteren.
+// Precondition: Als parameters hebben we value en key, de value is datgene wat we eigenlijk willen toevoegen aan de ketting.
+// de key geven we mee om de Value terug te vinden en te kunnen sorteren.
+// Postcondition: We krijgen een lijst waarbij een extra node is toegevoegd, na elke insert word de lijst ook automatisch gesorteerd
+// en we krijgen een bool die laat zien of de operatie succesvol was.
+
++traverse(out value: tuple)
+// We zullen elk element in de ketting doorlopen en deze returnen in een tuple.
+// Precondition: Er is een ketting die ge traversed kan worden
+// Postcondition: we zullen een tuple terug geven met daarin alle waarden die in de gelinkte lijst voorkomen op dezelfde volgorde.
+
++delete(in key: Intiger): boolean
+// Deze functie zal de ketting doorzoeken naar de value met de juiste key en wanneer deze gevonden is zal de node verwijderd worden.
+// Precondition: We hebben een key van de value die we willen verwijderen.
+// Postcondition: De node zal verwijderd zijn uit de lijst en de ketting zal het gat tussen de vorige node en de volgende node opgevuld hebben.
+// Er word ook een bool teruggegeven die laat zien of de operatie succesvol was.
+
+
+
+
+
+
 
