@@ -17,8 +17,8 @@
 
 +isEmpty(): boolean
 // Precondition: De queue bestaat en je wil weten of er elementen inzitten.
-// Postcondition: De method returnt true indien de queue elementen bevat. 
-// als de queue geen elementen bevat zal je een false terugkrijgen.
+// Postcondition: De method returnt true indien de queue elementen bevat. Als de
+// queue geen elementen bevat zal je een false terugkrijgen.
 
 +getLength(): integer
 // Precondition: De queue bestaat en je wil er de lengte van weten.
