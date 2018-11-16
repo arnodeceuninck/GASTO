@@ -1,3 +1,4 @@
 // Leerling
-// verantwoordelijke implementeren:
-// verantwoordelijke testen:
+// verantwoordelijke implementeren: Rob
+// verantwoordelijke testen: Tim
+
