@@ -16,10 +16,11 @@
 // vinden in de BST.
 // Postcondition: Er is een nieuwe lege BST aangemaakt met paramters in de root.
 
-+destroyBST()
++destroyBST() boolean
 // Precondition: De BST bestaat en moet verwijderd worden.
 // Postcondition: De BST bestaat niet meer. Alle elementen en de verwijzigingen
-// ervan zijn verwijderd.
+// ervan zijn verwijderd. De functie geeft ook een boolean terug om te laten zitten
+// of de operatie gelukt is.
 
 +isEmpty(): boolean
 // Precondition: De BST bestaat en je wil weten of er elementen inzitten.
