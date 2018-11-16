@@ -1,3 +1,55 @@
 // Punt
-// verantwoordelijke implementeren:
-// verantwoordelijke testen:
+// verantwoordelijke implementeren: Tim
+// verantwoordelijke testen: Sen
+
+//Het punt is de score die een leerling heeft gehaald bij een bepaalde test. Deze punten hebben ook een timestamp
+// en gebruiken als key het ID van zichzelf.
+
++createPunt(in ID: Integer, in Stamboeknummer: Integer, in Test: String,in timestamp: tuple) bool
+// Precondition: De operatie is voor het aanmaken van een gehaald punt door een leerling op een test, de paramters die een punt nodig heeft
+// zijn als volgd. Een ID van het punt, dit is een integer en is uniek voor dit punt. vervolgens is er ook een stamboeknummer dat een zevencijferige unieke code is,
+// dit is zodat het punt terug gelinkt kan worden aan de leerling die het punt heeft gehaald.
+// daarnaast hebben we ook de naam van de test nodig, dit is zodat we kunnen zien bij welke test het punt hoort.
+// in de database zetten. Als laatste hebben we ook een timestamp zodat de toetsen en punten gemakkelijk op datum gesorteerd kunnen word,
+// het timestamp zal in het volgende formaat zijn jjjj mm dd en word terug gegeven in een tuple in datzelfde formaat. 
+// Postcondition: er word een nieuw punt aangemaakt dat verbonden is met de leerling die het punt heeft behaald. het punt is 
+// ook verbonden met de bijhorende test en de timestamp van de test. Achteraf de geeft de operatie een bool terug  of de operatie gelukt is.
+
++getID(): Intiger
+// Precondition: Je wilt een ID van een punt hebben
+// Postcondition: De operatie zal een integer terug geven, deze integer is de ID van het punt.
+
++getstamboeknummer(): Integer
+// Precondition: Je hebt een punt waarvan je wilt weten welke leerling het heeft behaald.
+// Postcondition: De operatie geeft een integer terug, deze integer is het stamboeknummer van een leerling
+// en is uniek aan deze leerling.
+
++getNaam(): String
+// Precondition: Je hebt een punt waarvan je de naam van de test wilt hebben.
+// Postcondition: De operatie geeft een string terug, deze string is de naam van de test waarmee het punt
+// overeenkomt.
+
++getTimestap(): tuple
+// Precondition: Je hebt een punt waarvan je wilt weten wanneer het behaald is.
+// Postcondition: De operatie geeft een tuple met de waarde van datum.
+
++setID(in ID: Integer): bool
+// Precondition: Je hebt een nieuw uniek ID en een punt waarvan je het ID wilt veranderen.
+// Postcondition: Het punt zal een nieuw ID toegewezen hebben, er word ook een boolean terug meegegeven worden als teken of de operatie geslaagd is.
+// de operatie kan mislukken als de ID niet uniek is.
+
++setStamboeknummmer(in Stamboeknummer: Integer): bool
+// Precondition: Je hebt een stamboeknummer van een leerling en een punt waarvan je het stamboeknummer wilt wijzigen
+// Postcondition: Het stamboeknummer van het punt zal gewijzigd zijn naar het nieuwe stamboeknummer, er word ook een 
+// bool teruggegeven om aan te tonen of de operatie succesvol was. De operatie kan fout aflopen wanneer het stamboeknummer
+// al is toegewezen aan een ander punt of het stamboeknummer niet gelinkt is met een leerling.
+
++setName(in Name: string): bool
+// Precondition: Je hebt een punt waarvan je de naam wilt aanpassen en de naam van de nieuwe bestaande test.
+// Postcondition: De test waar aan het punt verbonden is zal veranderd zijn naar de nieuwe test. Er word ook een
+// bool terug gegeven die zegt of de operatie gelukt of gefaald is, de operatie kan falen wanneer de test niet bestaat.
+
++setTimestamp(in Timestamp: tuple): bool
+// Precondition: Je hebt een punt waarvan je de datum wilt aanpassen en een nieuwe datum.
+// Postcondition: De timestamp zal aangepast worden naar het nieuwe tuple, er word ook een bool terug gegeven die zegt of de operatie gelukt is of gefaald.
+// De operatie kan mislukken wanneer er het tuple in het foute formaat als input.
