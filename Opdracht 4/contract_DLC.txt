@@ -8,17 +8,17 @@
 
 +createDLC()
 // Precondition: Je wil een nieuwe DLC aanmaken. 
-// Postcondition: er word een nieuwe dubbel gelinkte ketting aangemaakt met een 
-// head pointer die verwijst naar een dummyhead.
+// Postcondition: Er wordt een nieuwe dubbel gelinkte ketting aangemaakt met een 
+// head pointer die verwijst naar een dummyhead en voor de rest geen elementen
+// bevat.
 
 +destroyDLC()
-// Precondition: Een dubbel gelinkte ketting die verwijderd moet worden.
-// Postcondition: De huidige dubbelgelinkte lijst wordt verwijderd samen met alle 
-// verwijzingen ernaar.
+// Precondition: Een dubbel gelinkte ketting die je wil verwijderen.
+// Postcondition: De huidige DLC is verwijderd samen met alle elementen erin.
 
 +retrieve(in key: integer, out value: DataType)
 // We zullen in de ketting zoeken naar de key en de waarde die hiermee verbonden is returnen.
-// Precondition: Een key is een Integer die uniek is voor een overeenkomstig datatype, 
+// Precondition: Een key is een integer die uniek is voor een overeenkomstig datatype, 
 // dit datatype is wat je wil zoeken met de key.
 // Postcondtion: Er zal een datatype terug gegeven worden, waarvan de zoeksleutel
 // overeenkomt met de meegegeven key. 
@@ -28,16 +28,18 @@
 // Precondition: Een dubbelgelinkte lijst waar je van wilt weten of hij leeg is, 
 // de head pointer en dummyhead tellen niet mee.
 // Postcondition: Er wordt een boolean gereturned die weergeeft of de gelinkte 
-// ketting leeg is of niet. Als de boolean true is, dan is de gelinkte ketting leeg.
+// ketting leeg is of niet. Als de boolean true is, dan is de gelinkte ketting 
+// leeg, anders niet.
 
 +insert(in value: DataType, in key: integer): boolean
 // De functie zal een nieuwe node toevoegen achteraan de ketting en de ketting sorteren.
 // Precondition: Als parameters hebben we value en key, de value is datgene wat we 
 // eigenlijk willen toevoegen aan de ketting. De key geven we mee om de value 
-// terug te kunne vinden en de DLC te kunnen sorteren.
+// terug te kunnen vinden en de DLC te kunnen sorteren.
 // Postcondition: We krijgen een lijst waarbij een extra node is toegevoegd. 
 // Na elke insert word de lijst ook automatisch gesorteerd
-// en we krijgen een bool die laat zien of de operatie succesvol was.
+// en we krijgen een bool die laat zien of de operatie succesvol was. Als de
+// teruggegeefde bool false is, dan is de insert operatie niet gelukt.
 
 +traverse(in visit: function)
 // We zullen elk element in de ketting doorlopen en hierop de functie visit toepassen.
