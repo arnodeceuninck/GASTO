@@ -1,6 +1,38 @@
 // Stack
-// verantwoordelijke implementeren:
-// verantwoordelijke testen:
+// verantwoordelijke implementeren: Sen
+// verantwoordelijke testen: Rob
+
+// Een stack is een ADT die een FILO systeem (First In, Last Out) toepast.
+// Het eerste element dat je aan deze ADT toegevoegd, is het laatste elemet dat de ADT zal teruggeven.
+// Alle elementen hebben hetzelfde datatype.
+// StackItemType is het type van de elementen die in de stack zitten.
 
 +createStack()
+// Precondition: Geen
+// Postconditoin: Er is een nieuwe lege stack aangemaakt met alle default waarden.
+
 +destroyStack()
+// Precondition: De stack bestaat en moet verwijderd worden.
+// Postcondition: De stack bestaat niet meer. Alle elementen ervan zijn verwijderd.
+
++isEmpty(): boolean
+// Precondition: De stack bestaat en je wil weten of er elementen inzitten.
+// Postcondition: De method returnt true indien de stack elementen bevat. Als de
+// stack geen elementen bevat zal je een false terugkrijgen.
+
++push(in newItem: StackItemType): boolean
+// Precondition: newItem is het item dat je wil toevoegen, van hetzelfde datatype als de andere elementen in de queue.
+// Postcondition: Voegt het element ‘newItem’ toe op de top van een stack.
+// Geeft True terug indien het toevoegen gelukt is.
+
++pop(): (StackItemType, boolean)
+// Precondition: De stack bevat minstens één element.
+// Postcondition: Plaatst de top van een stack (d.i. het laatst toegevoegde element) in
+// ‘stackTop’ en verwijdert dan deze top.
+// Geeft True terug indien het verwijderen gelukt is.
+
++getTop(): (StackItemType, boolean)
+// precondition: De stack bevat één of meer elementen.
+// Postcondition: Plaatst de top van een stack (d.i. het laatst toegevoegde element) in
+// ‘stackTop’ en laat de stack ongewijzigd.
+// Geeft True terug indien het gelukt is.
