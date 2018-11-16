@@ -3,9 +3,9 @@
 // verantwoordelijke testen: Arno
 
 +createtoets(in naam: string, in maximum: integer, in verzamelingVanPunten: array): boolean
-// Precondition: Je wil een nieuwe toets aanmaken. De naam is de naam van de toets zonder spaties.
-// Het maximum is het maximaal aantal punten dat behaald kunnen worden. 
-// De array is een verzameling van alle punten van alle oefeningen van de test.
+// Precondition: Je wil een nieuwe toets aanmaken. De naam is de naam van de toets zonder spaties. Het maximum is het maximaal aantal punten dat behaald kan worden. 
+// De array is een verzameling van alle punten die de leerlingen behaald hebben
+// op deze test.
 
 +getNaam(): string
 // Precondition: Je wil de naam van de toets weten.
@@ -16,18 +16,18 @@
 // Postcondition: Als de waarde die gereturnd wordt true is, dan is de naam
 // van de toets succesvol verandert in naam.
 
-+getMaximum(in maximum: integer): integer
++getMaximum(): integer
 // Precondition: Je wil het maximum van de toets weten.
 // Postcondition: De gereturnde value is het maximum van de toets.
 
-+setMaximum(): boolean
++setMaximum(in maximum: integer): boolean
 // Precondition: Je will het maximum van de toets veranderen naar maximum.
 // Postcondition: Als de waarde die gereturnd wordt true is, dan is het maximum
 // van de toets succesvol verandert in maximum.
 
 +getVerzamelingVanPunten(): array
-// Precondition: Je will de verzamelingVanPunten van de toets weten.
-// Postcondition: de gereturnde value is de verzameling van de toets.
+// Precondition: Je will de verzameling van punten voor deze toets weten.
+// Postcondition: de gereturnde value is de verzameling van punten voor deze toets.
 
 +setVerzamelingVanPunten(in verzamelingVanPunten: array): boolean
 // Precondition: Je will de verzamelingVanPunten van de toets veranderen naar verzamelingVanPunten.
