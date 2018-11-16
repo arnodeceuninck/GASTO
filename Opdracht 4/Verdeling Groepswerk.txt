@@ -14,7 +14,6 @@
 // verantwoordelijke implementeren: Sen
 // verantwoordelijke testen: Rob
 
-
 // DLC: Double Linked Chain
 // verantwoordelijke implementeren: Tim
 // verantwoordelijke testen: Arno
@@ -24,7 +23,7 @@
 // verantwooedelijke testen: Sen
 
 // BST: Binary Search Tree
-// verantwoordelijke implementeren: Arno
+// verantwoordelijke implementeren: Rob
 // verantwoordelijke testen: Tim
 
 // CLASSES
