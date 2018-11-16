@@ -18,10 +18,6 @@
 // Precondition: Je wil een puntenlijst toevoegen aan de verzameling van puntenlijsten (PuntenLijsten).
 // Postcondition: Wanneer de return waarde True is, is er succesvol een puntenlijst toegevoegd aan PuntenLijsten
 
-+getZoeksleutel(): string
-// Precondition: Je wil de zoeksleutel voor het zoeken van het rapport weten.
-// Postcondition: De waarde die je terugkrijgt is de zoeksleutel voor het zoeken in het rapport.
-
-+setZoeksleutel(): boolean
-// Precondition: Je wil een zoeksleutel aanmaken
-// Postcondition:
++search(in Zoeksleutel: string) lijst:
+// Precondition: Je wilt een bepaald rapport zoeken via de zoeksleutel: zoeksleutel.
+// Postcondition: Geeft het rapport terug met de zoeksleutel: zoeksleutel.
