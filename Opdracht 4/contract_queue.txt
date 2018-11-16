@@ -1,6 +1,6 @@
-﻿// Queue
-// verantwoordelijke implementeren: Arno
-// verantwoordelijke testen: Tim
+// Queue
+// verantwoordelijke implementeren:
+// verantwoordelijke testen:
 
 // Een queue is een ADT die een FIFO systeem (First In, First Out) toepast.
 // Het eerste element dat je aan deze ADT toevoegd, is ook het eerste element dat de ADT zal teruggeven.
@@ -25,7 +25,7 @@
 // Postcondition: De integer die gereturnd wordt is gelijk aan het aantal elementen in de queue.
 
 +enqueue(in newItem: QueueItemType): boolean
-// Precondition: newItem is het item dat je wil toevoegen, van hetzelfde datatype als de andere elementen in de queue. 
+// Precondition: newItem is het item dat je wil toevoegen, van het zelfde datatype als de andere elementen in de queue. 
 // Postcondition: Indien er true gereturnd wordt is het element achteraan toegevoegd aan de queue.
 
 +dequeue(): (boolean, QueueItemType)
