@@ -2,3 +2,29 @@
 // verantwoordelijke implementeren: Rob
 // verantwoordelijke testen: Tim
 
++createLeerling(in Naam: string, in Voornaam: string, in Klas: string, in KlasNummer: integer): boolean
+// Precondition: Je wil een nieuwe leerling aanmaken. De Naam is de naam van de leerling,
+// Achternaam de achternaam van de leerling. Klas is de klas waarin de leerling zit en KlasNummer is de nummer
+// van de klas waarin de leerling zit.
+// Postcondition: Indien het maken van de leerling succesvol is gebeurd, wordt de return value True.
+// Nu is er een nieuwe leerling aangemaakt met alle parameters in gebruik genomen.
+
++getNummer()
+
++setNummer(in Nummer: integer)
+
++getVoornaam()
+
++setVoornaam()
+
++getNaam()
+
++setNaam()
+
++getKlas()
+
++setKlas()
+
++setKlasNummer()
+
++getKlasNummer()
