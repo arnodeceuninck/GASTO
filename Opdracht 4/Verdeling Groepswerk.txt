@@ -20,7 +20,7 @@
 
 // CLC: Circular Linked Chain
 // verantwoordelijke implementeren: Arno
-// verantwooedelijke testen: Sen
+// verantwoordelijke testen: Sen
 
 // BST: Binary Search Tree
 // verantwoordelijke implementeren: Rob
