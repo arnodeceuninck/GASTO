@@ -28,7 +28,7 @@
 // Postcondition: Als de waarde die gereturnd wordt true is, dan is het maximum
 // van de toets succesvol verandert in maximum.
 
-+getVerzamelingVanPunten(): array
++getVerzamelingVanPunten(in searchkey: string): array
 // Precondition: Je will de verzameling van punten voor deze toets weten.
 // Postcondition: de gereturnde value is de verzameling van punten voor deze toets.
 
@@ -36,5 +36,6 @@
 // Precondition: Je will de verzamelingVanPunten van de toets veranderen naar verzamelingVanPunten.
 //Postcondition: Als de waarde die gereturnd wordt true is, dan is de verzamelingVanPunten
 // van de toets succesvol verandert in verzamelingVanPunten.
+
 
 
