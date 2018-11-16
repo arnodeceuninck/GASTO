@@ -2,6 +2,9 @@
 // verantwoordelijke implementeren: Sen
 // verantwoordelijke testen: Arno
 
+// Toets is een verzameling van alle punten van de leerlingen op die toets, ook de maximum score en de naam van de test staat hier in.
+//Deze testen hebben searchkey naam.
+
 +createtoets(in naam: string, in maximum: integer, in verzamelingVanPunten: array): boolean
 // Precondition: Je wil een nieuwe toets aanmaken. De naam is de naam van de toets zonder spaties. Het maximum is het maximaal aantal punten dat behaald kan worden. 
 // De array is een verzameling van alle punten die de leerlingen behaald hebben
@@ -25,7 +28,7 @@
 // Postcondition: Als de waarde die gereturnd wordt true is, dan is het maximum
 // van de toets succesvol verandert in maximum.
 
-+getVerzamelingVanPunten(): array
++getVerzamelingVanPunten(in searchkey: string): array
 // Precondition: Je will de verzameling van punten voor deze toets weten.
 // Postcondition: de gereturnde value is de verzameling van punten voor deze toets.
 
@@ -33,5 +36,6 @@
 // Precondition: Je will de verzamelingVanPunten van de toets veranderen naar verzamelingVanPunten.
 //Postcondition: Als de waarde die gereturnd wordt true is, dan is de verzamelingVanPunten
 // van de toets succesvol verandert in verzamelingVanPunten.
+
 
 
