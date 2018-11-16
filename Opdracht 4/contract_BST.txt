@@ -40,3 +40,33 @@
 // Precondition: Je wil weten wat er in de root van de BST zit
 // Postcondition: De gereturnde variabele bevat het element uit de root van de BST.
 // Indien de root van de BST None is, zal ook None gereturnd worden.
+
++inorderTraverse(in visit: function): boolean
+// Precondition: Je wil alle knopen overlopen in de binair binaire zoekboom, 
+// zodanig dat je eerst alle elementen in de linkerdeelboom overloopt,
+// gevolgd door de root en ten slotte alle elementen in de rechterdeelboom. Zo
+// worden alle elementen in volgorde overlopen. De functie die je hebt meegegeven
+// (visit) zal op elke knoop toegepast worden in de volgorde die hierboven
+// beschreven is.
+// Postcondition: Alle knopen zijn bezocht in volgorde (van kleinste zoeksleutel)
+// en de functie visit is ook in deze volgorde op alle knopen toegepast.
+
++preorderTraverse(in visit: function): boolean
+// Precondition: Je wil alle knopen overlopen in de binair binaire zoekboom, 
+// zodanig dat je eerst de root overloopt, gevolgd door de elementen in de 
+// linkerdeelboom en ten slotte alle elementen in de rechterdeelboom. Zo
+// worden alle elementen preorder overlopen. De functie die je hebt meegegeven
+// (visit) zal op elke knoop toegepast worden in de volgorde die hierboven
+// beschreven is.
+// Postcondition: Alle knopen zijn bezocht preorder en de functie visit is ook 
+// in deze volgorde op alle knopen toegepast.
+
++postorderTraverse(in visit: function): boolean
+// Precondition: Je wil alle knopen overlopen in de binair binaire zoekboom, 
+// zodanig dat je eerst alle elementen in de linkerdeelboom overloopt,
+// gevolgd door alle elementen in de rechterdeelboom en ten slotte de root. Zo
+// worden alle elementen postorder overlopen. De functie die je hebt meegegeven
+// (visit) zal op elke knoop toegepast worden in de volgorde die hierboven
+// beschreven is.
+// Postcondition: Alle knopen zijn bezocht postorder en de functie visit is ook 
+// in deze volgorde op alle knopen toegepast.
