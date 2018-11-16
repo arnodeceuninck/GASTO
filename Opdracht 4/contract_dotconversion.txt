@@ -1,4 +1,4 @@
-// Leerling
+// DotConversion
 // verantwoordelijke implementeren: Tim
 // verantwoordelijke testen: Arno
 
