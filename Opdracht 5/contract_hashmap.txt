@@ -1,0 +1,3 @@
+// Hashmap
+// verantwoordelijke implementeren: Rob
+// verantwoordelijke testen: Arno

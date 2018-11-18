@@ -1,0 +1,3 @@
+// RBT: Rood-Zwart Boom
+// verantwoordelijke implementeren: Arno
+// verantwoordelijke testen: Tim

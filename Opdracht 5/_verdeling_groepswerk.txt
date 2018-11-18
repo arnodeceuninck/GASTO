@@ -1,0 +1,24 @@
+// GASTO gebruikt ook enkele geavenceerde datastructuren
+
+// GEAVENCEERDE DATASTRUCTUREN
+// hieronder vind je de operation contracts van alle geavenceerde datastructuren
+
+// 23T: 2-3 Boom
+// verantwoordelijke implementeren: Sen
+// verantwoordelijke testen: Rob
+
+// 234T: 2-3-4 Boom
+// verantwoordelijke implementeren: Tim
+// verantwoordelijke testen: Sen
+
+// RBT: Rood-Zwart Boom
+// verantwoordelijke implementeren: Arno
+// verantwoordelijke testen: Tim
+
+// Hashmap
+// verantwoordelijke implementeren: Rob
+// verantwoordelijke testen: Arno 
+
+// Heap
+// verantwoordelijke implementeren: Arno
+// verantwoordelijke testen: Rob

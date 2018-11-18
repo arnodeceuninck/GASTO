@@ -5,3 +5,6 @@ Alle bestanden zijn gesorteerd per opdracht. Bij opdrachten die individueel ware
 
 De folder Opdracht x is voor individuele bestanden die (nog) niet specifiek bij een bepaalde opdracht horen
 
+Voor de finale versie af te geven moet je er rekening mee houden dat de ADT's van
+oefening 5 nog niet bij de verdeling van oefening 4 staat
+
