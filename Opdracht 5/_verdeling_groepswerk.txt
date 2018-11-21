@@ -4,8 +4,8 @@
 // hieronder vind je de operation contracts van alle geavenceerde datastructuren
 
 // 23T: 2-3 Boom
-// verantwoordelijke implementeren: Sen
-// verantwoordelijke testen: Rob
+// verantwoordelijke implementeren: Sen, Rob
+// verantwoordelijke testen: Rob, Sen
 
 // 234T: 2-3-4 Boom
 // verantwoordelijke implementeren: Tim
