@@ -1,3 +1,5 @@
+<<<<<<< HEAD
+=======
 // Rapport
 // verantwoordelijke implementeren: Rob
 // verantwoordelijke testen: Sen
@@ -21,3 +23,4 @@
 +search(in Zoeksleutel: string) lijst:
 // Precondition: Je wilt een bepaald rapport zoeken via de zoeksleutel: zoeksleutel.
 // Postcondition: Geeft het rapport terug met de zoeksleutel: zoeksleutel.
+>>>>>>> ed626b0ea797929d0ba8568fee5f45f87f1165c6
