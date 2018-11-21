@@ -1,0 +1,103 @@
+// RBT: Rood-Zwart Boom
+// verantwoordelijke implementeren: Arno
+// verantwoordelijke testen: Tim
+
+// Een Rood-Zwart Boom is een speciale vorm van een binaire zoekboom. De
+// eigenschappen van een binaire zoekboom blijven wel behouden, maar er zijn
+// nu 2 soorten verbindingen tussen nodes. Een rood-zwart boom is een 
+// representatie van een 2-3-4 boom. Elementen die in een 2-3-4 boom zitten
+// in dezelfde node, zullen in een rood-zwart boom een rode verbinding krijgen
+// tussen de nodes met deze elementen. Elementen die een ouder-kind relatie 
+// hebben krijgen wel een gewone, zwarte verbinding.
+// RBTItemType is het type van item dat je in de boom gaat steken. Alle items
+// in de boom moeten hetzelfde type hebben.
+
++createRBT()
+// Dit maakt een lege Red-Black Tree (RBT)(Rood-Zwart Boom) aan. 
+// Precondition: Je wil een nieuwe RBT aanmalen
+// Postcondition: Er is een nieuwe, lege RBT aangemaakt. De nodes van deze 
+// RBT bevatten de default gegevens, wat inhoudt dat alle variabelen hiervan 
+// niets bevatten.
+
++destroRBT()
+// Deze method maakt de plaats die de boom in het geheugen innam terug vrij.
+// Precondition: De boom bestaat en je wilt hem verwijderen.
+// Postcondition: De boom is verwijderd, samen met alle data die eraan vasthing.
+// De plaats die de boom in het geheugen innam is terug vrijgemaakt.
+
++isEmpty()
+// Deze method returnt een boolean die aangeeft of een elementen bevat of leeg
+// is.
+// Precondition: De RBT bestaat en je wilt weten of er elementen inzitten.
+// Postcondition: De method returnt false indien de RBT elementen bevat. Als de
+// RBT geen elementen bevat, zal je een true terugkrijgen.
+
++insert(in newItem: RBTItemType): boolean
+// Deze method zal het item newItem op de correcte plaats van de boom inserten,
+// Zodanig dat je na het inserten nogsteeds een RBT hebt.
+// Precondition: newItem is van hetzelfde datatype als de andere elementen in de
+// RBT.
+// Postcondition: Het newItem is toegevoegd aan de datastructuur. Deze
+// datastructuur heeft na het toevoegen nogsteeds alle eigenschappen van een 
+// RBT.
+
++remove(in rootKey: integer): boolean
+// Deze method zal het item met zoeksleutel rootKey verwijderen, zodanig dat na
+// het verwijderen van het item, nogsteeds alle eigenschappen van een RBT 
+// behouden blijven.
+// Precondition: rootKey is de zoeksleutel gelinkt aan het item dat je wilt
+// verwijderen.
+// Postcondition: Het item is verwijderd indien true gereturnd wordt. 
+
++retrieve(in rootKey: integer): (boolean, RBTItemType)
+// Deze method zal de waarde terugsturen van het item met als zoeksleutel 
+// rootKey.
+// Precondition: Er zit een item in de RBR met als zoeksleutel RBT.
+// Postcondition: Indien het eerste element van de gereturnde tuple true is, 
+// bevat het tweede element het element uit de BST met als zoeksleutel rootKey.
+
++getRoot(): RBTItemType
+// Deze method returnt de waarde van het item dat in de root zit.
+// Precondition: Er zit een item in de root van de RBT en je wilt weten wat de
+// waarde ervan is.
+// Postcondition: De gereturnde variabele bevat het element uit de root van de 
+// BST.
+
++inorderTraverse(in visit: function): boolean
+// Deze functie zal alle nodes inorder overlopen en er de meegegeven functie op
+// toepassen.
+// Precondition: Je wil alle knopen overlopen in de rood-zwart boom,
+// zodanig dat je eerst alle elementen in de linkerdeelboom overloopt,
+// gevolgd door de root en ten slotte alle elementen in de rechterdeelboom. Zo
+// worden alle elementen in volgorde overlopen. De functie die je hebt meegegeven
+// (visit) zal op elke knoop toegepast worden in de volgorde die hierboven
+// beschreven is.
+// Postcondition: Alle knopen zijn bezocht in volgorde (van kleinste zoeksleutel)
+// en de functie visit is ook in deze volgorde op alle knopen toegepast.
+// Er word een bool gereturnd die zegt of de operatie gelukt is.
+
++preorderTraverse(in visit: function): boolean
+// Deze functie zal alle nodes preorder overlopen en er de meegegeven functie op
+// toepassen.
+// Precondition: Je wil alle knopen overlopen in de Rood-Zwart Boom,
+// zodanig dat je eerst de root overloopt, gevolgd door de elementen in de
+// linkerdeelboom en ten slotte alle elementen in de rechterdeelboom. Zo
+// worden alle elementen preorder overlopen. De functie die je hebt meegegeven
+// (visit) zal op elke knoop toegepast worden in de volgorde die hierboven
+// beschreven is.
+// Postcondition: Alle knopen zijn bezocht preorder en de functie visit is ook
+// in deze volgorde op alle knopen toegepast. Er word een bool gereturnd die zegt
+// of de operatie gelukt is.
+
++postorderTraverse(in visit: function): boolean
+// Deze functie zal alle nodes postorder overlopen en er de meegegeven functie op
+// toepassen.
+// Precondition: Je wil alle knopen overlopen in de Rood-Zwart Boom,
+// zodanig dat je eerst alle elementen in de linkerdeelboom overloopt,
+// gevolgd door alle elementen in de rechterdeelboom en ten slotte de root. Zo
+// worden alle elementen postorder overlopen. De functie die je hebt meegegeven
+// (visit) zal op elke knoop toegepast worden in de volgorde die hierboven
+// beschreven is.
+// Postcondition: Alle knopen zijn bezocht postorder en de functie visit is ook
+// in deze volgorde op alle knopen toegepast. Er word een bool gereturnd die zegt
+// of de operatie gelukt is.
