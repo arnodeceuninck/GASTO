@@ -20,5 +20,5 @@
 // verantwoordelijke testen: Arno 
 
 // Heap
-// verantwoordelijke implementeren: Arno
+// verantwoordelijke implementeren: Arno, Tim
 // verantwoordelijke testen: Rob
