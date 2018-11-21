@@ -1,3 +1,52 @@
 // 23T: 2-3 Boom
 // verantwoordelijke implementeren: Sen 
 // verantwoordelijke testen: Rob
+
++create23T(in rootitem: ListItemType, in rootKey: Integer)
+// Precondition: De root van een nieuwe 2-3 boom word aangemaakt,
+// in deze root zal het item zitten dat werd meegegeven met de rootitem.
+// Ook word er nog een key verbonden aan de node zodat we de node terug kunnen
+// vinden in de 23T.
+// Postcondition: Er is een nieuwe lege 23T aangemaakt met paramters in de root.
+
++destroy23T() boolean
+// Precondition: De 23T bestaat en moet verwijderd worden.
+// Postcondition: De 23T bestaat niet meer. Alle elementen en de verwijzigingen
+// ervan zijn verwijderd. De functie geeft ook een boolean terug om te laten zitten
+// of de operatie gelukt is.
+
++isEmpty(): boolean
+// Precondition: De 23T bestaat en je wil weten of er elementen inzitten.
+// Postcondition: De method returnt false indien de 23T elementen bevat. Als de 23T
+// geen elementen bevat, zal je een true terugkrijgen.
+
++insertItem(in tree:TwoThreeTree, in newItem: TreeItemType)
+// Precondition: Je wilt een nieuw element toevoegen aan de 2-3 boom.
+// Postcondition:  Voegt newItem toe in een 2-3 boom tree. Alle zoeksleutels in tree zijn
+// verschillend en verschillen ook van de zoeksleutel van newItem.
+
+split(in n: TreeNode) (n: Treenode)
+// Precondition: Je wilt de knopen splitsen die 3 items bevatten en geen blad zijn.
+// Postcondition: Splitst de knoop n, die 3 items bevat, op. Als n geen blad is, dan heeft n
+// 4 kinderen.
+
++delete(in tree: TwoThreeTree, in searchKey: KeyType) boolean
+// Precondition: Je wilt een element uit de 2-3 boom verwijderen
+// Postcondition: Verwijdert uit de 2-3 boom tree het item met zoeksleutel searchKey.
+// success is false als er zo geen item is in tree.
+
++fix(in n: TreeNode)
+// Precondition: Je wilt de 2-3 Tree herschikken.
+// Postcondition: het verwijderen wordt afgerond door het verwijderen van de wortel, het
+// herverdelen van items of het samenvoegen van knopen. Indien n geen blad is,
+// heeft n 1 kind.
+
+inorder(in tree: TwoThreetree)
+// Precondition: Je wilt de 2-3 boom inorder doorlopen.
+// Postcondition: doorloopt de niet-lege 2-3 boom tree in volgorde van de zoeksleutels
+
+retrieveItem( in tree: TwoThreetree, in searchkey: KeyType) (boolean, treeItem: TreeItemType)
+// Precondition: Je wilt een item uit de 2-3 boom halen.
+// Postcondition: Plaatst het item met zoeksleutel searchKey uit de niet-lege 2-3 boom tree
+// in treeItem. De functie geeft de waarde true als het item gevonden is en
+// false als het niet aanwezig is.
