@@ -16,7 +16,7 @@
 // verantwoordelijke testen: Tim
 
 // Hashmap
-// verantwoordelijke implementeren: Rob
+// verantwoordelijke implementeren: Rob, Sen
 // verantwoordelijke testen: Arno 
 
 // Heap
