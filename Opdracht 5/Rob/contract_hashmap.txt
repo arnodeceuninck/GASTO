@@ -1,3 +1,28 @@
 // Hashmap
 // verantwoordelijke implementeren: Rob
 // verantwoordelijke testen: Arno
+
++createHashmap()
+// Dit maakt een nieuwe hashmap aan.
+// Precondition: Je wil een hashmap aanmaken
+// Postcondition: De hashmap is is aangemaakt
+
++tableInsert(in newItem: HashItemType) boolean
+// Hiermee voeg je een nieuw element toe aan een hashmap.
+// Precondition: Je wil een nieuw element toevoegen aan de hashmap.
+// Postcondition: Het nieuwe element is succesvol toegevoegd. De return waarde is dan true.
+
+ +hashFunctie(in searchKey) index
+ // Hier wordt de index berekend.
+ // Precondition: Je wilt de index berekenen.
+ // Postcondition: De index is berkend en wordt ook terug gegeven.
+
+ +tableRetrieve(in searchKey: KeyType) tableItem: (TableItemType, boolean)
+ // Hier kan je item door middel van een searchKey gaan ophalen.
+ // Precondition: Je wilt een item uit de tabel.
+ // Postcondition: Geeft true wanneer het gewenste item is terug gegeven.
+
+ +tableDelete(in searchKey: KeyType) boolean
+ // Hier kan een element uit de hashmap verwijderd worden.
+ // Precondition: Je wil een item met gegeven searchKey verwijderen.
+ // Postcondition: Geeft true terug als het gewenste item verwijderd is.
