@@ -2,27 +2,37 @@
 // verantwoordelijke implementeren: Rob
 // verantwoordelijke testen: Arno
 
+// Alle items in een hashmap hebben hetzelfde type. In dit operation contract 
+// wordt er naar dit type verwezen als 'HashItemType'.
+// Bovendien hebben ook alle items in een hashmap hetzelfde type voor hun 
+// zoeksleutel. In dit operation contract wordt er naar dit type verwezen als
+// 'KeyType'.
+
 +createHashmap()
 // Dit maakt een nieuwe hashmap aan.
-// Precondition: Je wil een hashmap aanmaken
-// Postcondition: De hashmap is is aangemaakt
+// Precondition: Je wilt een hashmap aanmaken.
+// Postcondition: De hashmap is aangemaakt.
 
-+tableInsert(in newItem: HashItemType) boolean
++tableInsert(in newItem: HashItemType): boolean
 // Hiermee voeg je een nieuw element toe aan een hashmap.
-// Precondition: Je wil een nieuw element toevoegen aan de hashmap.
-// Postcondition: Het nieuwe element is succesvol toegevoegd. De return waarde is dan true.
+// Precondition: Je wilt een nieuw element toevoegen aan de hashmap.
+// Postcondition: Het nieuwe element is succesvol toegevoegd indien de 
+// gereturnde waarde true is.
 
- +hashFunctie(in searchKey) index
- // Hier wordt de index berekend.
- // Precondition: Je wilt de index berekenen.
- // Postcondition: De index is berkend en wordt ook terug gegeven.
+ +hashFunctie(in searchKey: KeyType): integer
+// Hier wordt de index berekend.
+// Precondition: Je wilt de index berekenen. searchKey is de zoeksleutel van
+// het element waarvan je de index wil gaan berekenen.
+// Postcondition: De index is berkend en wordt ook teruggegeven.
 
- +tableRetrieve(in searchKey: KeyType) tableItem: (TableItemType, boolean)
- // Hier kan je item door middel van een searchKey gaan ophalen.
- // Precondition: Je wilt een item uit de tabel.
- // Postcondition: Geeft true wanneer het gewenste item is terug gegeven.
++tableRetrieve(in searchKey: KeyType): (TableItemType, boolean)
+// Hier kan je item door middel van een searchKey gaan ophalen.
+// Precondition: Je wilt een item uit de tabel met als zoeksleutel de parameter
+// searchKey.
+// Postcondition: Geeft true als tweede element van de tuple wanneer het 
+// gewenste item is teruggegeven als eerste element van de tuple.
 
- +tableDelete(in searchKey: KeyType) boolean
- // Hier kan een element uit de hashmap verwijderd worden.
- // Precondition: Je wil een item met gegeven searchKey verwijderen.
- // Postcondition: Geeft true terug als het gewenste item verwijderd is.
++tableDelete(in searchKey: KeyType): boolean
+// Hier kan een element uit de hashmap verwijderd worden.
+// Precondition: Je wilt een item met gegeven searchKey verwijderen.
+// Postcondition: Geeft true terug als het gewenste item verwijderd is.
