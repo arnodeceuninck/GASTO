@@ -15,7 +15,7 @@
  +hashFunctie(in searchKey) index
  // Hier wordt de index berekend.
  // Precondition: Je wilt de index berekenen.
- // Postcondition: De index is berkend en wordt ook terug gegeven.
+ // Postcondition: De index is berekend en wordt ook terug gegeven.
 
  +tableRetrieve(in searchKey: KeyType) tableItem: (TableItemType, boolean)
  // Hier kan je item door middel van een searchKey gaan ophalen.
