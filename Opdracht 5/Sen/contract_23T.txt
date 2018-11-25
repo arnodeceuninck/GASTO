@@ -1,5 +1,5 @@
 // 23T: 2-3 Boom
-// verantwoordelijke implementeren: Sen 
+// verantwoordelijke implementeren: Sen
 // verantwoordelijke testen: Rob
 
 +create23T(in rootitem: ListItemType, in rootKey: Integer)
@@ -12,7 +12,7 @@
 +destroy23T() boolean
 // Precondition: De 23T bestaat en moet verwijderd worden.
 // Postcondition: De 23T bestaat niet meer. Alle elementen en de verwijzigingen
-// ervan zijn verwijderd. De functie geeft ook een boolean terug om te laten zitten
+// ervan zijn verwijderd. De functie geeft ook een boolean terug om te laten zien
 // of de operatie gelukt is.
 
 +isEmpty(): boolean
