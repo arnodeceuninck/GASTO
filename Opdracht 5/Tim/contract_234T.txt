@@ -1,3 +1,84 @@
 // 234T: 2-3-4 Boom
-// verantwoordelijke implementeren: Tim 
+// verantwoordelijke implementeren: Tim
 // verantwoordelijke testen: Sen
+
+// Een 2-3-4 Boom (234T) is de grootste gebalanceerde boom. Dat wilt zeggen dat
+// elke node in de 234T kan een 2-node, 3-node, 4-node. en er dus nodes kunnen
+// zijn met 2, 3 of 4 kinderen zijn. Een 234T is ook zo geimplementeerd dat de
+// boom zichzelf gaat balanceren. 234TItemType is de soort van data die in de
+// boom zit.
+
++create234T()
+// Precondition: Je wilt een 2-3-4 boom aanmaken.
+// Postcondition: Er is een lege 2-3-4 aangemaakt.
+
++destroy234T()
+// Deze fucntie zal alle verwijzingen en nodes in de boom verwijderen zodat deze
+// niet meer bestaat in het geheugen.
+// Precondition: Er is een 2-3-4 Boom die je wilt verwijderen.
+// Postcondition: De 2-3-4 boom bestaat niet meer samen met alle data die in de
+// boom zat.
+
++isEmpty(): boolean
+// Deze functie zal kijken naar de root of tree en als deze niet bestaat dan is
+// de zoekboom leeg.
+// Precondition: Je hebt een 2-3-4 Boom waarvan je wilt weten of deze leeg is of
+// niet.
+// Postcondition: De functie zal een boolean teruggeven die vermeld of de 2-3-4
+// boom is leeg is of niet, true als de boom leeg is, false als er data in de
+// boom zit
+
++insert(in newItem: 234TItemType, in key: integer): boolean
+// Je hebt een nieuwe waarde en je wilt deze toevoegen aan de 2-3-4 boom dan zal
+// deze functie ervoor zorgen dat de data op de juiste plek komt.
+// Precondition: Je hebt een item met een datatype dat overeenkomt met de
+// andere items van de 2-3-4 Boom. Er word ook een unieke key meegegeven die
+// overeenkomt met de data die opgeslagen word.
+// Postcondition: De data zal toegevoegd zijn op de juiste locatie in de 2-3-4
+// boom en de structuur is nog nogsteeds correct. ook word er een boolean
+// teruggeven die zegt of de operatie gelukt is of niet.
+
++remove(in key: integer): boolean
+// Als je een bepaalde data wilt verwijderen uit de 2-3-4 boom dan zal deze
+// functie daarvoor zorgen.
+// Precondition: Je hebt de key van de data die je wilt verwijderen.
+// Postcondition: De data die uit de boom verwijderd moest worden zal uit de
+// boom gehaald zijn. Er word ook een boolean terug gegeven die aantoont of de
+// operatie gelukt is.
+
++retrieve(in key: integer): (234TItemType, boolean)
+// Deze operatie zal aan de hand van de key de overeenkomtstige data teruggeven
+// Precondition: Je hebt de key van de data die je uit de 234T wilt halen en deze
+// zit in de 234T
+// Postcondition: De operatie zal de data uit de 234T halen en deze teruggeven,
+// er zal ook een boolean teruggeven worden die zegt of de operatie gelukt is.
+
++getRoot(): 234TItemType
+// De operatie zal het item dat in de root zit teruggeven.
+// Precondition: Je hebt een 234T waarvan je wilt je weten wat er in de root zit.
+// Postcondition: De waarde dat in de root van de 234T zit word teruggeven.
+
++inorderTraverse(in visit: function): boolean
+// De inorderTraverse zal elke node in de 234T op een inorder volgorde overlopen
+// en parameter functie zal op elks worden uitgevoerd.
+// Precondition: Je hebt een functie die je op elke node in de 234T wilt toepassen
+// de 234T zal dan in inorder volgorde worden overlopen zodat alle nodes worden
+// bereikt.
+// Postcondition: Elke node in de 234T zal overlopen zijn en de fucntie erop
+// toegepast, er word ook een boolean teruggeven die zegt of de operatie gelukt is.
+
++preorderTraverse(in vist: function): boolean
+// Alle nodes worden overlopen in een preorder manier en de visit functie word er op
+// toegepast.
+// Precondition: Er is een 234T waarop je de visit fucntie wilt toepassen om zo
+// elke node aan te passen in een preoder volgorde.
+// Postcondition: de 234T zal op een preoder manier aangepast zijn en er word
+// een boolean terug gegeven die zegt of die operatie succesvol was.
+
++postorderTraverse(in visit: function): boolean
+// Alle nodes worden overlopen in een postorder manier en de visit functie word er op
+// toegepast.
+// Precondition: Er is een 234T waarop je de visit fucntie wilt toepassen om zo
+// elke node aan te passen in een preoder volgorde.
+// Postcondition: de 234T zal op een preoder manier aangepast zijn en er word
+// een boolean terug gegeven die zegt of die operatie succesvol was.
