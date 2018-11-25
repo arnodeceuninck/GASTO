@@ -25,8 +25,8 @@
 // Precondition: Je hebt een 2-3-4 Boom waarvan je wilt weten of deze leeg is of
 // niet.
 // Postcondition: De functie zal een boolean teruggeven die vermeld of de 2-3-4
-// boom is leeg is of niet, true als de boom leeg is, false als er data in de
-// boom zit
+// boom leeg is of niet, geeft true als de boom leeg is, false als er data in de
+// boom zit.
 
 +insert(in newItem: 234TItemType, in key: integer): boolean
 // Je hebt een nieuwe waarde en je wilt deze toevoegen aan de 2-3-4 boom dan zal
@@ -34,16 +34,15 @@
 // Precondition: Je hebt een item met een datatype dat overeenkomt met de
 // andere items van de 2-3-4 Boom. Er word ook een unieke key meegegeven die
 // overeenkomt met de data die opgeslagen word.
-// Postcondition: De data zal toegevoegd zijn op de juiste locatie in de 2-3-4
+// Postcondition: Het element zal toegevoegd zijn op de juiste locatie in de 2-3-4
 // boom en de structuur is nog nogsteeds correct. ook word er een boolean
 // teruggeven die zegt of de operatie gelukt is of niet.
 
 +remove(in key: integer): boolean
-// Als je een bepaalde data wilt verwijderen uit de 2-3-4 boom dan zal deze
+// Als je een bepaald element wilt verwijderen uit de 2-3-4 boom dan zal deze
 // functie daarvoor zorgen.
-// Precondition: Je hebt de key van de data die je wilt verwijderen.
-// Postcondition: De data die uit de boom verwijderd moest worden zal uit de
-// boom gehaald zijn. Er word ook een boolean terug gegeven die aantoont of de
+// Precondition: Je wilt een element verwijderen met de zoekkey: key.
+// Postcondition: Het element met de parameter key: integer wordt verwijdert uit de 2-3-4 boom. Er wordt een boolean terug gegeven die aantoont of de
 // operatie gelukt is.
 
 +retrieve(in key: integer): (234TItemType, boolean)
@@ -72,13 +71,13 @@
 // toegepast.
 // Precondition: Er is een 234T waarop je de visit fucntie wilt toepassen om zo
 // elke node aan te passen in een preoder volgorde.
-// Postcondition: de 234T zal op een preoder manier aangepast zijn en er word
+// Postcondition: de 234T zal op een preorder manier aangepast zijn en er word
 // een boolean terug gegeven die zegt of die operatie succesvol was.
 
 +postorderTraverse(in visit: function): boolean
 // Alle nodes worden overlopen in een postorder manier en de visit functie word er op
 // toegepast.
 // Precondition: Er is een 234T waarop je de visit fucntie wilt toepassen om zo
-// elke node aan te passen in een preoder volgorde.
-// Postcondition: de 234T zal op een preoder manier aangepast zijn en er word
+// elke node aan te passen in een postorder volgorde.
+// Postcondition: de 234T zal op een postorder manier aangepast zijn en er word
 // een boolean terug gegeven die zegt of die operatie succesvol was.
