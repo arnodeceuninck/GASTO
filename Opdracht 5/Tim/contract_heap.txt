@@ -2,3 +2,52 @@
 // verantwoordelijke implementeren: Tim
 // verantwoordelijke testen: Rob
 
+// Een heap is een binaire boom waarbij de waarde gesoorteerd zijn op grootte,
+// maar inplaats van te controleren op rootkey van de parent word er gekeken of
+// de key groter is dan die van de kinderen. En word er altijd zo geinsert dat
+// de heap altijd compleet is. Dus na elke delete en insert moet de heap
+// geherstructeerd worden.
+
++createHeap()
+// Er word een lege Heap aangemaakt.
+// Precondition: Je wilt een nieuwe heap aanmaken
+// Postcondition: Je hebt een nieuwe lege heap aangemaakt
+
++destroHeap()
+// Dit zal ervoor zorgen dat de heap verwijderd word door alle verwijzingen en
+// nodes te verwijderen.
+// Precondition: Je hebt een heap die je wilt verwijderen
+// Postcondition: De heap zal verwijderd zijn samen met alle data dat in de Heap
+// zat, ook zal al het geheugen terug vrijgemaakt zijn.
+
++isEmpty(): boolean
+// Deze operatie zal kijken of de heap elementen bevat en dan een boolean terug
+// geven
+// Precondition: Je hebt een heap waarvan je wilt weten of hij leeg is of niet
+// Postcondition: Je krijgt een boolean terug die zegt of de heap leeg is of niet.
+
++insert(in newItem: HeapItemType): boolean
+// Deze methode zal een item toevoegen aan de Heap.
+// Precondition: je hebt een item dat je aan de heap wilt toevoegen
+// Postcondition: Het item zal aan de heap toegevoegd worden op de juiste locatie
+// er word ook een boolean terug gegeven die zegt of de operatie gelukt is.
+
++getTop(): HeapItemType
+// Deze operatie zal het bovenste element van de heap teruggeven.
+// Precondition: Er is een Heap die niet leeg is en je wilt weten welk item
+// bovenaan staat.
+// Postcondition: Het item dat bovenaan staat word terug gegeven aan de oproeper.
+
++remove(): (boolean, HeapItemType)
+// Deze operatie zal het bovenste element van de heap verwijderen en deze
+// gebruiker teruggeven aan de gebruiker.
+// Precondition: je hebt een heap waar je het bovenste item van wilt verwijderen.
+// Postcondition: De heap zal aangepast worden zodat het bovenste element
+// verwijderd word en teruggeven word aan de gebruiker. Er word ook een boolean
+// teruggeven die zegt of de operatie gelukt is of niet.
+
++size(): integer
+// Deze operatie zal de groote van de heap teruggeven aan de gebruiker.
+// Precondition: Je hebt een heap waarvan je het aantal elementen wilt weten.
+// Postcondition: Je krijgt een integer terug die aanduid hoeveel elementen er
+// in de heap zitten.
