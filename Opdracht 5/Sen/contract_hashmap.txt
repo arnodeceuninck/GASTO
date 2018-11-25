@@ -21,20 +21,19 @@
 // berekenen succesvol verlopen en zal de tweede waarde van de tuple de 
 // berekende index bevatten.
 
-+tableInsert(in newItem:TableItemType) 
-// REMOVETHISLINE: zit de zoeksleutel in TableItemType? misschien best bovenaan
-// REMOVETHISLINE: het document vermelden, anders een extra parameter searchKey
-// REMOVETHISLINE: toevoegen aan deze functie. 
++tableInsert(in newItem:TableItemType)  
 // Deze method voegt een nieuw item toe op de juiste positie van de 
 // datastructuur.
 // Precondition: Je wilt een nieuw element toevoegen aan de hashmap.
 // Postcondition: Het element is geinsert in de hashmap.
 
-+tableRetrieve( in searchKey: KeyType) (boolean, tableItem:TableItemType)
-// Precondition: Je wilt element retrieve met searchkey: KeyType.
-// Postcondition: Geeft een true terug als het succesvol het element heeft terug gegeven met searchkey: KeyType.
+ +tableRetrieve( in searchKey: KeyType) (boolean, tableItem:TableItemType)
+// Deze methode geeft een element terug doormiddel van een bepaald zoeksleutel.
+// Precondition: Je wilt element retrieve met de searchkey: KeyType.
+// Postcondition: Geeft true als tweede element van de tuple wanneer het
+// gewenste item is teruggegeven als eerste element van de tuple.
 
-+tableDelete( in searchKey: KeyType) boolean
-// Precondition: Je wilt een element verwijderen uit de hashmap.
-// Postconditoin: Geeft true terug als het succesvol is verwijdert.
-
++tableDelete(in searchKey: KeyType): boolean
+// Hier kan een element uit de hashmap verwijderd worden.
+// Precondition: Je wilt een item met gegeven searchKey verwijderen.
+// Postcondition: Geeft true terug als het gewenste item verwijderd is.
