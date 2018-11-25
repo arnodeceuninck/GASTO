@@ -1,3 +1,42 @@
 // 23T: 2-3 Boom
-// verantwoordelijke implementeren: Rob 
+// verantwoordelijke implementeren: Rob
 // verantwoordelijke testen: Sen
+
++create23T()
+// Voor wanneer je een 2-3 boom wil aanmaken.
+// Precondition: Je wilt een 2-3 boom aanmaken.
+// Postcondition: De 2-3 boom is succesvol aangemaakt.
+
++insertItem(in tree: TwoThreeTree, in newItem: TreeItemType) boolean
+// Hiermee kan je een element toevoegen aan een 2-3 boom.
+// Precondition: Je wilt een element toevoegen aan een 2-3 Boom.
+// Postcondition: Geeft true terug als het element succesvol is toegevoegd.
+
++deleteItem(in tree: TwoThreeTree, in searchKey: KeyType) boolean
+// Hiermee kan je een element verwijderen uit de 2-3 boom.
+// Precondition: Je wilt een element met een bepaalde searchKey verwijderen.
+// Postcondition: Geeft true terug wanneer het element met success is verwijderd.
+
++inorder(in tree: TwoThreetree)
+// Hiermee kan je de 2-3 boom doorlopen in een inorder manier.
+// Precondition: Je wilt de 2-3 boom inorder doorlopen.
+// Postcondition: Doorloopt de 2-3 boom indien die niet leeg is, in volgorde van
+// de zoeksleutels.
+
++retrieveItem(in tree: TwoThreetree, in searchKey: KeyType) (treeItem: TreeItemType, success: boolean)
+// Hiermee kan je naar een element met bepaalde zoeksleutel zoeken in de 2-3 boom.
+// Precondition: Je wilt een element zoeken via zijn zoeksleutel in een niet lege 2-3 boom.
+// Geeft true terug indien het gewenste item gevonden is, en geeft deze waarde ook mee.
+
++split(in n: TreeNode) n:Treenode
+// Hiermee splitst de knoop n, die 3 items bevat, op. Indien n geen blad is,
+// heeft het 4 kinderen.
+//Precondition: Je wilt een node die 3 items bevat en geen bladeren zijn, splitsen.
+//Postcondition: De node n is gesplitst en wordt terug gegeven.
+
++fix(in n:TreeNode)
+// Dit is voor het herschikken van een 2-3 boom na het verwijderen van een element.
+// Precondition: Je wilt de 2-3 boom herschikken.
+// Postcondition: Het verwijderen wordt afgerond door het verwijderen van de wortel,
+// het herverdelen van items of het samenvoegen van knopen. Indien n geen blad is,
+// heeft n 1 kind.
