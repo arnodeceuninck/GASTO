@@ -2,17 +2,33 @@
 // verantwoordelijke implementeren: Sen
 // verantwoordelijke testen: Arno
 
+// Alle items in de Hashmap hebben hetzelfde type. In dit operation contract
+// wordt dit type 'TableItemType' genoemt.
+// Een hashmap hasht alle locaties met behulp van een hashfunctie. Deze 
+// hashfunctie moet altijd hetzelfde type als input krijgen. In dit operation
+// contract verwijzen we naar dit type als KeyType
+
 +createHashmap()
+// Maakt een nieuwe hashmap aan
 // Precondition: Je wilt een nieuwe hashmap maken.
-// Postcondition: create een nieuwe hashmap.
+// Postcondition: Er is een nieuwe hashmap aangemaakt.
 
-+hashfunctie(in HashfunctionType) (boolean, index)
-// Precondition: Je wilt de index berekenen.
-// Postcondition: Geeft de index terug en true indien het succesvol is.
++hashfunctie(in searchKey: KeyType) (boolean, index)
+// Deze method berekent een index die vasthangt aan een bepaalde zoeksleutel.
+// Precondition: Je wilt de index berekenen van een element met als zoeksleutel
+// de parameter searchKey.
+// Postcondition: Geeft een tuple terug. Indien de eerste waarde true is, is het
+// berekenen succesvol verlopen en zal de tweede waarde van de tuple de 
+// berekende index bevatten.
 
-+tableInsert(in newItem:TableItemType)
++tableInsert(in newItem:TableItemType) 
+// REMOVETHISLINE: zit de zoeksleutel in TableItemType? misschien best bovenaan
+// REMOVETHISLINE: het document vermelden, anders een extra parameter searchKey
+// REMOVETHISLINE: toevoegen aan deze functie. 
+// Deze method voegt een nieuw item toe op de juiste positie van de 
+// datastructuur.
 // Precondition: Je wilt een nieuw element toevoegen aan de hashmap.
-// Postcondition: Insert het element op de juiste index.
+// Postcondition: Het element is geinsert in de hashmap.
 
 +tableRetrieve( in searchKey: KeyType) (boolean, tableItem:TableItemType)
 // Precondition: Je wilt element retrieve met searchkey: KeyType.
