@@ -13,6 +13,7 @@
   </component>
   <component name="CoverageDataManager">
     <SUITE FILE_PATH="coverage/GASTO$RZT.coverage" NAME="RZT Coverage Results" MODIFIED="1543787750694" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Opdracht 7/Arno" />
+<<<<<<< Updated upstream
   </component>
   <component name="FUSProjectUsageTrigger">
     <session id="-1601873490">
@@ -46,6 +47,8 @@
         </counts>
       </usages-collector>
     </session>
+=======
+>>>>>>> Stashed changes
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
@@ -59,6 +62,7 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
+<<<<<<< Updated upstream
 <<<<<<< Updated upstream
         <entry file="file://$PROJECT_DIR$/Opdracht 1/Arno/Python/graph.py">
           <provider selected="true" editor-type-id="text-editor">
@@ -115,18 +119,43 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="826">
               <caret line="54" column="1" selection-start-line="54" selection-start-column="1" selection-end-line="54" selection-end-column="1" />
+=======
+        <entry file="file://$PROJECT_DIR$/Opdracht 7/Arno/graph.dot">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Opdracht 1/Arno/Python/BinarySearchTree.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="2265">
+              <caret line="151" column="35" selection-start-line="151" selection-start-column="35" selection-end-line="151" selection-end-column="35" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Opdracht 5/Arno/contract_RBT.txt">
+        <entry file="file://$PROJECT_DIR$/Opdracht 6/Arno/TestHashmapSen.py">
           <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="330">
+              <caret line="22" column="23" selection-start-line="22" selection-start-column="23" selection-end-line="22" selection-end-column="23" />
+>>>>>>> Stashed changes
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Opdracht 5/Rob/contract_hashmap.txt">
+          <provider selected="true" editor-type-id="text-editor">
+<<<<<<< Updated upstream
             <state relative-caret-position="102">
               <caret line="6" column="17" selection-start-line="6" selection-start-column="17" selection-end-line="6" selection-end-column="17" />
 =======
         <entry file="file://$PROJECT_DIR$/Opdracht 5/Rob/contract_hashmap.txt">
           <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="405">
+              <caret line="27" column="32" selection-start-line="27" selection-start-column="32" selection-end-line="27" selection-end-column="32" />
+>>>>>>> Stashed changes
+=======
             <state relative-caret-position="405">
               <caret line="27" column="32" selection-start-line="27" selection-start-column="32" selection-end-line="27" selection-end-column="32" />
 >>>>>>> Stashed changes
@@ -160,6 +189,7 @@
     </option>
   </component>
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
   <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
   <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER" />
   <component name="JsGulpfileManager">
@@ -171,6 +201,8 @@
     <option name="width" value="974" />
     <option name="height" value="1047" />
 =======
+=======
+>>>>>>> Stashed changes
   <component name="ProjectFrameBounds" extendedState="4">
     <option name="x" value="412" />
     <option name="y" value="27" />
@@ -198,12 +230,22 @@
               <item name="GASTO" type="b2602c69:ProjectViewProjectNode" />
               <item name="GASTO" type="462c0819:PsiDirectoryNode" />
               <item name="Opdracht 1" type="462c0819:PsiDirectoryNode" />
+<<<<<<< Updated upstream
+=======
             </path>
             <path>
               <item name="GASTO" type="b2602c69:ProjectViewProjectNode" />
               <item name="GASTO" type="462c0819:PsiDirectoryNode" />
               <item name="Opdracht 1" type="462c0819:PsiDirectoryNode" />
               <item name="Arno" type="462c0819:PsiDirectoryNode" />
+>>>>>>> Stashed changes
+            </path>
+            <path>
+              <item name="GASTO" type="b2602c69:ProjectViewProjectNode" />
+              <item name="GASTO" type="462c0819:PsiDirectoryNode" />
+              <item name="Opdracht 1" type="462c0819:PsiDirectoryNode" />
+              <item name="Arno" type="462c0819:PsiDirectoryNode" />
+              <item name="Python" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="GASTO" type="b2602c69:ProjectViewProjectNode" />
@@ -315,7 +357,11 @@
   </component>
   <component name="ToolWindowManager">
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
     <frame x="-7" y="0" width="974" height="1047" extended-state="0" />
+=======
+    <frame x="412" y="27" width="1188" height="873" extended-state="4" />
+>>>>>>> Stashed changes
 =======
     <frame x="412" y="27" width="1188" height="873" extended-state="4" />
 >>>>>>> Stashed changes
@@ -373,6 +419,7 @@
   </component>
   <component name="editorHistoryManager">
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
     <entry file="file://$PROJECT_DIR$/Opdracht 7/Arno/RZT.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="3196">
@@ -382,6 +429,8 @@
     </entry>
 =======
 >>>>>>> Stashed changes
+=======
+>>>>>>> Stashed changes
     <entry file="file://$PROJECT_DIR$/Opdracht 5/Arno/contract_RBT.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="102">
@@ -389,6 +438,7 @@
         </state>
       </provider>
     </entry>
+<<<<<<< Updated upstream
 <<<<<<< Updated upstream
     <entry file="file://$PROJECT_DIR$/Opdracht 6/Sen/Test234T.py">
       <provider selected="true" editor-type-id="text-editor" />
@@ -417,6 +467,8 @@
         <state relative-caret-position="826">
           <caret line="54" column="1" selection-start-line="54" selection-start-column="1" selection-end-line="54" selection-end-column="1" />
 =======
+=======
+>>>>>>> Stashed changes
     <entry file="file://$PROJECT_DIR$/Opdracht 6/Sen/Test23T.py">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -478,6 +530,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="405">
           <caret line="27" column="32" selection-start-line="27" selection-start-column="32" selection-end-line="27" selection-end-column="32" />
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
         </state>
       </provider>
