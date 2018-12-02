@@ -2,18 +2,18 @@
 // verantwoordelijke implementeren: Arno
 // verantwoordelijke testen: Rob
 
-// Heap is een binaire boom waarbij het element met de hoogste zoeksleutel 
-// steed in de root zit. Iedere parent heeft ook een hogere zoeksleutel dan 
+// Heap is een binaire boom waarbij het element met de hoogste zoeksleutel
+// steed in de root zit. Iedere parent heeft ook een hogere zoeksleutel dan
 // zijn kinderen. Als je een element uit een heap wil halen, krijg je steeds
 // het element met de hoogste zoeksleutelwaarde terug.
 // Alle items in de heap hebben hetzelfde datatype. Als we in dit contract naar
 // dit datatype verwijzen, dan noemen  we het HeapItemType.
 
 +createHeap()
-// Dit maakt een lege Heap aan. 
-// Precondition: Je wil een nieuwe Heap aanmalen
-// Postcondition: Er is een nieuwe, lege Heap aangemaakt. De node van deze 
-// Heap bevat de default gegevens, wat inhoudt dat alle variabelen hiervan 
+// Dit maakt een lege Heap aan.
+// Precondition: Je wilt een nieuwe Heap aanmaken
+// Postcondition: Er is een nieuwe, lege Heap aangemaakt. De node van deze
+// Heap bevat de default gegevens, wat inhoudt dat alle variabelen hiervan
 // niets bevatten.
 
 +destroHeap()
@@ -31,11 +31,11 @@
 
 +insert(in newItem: HeapItemType): boolean
 // Deze method zal het item newItem op de correcte plaats van de heap inserten,
-// Zodanig dat je na het inserten nogsteeds een heap hebt. De insert functie 
+// Zodanig dat je na het inserten nogsteeds een heap hebt. De insert functie
 // kijkt naar de zoeksleutel.
 // Precondition: newItem is van hetzelfde datatype als de andere elementen in de
 // heap.
-// Postcondition: Het newItem is toegevoegd aan de datastructuur indien de 
+// Postcondition: Het newItem is toegevoegd aan de datastructuur indien de
 // gereturnde boolean true is. Deze datastructuur heeft na het toevoegen
 // nogsteeds alle eigenschappen van een heap.
 
@@ -44,15 +44,15 @@
 // met de hoogste zoeksleutelwaarde.
 // Precondition: Er zit een item in de root van de RBT en je wilt weten wat de
 // waarde ervan is.
-// Postcondition: De gereturnde variabele bevat het element uit de root van de 
+// Postcondition: De gereturnde variabele bevat het element uit de root van de
 // BST.
 
 +remove(): RBTItemType
-// Deze method verwijdert en returnt de waarde van het item dat in de root zit. 
+// Deze method verwijdert en returnt de waarde van het item dat in de root zit.
 // Dit is het item met de hoogste zoeksleutelwaarde.
-// Precondition: Er zit een item in de root van de RBT en je wilt dit uit de 
+// Precondition: Er zit een item in de root van de RBT en je wilt dit uit de
 // heap verwijderen.
-// Postcondition: De gereturnde variabele bevat het element uit de root van de 
+// Postcondition: De gereturnde variabele bevat het element uit de root van de
 // heap.
 
 +size(): integer
@@ -60,5 +60,3 @@
 // Precondition: Je wil het aantal nodes in de heap weten.
 // Postcondition: Er wordt een integer gereturnt die aanduid hoeveel nodes er
 // in de heap zitten.
-
-
