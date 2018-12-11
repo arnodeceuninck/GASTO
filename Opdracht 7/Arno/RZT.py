@@ -75,8 +75,33 @@ class connection:
             string += '[color ="red"]' + " "
         return string
 ########################
-
 class RoodZwartBoom:
+    # Aparte klasse nodig aangezien de root kan veranderen
+    def __init__(self):
+        self.root = RZTNode()
+
+    def createRBT(self):
+        return self.root.createRBT()
+
+    def isEmpty(self):
+        return self.root.isEmpty()
+
+    def insert(self, newItem):
+        self.root.insert(newItem)
+        self.root = self.root.findNewRoot()
+        return
+
+    def visualize(self):
+        vgraph = Graph()
+        vgraph.change_rankdir("TB")
+        self.root.createVisualisation(vgraph)
+        vgraph.rebuild_file()
+
+    def remove(self, key):
+        return self.root.remove(key)
+
+
+class RZTNode:
 
     def __init__(self):
 
@@ -112,6 +137,11 @@ class RoodZwartBoom:
 
         self.parent = None
 
+    def findNewRoot(self):
+        root = self
+        while(root.parent != None):
+            root = root.parent
+        return root
     def destroyRBT(self):
 
         self.root_key = None
@@ -132,6 +162,115 @@ class RoodZwartBoom:
         if self.root_key is None:
             return True
 
+    def rotateRight(self):
+
+        if self.parent != None and self.parent.parent != None:
+            if self.parent.parent.left_tree == self.parent:
+                self.parent.parent.left_tree = self
+            elif self.parent.parent.right_tree == self.parent:
+                self.parent.parent.right_tree = self
+
+        temp_tree = self.right_tree
+        self.right_tree = self.parent
+        self.right_connection = 1
+        self.parent = self.right_tree.parent
+        self.right_tree.parent = self
+
+        self.right_tree.left_tree = temp_tree
+        self.right_tree.left_connection = 0
+
+        if self.left_tree.right_tree is not None:
+            self.left_tree.right_tree.parent = self.left_tree
+
+    def rotateUp(self):
+        if(self.right_connection == 1):
+            newTop = self.right_tree
+        elif(self.left_connection == 1):
+            newTop = self.left_tree
+
+        if self.parent != None and self.parent.parent != None:
+            if self.parent.parent.left_tree == self.parent:
+                self.parent.parent.left_tree = newTop
+            elif self.parent.parent.right_tree == self.parent:
+                self.parent.parent.right_tree = newTop
+
+        tempLeftTree = newTop.left_tree
+        tempRightTree = newTop.right_tree
+
+        if(self.parent.root_key > newTop.root_key):
+            newTop.right_tree = self.parent
+            newTop.right_connection = 1
+            newTop.left_tree = self
+            newTop.left_connection = 1
+        elif(self.parent.root_key > newTop.root_key):
+            newTop.left_tree = self.parent
+            newTop.left_connection = 1
+            newTop.right_tree = self
+            newTop.right_connection = 1
+
+        if(newTop.left_tree != None):
+            newTop.left_tree.right_tree = tempLeftTree
+            newTop.left_tree.right_connection = 0
+            newTop.left_tree.parent = newTop
+        if(newTop.right_tree != None):
+            newTop.right_tree.left_tree = tempRightTree
+            newTop.right_tree.left_connection = 0
+            newTop.right_tree.parent = newTop
+
+    def rotateLeft(self):
+        if self.parent != None and self.parent.parent != None:
+            if self.parent.parent.left_tree == self.parent:
+                self.parent.parent.left_tree = self
+            elif self.parent.parent.right_tree == self.parent:
+                self.parent.parent.right_tree = self
+
+        temp_tree = self.left_tree
+        self.left_tree = self.parent
+        self.left_connection = 1
+        self.parent = self.left_tree.parent
+        self.left_tree.parent = self
+
+        self.left_tree.right_tree = temp_tree
+        self.left_tree.right_connection = 0
+
+        if self.left_tree.right_tree is not None:
+            self.left_tree.right_tree.parent = self.left_tree
+
+    def check_split(self):
+        if self.left_connection == 1 and self.right_connection == 1:
+            self.split()
+
+    def check_rotation(self):
+        if self.left_connection == 1 and self.findConnectionWithParent() == 1 and self.parent.left_tree == self:
+            return self.rotateRight()
+        elif self.right_connection == 1 and self.findConnectionWithParent() == 1 and self.parent.right_tree == self:
+            return self.rotateLeft()
+        elif (self.left_connection == 1 or self.right_connection == 1) and self.findConnectionWithParent() == 1:
+            return self.rotateUp()
+
+    def split(self):
+
+        self.left_connection = 0
+        self.right_connection = 0
+        # De node wordt gesplitst en de middelste 'springt' in de node van zijn parent
+        if self.parent != None:
+            if self.parent.left_tree == self:
+                self.parent.left_connection = 1
+            elif self.parent.right_tree == self:
+                self.parent.right_connection = 1
+            self.parent.check_rotation()
+            # if self.parent.parent != None: # Niet meer nodig, want alle 4 knopen op pad zijn al gesplitst
+            #     self.parent.parent.check_split()
+        # Splitsen gedaan
+
+    def findConnectionWithParent(self):
+        if self.parent == None:
+            return 0  # Zwarte verbinding is geen speciaal geval
+        elif self.parent.left_tree == self:
+            return self.parent.left_connection
+        elif self.parent.right_tree == self:
+            return self.parent.right_connection
+
     def insert(self, newItem):
         # Bij een lege boom
         if self.isEmpty():
@@ -141,31 +280,16 @@ class RoodZwartBoom:
 
         # Doorloop het blad van wortel tot blad en splits alle 4-knopen
         # 4 knoop als zowel linker als rechter boom in dezelfde node zitten
-        if self.left_connection == 1 and self.right_connection == 1:
-            self.left_connection = 0
-            self.right_connection = 0
-            # De node wordt gesplitst en de middelste 'springt' in de node van zijn parent
-            if self.parent != None:
-                if self.parent.left_tree == self:
-                    self.parent.left_connection = 1
-                elif self.parent.right_tree == self:
-                    self.parent.right_connection = 1
-        # Splitsen gedaan
+        self.check_split()
 
         # Bepaal de verbinding tussen self en parent, om te weten of er een rotation moet komen na het toevoegen
-        if self.parent == None:
-            connection_with_parent = 0  # Zwarte verbinding is geen speciaal geval
-        elif self.parent.left_tree == self:
-            connection_with_parent = self.parent.left_connection
-        elif self.parent.right_tree == self:
-            connection_with_parent = self.parent.right_connection
-
+        # connection_with_parent = self.findConnectionWithParent()
 
         # Kunnen we vanuit deze deelboom inserten?
         # Linkerblad is leeg, hier moet het item komen, in dezelfde node
         if newItem.key < self.root_key and self.left_tree is None:
             # maak de nieuwe boom aan
-            subtree = RoodZwartBoom()
+            subtree = RZTNode()
 
             subtree.root_key = newItem.key
             subtree.root_value = newItem.value
@@ -179,30 +303,13 @@ class RoodZwartBoom:
             # Anders moet de knoop nog 'draaien' rond zichzelf.
             # Dwz dat zijn parent zijn rechterdeelboom wordt en zijn oorspronkelijke rechterdeelboom
             # De linkerdeelboom daarvan wordt
-            if connection_with_parent == 1:
-                if self.parent.parent.left_tree == self.parent:
-                    self.parent.parent.left_tree = self
-                elif self.parent.parent.right_tree == self.parent:
-                    self.parent.parent.right_tree = self
-
-                temp_tree = self.right_tree
-                self.right_tree = self.parent
-                self.right_connection = 1
-                self.parent = self.left_tree.parent
-                self.right_tree.parent = self
-
-                self.right_tree.left_tree = temp_tree
-                self.right_tree.left_connection = 0
-
-                if self.left_tree.right_tree is not None:
-                    self.left_tree.right_tree.parent = self.left_tree
-
+            self.check_rotation()
             return True
 
         # Voeg het item rechts toe
         if newItem.key > self.root_key and self.right_tree is None:
 
-            subtree = RoodZwartBoom()
+            subtree = RZTNode()
 
             subtree.root_key = newItem.key
             subtree.root_value = newItem.value
@@ -211,23 +318,7 @@ class RoodZwartBoom:
             self.right_tree = subtree
             self.right_connection = 1
 
-            if connection_with_parent == 1:
-                if self.parent.parent.left_tree == self.parent:
-                    self.parent.parent.left_tree = self
-                elif self.parent.parent.right_tree == self.parent:
-                    self.parent.parent.right_tree = self
-
-                temp_tree = self.left_tree
-                self.left_tree = self.parent
-                self.left_connection = 1
-                self.parent = self.left_tree.parent
-                self.left_tree.parent = self
-
-                self.left_tree.right_tree = temp_tree
-                self.left_tree.right_connection = 0
-
-                if self.left_tree.right_tree is not None:
-                    self.left_tree.right_tree.parent = self.left_tree
+            self.check_rotation()
 
             return True
 
@@ -237,14 +328,67 @@ class RoodZwartBoom:
         elif self.root_key > newItem.key:
             self.left_tree.insert(newItem)
 
+    def findInorderSuccerssor(self):
+        # TODO: Elke 2-node omvormen in 3-node of 4-node
+        if self.right_tree is None:
+            return self
+        inorder_successor = self.right_tree
+        while inorder_successor.left_tree is not None:
+            inorder_successor = inorder_successor.left_tree
+        return inorder_successor
+
+    def remove(self, key):
+        # TODO: Elke 2-node omvormen in 3-node of 4-node
+        if self.root_key < key and self.right_tree is not None:
+            self.right_tree.remove(key)
+        elif self.root_key > key and self.left_tree is not None:
+            self.left_tree.remove(key)
+        elif self.root_key != key:
+            print("Key not found.")
+            return 404
+
+        # We bevinden ons in de Node die verwijderd zal moeten worden
+        inorder_successor = self.findInorderSuccessor()
+
+        # Blad inorder successor is nu altijd een 3-knoop of 4-knoop
+        # swap deze items
+
+        tempParent = inorder_successor.parent
+
+        inorder_successor.left_tree = self.left_tree
+        inorder_successor.left_connection = self.left_connection
+        inorder_successor.right_tree = self.right_tree
+        inorder_successor.right_connection = self.right_connection
+        # Het type connection met de parent blijft hetzelfde
+        if self.parent.left_tree == self:
+            self.parent.left_tree = inorder_successor
+        elif self.parent.right_tree == self:
+            self.parent.right_tree = inorder_successor
+        inorder_successor.parent = self.parent
+
+        self.left_tree = None
+        self.right_tree = None
+        self.parent = tempParent
+        if self.parent.left_tree == inorder_successor:
+            self.parent.left_tree = None
+            self.parent.left_connection = None
+        elif self.parent.right_tree == inorder_successor:
+            self.parent.right_tree = None
+            self.parent.right_connection = None
+
+        return self.destroyRBT()
+
     def createVisualisation(self, vgraph):
         if not self.isEmpty():
             if self.left_tree is not None:
                 vgraph.add_connection(self.root_key, self.left_tree.root_key, self.left_connection)
                 self.left_tree.createVisualisation(vgraph)
+
             if self.right_tree is not None:
                 vgraph.add_connection(self.root_key, self.right_tree.root_key, self.right_connection)
                 self.right_tree.createVisualisation(vgraph)
+
+
 
 class RBTItem:
     def __init__(self, key, value):
@@ -252,52 +396,27 @@ class RBTItem:
         self.value = value
 
 
-vgraph = Graph()
-vgraph.change_rankdir("TB")
 
 sprookjesboom = RoodZwartBoom()
+
 sprookjesboom.insert(RBTItem(3, 3))
 
-vgraph = Graph()
-vgraph.change_rankdir("TB")
-sprookjesboom.createVisualisation(vgraph)
-vgraph.rebuild_file()
-
 sprookjesboom.insert(RBTItem(4, 4))
-vgraph = Graph()
-vgraph.change_rankdir("TB")
-sprookjesboom.createVisualisation(vgraph)
-vgraph.rebuild_file()
 
 sprookjesboom.insert(RBTItem(2, 2))
-vgraph = Graph()
-vgraph.change_rankdir("TB")
-sprookjesboom.createVisualisation(vgraph)
-vgraph.rebuild_file()
+
 sprookjesboom.insert(RBTItem(1, 1))
-vgraph = Graph()
-vgraph.change_rankdir("TB")
-sprookjesboom.createVisualisation(vgraph)
-vgraph.rebuild_file()
 
 sprookjesboom.insert(RBTItem(5, 5))
-vgraph = Graph()
-vgraph.change_rankdir("TB")
-sprookjesboom.createVisualisation(vgraph)
-vgraph.rebuild_file()
 
-# Hier is er nog een probleem, wat er zou moeten gebeuren:
-# 5 wordt het nieuwe kind van 3, 4 komt daar liks van en 7 rechts
 sprookjesboom.insert(RBTItem(7, 7))
-vgraph = Graph()
-vgraph.change_rankdir("TB")
-sprookjesboom.createVisualisation(vgraph)
-vgraph.rebuild_file()
 
 sprookjesboom.insert(RBTItem(8, 8))
-vgraph = Graph()
-vgraph.change_rankdir("TB")
-sprookjesboom.createVisualisation(vgraph)
-vgraph.rebuild_file()
+
+sprookjesboom.insert(RBTItem(6, 6))
+
+sprookjesboom.insert(RBTItem(9, 9))
+
+sprookjesboom.visualize()
 
 pass
