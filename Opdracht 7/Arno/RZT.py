@@ -337,8 +337,80 @@ class RZTNode:
             inorder_successor = inorder_successor.left_tree
         return inorder_successor
 
+    def makeThreeFourNode(self):
+        # Geval 1: Als de ouder en siblings 2 nodes zijn
+        # Gewoon een omgekeerde split doen
+        if self.parent.checkTwoNode() \
+                and self.parent.left_tree.checkTwoNode() \
+                and self.parent.right_tree.checkTwoNode():
+            self.parent.left_connection = 1
+            self.parent.right_connection = 1
+            # De node wordt gesplitst en de middelste 'springt' in de node van zijn parent
+            if self.parent.parent != None:
+                if self.parent.parent.left_tree == self:
+                    self.parent.parent.left_connection = 0
+                elif self.parent.parent.right_tree == self:
+                    self.parent.parent.right_connection = 0
+                self.parent.parent.check_rotation()
+
+        # Geval 2: Als de ouder een 3-knoop is
+        # Eentje uit de ouder laten zakken en in een nieuwe node steken
+        #   die bestaat uit een merge van 2 siblings + element uit ouder
+        # Let op: Enkel sibling-buurtjes kunnen gemerged worden
+        if self.parent.checkTreeNode():
+            # Geval A: We zitten in S
+            # Todo: Maak dit met de letters uit de GAS slides, zo kan geval L ook makkelijk geimplementeerd worden
+            # GAS slide 405
+            if self.parent.findConnectionWithParent() == 0: # Moet specifieker voor S
+                newRoot = self.parent.right_tree
+                if self.parent.parent.left_tree == self.parent:
+                    self.parent.parent.left_tree = newRoot
+                elif self.parent.parent.right_tree == self.parent:
+                    self.parent.parent.right_tree = newRoot
+                newRoot.parent = self.parent.parent
+
+                tempLeft = newRoot.left_tree
+                newRoot.left_tree = self.parent
+                self.parent.parent = newRoot
+
+                self.parent.right_tree = tempLeft
+
+                self.parent.left_connection = 1
+
+        # Geval 3: Als de ouder een 4 knoop is
+        # Let op: Enkel sibling-buurtjes kunnen gemerged worden
+
+
+    def checkTwoNode(self):
+        if self.left_connection == 0 and self.right_connection == 0:
+            return True
+        return False
+
+    def checkThreeNode(self):
+        if self.findConnectionWithParent() == 1:
+            return self.parent.checkTreeNode()
+
+        if self.left_connection is not None \
+                and self.right_connection is not None\
+                and self.left_connection + self.right_connection == 1: # Maar 1 van de 2 is rood
+            return True
+        return False
+
+    def checkThreeNode(self):
+        if self.findConnectionWithParent() == 1:
+            return self.parent.checkTreeNode()
+
+        if self.left_connection is not None \
+                and self.right_connection is not None\
+                and self.left_connection + self.right_connection == 2: # allebei rood
+            return True
+        return False
+
     def remove(self, key):
         # TODO: Elke 2-node omvormen in 3-node of 4-node
+        if self.checkTwoNode():
+            self.makeThreeFourNode()
+
         if self.root_key < key and self.right_tree is not None:
             self.right_tree.remove(key)
         elif self.root_key > key and self.left_tree is not None:
