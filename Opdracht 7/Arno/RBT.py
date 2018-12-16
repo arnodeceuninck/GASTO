@@ -1,121 +1,80 @@
-#############
-# DELETE THIS
-from random import randint
-class Graph:
-    def __init__(self):
-        self.nodes = []
-        self.connections = []
-        self.rankdir = "LR"
-        self.rebuild_file()
-
-    def rebuild_file(self):
-        name = "graph.dot"
-        with open(name, 'w'):
-            pass
-        file = open(name, "w")
-        file.write("graph {\n")
-        for node in self.nodes:
-            file.write(str(node) + "\n")
-        for connection in self.connections:
-            file.write(str(connection) + "\n")
-        file.write("rankdir=" + self.rankdir + "\n")
-        file.write("}\n")
-        file.close()
-
-    def change_rankdir(self, rankdir):
-        self.rankdir = rankdir
-
-    def add_node(self, name, label_elements, shape):
-        new_node = node(name, label_elements, shape)
-        self.nodes.append(new_node)
-
-    def add_connection(self, fromN, toN, type):
-        new_connection = connection(fromN, toN, type)
-        self.connections.append(new_connection)
-
-class node:
-    def __init__(self, name, label_elements, shape):
-        self.name = name
-        self.labels = label_elements
-        self.shape = shape
-    def __str__(self):
-        string = str(self.name) + " ["
-        string += "label=\""
-        if not isinstance(self.labels, list):
-            label_list = []
-            label_list.append(self.labels)
-            self.labels = label_list
-        if len(self.labels) > 1:
-            for label in self.labels:
-                string += label + "| "
-            string += "\""
-        else:
-            string += str(self.labels[0])
-            string += "\""
-        string += " shape="+self.shape
-        string += "]"
-
-        return string
-
-class connection:
-    def __init__(self, fromN, toN, type):
-        self.fromN = fromN
-        self.toN = toN
-        self.type = type
-
-    def __str__(self):
-        CONNECTIONTYPES = {"arrow":"->", 0:"--", 1:"--"}
-        string = ""
-        string += str(self.fromN) + " "
-        string += CONNECTIONTYPES[self.type] + " "
-        string += str(self.toN) + " "
-        if self.type == 0:
-            string += '[color ="black"]' + " "
-        elif self.type == 1:
-            string += '[color ="red"]' + " "
-        return string
-########################
-# Todo: Remove this line, staat er momenteel om tijdens het debuggen de boom te kunnen visualizeren
-sprookjesboom = None
+from Graph import *
+from KeyValueItem import *
 
 class RoodZwartBoom:
     # Aparte klasse nodig aangezien de root kan veranderen
+
     def __init__(self):
-        self.root = RZTNode()
+        self.root = None # Alle waarden moeten eerst in de __init__ voorkomen
+        self.createRBT()
 
     def createRBT(self):
+        # Stelt alle waarden in op de default-waarden
+        self.root = RBTNode()
         return self.root.createRBT()
 
+    def destroyRBT(self):
+        # Verwijdert een boom
+        return self.root.destroyRBT()
+
     def isEmpty(self):
+        # Kijkt of een boom leeg is
+        # Een boom is leeg als zijn root leeg is
+        # De root zou altijd moeten bestaan, aangezien deze in de __init__ -> createRBT() wordt aangemaakt
         return self.root.isEmpty()
 
     def insert(self, newItem):
-        self.root.insert(newItem)
+        # Steek een nieuw item in de boom
+        success = self.root.insert(newItem)
+        # Tijdens het inserten kan de root veranderd worden
         self.root = self.root.findNewRoot()
-        return
+        return success
 
     def remove(self, key):
-        self.root.remove(key)
+        # Verwijdert een item uit de boom
+        success = self.root.remove(key)
+        # Tijdens het verwijderen kan de root veranderd worden
         self.root = self.root.findNewRoot()
-        return
+        return success
 
     def visualize(self):
-        vgraph = Graph()
-        vgraph.change_rankdir("TB")
+        # Maakt een .dot file met daarin een visuele representatie van de boom (in .dot language)
+        vgraph = Graph("RBT")
+        vgraph.change_rankdir("TB") # Bomen worden meestal van Top to Bottem getoond
+        # Doorloop de boom, startende bij de root om er een visualisatie van te maken
         self.root.createVisualisation(vgraph)
+        # Alle nodes en verbindingen zijn nu toegevooegd aan vgraph, maak er nu dus het bestand zelf van
         vgraph.rebuild_file()
 
     def remove(self, key):
-        return self.root.remove(key)
+        # Verwijdert een item uit de boom
+        # Er moet wel een item bestaan dat verwijderc kan worden, dus als er geen root is,
+        # Dan is dit al niet het geval
+        if self.root is not None:
+            return self.root.remove(key)
+        else:
+            return False
 
+    def retrieve(self, key):
+        # returnt het RBTItem waarbij RBTItem.key == key
+        # Er moet een item bestaan om een item te vinden
+        if self.root is not None:
+            return self.root.retrieve(key)
+        else:
+            return False
 
-class RZTNode:
+    def getRoot(self):
+        # Returnt het RBTItem dat in de top van de RZB zit
+        return self.root
+
+class RBTNode:
 
     def __init__(self):
+        # Orginele plan was om dit enkel in createRBT te schrijven,
+        # maar dan doet python moeilijk aangezien de variabelen niet in de __init__ aangemaakt werden
 
         # Variabelen ivm de rootgegevens
-        self.root_key = None
-        self.root_value = None
+        self.root = None
 
         # Variabelen ivm de linkerdeelboom
         # Connection:
@@ -133,9 +92,8 @@ class RZTNode:
         self.createRBT()
 
     def createRBT(self):
-
-        self.root_key = None
-        self.root_value = None
+        # Stelt alle variabelen in op hun defaultwaarden
+        self.root = None
 
         self.left_tree = None
         self.left_connection = None
@@ -146,16 +104,23 @@ class RZTNode:
         self.parent = None
 
     def findNewRoot(self):
-        root = self
-        while(root.parent != None):
-            root = root.parent
-        return root
+        # Zoekt de node waarvan alle andere nodes (klein-)kinderen zijn
+        if self.parent != None:
+            return self.parent.findNewRoot()
+        return self
+
     def destroyRBT(self):
+        # self.preorderTraverse(self.destroyNode) # TODO: Check if this works
+        if(self.left_tree != None):
+            self.left_tree.destroyNode()
+        if (self.right_tree != None):
+            self.right_tree.destroyNode()
+        return self.destroyNode()
 
-        self.root_key = None
-        self.root_value = None
+    def destroyNode(self):
 
-        # TODO: Delete all items in the subtrees
+        self.root = None
+
         self.left_tree = None
         self.left_connection = None
 
@@ -165,79 +130,111 @@ class RZTNode:
         self.parent = None
 
         del self
+        return True
 
     def isEmpty(self):
-        if self.root_key is None:
+        if self.root is None:
             return True
 
     def rotateRight(self):
+        # Maakt een rotatie van 3 elementen die in dezelfde Node zitten,
+        # self.parent.left_tree == self #TODO: check this
+        #   en self.findConnectionWithParent == 1
+        #   en self.left_tree.left_connection == 1
+        # De nodes staan dus op eenzelfde rechte in het vlak
 
+        # Het kind van de grootouder van de middelste node wordt veranderd naar de huidige node
+        # Als self.parent.parent niet bestaat, dan moet deze ook niet veranderd worden
+        # Als self.parent niet bestaat, dan zitten we niet in de middelste node, en zijn we dus fout begonnen #TODO
         if self.parent != None and self.parent.parent != None:
+            # Hiervoor moeten we eerst weten of self.parent links of rechts staat van self.parent.parent
             if self.parent.parent.left_tree == self.parent:
                 self.parent.parent.left_tree = self
             elif self.parent.parent.right_tree == self.parent:
                 self.parent.parent.right_tree = self
 
+        # De 'parent' komt rechts van de middelste node
         temp_tree = self.right_tree
         self.right_tree = self.parent
+        # Deze verplaatste node, blijft nogsteeds mee in dezelfde node zitten
         self.right_connection = 1
+        # deze node krijgt dus een nieuwe parent
         self.parent = self.right_tree.parent
+        # En de parent van de net verplaatste node verandert ook
         self.right_tree.parent = self
 
+        # De oorspronkelijke rechter node wordt nu de linkernode van de oorspronkelijke parent
         self.right_tree.left_tree = temp_tree
         self.right_tree.left_connection = 0
 
+        # Parent van de net verplaatste deelboom terug juistzetten
         if self.left_tree.right_tree is not None:
             self.left_tree.right_tree.parent = self.left_tree
 
     def rotateUp(self):
+        # Draait drie nodes met 3 elementen, die niet op eenzelfde rechte in het vlak liggen
+
+        # Bepaal de nieuwe top,
+        # dit is het element waarvan het ene element een kleinere waarde heeft en het andere een grotere waarde heeft
+        # Dit is dus het element waarvan deze node de parent is
         if(self.right_connection == 1):
             newTop = self.right_tree
         elif(self.left_connection == 1):
             newTop = self.left_tree
 
+        # De top verandert, dus de grootouder krijgt een nieuw kind
+        # Bepaal of dit kind links of rechts komt
         if self.parent != None and self.parent.parent != None:
             if self.parent.parent.left_tree == self.parent:
                 self.parent.parent.left_tree = newTop
             elif self.parent.parent.right_tree == self.parent:
                 self.parent.parent.right_tree = newTop
 
+        # Onthoud de 2 deelbomen van de toekomstige nieuwe top
         tempLeftTree = newTop.left_tree
         tempRightTree = newTop.right_tree
 
-        if(self.parent.root_key > newTop.root_key):
+        # Plaats self en de parent van self op de juiste positie van de nieuwe boom,
+        #  dwz links indien de key kleiner is en rechts indien de key groter is
+        if(self.parent.root.key > newTop.root.key):
             newTop.right_tree = self.parent
-            newTop.right_connection = 1
             newTop.left_tree = self
-            newTop.left_connection = 1
-        elif(self.parent.root_key > newTop.root_key):
+        elif(self.parent.root.key > newTop.root.key):
             newTop.left_tree = self.parent
-            newTop.left_connection = 1
             newTop.right_tree = self
-            newTop.right_connection = 1
 
-        if(newTop.left_tree != None):
-            newTop.left_tree.right_tree = tempLeftTree
-            newTop.left_tree.right_connection = 0
-            newTop.left_tree.parent = newTop
-        if(newTop.right_tree != None):
-            newTop.right_tree.left_tree = tempRightTree
-            newTop.right_tree.left_connection = 0
-            newTop.right_tree.parent = newTop
+        newTop.left_connection = 1
+        newTop.right_connection = 1
+
+        # Zet de oorspronkelijke deelbomen van newTop terug op de juiste plaats
+
+        newTop.left_tree.right_tree = tempLeftTree
+        newTop.left_tree.right_connection = 0
+        newTop.left_tree.parent = newTop
+
+        newTop.right_tree.left_tree = tempRightTree
+        newTop.right_tree.left_connection = 0
+        newTop.right_tree.parent = newTop
 
     def rotateLeft(self):
+        # Zie rotateRight() voor de comments die hierbij horen
+
+        # grootvader krijgt een niew kind, namelijk de nieuwe top
         if self.parent != None and self.parent.parent != None:
             if self.parent.parent.left_tree == self.parent:
                 self.parent.parent.left_tree = self
             elif self.parent.parent.right_tree == self.parent:
                 self.parent.parent.right_tree = self
 
+        # de nieuwe top (self) krijgt een nieuwe linkerdeelboom en rechterdeelboom
+        # de rechterdeelboom blijft hetzelfde
         temp_tree = self.left_tree
         self.left_tree = self.parent
         self.left_connection = 1
         self.parent = self.left_tree.parent
         self.left_tree.parent = self
 
+        # juistzetten van de oorspronkelijke linkerdeelboom
         self.left_tree.right_tree = temp_tree
         self.left_tree.right_connection = 0
 
@@ -245,10 +242,14 @@ class RZTNode:
             self.left_tree.right_tree.parent = self.left_tree
 
     def check_split(self):
+        # controleert of we in een 4-knoop zitten en splitst deze indien nodig
         if self.left_connection == 1 and self.right_connection == 1:
             self.split()
 
     def check_rotation(self):
+        # iedere 4-node bestaat uit een bovenste element, met een linker en rechterdeelboom die in dezelfde node zitten
+        # deze functie controleert of dit bij deze node het geval is, indien dit niet is, zal de node gedraaid worden,
+        # zodat dit erna wel het geval is
         if self.left_connection == 1 and self.findConnectionWithParent() == 1 and self.parent.left_tree == self:
             return self.rotateRight()
         elif self.right_connection == 1 and self.findConnectionWithParent() == 1 and self.parent.right_tree == self:
@@ -257,6 +258,7 @@ class RZTNode:
             return self.rotateUp()
 
     def split(self):
+        # Deze functie zal een 4-node splitsen
 
         self.left_connection = 0
         self.right_connection = 0
@@ -282,8 +284,7 @@ class RZTNode:
     def insert(self, newItem):
         # Bij een lege boom
         if self.isEmpty():
-            self.root_key = newItem.key
-            self.root_value = newItem.value
+            self.root = newItem
             return True
 
         # Doorloop het blad van wortel tot blad en splits alle 4-knopen
@@ -295,12 +296,11 @@ class RZTNode:
 
         # Kunnen we vanuit deze deelboom inserten?
         # Linkerblad is leeg, hier moet het item komen, in dezelfde node
-        if newItem.key < self.root_key and self.left_tree is None:
+        if newItem.key < self.root.key and self.left_tree is None:
             # maak de nieuwe boom aan
-            subtree = RZTNode()
+            subtree = RBTNode()
 
-            subtree.root_key = newItem.key
-            subtree.root_value = newItem.value
+            subtree.root = newItem
 
             # Maak de nieuwe boom vast aan de huidige boom met een rode verbinding
             subtree.parent = self
@@ -315,12 +315,11 @@ class RZTNode:
             return True
 
         # Voeg het item rechts toe
-        if newItem.key > self.root_key and self.right_tree is None:
+        if newItem.key > self.root.key and self.right_tree is None:
 
-            subtree = RZTNode()
+            subtree = RBTNode()
 
-            subtree.root_key = newItem.key
-            subtree.root_value = newItem.value
+            subtree.root = newItem
 
             subtree.parent = self
             self.right_tree = subtree
@@ -331,18 +330,25 @@ class RZTNode:
             return True
 
         # Deze parent heeft geen vrije plaatsen, het moet dus een niveau lager geinsert worden
-        if self.root_key < newItem.key:
+        if self.root.key < newItem.key:
             self.right_tree.insert(newItem)
-        elif self.root_key > newItem.key:
+        elif self.root.key > newItem.key:
             self.left_tree.insert(newItem)
 
     def findInorderSuccessor(self):
-        # TODO: Elke 2-node omvormen in 3-node of 4-node
         if self.right_tree is None:
             return self
+
         inorder_successor = self.right_tree
+
         while inorder_successor.left_tree is not None:
+
+            # Alle 2 nodes op het pad moeten 3/4 nodes worden
+            if(inorder_successor.check_TwoNode()):
+                inorder_successor.makeThreeFoutNode()
+
             inorder_successor = inorder_successor.left_tree
+
         return inorder_successor
 
     def makeThreeFourNode(self):
@@ -375,7 +381,6 @@ class RZTNode:
         # Let op: Enkel sibling-buurtjes kunnen gemerged worden
         elif self.parent.checkThreeNode():
             # Geval A: We zitten in S
-            # Todo: Maak dit met de letters uit de GAS slides, zo kan geval L ook makkelijk geimplementeerd worden
             # GAS slide 405
 
             # Ik gebruik hier de letters van de tekening van de cursus van GAS (slide 405)
@@ -386,10 +391,10 @@ class RZTNode:
                 s = self
                 m = s.parent
                 # p is afhankelijk van geval A of B op die slide
-                if s.root_key < m.root_key:
+                if s.root.key < m.root.key:
                     p = m.right_tree  # Wordt de nieuwe root
                     l = p.left_tree
-                elif s.root_key > m.root_key:
+                elif s.root.key > m.root.key:
                     p = m.left_tree
                     l = p.right_tree
 
@@ -398,9 +403,9 @@ class RZTNode:
                 l = self
                 p = self.parent
                 m = p.parent
-                if p.root_key > m.root_key:
+                if p.root.key > m.root.key:
                     s = m.left_tree
-                elif p.root_key < m.root_key:
+                elif p.root.key < m.root.key:
                     s = m.right_tree
 
             if m.parent.left_tree == m:
@@ -410,17 +415,17 @@ class RZTNode:
             p.parent = m.parent
 
             # tempLeft = p.left_tree zit al in l
-            if p.root_key < m.root_key:
+            if p.root.key < m.root.key:
                 p.left_tree = m
-            elif p.root_key < m.root_key:
+            elif p.root.key < m.root.key:
                 p.right_tree = m
 
             m.parent = p
 
-            if m.root_key > l.root_key:
+            if m.root.key > l.root.key:
                 m.left_tree = l
                 m.right_tree = s
-            elif m.root_key < l.root_key:
+            elif m.root.key < l.root.key:
                 m.right_tree = l
                 m.left_tree = s
 
@@ -463,30 +468,32 @@ class RZTNode:
                 m.right_connection = 1
 
     def checkTwoNode(self):
-        # Werkt ook in sommige gevallen bij 3 nodes,
-        #   maar deze moeten dan hetzelfde delete algoritme volgen als een 2 node
-        # Nu niet meer:
+        # Ga naar het bovenste element van de knoop waar je in zit
         if self.findConnectionWithParent() == 1:
             return self.parent.checkTwoNode()
 
+        # Als zowel links als rechts niet in dezelfde node zitten, dan is het een 2-node
         if self.left_connection == 0 and self.right_connection == 0:
             return True
         return False
 
     def checkThreeNode(self):
+        # Ga naar het bovenste element van een knoop
         if self.findConnectionWithParent() == 1:
             return self.parent.checkTreeNode()
 
-        if self.left_connection is not None \
-                and self.right_connection is not None\
-                and self.left_connection + self.right_connection == 1: # Maar 1 van de 2 is rood
+        # Kijk vandaaruit of het een 3 node is
+        if (self.left_tree is not None and self.left_tree.root is not None and self.left_connection == 1 and (self.right_tree is None or self.right_connection == 0))\
+                or (self.right_tree is not None and self.right_tree.root is not None and self.right_connection == 1 and (self.left_tree is None or self.left_connection == 0)):
             return True
         return False
 
     def checkThreeNode(self):
+        # Ga naar het bovenste element van de knoop
         if self.findConnectionWithParent() == 1:
             return self.parent.checkTreeNode()
 
+        # Kijk of deze 2 andere elementen heeft in dezelfde node
         if self.left_connection is not None \
                 and self.right_connection is not None\
                 and self.left_connection + self.right_connection == 2: # allebei rood
@@ -494,17 +501,17 @@ class RZTNode:
         return False
 
     def remove(self, key):
-        # TODO: Elke 2-node omvormen in 3-node of 4-node
+        # Vorm elke 2 node in het pad om in een 3 of 4 node
         if self.checkTwoNode():
             self.makeThreeFourNode()
 
-        if self.root_key < key and self.right_tree is not None:
+        if self.root.key < key and self.right_tree is not None:
             return self.right_tree.remove(key)
-        elif self.root_key > key and self.left_tree is not None:
+        elif self.root.key > key and self.left_tree is not None:
             return self.left_tree.remove(key)
-        elif self.root_key != key:
-            print("Key not found.")
-            return 404
+        elif self.root.key != key:
+            print("Key to remove not found.")
+            return False
 
         # We bevinden ons in de Node die verwijderd zal moeten worden
         inorder_successor = self.findInorderSuccessor()
@@ -546,45 +553,92 @@ class RZTNode:
         return self.destroyRBT()
 
     def createVisualisation(self, vgraph):
+        # voeg iedere node toe
+        vgraph.add_node(self.root.key, self.root.key)
         if not self.isEmpty():
+
+            if self.left_tree is None and self.right_tree is None:
+                return
+
+            # voeg de linkerverbinding toe
             if self.left_tree is not None:
-                vgraph.add_connection(self.root_key, self.left_tree.root_key, self.left_connection)
                 self.left_tree.createVisualisation(vgraph)
+                vgraph.add_connection(self.root.key, self.left_tree.root.key, self.left_connection)
+            else:
+                # (Kan ook onzichtbaar zijn als er geen is, zodat het andere element duidelijk links of rechts van de node is)
+                vgraph.add_node("left" + str(self.root.key), "0", "circle", "style=invis")
+                vgraph.add_connection(self.root.key, "left" + str(self.root.key), 0, "style=invis")
 
+            # voeg de rechterverbinding toe
             if self.right_tree is not None:
-                vgraph.add_connection(self.root_key, self.right_tree.root_key, self.right_connection)
                 self.right_tree.createVisualisation(vgraph)
+                vgraph.add_connection(self.root.key, self.right_tree.root.key, self.right_connection)
+            else:
+                vgraph.add_node("right" + str(self.root.key), "0", "circle", "style=invis")
+                vgraph.add_connection(self.root.key, "right" + str(self.root.key), 0, "style=invis")
+
+    def retrieve(self, key):
+
+        if self.root is not None and self.root.key == key:
+            return (True, (self.root.key, self.root.value))
+
+        elif self.root is not None \
+                and self.root.key < key \
+                and self.right_tree is not None:
+            return self.right_tree.retrieve(key)
+
+        elif self.root is not None \
+                and self.root.key > key \
+                and self.left_tree is not None:
+            return self.left_tree.retrieve(key)
+
+        # key niet gelijk aan de huidige node, en geen verdere linker/rechter vertakkingen
+        else:
+            return (False, None)
+
+    def inorderTraverse(self, visit):
+        if self.left_tree is not None:
+            self.left_tree.inorderTraverse(visit)
+        visit(self) # Todo: test if works
+        if self.right_tree is not None:
+            self.right_tree.inorderTravers(visit)
+
+    def preorderTraverse(self, visit):
+        visit(self)
+        if self.left_tree is not None:
+            self.left_tree.inorderTraverse(visit)
+        if self.right_tree is not None:
+            self.right_tree.inorderTravers(visit)
+
+    def postorderTraverse(self, visit):
+        if self.left_tree is not None:
+            self.left_tree.inorderTraverse(visit)
+        if self.right_tree is not None:
+            self.right_tree.inorderTravers(visit)
+        visit(self)
+
+def createRBT():
+    return RoodZwartBoom()
 
 
-
-class RBTItem:
-    def __init__(self, key, value):
-        self.key = key
-        self.value = value
-
-
-
-sprookjesboom = RoodZwartBoom()
-
-sprookjesboom.insert(RBTItem(3, 3))
-
-sprookjesboom.insert(RBTItem(4, 4))
-
-sprookjesboom.insert(RBTItem(2, 2))
-
-sprookjesboom.insert(RBTItem(1, 1))
-
-sprookjesboom.insert(RBTItem(5, 5))
-
-sprookjesboom.insert(RBTItem(7, 7))
-
-sprookjesboom.insert(RBTItem(8, 8))
-
-sprookjesboom.insert(RBTItem(6, 6))
+# # Maak een nieuwe boom aan
+# sprookjesboom = createRBT()
 #
-sprookjesboom.insert(RBTItem(9, 9))
-
-sprookjesboom.remove(7)
-sprookjesboom.visualize()
-
-pass
+# # Voeg er een hoop key-value pairs aan toe
+# sprookjesboom.insert(KeyValueItem(3, 3))
+# sprookjesboom.insert(KeyValueItem(4, 4))
+# sprookjesboom.insert(KeyValueItem(2, 2))
+# sprookjesboom.insert(KeyValueItem(1, 1))
+# sprookjesboom.insert(KeyValueItem(5, 5))
+# sprookjesboom.visualize()
+# sprookjesboom.insert(KeyValueItem(7, 7))
+# sprookjesboom.insert(KeyValueItem(8, 8))
+# sprookjesboom.insert(KeyValueItem(6, 6))
+# sprookjesboom.insert(KeyValueItem(9, 9))
+# # Verwijder het item met zoeksleutel 7
+# sprookjesboom.remove(7)
+#
+# # Maak een .dot file voor deze boom
+# sprookjesboom.visualize()
+#
+# pass

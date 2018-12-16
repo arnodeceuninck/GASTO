@@ -1,80 +1,5 @@
-#############
-# DELETE THIS
-from random import randint
-class Graph:
-    def __init__(self):
-        self.nodes = []
-        self.connections = []
-        self.rankdir = "LR"
-        self.rebuild_file()
-
-    def rebuild_file(self):
-        name = "graph.dot"
-        with open(name, 'w'):
-            pass
-        file = open(name, "w")
-        file.write("graph {\n")
-        for node in self.nodes:
-            file.write(str(node) + "\n")
-        for connection in self.connections:
-            file.write(str(connection) + "\n")
-        file.write("rankdir=" + self.rankdir + "\n")
-        file.write("}\n")
-        file.close()
-
-    def change_rankdir(self, rankdir):
-        self.rankdir = rankdir
-
-    def add_node(self, name, label_elements, shape):
-        new_node = node(name, label_elements, shape)
-        self.nodes.append(new_node)
-
-    def add_connection(self, fromN, toN, type):
-        new_connection = connection(fromN, toN, type)
-        self.connections.append(new_connection)
-
-class node:
-    def __init__(self, name, label_elements, shape):
-        self.name = name
-        self.labels = label_elements
-        self.shape = shape
-    def __str__(self):
-        string = str(self.name) + " ["
-        string += "label=\""
-        if not isinstance(self.labels, list):
-            label_list = []
-            label_list.append(self.labels)
-            self.labels = label_list
-        if len(self.labels) > 1:
-            for label in self.labels:
-                string += label + "| "
-            string += "\""
-        else:
-            string += str(self.labels[0])
-            string += "\""
-        string += " shape="+self.shape
-        string += "]"
-
-        return string
-
-class connection:
-    def __init__(self, fromN, toN, type):
-        self.fromN = fromN
-        self.toN = toN
-        self.type = type
-
-    def __str__(self):
-        CONNECTIONTYPES = {"arrow":"->", 0:"--", 1:"--"}
-        string = ""
-        string += str(self.fromN) + " "
-        string += CONNECTIONTYPES[self.type] + " "
-        string += str(self.toN) + " "
-        if self.type == 0:
-            string += '[color ="black"]' + " "
-        elif self.type == 1:
-            string += '[color ="red"]' + " "
-        return string
-########################
+from Graph import *
+from KeyValueItem import *
 
 class Heap:
     def __init__(self):
@@ -83,47 +8,38 @@ class Heap:
         
     def createHeap(self):
         self.top = HeapNode()
-        self.size = 0
         
     def destroyHeap(self):
-        self.top = None
-        self.size = None
         del self
+        # Omdat we werken in python en de nodes niet meer gebruikt worden, zal python zelf de rest van de heap afbreken
         
     def isEmpty(self):
-        return self.size == 0
+        return self.size() == 0
         
     def insert(self, newItem):
-       self.top.insert(newItem)
-       return
+        return self.top.insert(newItem)
+
         
     def getTop(self):
-        return self.top # TODO: moet .value of getValue erbij?
+        return self.top.root # Returnt het volledige item, dus de key en de value als een object
 
     def remove(self):
-        top = self.top
+        top = self.top.root
         # TODO: Remove top + heaprebuild
         self.top.remove()
         return top
 
     def size(self):
-        if self.top is None: return 0
+        if self.top is None:
+            return 0
         return self.top.size()
 
     def visualize(self):
-        vgraph = Graph()
+        vgraph = Graph("heap")
         vgraph.change_rankdir("TB")
         self.top.createVisualisation(vgraph)
         vgraph.rebuild_file()
-        
-class HeapItem:
-    def __init__(self, key, value):
-        self.key = key
-        self.value = value
-    def getKey(self):
-        return self.key
-    def getValue(self):
-        return self.value
+
 class HeapNode:
     def __init__(self):
         self.parent = None
@@ -166,10 +82,10 @@ class HeapNode:
             return self
         if self.right_tree == None:
             return self.left_tree
-        if self.left_tree.size() > self.right_tree.size():
+        if self.right_tree.is_full and self.left_tree.size() > self.right_tree.size():
             return self.left_tree.findLastItem()
         else:
-            self.right_tree.findLastItem()
+            return self.right_tree.findLastItem()
 
 
     def trickleUp(self):
@@ -178,40 +94,56 @@ class HeapNode:
             self.parent.root = self.root
             self.root = tempRoot
             self.parent.trickleUp()
+
     def insert(self, newItem):
         if self.root is None:
             self.root = newItem
             self.trickleUp()
-            return
+            return True
         if self.left_tree is None:
             self.left_tree = HeapNode()
             self.left_tree.parent = self
-            self.left_tree.insert(newItem)
-            return
+            return self.left_tree.insert(newItem)
+
         if self.right_tree is None:
             self.right_tree = HeapNode()
             self.right_tree.parent = self
-            self.right_tree.insert(newItem)
-            return
+            return self.right_tree.insert(newItem)
+
         if self.left_tree.is_full() and self.left_tree.size() > self.right_tree.size():
-            self.right_tree.insert(newItem)
-            return
+            return self.right_tree.insert(newItem)
         else:
-            self.left_tree.insert(newItem)
-            return
+            return self.left_tree.insert(newItem)
 
     def isEmpty(self):
         return self.size() == 0
 
     def createVisualisation(self, vgraph):
+        # voeg iedere node toe
+        vgraph.add_node(self.root.key, self.root.key)
         if not self.isEmpty():
-            if self.left_tree is not None:
-                vgraph.add_connection(self.root.value, self.left_tree.root.value, 0)
-                self.left_tree.createVisualisation(vgraph)
 
+            if self.left_tree is None and self.right_tree is None:
+                return
+
+            # voeg de linkerverbinding toe
+            if self.left_tree is not None:
+                self.left_tree.createVisualisation(vgraph)
+                vgraph.add_connection(self.root.key, self.left_tree.root.key, 0)
+            else:
+                # (Kan ook onzichtbaar zijn als er geen is, zodat het andere element duidelijk links of rechts van de node is)
+                vgraph.add_node("left" + str(self.root.key), "", "circle",
+                                "style=invis")
+                vgraph.add_connection(self.root.key, "left" + str(self.root.key), 0, "style=invis")
+
+            # voeg de rechterverbinding toe
             if self.right_tree is not None:
-                vgraph.add_connection(self.root.value, self.right_tree.root.value, 0)
                 self.right_tree.createVisualisation(vgraph)
+                vgraph.add_connection(self.root.key, self.right_tree.root.key, 0)
+            else:
+                vgraph.add_node("right" + str(self.root.key), "", "circle",
+                                "style=invis")
+                vgraph.add_connection(self.root.key, "right" + str(self.root.key), 0, "style=invis")
 
     def findGreatestChild(self):
         if self.left_tree == None:
@@ -241,15 +173,19 @@ class HeapNode:
         lastItem.destroy()
         self.trickleDown()
 
-hoera = Heap() # Heap heap heap, Hoera!
-hoera.insert(HeapItem(5, "vijf"))
-hoera.insert(HeapItem(4, "vier"))
-hoera.insert(HeapItem(2, "twee"))
-hoera.insert(HeapItem(3, "drie"))
-hoera.insert(HeapItem(6, "zes"))
-hoera.insert(HeapItem(7, "zeven"))
-hoera.insert(HeapItem(8, "acht"))
-hoera.insert(HeapItem(9, "negen"))
+def createHeap():
+    return Heap()
+
+# hoera = createHeap() # Heap heap heap, Hoera!
+# hoera.insert(KeyValueItem(5, "vijf"))
+# hoera.insert(KeyValueItem(4, "vier"))
+# hoera.insert(KeyValueItem(2, "twee"))
+# hoera.insert(KeyValueItem(3, "drie"))
+# hoera.insert(KeyValueItem(6, "zes"))
+# hoera.insert(KeyValueItem(7, "zeven"))
+# hoera.insert(KeyValueItem(8, "acht"))
+# hoera.insert(KeyValueItem(9, "negen"))
+# hoera.insert(KeyValueItem(10, "tien"))
 # hoera.remove()
-hoera.visualize()
-pass
+# hoera.visualize()
+# pass
