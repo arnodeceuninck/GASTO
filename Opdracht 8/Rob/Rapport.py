@@ -16,3 +16,7 @@ class Rapport:
     def setZoeksleutel(self, Zoeksteutel):
         self.Zoeksleutel = Zoeksteutel
         return True
+
+
+def createRapport(list, Zoeksleutel):
+    return Rapport(list, Zoeksleutel)

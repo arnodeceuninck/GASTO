@@ -24,3 +24,7 @@ class Toets:
     def setVerzamelingVanPunten(self, verzameling):
         self.verzamelingVanPunten = verzameling
         return True
+
+
+def createToets(naam, maximum, verzamelingVanPunten):
+    return Toets(naam, maximum, verzamelingVanPunten)

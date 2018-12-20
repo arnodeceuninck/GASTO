@@ -38,3 +38,6 @@ class Punt:
         self.timestamp = time
         return True
 
+
+def createPunt(id, stamboeknummer, naam, waarde, timestamp):
+    return Punt(id, stamboeknummer, naam, waarde, timestamp)
