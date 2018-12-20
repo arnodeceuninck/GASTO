@@ -23,6 +23,17 @@ class stack:
     def getTop(self):
         return self.stackpointer.value
 
+    def isEmpty(self):
+        if self.stackpointer is None:
+            return True
+        else:
+            return False
+
+    def destroyStack(self):
+        while self.isEmpty() is False:
+            self.pop()
+        return
+
 def createstack():
     return stack()
 
