@@ -41,7 +41,7 @@ class DGL:
     def traverse(self):
         values = []
         node = self.dummy.next
-        while self.dummy.next is not None:
+        while node is not None:
             values.append(node.value)
             node = node.next
         return values

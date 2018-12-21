@@ -435,9 +435,10 @@ class _234T:
         self.parent.item1 = None
         self.parent.left = self.parent.mleft
         self.parent.mleft = None
-        self.parent.left.mright = self.parent.left.mleft
-        self.parent.left.mleft = self.parent.left.left
-        self.parent.left.left = self.left
+        self.parent.mleft.mright = self.parent.mleft.mleft
+        self.parent.mleft.mleft = self.parent.mleft.left
+        self.parent.mleft.left = self.left
+        self.left.parent = self.parent.mleft
         if self.parent.item2 is not None:
             self.parent.item1 = self.parent.item2
             self.parent.item2 = None
@@ -490,32 +491,8 @@ class _234T:
         self.parent.right = None
 
     def fixtree(self):
-        if self.parent is None and self.left is None and self.item1 is None:
-            return True
         if self.parent is None:
-            self.item1 = self.left.item1
-            self.left.item1 = None
-            self.left.mleft.parent = self
-            self.mleft = self.left.mleft
-            self.left.mleft = None
-            if self.left.item2 is not None:
-                self.item2 = self.left.item2
-                self.left.item2 = None
-                self.left.mright.parent = self
-                self.mright = self.left.mright
-                self.left.mright = None
-
-            if self.left.item3 is not None:
-                self.item3 = self.left.item3
-                self.left.item3 = None
-                self.left.right.parent = self
-                self.right = self.left.right
-                self.left.right = None
-            self.left.left.parent = self
-            temp = self.left
-            self.left = self.left.left
-            temp.left = None
-
+            del self
         else:
 
             if self.parent.left is not None and self == self.parent.left and self.parent.mleft.item2 is not None:
@@ -679,8 +656,7 @@ class _234T:
         f.write("digraph 234{")
         f.write(str("node [shape=record];") + '\n')
         f.write(str("edge[splines=" + "line" + "];" + '\n'))
-        if self.isEmpty():
-            self.dotread(f)
+        self.dotread(f)
         f.write("}")
         f.close()
 
