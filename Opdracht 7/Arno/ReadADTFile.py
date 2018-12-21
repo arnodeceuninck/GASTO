@@ -39,12 +39,12 @@ for line in instructionFile:
         dataStructure = instructions[structureName][functions["create"]]
 
     if words[0] == "insert":
-        dataStructure.insert(KeyValueItem(words[1], words[1]))
+        dataStructure.insert(KeyValueItem(int(words[1]), words[1]))  # Key is number, value string
         dataStructure.visualize() #TODO: comment
 
     if words[0] == "remove":
         if structureName in dataStructuresWithoutRemoveParameter:
             dataStructure.remove()
         else:
-            dataStructure.remove(words[1][0:len(words[0])-1])  # Remove the '\n'
+            dataStructure.remove(int(words[1][0:len(words[0])-1]))  # Remove the '\n'
         dataStructure.visualize()
