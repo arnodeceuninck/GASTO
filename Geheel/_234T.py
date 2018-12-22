@@ -5,7 +5,7 @@ class TreeItem:
         self.key = key
 
 
-class _234T:
+class T234:
     def __init__(self, item1, item2, item3, left, mleft, mright, right, parent):
         self.parent = parent
         self.item1 = item1
@@ -38,8 +38,8 @@ class _234T:
     def split(self):
         if self.parent is None: #als we in de root zitten
             if self.left is None:#als de root geen kinderen heeft
-                self.left = _234T(self.item1, None, None, None, None, None, None, self)
-                self.mleft = _234T(self.item3, None, None, None, None, None, None, self)
+                self.left = T234(self.item1, None, None, None, None, None, None, self)
+                self.mleft = T234(self.item3, None, None, None, None, None, None, self)
                 self.item1 = self.item2
                 self.item2 = None
                 self.item3 = None
@@ -49,8 +49,8 @@ class _234T:
                 self.mleft.parent = None
                 self.mright.parent = None
                 self.right.parent = None
-                self.left = _234T(self.item1, None, None, self.left, self.mleft, None, None, self)
-                self.mleft = _234T(self.item3, None, None, self.mright, self.right, None, None, self)
+                self.left = T234(self.item1, None, None, self.left, self.mleft, None, None, self)
+                self.mleft = T234(self.item3, None, None, self.mright, self.right, None, None, self)
                 self.left.left.parent = self.left
                 self.left.mleft.parent = self.left
                 self.mleft.left.parent = self.mleft
@@ -68,7 +68,7 @@ class _234T:
                     self.parent.item1 = self.item2
                     self.parent.mright = self.parent.mleft
                     if self.left is not None:#als we kinderen hebben
-                        self.parent.mleft = _234T(self.item3, None, None, self.mright, self.right, None, None, self.parent)
+                        self.parent.mleft = T234(self.item3, None, None, self.mright, self.right, None, None, self.parent)
                         self.mright.parent = self.parent.mleft
                         self.right.parent = self.parent.mleft
                         self.mright = None
@@ -77,7 +77,7 @@ class _234T:
                         self.item2 = None
                         return True
                     else:
-                        self.parent.mleft = _234T(self.item3, None, None, None, None, None, None, self.parent)
+                        self.parent.mleft = T234(self.item3, None, None, None, None, None, None, self.parent)
                         self.item3 = None
                         self.item2 = None
                         return True
@@ -85,7 +85,7 @@ class _234T:
                     self.parent.item2 = self.item2
                     self.parent.mright = self
                     if self.left is not None:
-                        self.parent.mleft = _234T(self.item1, None, None, self.left, self.mleft, None, None, self.parent)
+                        self.parent.mleft = T234(self.item1, None, None, self.left, self.mleft, None, None, self.parent)
                         self.left.parent = self.parent.mleft
                         self.mleft.parent = self.parent.mleft
                         self.left = self.mright
@@ -97,7 +97,7 @@ class _234T:
                         self.item3 = None
                         return True
                     else:
-                        self.parent.mleft = _234T(self.item1, None, None, None, None, None, None, self.parent)
+                        self.parent.mleft = T234(self.item1, None, None, None, None, None, None, self.parent)
                         self.item1 = self.item3
                         self.item2 = None
                         self.item3 = None
@@ -110,7 +110,7 @@ class _234T:
                     self.parent.right = self.parent.mright
                     self.parent.mright = self.parent.mleft
                     if self.left is not None: #als de node kinderen heeft
-                        self.parent.mleft = _234T(self.item3, None, None, self.mright, self.right, None, None, self.parent)
+                        self.parent.mleft = T234(self.item3, None, None, self.mright, self.right, None, None, self.parent)
                         self.mright.parent = self.parent.mleft
                         self.right.parent = self.parent.mleft
                         self.item3 = None
@@ -119,7 +119,7 @@ class _234T:
                         self.right = None
                         return True
                     else:
-                        self.parent.mleft = _234T(self.item3, None, None, None, None, None, None,
+                        self.parent.mleft = T234(self.item3, None, None, None, None, None, None,
                                                   self.parent)
                         self.item3 = None
                         self.item2 = None
@@ -129,7 +129,7 @@ class _234T:
                     self.parent.item2 = self.item2
                     self.parent.right = self.parent.mright
                     if self.left is not None:
-                        self.parent.mright = _234T(self.item3, None, None, self.mright, self.right, None, None, self.parent)
+                        self.parent.mright = T234(self.item3, None, None, self.mright, self.right, None, None, self.parent)
                         self.mright.parent = self.parent.mright
                         self.right.parent = self.parent.mright
                         self.item3 = None
@@ -138,7 +138,7 @@ class _234T:
                         self.right = None
                         return True
                     else:
-                        self.parent.mright = _234T(self.item3, None, None, None, None, None, None,
+                        self.parent.mright = T234(self.item3, None, None, None, None, None, None,
                                                    self.parent)
                         self.item3 = None
                         self.item2 = None
@@ -147,7 +147,7 @@ class _234T:
                     self.parent.item3 = self.item2
                     self.parent.right = self
                     if self.left is not None:
-                        self.parent.mright = _234T(self.item1, None, None, self.left, self.mleft, None, None,
+                        self.parent.mright = T234(self.item1, None, None, self.left, self.mleft, None, None,
                                                    self.parent)
                         self.item1 = self.item3
                         self.item2 = None
@@ -160,7 +160,7 @@ class _234T:
                         self.right = None
                         return True
                     else:
-                        self.parent.mright = _234T(self.item1, None, None, None, None, None, None,
+                        self.parent.mright = T234(self.item1, None, None, None, None, None, None,
                                                    self.parent)
                         self.item1 = self.item3
                         self.item2 = None
@@ -168,7 +168,7 @@ class _234T:
                         return True
 
 
-    def _234TInsert(self, treeitem):
+    def T234Insert(self, treeitem):
         if self.isEmpty():
             self.item1 = treeitem
             return True
@@ -199,11 +199,11 @@ class _234T:
                     self.item2 = treeitem
                     return True
         elif treeitem.key < self.item1.key:
-            self.left._234TInsert(treeitem)
+            self.left.T234Insert(treeitem)
         elif self.item2 is None or treeitem.key > self.item1.key and treeitem.key < self.item2.key:
-            self.mleft._234TInsert(treeitem)
+            self.mleft.T234Insert(treeitem)
         elif self.item3 is None or treeitem.key > self.item2.key and treeitem.key < self.item3.key:
-            self.mright._234TInsert(treeitem)
+            self.mright.T234Insert(treeitem)
         elif treeitem.key > self.item3.key:
             self.right._234TInsert(treeitem)
 
@@ -588,7 +588,7 @@ class _234T:
                 del self
 
 
-    def _234TDelete(self, key):
+    def T234Delete(self, key):
         if self.item1.key == key:
             if self.left is None:
                 if self.item2 is None:
@@ -605,7 +605,7 @@ class _234T:
                 temp = self.item1
                 self.item1 = inordernode.item1
                 inordernode.item1 = temp
-                inordernode._234TDelete(key)
+                inordernode.T234Delete(key)
 
             if self.item1 is None:
                 self.fixtree()
@@ -622,7 +622,7 @@ class _234T:
                 temp = self.item2
                 self.item2 = inordernode.item1
                 inordernode.item1 = temp
-                inordernode._234TDelete(key)
+                inordernode.T234Delete(key)
 
         elif self.item3 is not None and self.item3.key == key:
             if self.left is None:
@@ -632,18 +632,18 @@ class _234T:
                 temp = self.item2
                 self.item2 = inordernode.item1
                 inordernode.item1 = temp
-                inordernode._234TDelete(key)
+                inordernode.T234Delete(key)
         elif key < self.item1.key:
-            self.left._234TDelete(key)
+            self.left.T234Delete(key)
 
         elif self.item2 is None or key < self.item2.key:
-            self.mleft._234TDelete(key)
+            self.mleft.T234Delete(key)
 
         elif self.item3 is None or key < self.item3.key:
-            self.mright._234TDelete(key)
+            self.mright.T234Delete(key)
 
         else:
-            self.right._234TDelete(key)
+            self.right.T234Delete(key)
 
     def retrieve(self, key):
         if self.item1.key == key:
@@ -729,4 +729,4 @@ class _234T:
         return self.destroyNode()
 
 def createSearchTree():
-    return _234T(None, None, None, None, None, None, None, None)
+    return T234(None, None, None, None, None, None, None, None)
