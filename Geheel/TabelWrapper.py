@@ -3,6 +3,7 @@ import stack
 # import queue
 # import bst
 import Dubbelgelinktelijst
+import ADTcircularLinkedChain
 # import 23
 import _234T
 import RBT
@@ -10,11 +11,12 @@ import RBT
 import heap
 
 # GLOBAL VARIABLES
-supportedDataStructures = ["stack", "queue", "bst", "ll", "23", "234", "rb", "hlin", "hquad", "hsep", "heap"]
+supportedDataStructures = ["stack", "queue", "bst", "cl", "ll", "23", "234", "rb", "hlin", "hquad", "hsep", "heap"]
 
 createDataStructure = {"stack": stack.createstack(),
                        "queue": None,
                        "bst": None,
+                       "cl": ADTcircularLinkedChain.createList(),
                        "ll": Dubbelgelinktelijst.createLinkedChain(),
                        "23": None,
                        "234": _234T.createSearchTree(),
@@ -56,12 +58,14 @@ class TabelWrapper:
             return self.dataStructure.insert(key)
         elif self.type == "bst":
             return self.dataStructure.insert(key)
+        elif self.type == "cl":
+            return self.dataStructure.insert(key, value)
         elif self.type == "ll":
             return self.dataStructure.insert(Dubbelgelinktelijst.Node(value, key))
         elif self.type == "23":
             return self.dataStructure.insert(key)
         elif self.type == "234":
-            return self.dataStructure._234TInsert(_234T.TreeItem(value, key))
+            return self.dataStructure.T234Insert(_234T.TreeItem(value, key))
         elif self.type == "rb":
             return self.dataStructure.insert(KeyValueItem(key, value))
         elif self.type == "hlin" or self.type == "hquad" or self.type == "hsep":
@@ -77,6 +81,8 @@ class TabelWrapper:
         elif self.type == "queue":
             return self.dataStructure.retrieve(key)
         elif self.type == "bst":
+            return self.dataStructure.retrieve(key)
+        elif self.type == "cl":
             return self.dataStructure.retrieve(key)
         elif self.type == "ll":
             return self.dataStructure.retrieve(key)
@@ -102,12 +108,14 @@ class TabelWrapper:
             return self.dataStructure.delete(key)
         elif self.type == "bst":
             return self.dataStructure.delete(key)
+        elif self.type == "cl":
+            return self.dataStructure.delete(key)
         elif self.type == "ll":
             return self.dataStructure.delete(key)
         elif self.type == "23":
             return self.dataStructure.delete(key)
         elif self.type == "234":
-            return self.dataStructure._234TDelete(key)
+            return self.dataStructure.T234Delete(key)
         elif self.type == "rb":
             return self.dataStructure.remove(key)
         elif self.type == "hlin" or self.type == "hquad" or self.type == "hsep":
@@ -124,6 +132,8 @@ class TabelWrapper:
             return self.dataStructure.destroy()
         elif self.type == "bst":
             return self.dataStructure.destroy()
+        elif self.type == "cl":
+            return self.dataStructure.destroyList()
         elif self.type == "ll":
             return self.dataStructure.destroyList()
         elif self.type == "23":
@@ -145,6 +155,8 @@ class TabelWrapper:
         elif self.type == "queue":
             return self.dataStructure.isEmpty(key)
         elif self.type == "bst":
+            return self.dataStructure.isEmpty(key)
+        elif self.type == "cl":
             return self.dataStructure.isEmpty(key)
         elif self.type == "ll":
             return self.dataStructure.isEmpty(key)
@@ -169,6 +181,8 @@ class TabelWrapper:
         elif self.type == "queue":
             return self.dataStructure.getLength(key)
         elif self.type == "bst":
+            return self.dataStructure.getLength(key)
+        elif self.type == "cl":
             return self.dataStructure.getLength(key)
         elif self.type == "ll":
             return self.dataStructure.getLength(key)
