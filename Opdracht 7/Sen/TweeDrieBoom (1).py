@@ -302,9 +302,13 @@ def dot(current, parent, file):
             parentKeys = ""
             currentKeys = ""
             for keyNode in parent.root:
-                parentKeys += str(keyNode.key)+"|"
+                parentKeys += str(keyNode.key)
+                parentKeys += "|"
+            parentKeys = parentKeys[:-1]
             for keyNode in current.root:
-                currentKeys += str(keyNode.key)+"|"
+                currentKeys += str(keyNode.key)
+                currentKeys += "|"
+            currentKeys = currentKeys[:-1]
             file.write(str(parentKeys) + " -> " + str(currentKeys) + "\n")
 
     if current.childrenLeft != None:
@@ -320,12 +324,12 @@ def write_dot(tree):
     dotFile = open("tree.dot", "w")
     dotFile.write("digraph finite_state_machine { \n")
     dotFile.write("size=8.5\n")
-    dot(tree, tree.parent, dotFile)
+    global globalCounter
+    dot(tree, None, dotFile)
     dotFile.write("}")
 
 test = TweeDrieBoom()
 test.create23T()
-
 # lijst_elements = []
 # value_lijst = []
 # for x in range(100):
@@ -339,42 +343,39 @@ test.create23T()
 #     value_lijst.append(value)
 #
 #     test.insertItem(TreeItem(value, key))
-test.insertItem(TreeItem(1, 5))
-test.insertItem(TreeItem(1, 6))
-test.insertItem(TreeItem(1, 7))
 
 # test.delete(6)
 test.insertItem(TreeItem(1, 8))
+test.insertItem(TreeItem(1, 9))
+test.insertItem(TreeItem(1, 10))
+test.insertItem(TreeItem(1, 11))
+test.insertItem(TreeItem(1, 12))
+test.insertItem(TreeItem(1, 13))
+test.insertItem(TreeItem(1, 14))
+test.insertItem(TreeItem(1, 15))
+test.insertItem(TreeItem(1, 16))
+test.insertItem(TreeItem(1, 17))
+test.insertItem(TreeItem(1, 18))
+test.insertItem(TreeItem(1, 19))
+test.insertItem(TreeItem(1, 20))
+test.insertItem(TreeItem(1, 21))
+test.insertItem(TreeItem(1, 22))
+test.insertItem(TreeItem(1, 23))
+test.insertItem(TreeItem(1, 24))
+test.insertItem(TreeItem(1, 25))
+test.insertItem(TreeItem(1, 26))
+test.insertItem(TreeItem(1, 27))
+test.insertItem(TreeItem(1, 28))
+test.insertItem(TreeItem(1, 29))
+test.insertItem(TreeItem(1, 30))
+test.insertItem(TreeItem(1, 40))
+test.insertItem(TreeItem(1, 31))
+test.insertItem(TreeItem(1, 32))
+test.insertItem(TreeItem(1, 33))
+test.insertItem(TreeItem(1, 34))
+test.insertItem(TreeItem(1, 35))
+test.insertItem(TreeItem(1, 36))
 write_dot(test)
-# test.insertItem(TreeItem(1, 9))
-# test.insertItem(TreeItem(1, 10))
-# test.insertItem(TreeItem(1, 11))
-# test.insertItem(TreeItem(1, 12))
-# test.insertItem(TreeItem(1, 13))
-# test.insertItem(TreeItem(1, 14))
-# test.insertItem(TreeItem(1, 15))
-# test.insertItem(TreeItem(1, 16))
-# test.insertItem(TreeItem(1, 17))
-# test.insertItem(TreeItem(1, 18))
-# test.insertItem(TreeItem(1, 19))
-# test.insertItem(TreeItem(1, 20))
-# test.insertItem(TreeItem(1, 21))
-# test.insertItem(TreeItem(1, 22))
-# test.insertItem(TreeItem(1, 23))
-# test.insertItem(TreeItem(1, 24))
-# test.insertItem(TreeItem(1, 25))
-# test.insertItem(TreeItem(1, 26))
-# test.insertItem(TreeItem(1, 27))
-# test.insertItem(TreeItem(1, 28))
-# test.insertItem(TreeItem(1, 29))
-# test.insertItem(TreeItem(1, 30))
-# test.insertItem(TreeItem(1, 40))
-# test.insertItem(TreeItem(1, 31))
-# test.insertItem(TreeItem(1, 32))
-# test.insertItem(TreeItem(1, 33))
-# test.insertItem(TreeItem(1, 34))
-# test.insertItem(TreeItem(1, 35))
-# test.insertItem(TreeItem(1, 36))
 
 # successor = test.inorder()
 

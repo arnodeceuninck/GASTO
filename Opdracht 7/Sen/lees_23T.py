@@ -6,6 +6,7 @@ class lees:
         self.element = 0
         self.start_lijn_operaties = 0
         self.lees()
+        self.nummer_file = 0
     def lees(self):
         type = ""
         operatie = False
@@ -44,8 +45,9 @@ class lees:
                         TTT.insertItem(Item)
                     elif words[0] == "delete":
                         self.element = int(words[1])
-                        TTT.delete(self.element)
+                        # TTT.delete(self.element)
                     elif words[0] == "print":
-                        TweeDrieBoom.TweeDrieBoom.print(self)
+                        TTT.print(self.nummer_file)
+                        self.nummer_file += 1
 
 lees("adt.txt")
