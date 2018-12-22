@@ -32,13 +32,10 @@ class RoodZwartBoom:
 
     def remove(self, key):
         # Verwijdert een item uit de boom
-        if self.root is not None:
-            success = self.root.remove(key)
-            # Tijdens het verwijderen kan de root veranderd worden
-            self.root = success[1]
-            return success[0]
-        else:
-            return False
+        success = self.root.remove(key)
+        # Tijdens het verwijderen kan de root veranderd worden
+        self.root = self.root.findNewRoot()
+        return success
 
     def visualize(self):
         # Maakt een .dot file met daarin een visuele representatie van de boom (in .dot language)
@@ -48,6 +45,15 @@ class RoodZwartBoom:
         self.root.createVisualisation(vgraph)
         # Alle nodes en verbindingen zijn nu toegevooegd aan vgraph, maak er nu dus het bestand zelf van
         vgraph.rebuild_file()
+
+    def remove(self, key):
+        # Verwijdert een item uit de boom
+        # Er moet wel een item bestaan dat verwijderc kan worden, dus als er geen root is,
+        # Dan is dit al niet het geval
+        if self.root is not None:
+            return self.root.remove(key)
+        else:
+            return False
 
     def retrieve(self, key):
         # returnt het RBTItem waarbij RBTItem.key == key
@@ -179,14 +185,10 @@ class RBTNode:
         # De top verandert, dus de grootouder krijgt een nieuw kind
         # Bepaal of dit kind links of rechts komt
         if self.parent != None and self.parent.parent != None:
-            newTop.parent = self.parent.parent # Note: changed: previous: /
             if self.parent.parent.left_tree == self.parent:
                 self.parent.parent.left_tree = newTop
             elif self.parent.parent.right_tree == self.parent:
                 self.parent.parent.right_tree = newTop
-        else:
-            newTop.parent = None
-
 
         # Onthoud de 2 deelbomen van de toekomstige nieuwe top
         tempLeftTree = newTop.left_tree
@@ -197,7 +199,7 @@ class RBTNode:
         if(self.parent.root.key > newTop.root.key):
             newTop.right_tree = self.parent
             newTop.left_tree = self
-        elif(self.parent.root.key < newTop.root.key): # Note: Changed: previous line: elif(self.parent.root.key > newTop.root.key):
+        elif(self.parent.root.key > newTop.root.key):
             newTop.left_tree = self.parent
             newTop.right_tree = self
 
@@ -207,14 +209,10 @@ class RBTNode:
         # Zet de oorspronkelijke deelbomen van newTop terug op de juiste plaats
 
         newTop.left_tree.right_tree = tempLeftTree
-        if newTop.left_tree.right_tree != None:
-            newTop.left_tree.right_tree.parent = newTop.left_tree  # Note: Changed: previous line: /
         newTop.left_tree.right_connection = 0
         newTop.left_tree.parent = newTop
 
         newTop.right_tree.left_tree = tempRightTree
-        if newTop.right_tree.left_tree != None:
-            newTop.right_tree.left_tree.parent = newTop.right_tree  # Note: Changed: previous line: /
         newTop.right_tree.left_connection = 0
         newTop.right_tree.parent = newTop
 
@@ -284,7 +282,7 @@ class RBTNode:
             return self.parent.right_connection
 
     def insert(self, newItem):
-        # Bij een lege boom #TODO: gecheckt bij insert 14 tot in node 10 (niet met) nog geen probleem
+        # Bij een lege boom
         if self.isEmpty():
             self.root = newItem
             return True
@@ -346,20 +344,16 @@ class RBTNode:
         while inorder_successor.left_tree is not None:
 
             # Alle 2 nodes op het pad moeten 3/4 nodes worden
-            if(inorder_successor.checkTwoNode()):
-                inorder_successor.makeThreeFourNode()
+            if(inorder_successor.check_TwoNode()):
+                inorder_successor.makeThreeFoutNode()
 
             inorder_successor = inorder_successor.left_tree
-
-        if (inorder_successor.checkTwoNode()):
-            inorder_successor.makeThreeFourNode()
 
         return inorder_successor
 
     def makeThreeFourNode(self):
         # Geval 1: Als de ouder en siblings 2 nodes zijn
         # Gewoon een omgekeerde split doen
-        # Tekening 1a
         if self.parent == None:
             self.left_connection = 1
             self.right_connection = 1
@@ -368,7 +362,6 @@ class RBTNode:
             self.left_tree.right_connection = 0
             self.right_tree.right_connection = 0
 
-        # Tekening 1b
         elif self.parent.checkTwoNode() \
                 and self.parent.left_tree.checkTwoNode() \
                 and self.parent.right_tree.checkTwoNode():
@@ -387,16 +380,21 @@ class RBTNode:
         #   die bestaat uit een merge van 2 siblings + element uit ouder
         # Let op: Enkel sibling-buurtjes kunnen gemerged worden
         elif self.parent.checkThreeNode():
-            # Tekening 2a
+            # Geval A: We zitten in S
+            # GAS slide 405
+
+            # Ik gebruik hier de letters van de tekening van de cursus van GAS (slide 405)
+            # S en L zijn wel omgewisseld tov de onderste tekening van de slide
+
             if self.parent.findConnectionWithParent() == 0:
                 # We zitten in S
                 s = self
                 m = s.parent
                 # p is afhankelijk van geval A of B op die slide
-                if s.root.key < m.root.key: # Tekening 2a
+                if s.root.key < m.root.key:
                     p = m.right_tree  # Wordt de nieuwe root
                     l = p.left_tree
-                elif s.root.key > m.root.key: # Tekening 2b
+                elif s.root.key > m.root.key:
                     p = m.left_tree
                     l = p.right_tree
 
@@ -405,30 +403,29 @@ class RBTNode:
                 l = self
                 p = self.parent
                 m = p.parent
-                if p.root.key > m.root.key:  # Tekening 2a
+                if p.root.key > m.root.key:
                     s = m.left_tree
-                elif p.root.key < m.root.key: # Tekening 2b
+                elif p.root.key < m.root.key:
                     s = m.right_tree
 
-            if m.parent is not None:
-                if m.parent.left_tree == m:
-                    m.parent.left_tree = p
-                elif m.parent.right_tree == m:
-                    m.parent.right_tree = p
+            if m.parent.left_tree == m:
+                m.parent.left_tree = p
+            elif m.parent.right_tree == m:
+                m.parent.right_tree = p
             p.parent = m.parent
 
             # tempLeft = p.left_tree zit al in l
-            if p.root.key < m.root.key:  # Tekening 2b
-                p.right_tree = m
-            elif p.root.key > m.root.key:  # Tekening 2a
+            if p.root.key < m.root.key:
                 p.left_tree = m
+            elif p.root.key < m.root.key:
+                p.right_tree = m
 
             m.parent = p
 
-            if m.root.key > l.root.key:  # Tekening 2b
+            if m.root.key > l.root.key:
                 m.left_tree = l
                 m.right_tree = s
-            elif m.root.key < l.root.key:  # Tekening 2a
+            elif m.root.key < l.root.key:
                 m.right_tree = l
                 m.left_tree = s
 
@@ -438,40 +435,37 @@ class RBTNode:
         # Geval 3: Als de ouder een 4 knoop is
         # Let op: Enkel sibling-buurtjes kunnen gemerged worden
         elif self.parent.checkFourNode():
-            # Tekening 3a/3c
             m = self.parent
-            # Tekening 3a (zowel in S als L)
-            if m.parent.left_tree == m:
+            if m.parent.left_tree == m and m.left_tree == self:
                 m.parent.left_connection = 0
                 m.left_connection = 1
                 m.right_connection = 1
                 return
-            # Tekening 3c (zowel in S als L)
-            elif m.parent.right_tree == m:
+            elif m.parent.right_tree == m and m.right_tree == self:
                 m.parent.right_connection = 0
                 m.left_connection = 1
                 m.right_connection = 1
                 return
-            # else:
-            #     p = m.parent
-            #     if m.right_connection == self:
-            #         s = self
-            #         q = p.right_connection
-            #         l = q.left_connection
-            #     else:
-            #         l = self
-            #         q = l.parent
-            #         p = q.parent
-            #         m = p.left_tree
-            #         s = m.right_tree
-            #
-            #     p.left_tree = m.left_tree
-            #     p.left_connection = 0
-            #     q.left_tree = m
-            #     m.left_tree = s
-            #     m.left_connection = 1
-            #     m.right_tree = l
-            #     m.right_connection = 1
+            else:
+                p = m.parent
+                if m.right_connection == self:
+                    s = self
+                    q = p.right_connection
+                    l = q.left_connection
+                else:
+                    l = self
+                    q = l.parent
+                    p = q.parent
+                    m = p.left_tree
+                    s = m.right_tree
+
+                p.left_tree = m.left_tree
+                p.left_connection = 0
+                q.left_tree = m
+                m.left_tree = s
+                m.left_connection = 1
+                m.right_tree = l
+                m.right_connection = 1
 
     def checkTwoNode(self):
         # Ga naar het bovenste element van de knoop waar je in zit
@@ -486,7 +480,7 @@ class RBTNode:
     def checkThreeNode(self):
         # Ga naar het bovenste element van een knoop
         if self.findConnectionWithParent() == 1:
-            return self.parent.checkThreeNode()
+            return self.parent.checkTreeNode()
 
         # Kijk vandaaruit of het een 3 node is
         if (self.left_tree is not None and self.left_tree.root is not None and self.left_connection == 1 and (self.right_tree is None or self.right_connection == 0))\
@@ -494,10 +488,10 @@ class RBTNode:
             return True
         return False
 
-    def checkFourNode(self): # Note: Changed: previous: def checkThreeNode(self):
+    def checkThreeNode(self):
         # Ga naar het bovenste element van de knoop
         if self.findConnectionWithParent() == 1:
-            return self.parent.checkThreeNode()
+            return self.parent.checkTreeNode()
 
         # Kijk of deze 2 andere elementen heeft in dezelfde node
         if self.left_connection is not None \
@@ -517,30 +511,9 @@ class RBTNode:
             return self.left_tree.remove(key)
         elif self.root.key != key:
             print("Key to remove not found.")
-            return (False, None)
+            return False
 
         # We bevinden ons in de Node die verwijderd zal moeten worden
-        # Geval: geen inorder successor
-        if self.right_tree == None:
-            if self.parent != None:
-                returnNode = self.parent
-                if self.parent.right_tree == self:
-                    self.parent.right_tree = self.left_tree
-                    self.parent.right_connection = self.left_connection
-                elif self.parent.left_tree == self:
-                    self.parent.left_tree = self.left_tree
-                    self.parent.left_connection = self.left_connection
-            else:
-                returnNode = self.left_tree
-            if self.left_tree is not None:
-                self.left_tree.parent = self.parent
-
-            self.destroyNode()
-            if returnNode != None:
-                returnNode = returnNode.findNewRoot()
-            return (True, returnNode)
-
-
         inorder_successor = self.findInorderSuccessor()
 
         # Blad inorder successor is nu altijd een 3-knoop of 4-knoop
@@ -555,51 +528,40 @@ class RBTNode:
 
         inorder_successor.left_tree = self.left_tree
         inorder_successor.left_connection = self.left_connection
-        if inorder_successor.left_tree != None:
-            inorder_successor.left_tree.parent = inorder_successor
         self.left_tree = None
         if(self.right_tree != inorder_successor):
             inorder_successor.right_tree = self.right_tree
-            inorder_successor.parent.left_tree = tempRight
-            if inorder_successor.parent.left_tree is not None:
-                inorder_successor.parent.left_tree.parent = inorder_successor.parent
-            inorder_successor.parent.left_connection = tempRightC
         else:
             inorder_successor.right_tree = self
-        # Aanpassen parent inorder successor.right_tree gebeurt pas onder het verwijzen van de nieuwe parent voor de inorder successor
-        # Het type connection met de parent blijft hetzelfde
-        if self.parent is not None:
-            if self.parent.left_tree == self:
-                self.parent.left_tree = inorder_successor
-            elif self.parent.right_tree == self:
-                self.parent.right_tree = inorder_successor
-        inorder_successor.parent = self.parent
-        # self.left_tree = None # is hierboven al gebeurd
-        if inorder_successor.right_tree != None:
-            inorder_successor.right_tree.parent = inorder_successor
         inorder_successor.right_connection = self.right_connection
+        # Het type connection met de parent blijft hetzelfde
+        if self.parent.left_tree == self:
+            self.parent.left_tree = inorder_successor
+        elif self.parent.right_tree == self:
+            self.parent.right_tree = inorder_successor
+        inorder_successor.parent = self.parent
+        self.left_tree = None
         self.right_tree = None
         self.parent = tempParent
-        if self.parent is not None:
-            if self.parent.left_tree == self:
-                self.parent.left_tree = tempRight
-                self.parent.left_connection = tempRightC
-            elif self.parent.right_tree == self:
-                self.parent.right_tree = tempRight
-                self.parent.right_connection = tempRightC
+        if self.parent.left_tree == self:
+            self.parent.left_tree = tempRight
+            self.parent.left_connection = tempRightC
+        elif self.parent.right_tree ==self:
+            self.parent.right_tree = tempRight
+            self.parent.right_connection = tempRightC
 
-        #return self.destroyRBT()
-        return (True, inorder_successor.findNewRoot())
+        return self.destroyRBT()
 
     def createVisualisation(self, vgraph):
         # voeg iedere node toe
+        vgraph.add_node(self.root.key, self.root.key)
         if not self.isEmpty():
-            vgraph.add_node(self.root.key, self.root.key)
+
             if self.left_tree is None and self.right_tree is None:
                 return
 
             # voeg de linkerverbinding toe
-            if self.left_tree is not None and self.left_tree.root is not None:
+            if self.left_tree is not None:
                 self.left_tree.createVisualisation(vgraph)
                 vgraph.add_connection(self.root.key, self.left_tree.root.key, self.left_connection)
             else:
@@ -608,7 +570,7 @@ class RBTNode:
                 vgraph.add_connection(self.root.key, "left" + str(self.root.key), 0, "style=invis")
 
             # voeg de rechterverbinding toe
-            if self.right_tree is not None and self.right_tree.root is not None:
+            if self.right_tree is not None:
                 self.right_tree.createVisualisation(vgraph)
                 vgraph.add_connection(self.root.key, self.right_tree.root.key, self.right_connection)
             else:
@@ -655,38 +617,28 @@ class RBTNode:
             self.right_tree.inorderTravers(visit)
         visit(self)
 
-    def size(self):
-        size = 0
-        if(self.left_tree != None):
-            size += self.left_tree.size()
-        if(self.right_tree != None):
-            size += self.right_tree.size()
-        if(self.root != None):
-            size += 1
-        return size
-
 def createRBT():
     return RoodZwartBoom()
 
 
-# Maak een nieuwe boom aan
-sprookjesboom = createRBT()
-
-# Voeg er een hoop key-value pairs aan toe
-sprookjesboom.insert(KeyValueItem(3, 3))
-sprookjesboom.insert(KeyValueItem(4, 4))
-sprookjesboom.insert(KeyValueItem(2, 2))
-sprookjesboom.insert(KeyValueItem(1, 1))
-sprookjesboom.insert(KeyValueItem(5, 5))
-sprookjesboom.visualize()
-sprookjesboom.insert(KeyValueItem(7, 7))
-sprookjesboom.insert(KeyValueItem(8, 8))
-sprookjesboom.insert(KeyValueItem(6, 6))
-sprookjesboom.insert(KeyValueItem(9, 9))
-# Verwijder het item met zoeksleutel 7
+# # Maak een nieuwe boom aan
+# sprookjesboom = createRBT()
+#
+# # Voeg er een hoop key-value pairs aan toe
+# sprookjesboom.insert(KeyValueItem(3, 3))
+# sprookjesboom.insert(KeyValueItem(4, 4))
+# sprookjesboom.insert(KeyValueItem(2, 2))
+# sprookjesboom.insert(KeyValueItem(1, 1))
+# sprookjesboom.insert(KeyValueItem(5, 5))
+# sprookjesboom.visualize()
+# sprookjesboom.insert(KeyValueItem(7, 7))
+# sprookjesboom.insert(KeyValueItem(8, 8))
+# sprookjesboom.insert(KeyValueItem(6, 6))
+# sprookjesboom.insert(KeyValueItem(9, 9))
+# # Verwijder het item met zoeksleutel 7
 # sprookjesboom.remove(7)
-
-# Maak een .dot file voor deze boom
-sprookjesboom.visualize()
-
-pass
+#
+# # Maak een .dot file voor deze boom
+# sprookjesboom.visualize()
+#
+# pass

@@ -70,28 +70,11 @@ class HeapNode:
             size += 1
         return size
 
-    def isPowerOfTwo(self, n):
-        i = 1
-        s = i # s is de som van alle machten
-        while i <= n:
-            if n == s:
-                return True
-            i *= 2
-            s += i
-        return False
-
-
     def is_full(self):
         if(self.left_tree == None and self.right_tree == None):
             return True
-        if self.right_tree == None and self.left_tree.size() == 1:
-            return False
-        if self.left_tree == None and self.right_tree.size() == 1:
-            return False
-        if self.isPowerOfTwo(self.left_tree.size()) and self.isPowerOfTwo(self.right_tree.size())\
-                and self.left_tree.is_full() and self.right_tree.is_full()\
-                and self.left_tree.size() == self.right_tree.size():
-                return True
+        if self.left_tree is not None and self.right_tree is not None:
+            return self.left_tree.is_full() and self.right_tree.is_full()
         return False
 
     def findLastItem(self):
@@ -99,7 +82,7 @@ class HeapNode:
             return self
         if self.right_tree == None:
             return self.left_tree
-        if self.right_tree.is_full() and self.left_tree.size() > self.right_tree.size():
+        if self.right_tree.is_full and self.left_tree.size() > self.right_tree.size():
             return self.left_tree.findLastItem()
         else:
             return self.right_tree.findLastItem()
@@ -137,8 +120,9 @@ class HeapNode:
 
     def createVisualisation(self, vgraph):
         # voeg iedere node toe
+        vgraph.add_node(self.root.key, self.root.key)
         if not self.isEmpty():
-            vgraph.add_node(self.root.key, self.root.key)
+
             if self.left_tree is None and self.right_tree is None:
                 return
 
@@ -179,8 +163,6 @@ class HeapNode:
             greatestChild.trickleDown()
 
     def remove(self):
-        if self.parent == None and self.size() == 1:
-            return self.destroy()
         lastItem = self.findLastItem()
         self.root = lastItem.root
         # TODO: What if no parent exists?

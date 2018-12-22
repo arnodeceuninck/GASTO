@@ -1,13 +1,7 @@
 from RBT import *
 from heap import *
-import sys
 
-if len(sys.argv) != 2:
-    print('Usage: adts.py <inputfile>')
-else:
-    print('Running ADT operations given in file ', sys.argv[1])
-
-filename = sys.argv[1]
+filename = "adt.txt"
 instructionFile = open(filename) # Default is read only
 
 functions = {"create": 0, "insert": 1, "remove": 2, "print": 3}
@@ -39,12 +33,13 @@ for line in instructionFile:
         dataStructure = instructions[structureName][functions["create"]]
 
     if words[0] == "insert":
-        dataStructure.insert(KeyValueItem(int(words[1]), words[1]))  # Key is number, value string
-        dataStructure.visualize() #TODO: comment
+        dataStructure.insert(KeyValueItem(words[1], words[1]))
 
     if words[0] == "remove":
         if structureName in dataStructuresWithoutRemoveParameter:
             dataStructure.remove()
         else:
-            dataStructure.remove(int(words[1][0:len(words[0])-1]))  # Remove the '\n'
+            dataStructure.remove(words[1][0:len(words[0])-1]) # Remove the '\n'
+
+    if words[0] == "print":
         dataStructure.visualize()
