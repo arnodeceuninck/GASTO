@@ -33,7 +33,7 @@
 // Postcondition: De operatie geeft een string terug, deze string is de naam van de test waarmee het punt
 // overeenkomt.
 
-+getTimestap(): tuple
++getTimestamp(): tuple
 // Precondition: Je hebt een punt waarvan je wilt weten wanneer die test afgelegd is.
 // Postcondition: De operatie geeft een tuple met de waarde van datum.
 

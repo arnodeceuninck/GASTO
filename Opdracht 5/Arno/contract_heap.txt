@@ -60,3 +60,9 @@
 // Precondition: Je wil het aantal nodes in de heap weten.
 // Postcondition: Er wordt een integer gereturnt die aanduid hoeveel nodes er
 // in de heap zitten.
+
++visualize()
+// Je wil een .dot bestand laten maken die je boom visueel voorstelt.
+// Precondition: De heap die je wilt gaan visualiseren bestaat.
+// Postcondition: In het bestand graph.dot vind je een visuele voorstelling van
+// de heap, geschreven in dot-language. 

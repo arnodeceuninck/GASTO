@@ -48,6 +48,8 @@ class circular_chain:
         else:
             new_node.next = current_node
         previous_node.next = new_node
+        if self.getLength() == 1 and index == 0:
+            current_node.next = new_node
 
         self.count += 1
 
@@ -68,11 +70,16 @@ class circular_chain:
         # getting the pointers right
         # special case: deleting the first node
         if index == 0:
+            if self.getLength() == 1:
+                previous_node.next = None
+                del current_node
+                self.count -= 1
+                return True
             previous_node = None
             current_node2 = self.head
-            for i in range(self.getLength()-1):
+            for i in range(self.getLength()+1):
                 previous_node = current_node2
-                current_node2 = current_node.next
+                current_node2 = current_node2.next
             self.head.next = current_node.next
 
         previous_node.next = current_node.next
@@ -108,9 +115,11 @@ class circular_chain:
 
 chain = circular_chain()
 chain.insert(0, "first")
+chain.insert(0, "newFirst")
 chain.insert(1, "second")
 chain.insert(2, "third")
 chain.insert(3, "fourth")
 chain.insert(4, "fifth")
+chain.delete(chain.getLength()-1)
 chain.visualize()
 
