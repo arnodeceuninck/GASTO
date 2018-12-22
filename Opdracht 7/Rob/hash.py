@@ -9,6 +9,7 @@ class Hashmap():
         self.hashTable = [None] * (self.tableSize)
         self.step = 1
         self.type = type
+        self.count = 0
 
     def hashf(self, key):
         return key % self.tableSize
@@ -51,6 +52,7 @@ class Hashmap():
     #         delete(i)
 
     def delete(self, key):
+        self.count -= 1
         index = self.hashf(key)
         if len(self.hashTable) == 0:
             return False
@@ -73,10 +75,13 @@ class Hashmap():
             print(self.hashTable[index].item)
 
     def insert(self, key, item):
-        treeItem = TreeItem(item, key)
-        self.step = 1
-        self.hashTable[self.getPosition(key)] = treeItem
-
+        self.count += 1
+        if self.count < self.tableSize + 1 or self.type == 3:
+            treeItem = TreeItem(item, key)
+            self.step = 1
+            self.hashTable[self.getPosition(key)] = treeItem
+        else:
+            print("Je kan maximaal %s items inserten! Item (%s, %s) is niet geinsert geweest." %(self.tableSize, key, item))
 
 
 size = input("Hoe groot moet de hashmap worden? ")
@@ -84,20 +89,22 @@ select = input("Wilt u linair probing (1), qwadratic probing (2) of seperate cha
 h = Hashmap(int(size), int(select))
 #h.insert(searchKey, item)
 ### (1) ###
-# h.insert(66, 0)
-# h.insert(63, 8)
-# h.insert(71, 5)
-# h.insert(10, 10)
-# h.insert(93, 6)
-# h.insert(28, 7)
-# h.insert(18, 9)
-# h.insert(72, 1)
-# h.insert(71, 2)
-# h.insert(5, 3)
-# h.insert(12, 4)
-# h.retrieve(12)
-# h.delete(12)
-# h.delete(18)
+h.insert(66, 0)
+h.insert(63, 8)
+h.insert(71, 5)
+h.insert(10, 10)
+h.insert(93, 6)
+h.insert(28, 7)
+h.insert(18, 9)
+h.insert(72, 1)
+h.insert(71, 2)
+h.insert(5, 3)
+h.insert(12, 4)
+h.delete(12)
+h.insert(12, 345334353)
+h.insert(24, 3453)
+h.retrieve(12)
+h.delete(18)
 
 ### (1) delete met aanpassingen aan het invoeren ###
 # h.insert(66, 0)
