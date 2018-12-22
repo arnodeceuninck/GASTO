@@ -1,5 +1,5 @@
 from KeyValueItem import *
-import stack
+import Stack
 # import queue
 # import bst
 import Dubbelgelinktelijst
@@ -8,12 +8,12 @@ import ADTcircularLinkedChain
 import _234T
 import RBT
 # import hashmap
-import heap
+import Heap
 
 # GLOBAL VARIABLES
 supportedDataStructures = ["stack", "queue", "bst", "cl", "ll", "23", "234", "rb", "hlin", "hquad", "hsep", "heap"]
 
-createDataStructure = {"stack": stack.createstack(),
+createDataStructure = {"stack": Stack.createstack(),
                        "queue": None,
                        "bst": None,
                        "cl": ADTcircularLinkedChain.createList(),
@@ -24,7 +24,7 @@ createDataStructure = {"stack": stack.createstack(),
                        "hlin": None,
                        "hquad": None,
                        "hsep": None,
-                       "heap": heap.createHeap()}
+                       "heap": Heap.createHeap()}
 
 
 class TabelWrapper:
@@ -53,7 +53,7 @@ class TabelWrapper:
         if not self.type_assigned:
             return False
         elif self.type == "stack":
-            return self.dataStructure.push(stack.Node(value))
+            return self.dataStructure.push(Stack.Node(value))
         elif self.type == "queue":
             return self.dataStructure.insert(key)
         elif self.type == "bst":
