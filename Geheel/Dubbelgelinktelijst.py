@@ -137,14 +137,3 @@ class DGL:
 
 def createLinkedChain():
     return DGL()
-
-
-test = createLinkedChain()
-test.insert(Node(70, 5))
-test.insert(Node(70, 10))
-test.insert(Node(70, 1))
-test.insert(Node(70, 9))
-test.delete(1)
-test.print(1)
-test.destroyList()
-print("End")
