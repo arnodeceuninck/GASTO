@@ -4,31 +4,33 @@ import Rapport
 import stack
 import Toets
 import Wachtlijst
-import _234T
-import Dubbelgelinktelijst
+
+# Hier geen ADT Tabellen importeren! Dit gebeurt via TabelWrapper
+from TabelWrapper import *
 
 
 class system:
     def __init__(self):
-        self.punten = _234T.createSearchTree()
-
+        self.punten = TabelWrapper("234") # dit is de create
 
     def addPunt(self):
         ID = input("ID: ")
-        self.punten._234TInsert(_234T.TreeItem(Punt.createPunt(ID, input("Stamboomnummer: "), input("Naam: "),
-                                                                    input("Waarde: "), input("Timestamp: ")), ID))
+        self.punten.insert(Punt.createPunt(ID, input("Stamboomnummer: "),  # Value
+                                           input("Naam: "),
+                                           input("Waarde: "),
+                                           input("Timestamp: ")),
+                           ID)  # Key
         return True
 
     def deletePunt(self):
-        self.punten._234TDelete(input("ID: "))
+        self.punten.delete(input("ID: "))
         return True
 
     def retrievePunt(self):
         self.punten.retrieve(input("ID: "))
 
     def removeAllPunten(self):
-        self.punten.destroyList()
-
+        self.punten.destroy()
 
 
 geheel = system()
@@ -41,4 +43,3 @@ while True:
         geheel.addPunt()
     elif temp == "2":
         geheel.deletePunt()
-
