@@ -6,6 +6,9 @@ class Leerling:
         self.KlasNummer = KlasNummer
         self.nummer = nummer
 
+    def __str__(self):
+        return self.Naam + " - " + self.Voornaam + " - " + self.Klas + " - " + self.KlasNummer + " - " + self. nummer
+
     def getNummer(self):
         return self.nummer
 
@@ -40,3 +43,4 @@ class Leerling:
     def setKlasNummer(self, klasnummer):
         self.KlasNummer = klasnummer
         return True
+

@@ -1,8 +1,14 @@
 class Toets:
-    def __init__(self, naam, maximum, verzamelingVanPunten):
+    def __init__(self, puntenlijst, naam, maximum, verzamelingVanPunten):
+        self.puntenlijst = puntenlijst
         self.naam = naam
         self.maximum = maximum
         self.verzamelingVanPunten = verzamelingVanPunten
+
+    def __str__(self):
+        return str(self.naam) + " - " + \
+               str(self.maximum) + " punten max "+ " - " + \
+               str(len(self.verzamelingVanPunten)) + " punten ingegeven"
 
     def getNaam(self):
         return self.naam
@@ -25,6 +31,11 @@ class Toets:
         self.verzamelingVanPunten = verzameling
         return True
 
+    def addPunt(self, punt):
+        # TODO: controleer of punt kleiner is dan maxpunten en strikt positief
+        self.verzamelingVanPunten.append(punt)
+        return True
 
-def createToets(naam, maximum, verzamelingVanPunten):
-    return Toets(naam, maximum, verzamelingVanPunten)
+
+def createToets(puntenlijst, naam, maximum, verzamelingVanPunten):
+    return Toets(puntenlijst, naam, maximum, verzamelingVanPunten)
