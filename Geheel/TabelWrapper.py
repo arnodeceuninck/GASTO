@@ -4,7 +4,7 @@ import ADTQueue
 # import bst
 import Dubbelgelinktelijst
 import ADTcircularLinkedChain
-# import 23
+import TweeDrieBoom
 import T234
 import RBT
 # import hashmap
