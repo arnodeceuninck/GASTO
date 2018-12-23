@@ -448,15 +448,15 @@ class TweeDrieBoom():
             result = (gevonden, self.root[1])
             return result
         elif key < self.root[0].key:
-            self.childrenLeft.zoek(key, gevonden)
+            return self.childrenLeft.zoek(key, gevonden)
         else:
             if len(self.root) == 1:
-                self.childrenRight.zoek(key, gevonden)
+                return self.childrenRight.zoek(key, gevonden)
             else:
                 if key < self.root[1].key:
-                    self.childrenMiddle.zoek(key, gevonden)
+                    return self.childrenMiddle.zoek(key, gevonden)
                 else:
-                    self.childrenRight.zoek(key, gevonden)
+                    return self.childrenRight.zoek(key, gevonden)
 
     def retrieve(self, key):
         result = self.zoek(key, False)
