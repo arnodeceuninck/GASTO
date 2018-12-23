@@ -154,8 +154,7 @@ while True:
             print("This feauture is not yet supported.")
             pass
         elif input_str == "5":
-            print("This feauture is not yet supported.")
-            pass
+            geheel.deletePuntenlijst(input("ID: "))
         elif input_str == "6":
             geheel.deleteToets(input("Naam toets: "))
         elif input_str == "7":

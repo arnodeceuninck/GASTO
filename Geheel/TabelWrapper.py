@@ -4,7 +4,7 @@ import ADTQueue
 # import bst
 import Dubbelgelinktelijst
 import ADTcircularLinkedChain
-# import 23
+import TweeDrieBoom
 import T234
 import RBT
 # import hashmap
@@ -78,7 +78,7 @@ class TabelWrapper:
         elif self.type == "ll":
             return self.dataStructure.insert(Dubbelgelinktelijst.Node(value, key))
         elif self.type == "23":
-            return self.dataStructure.insertItem(TreeItem(value, key))
+            return self.dataStructure.insertItem(TweeDrieBoom.TreeItem(value, key))
         elif self.type == "234":
             return self.dataStructure.T234Insert(T234.TreeItem(value, key))
         elif self.type == "rb":

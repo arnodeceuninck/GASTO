@@ -113,6 +113,25 @@ class system:
         else:
             print("ERROR: Klas" + naam + "Zit niet in het systeem")
 
+    def deleteLeerling(self, key):
+        if 
+
+
+    def deletePuntenlijst(self, key):
+        puntenlijst = self.puntenlijst.retrieve(key)
+        for i in range(len(puntenlijst.toetsen)-1, -1, -1):
+            self.deleteToets(puntenlijst.toetsen[i].getNaam())
+            del puntenlijst.toetsen[i]
+        self.puntenlijst.delete(key)
+
+    def deleteToets(self, naam):
+        toets = self.retrieveToets(naam)
+        for i in range(len(toets.verzamelingVanPunten)-1, -1, -1):
+            self.deletePunt(toets.verzamelingVanPunten[i].getID())
+            del toets.verzamelingVanPunten[i]
+        #TODO: Als het een cl is dan is dit het speciaal geval, controleren hoe te werk gaan bij andere datastructuren
+        self.toetsen.delete(self.toetsen.dataStructure.findIndexValue(naam))
+
     def retrievePunt(self, key):
         # Vraag een specifiek punt op
         return self.punten.retrieve(key)
