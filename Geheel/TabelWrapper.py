@@ -14,7 +14,6 @@ import Heap
 supportedDataStructures = ["stack", "queue", "bst", "cl", "ll", "23", "234", "rb", "hlin", "hquad", "hsep", "heap"]
 
 # TODO: traversals
-# TODO: print (dot file)
 
 class TabelWrapper:
     def __init__(self, structure_type):  # structure_type is een string
@@ -221,6 +220,33 @@ class TabelWrapper:
             return self.dataStructure.size()
 
     # Moet een wrapper traverse ook ondersteunen?
+    def print(self):    #todo eigen functie namen aanpassen
+        if not self.type_assigned:
+            return False
+        elif self.type == "stack":
+            return self.dataStructure.print("stack.dot")
+        elif self.type == "queue":
+            return self.dataStructure.print("queue.dot")
+        elif self.type == "bst":
+            return self.dataStructure.print("bst.dot")
+        elif self.type == "cl":
+            return self.dataStructure.print("cl.dot")
+        elif self.type == "ll":
+            return self.dataStructure.print("ll.dot")
+        elif self.type == "23":
+            return self.dataStructure.write_dot("23.dot", self)
+        elif self.type == "234":
+            return self.dataStructure.print("234.dot")
+        elif self.type == "rb":
+            return self.dataStructure.print("rb.dot")
+        elif self.type == "hlin":
+            return self.dataStructure.print("hlin.dot")
+        elif self.type == "hquad":
+            return self.dataStructure.print("hquad.dot")
+        elif self.type == "hsep":
+            return self.dataStructure.print("hsep.dot")
+        elif self.type == "heap":
+            return self.dataStructure.print("heap.dot")
 
 
 bob = Dubbelgelinktelijst.createLinkedChain()
