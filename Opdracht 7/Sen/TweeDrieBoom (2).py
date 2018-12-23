@@ -12,7 +12,26 @@ class TweeDrieBoom():
     def create23T(self):
         self.__init__()
     def destroy23T(self):
-        pass
+        if self.childrenLeft == None:
+            if self.childrenMiddle != None:
+                self.childrenMiddle.destroy23T()
+            elif self.childrenRight != None:
+                self.childrenRight.destroy23T()
+            else:
+                self.root.clear()
+                if self.parent == None and self.childrenLeft == self.childrenRight == self.childrenMiddle == None:
+                    del self
+                elif self == self.parent.childrenLeft:
+                    self.parent.childrenLeft = None
+                    self.parent.destroy23T()
+                elif self == self.parent.childrenRight:
+                    self.parent.childrenRight = None
+                    self.parent.destroy23T()
+                else:
+                    self.parent.childrenMiddle = None
+                    self.parent.destroy23T()
+        else:
+            self.childrenLeft.destroy23T()
     def isEmpty(self):
         if len(self.root) == 0 and self.childrenLeft == self.childrenMiddle == self.childrenRight == self.parent == None:
             return True
@@ -189,6 +208,9 @@ class TweeDrieBoom():
                         self.parent.childrenMiddle = NodeMiddle
                         self.parent.split()
     def delete(self, key):
+        # check = self.zoek(key, False)   #checkt of het element in de 23T zit
+        # if check[0] == False:
+        #     return False
         Treeitem = None
         if key == self.root[0].key:
             Treeitem = self.root[0]
@@ -410,7 +432,38 @@ class TweeDrieBoom():
         while(node.childrenLeft != None):
             node = node.childrenLeft
         return node
+    def zoek(self, key, gevonden):
+        if len(self.root) == 1 and self.childrenLeft == self.childrenRight == None and self.root[0].key != key:
+            result = (gevonden, None)
+            return result
+        elif len(self.root) == 2 and self.childrenLeft == self.childrenRight == self.childrenMiddle == None and self.root[0].key != key and self.root[1] != key:
+            result = (gevonden, None)
+            return result
+        if key == self.root[0].key:
+            gevonden = True
+            result = (gevonden, self.root[0])
+            return result
+        elif len(self.root) == 2 and self.root[1].key:
+            gevonden = True
+            result = (gevonden, self.root[1])
+            return result
+        elif key < self.root[0].key:
+            self.childrenLeft.zoek(key, gevonden)
+        else:
+            if len(self.root) == 1:
+                self.childrenRight.zoek(key, gevonden)
+            else:
+                if key < self.root[1].key:
+                    self.childrenMiddle.zoek(key, gevonden)
+                else:
+                    self.childrenRight.zoek(key, gevonden)
 
+    def retrieve(self, key):
+        result = self.zoek(key, False)
+        if result[0] == False:
+            return False
+        else:
+            return result
 class TreeItem(object):
     def __init__(self, value, key):
         self.key = key
@@ -506,6 +559,9 @@ test.delete(8)
 test.delete(27)
 test.delete(30)
 test.delete(29)
+# print(test.delete(50))
+print(str(test.retrieve(36)[0]))
+test.destroy23T()
 write_dot(test)
 # successor = test.inorder()
 
