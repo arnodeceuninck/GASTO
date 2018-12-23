@@ -64,9 +64,9 @@ while True:
         if input_str == "1":
             print(str(geheel.retrieveVak(input("Afkorting: "))))
         elif input_str == "2":
-            print(str(geheel.retrieveLee(input("ID: "))))
+            print(str(geheel.retrieveKlas(input("ID: "))))
         elif input_str == "3":
-            print(str(geheel.retrieveLeerling(input("Afkorting: "))))
+            print(str(geheel.retrieveLeeraar(input("Afkorting: "))))
         elif input_str == "4":
             print(str(geheel.retrieveLeerling(input("ID: "))))
         elif input_str == "5":
@@ -143,8 +143,7 @@ while True:
 
         # TODO: support unsupported feautures
         if input_str == "1":
-            print("This feauture is not yet supported.")
-            pass
+            geheel.deleteVak(input("Afkorting: "))
         elif input_str == "2":
             print("This feauture is not yet supported.")
             pass

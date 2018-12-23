@@ -38,8 +38,9 @@ class system:
         return self.leraars.insert(Leraar.Leraar(afkorting, naam, achternaam), afkorting)
 
     def addLeerling(self, naam, voornaam, klas, klasnummer, studentennummer):
-        # TODO: test for unique studentnumber
-
+        if self.retrieveLeerling(studentennummer) is not False:
+            print("De gegeven studenten nummer is al in gebruik")
+            return False
         # Kijk of de klas al is aangemaakt
         if self.klassen.retrieve(klas) is None:
             print("ERROR: De klas waar je de leerling wil insteken (" + klas + "), bestaat nog niet. "
@@ -96,6 +97,21 @@ class system:
         # verwijdert een eerder aangemaakt punt
         self.punten.delete(ID)
         return True
+
+    def deleteVak(self, afkorting):
+        if self.vakken.delete(afkorting):
+            print("Vak succesvol verwijderd")
+            return True
+        else:
+            print("ERROR: Vak" + afkorting + "Zit niet in het systeem")
+            return False
+
+    def deleteKlas(self, naam):
+        if self.klassen.delete(naam):
+            print("Klas succesvol verwijderd")
+            return True
+        else:
+            print("ERROR: Klas" + naam + "Zit niet in het systeem")
 
     def retrievePunt(self, key):
         # Vraag een specifiek punt op
