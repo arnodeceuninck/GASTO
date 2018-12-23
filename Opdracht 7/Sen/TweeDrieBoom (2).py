@@ -1,6 +1,3 @@
-
-import random
-
 class TweeDrieBoom():
     def __init__(self):
         self.root = []
@@ -109,7 +106,7 @@ class TweeDrieBoom():
                         NodeMiddle.childrenLeft = self.childrenMiddle
                         NodeMiddle.childrenRight = self.childrenRight
                         NodeMiddle.childrenLeft.parent = NodeMiddle
-                        NodeMiddle.childrenRight = NodeMiddle
+                        NodeMiddle.childrenRight.parent = NodeMiddle
                         self.childrenRight = self.childrenMiddle2
                         self.childrenMiddle = None
                         self.childrenMiddle2 = None
@@ -148,7 +145,7 @@ class TweeDrieBoom():
                         self.childrenMiddle2 = None
 
                         NodeMiddle.parent = self.parent
-                        self.parent.childrenMiddle = NodeMiddle
+                        self.parent.childrenMiddle2 = NodeMiddle    #todo check
                         self.parent.split()
                     else:
                         NodeMiddle.root.append(self.root[1])
@@ -556,12 +553,15 @@ test.insertItem(TreeItem(1, 34))
 test.insertItem(TreeItem(1, 35))
 test.insertItem(TreeItem(1, 36))
 test.delete(8)
-test.delete(27)
-test.delete(30)
-test.delete(29)
-print(test.delete(50))
-print(str(test.retrieve(36)[0]))
-test.destroy23T()
+test.insertItem(TreeItem(1, 8))
+test.delete(16)
+test.insertItem(TreeItem(1, 16))
+# test.delete(27)
+# test.delete(30)
+# test.delete(29)
+# print(test.delete(50))
+# print(str(test.retrieve(36)[0]))
+# test.destroy23T()
 write_dot(test)
 
 
