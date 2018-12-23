@@ -23,15 +23,15 @@ class TweeDrieBoom():
                     del self
                 elif self == self.parent.childrenLeft:
                     self.parent.childrenLeft = None
-                    self.parent.destroy23T()
+                    return self.parent.destroy23T()
                 elif self == self.parent.childrenRight:
                     self.parent.childrenRight = None
-                    self.parent.destroy23T()
+                    return self.parent.destroy23T()
                 else:
                     self.parent.childrenMiddle = None
-                    self.parent.destroy23T()
+                    return self.parent.destroy23T()
         else:
-            self.childrenLeft.destroy23T()
+            return self.childrenLeft.destroy23T()
     def isEmpty(self):
         if len(self.root) == 0 and self.childrenLeft == self.childrenMiddle == self.childrenRight == self.parent == None:
             return True
@@ -208,9 +208,9 @@ class TweeDrieBoom():
                         self.parent.childrenMiddle = NodeMiddle
                         self.parent.split()
     def delete(self, key):
-        # check = self.zoek(key, False)   #checkt of het element in de 23T zit
-        # if check[0] == False:
-        #     return False
+        check = self.zoek(key, False)   #checkt of het element in de 23T zit
+        if check[0] == False:
+            return False
         Treeitem = None
         if key == self.root[0].key:
             Treeitem = self.root[0]
@@ -559,11 +559,11 @@ test.delete(8)
 test.delete(27)
 test.delete(30)
 test.delete(29)
-# print(test.delete(50))
+print(test.delete(50))
 print(str(test.retrieve(36)[0]))
 test.destroy23T()
 write_dot(test)
-# successor = test.inorder()
+
 
 
 

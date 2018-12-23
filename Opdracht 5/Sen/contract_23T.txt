@@ -2,18 +2,14 @@
 // verantwoordelijke implementeren: Sen
 // verantwoordelijke testen: Rob
 
-+create23T(in rootitem: ListItemType, in rootKey: Integer)
++create23T()
 // Precondition: De root van een nieuwe 2-3 boom word aangemaakt,
-// in deze root zal het item zitten dat werd meegegeven met de rootitem.
-// Ook word er nog een key verbonden aan de node zodat we de node terug kunnen
-// vinden in de 23T.
-// Postcondition: Er is een nieuwe lege 23T aangemaakt met paramters in de root.
+// Postcondition: Er is een nieuwe lege 23T aangemaakt.
 
-+destroy23T() boolean
++destroy23T()
 // Precondition: De 23T bestaat en moet verwijderd worden.
 // Postcondition: De 23T bestaat niet meer. Alle elementen en de verwijzigingen
-// ervan zijn verwijderd. De functie geeft ook een boolean terug om te laten zien
-// of de operatie gelukt is.
+// ervan zijn verwijderd.
 
 +isEmpty(): boolean
 // Precondition: De 23T bestaat en je wil weten of er elementen inzitten.
@@ -25,7 +21,7 @@
 // Postcondition:  Voegt newItem toe in een 2-3 boom tree. Alle zoeksleutels in tree zijn
 // verschillend en verschillen ook van de zoeksleutel van newItem.
 
-split(in n: TreeNode) (n: Treenode)
+split(in n: TreeNode)
 // Precondition: Je wilt de knopen splitsen die 3 items bevatten en geen blad zijn.
 // Postcondition: Splitst de knoop n, die 3 items bevat, op. Als n geen blad is, dan heeft n
 // 4 kinderen.
