@@ -9,6 +9,15 @@ class PuntenLijst:
         self.uren = uren
         self.toetsen = toetsen
 
+    def __str__(self):
+        return str(self.id) + " - " + \
+               str(self.type) + str(self.periode) + " - " + \
+               str(self.namecodes) + " - " +\
+               str(self.vakcode) + " - " +\
+               str(self.klas) + " - " +\
+               str(self.uren) + " - " +\
+               str(len(self.toetsen)) + " toetsen aan gekoppeld"
+
     def addToets(self, toets):
         self.toetsen.append(toets)
         return True

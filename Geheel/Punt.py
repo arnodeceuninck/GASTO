@@ -7,6 +7,13 @@ class Punt:
         self.waarde = waarde
         self.timestamp = timestamp
 
+    def __str__(self):
+        return str(self.id) + " - " + \
+               str(self.stamboomnummer) + " - " + \
+               str(self.name) + " - " + \
+               str(self.waarde) + " - " + \
+               str(self.timestamp)
+
     def getID(self):
         return self.id
 
