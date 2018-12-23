@@ -236,9 +236,9 @@ class TweeDrieBoom():
                     self.childrenMiddle.parent = self
                     self.childrenRight.parent = self
             elif self.childrenMiddle != None:
+                nodemiddle = TweeDrieBoom()
+                nodemiddle.parent = self.parent
                 if self == self.parent.childrenLeft:
-                    nodemiddle = TweeDrieBoom()
-                    nodemiddle.parent = self.parent
                     nodemiddle.root.append(self.parent.root[0])
                     if len(self.parent.root) == 1:
                         nodemiddle.root.append(self.parent.childrenRight.root[0])
@@ -264,8 +264,6 @@ class TweeDrieBoom():
                         self.parent.childrenMiddle = None
                         self.parent.childrenLeft = nodemiddle
                 elif self == self.parent.childrenRight:
-                    nodemiddle = TweeDrieBoom()
-                    nodemiddle.parent = self.parent
                     if len(self.parent.root) == 1:
                         nodemiddle.root.append(self.parent.root[0])
                         nodemiddle.root.insert(0, self.parent.childrenLeft.root[0])
@@ -292,24 +290,41 @@ class TweeDrieBoom():
                         self.parent.childrenMiddle = None
                         self.parent.childrenRight = nodemiddle
                 else:
-                    self.root.append(self.parent.root[0])
-                    self.parent.root.remove(self.parent.root[0])
-                    if len(self.parent.childrenLeft.root) == 2:
-                        self.childrenRight = self.childrenMiddle
-                        self.childrenMiddle = None
-                        self.parent.root.insert(0, self.parent.childrenLeft.root[1])
-                        self.parent.childrenLeft.childrenRight.parent = self
-                        self.childrenLeft = self.parent.childrenLeft.childrenRight
-                        self.parent.childrenLeft.childrenRight = self.parent.childrenLeft.childrenMiddle
-                        self.parent.childrenLeft.childrenMiddle = None
-                    elif len(self.parent.childrenRight.root) == 2:
-                        self.childrenLeft = self.childrenMiddle
-                        self.childrenMiddle = None
-                        self.parent.root.append(self.parent.childrenRight.root[0])
-                        self.parent.childrenRight.childrenLeft.parent = self
-                        self.childrenLeft = self.parent.childrenRight.childrenLeft
-                        self.parent.childrenRight.childrenLeft = self.parent.childrenRight.childrenMiddle
-                        self.parent.childrenLeft.childrenMiddle = None
+                    if len(self.parent.childrenLeft.root) == 2 or len(self.parent.childrenRight.root) == 2:
+                        if len(self.parent.childrenLeft.root) == 2:
+                            self.root.append(self.parent.root[0])
+                            self.parent.root.remove(self.parent.root[0])
+                            self.parent.root.insert(0, self.parent.childrenLeft.root[1])
+                            self.parent.childrenLeft.root.remove(self.parent.childrenLeft.root[1])
+                            self.childrenRight = self.childrenMiddle
+                            self.childrenMiddle = None
+                            self.childrenLeft = self.parent.childrenLeft.childrenRight
+                            self.childrenLeft.parent = self
+                            self.parent.childrenLeft.childrenRight = self.parent.childrenLeft.childrenMiddle
+                            self.parent.childrenLeft.childrenMiddle = None
+                        else:
+                            self.root.append(self.parent.root[1])
+                            self.parent.root.remove(self.parent.root[1])
+                            self.parent.root.append(self.parent.childrenRight.root[0])
+                            self.parent.childrenRight.root.remove(self.parent.childrenRight.root[0])
+                            self.childrenLeft = self.childrenMiddle
+                            self.childrenMiddle = None
+                            self.childrenRight = self.parent.childrenRight.childrenLeft
+                            self.childrenRight.parent = self
+                            self.parent.childrenRight.childrenLeft = self.parent.childrenRight.childrenMiddle
+                            self.parent.childrenRight.childrenMiddle = None
+                    else:
+                        nodemiddle.root.append(self.parent.childrenLeft.root[0])
+                        nodemiddle.root.append(self.parent.root[0])
+                        self.parent.root.remove(self.parent.root[0])
+                        nodemiddle.childrenLeft = self.parent.childrenLeft.childrenLeft
+                        nodemiddle.childrenMiddle = self.parent.childrenLeft.childrenRight
+                        nodemiddle.childrenRight = self.childrenMiddle
+                        nodemiddle.childrenLeft.parent = nodemiddle
+                        nodemiddle.childrenMiddle.parent = nodemiddle
+                        nodemiddle.childrenRight.parent = nodemiddle
+                        self.parent.childrenMiddle = None
+                        self.parent.childrenLeft = nodemiddle
                 self.parent.fix()
 
             else:   #base case fix
@@ -489,6 +504,8 @@ test.insertItem(TreeItem(1, 35))
 test.insertItem(TreeItem(1, 36))
 test.delete(8)
 test.delete(27)
+test.delete(30)
+test.delete(29)
 write_dot(test)
 # successor = test.inorder()
 
