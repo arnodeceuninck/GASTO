@@ -512,8 +512,8 @@ def dot(current, parent, file):
     if current.childrenRight != None:
         dot(current.childrenRight, current, file)
 
-def write_dot(tree):
-    dotFile = open("tree.dot", "w")
+def write_dot(file, tree):
+    dotFile = open(file, "w")
     dotFile.write("digraph Two_Three_Tree { \n")
     dotFile.write("\t"+"size=8.5\n")
     global globalCounter
@@ -562,7 +562,7 @@ test.insertItem(TreeItem(1, 16))
 # print(test.delete(50))
 # print(str(test.retrieve(36)[0]))
 # test.destroy23T()
-write_dot(test)
+write_dot("23Tree.dot", test)
 
 
 
