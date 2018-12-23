@@ -80,9 +80,7 @@ class DGL:
     def delete(self, key):
         node = self.dummy
         while True:
-            if node.next is None:
-                return False
-            elif node.key == key:
+            if node.key == key:
                 if node.next is None:
                     node.back.next = None
                     node.back = None
@@ -93,6 +91,8 @@ class DGL:
                     node.next = None
                     node.back = None
                     return True
+            elif node.next is None:
+                return False
             else:
                 node = node.next
 
