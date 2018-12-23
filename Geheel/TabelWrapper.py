@@ -50,7 +50,7 @@ class TabelWrapper:
         elif self.type == "ll":
             self.dataStructure = Dubbelgelinktelijst.createLinkedChain()
         elif self.type == "23":
-            self.dataStructure = Stack.createStack()
+            self.dataStructure = Stack.create23T()
         elif self.type == "234":
             self.dataStructure = T234.createSearchTree()
         elif self.type == "rb":
@@ -78,7 +78,7 @@ class TabelWrapper:
         elif self.type == "ll":
             return self.dataStructure.insert(Dubbelgelinktelijst.Node(value, key))
         elif self.type == "23":
-            return self.dataStructure.insert(key)
+            return self.dataStructure.insertItem(TreeItem(value, key))
         elif self.type == "234":
             return self.dataStructure.T234Insert(T234.TreeItem(value, key))
         elif self.type == "rb":
@@ -102,7 +102,7 @@ class TabelWrapper:
         elif self.type == "ll":
             return self.dataStructure.retrieve(key)
         elif self.type == "23":
-            return self.dataStructure.retrieve(key)
+            return self.dataStructure.retrieve(key) #geeft een tuple terug (bool, TreeItem)
         elif self.type == "234":
             return self.dataStructure.retrieve(key).item
         elif self.type == "rb":
@@ -152,7 +152,7 @@ class TabelWrapper:
         elif self.type == "ll":
             return self.dataStructure.destroyList()
         elif self.type == "23":
-            return self.dataStructure.destroy()
+            return self.dataStructure.destroy23T()
         elif self.type == "234":
             return self.dataStructure.destroySearchtree()
         elif self.type == "rb":
@@ -204,7 +204,9 @@ class TabelWrapper:
         elif self.type == "ll":
             return self.dataStructure.getLength()
         elif self.type == "23":
-            return self.dataStructure.getLength()
+            pass  # Not implemented
+            return False
+            # return self.dataStructure.getLength()
         elif self.type == "234":
             pass  # Not implemented
             return False

@@ -2,11 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="02db20bb-13fa-4680-8bb0-acfadcd6223a" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/Opdracht 7/Rob/LL.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/GASTO.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/GASTO.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Opdracht 7/Rob/hash.py" beforeDir="false" afterPath="$PROJECT_DIR$/Opdracht 7/Rob/hash.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Geheel/TabelWrapper.py" beforeDir="false" afterPath="$PROJECT_DIR$/Geheel/TabelWrapper.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -16,8 +13,8 @@
   </component>
   <component name="CoverageDataManager">
     <SUITE FILE_PATH="coverage/GASTO$LL.coverage" NAME="LL Coverage Results" MODIFIED="1545559217179" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Opdracht 7/Rob" />
-    <SUITE FILE_PATH="coverage/GASTO$hash.coverage" NAME="hash Coverage Results" MODIFIED="1545552561264" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Opdracht 7/Rob" />
     <SUITE FILE_PATH="coverage/GASTO$Dubbelgelinktelijst.coverage" NAME="Dubbelgelinktelijst Coverage Results" MODIFIED="1545553160480" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$USER_HOME$/AppData/Local/Temp" />
+    <SUITE FILE_PATH="coverage/GASTO$hash.coverage" NAME="hash Coverage Results" MODIFIED="1545552561264" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Opdracht 7/Rob" />
     <SUITE FILE_PATH="coverage/GASTO$RZT.coverage" NAME="RZT Coverage Results" MODIFIED="1542841852562" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Opdracht 7/Arno" />
   </component>
   <component name="FUSProjectUsageTrigger">
@@ -80,45 +77,54 @@
         </counts>
       </usages-collector>
     </session>
+    <session id="-1967430509">
+      <usages-collector id="statistics.lifecycle.project">
+        <counts>
+          <entry key="project.open.time.5" value="1" />
+          <entry key="project.opened" value="1" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.extensions.open">
+        <counts>
+          <entry key="py" value="1" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.open">
+        <counts>
+          <entry key="Python" value="1" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.extensions.edit">
+        <counts>
+          <entry key="py" value="52" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.edit">
+        <counts>
+          <entry key="Python" value="52" />
+        </counts>
+      </usages-collector>
+    </session>
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Opdracht 7/Rob/hash.py">
+        <entry file="file://$PROJECT_DIR$/Geheel/TabelWrapper.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1512">
-              <caret line="84" lean-forward="true" selection-start-line="84" selection-end-line="84" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$USER_HOME$/AppData/Local/Temp/Dubbelgelinktelijst.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1717">
-              <caret line="149" selection-start-line="149" selection-end-line="149" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/Opdracht 7/Rob/LL.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="306">
-              <caret line="18" column="36" lean-forward="true" selection-start-line="18" selection-start-column="36" selection-end-line="18" selection-end-column="36" />
+            <state relative-caret-position="3350">
+              <caret line="209" column="32" lean-forward="true" selection-start-line="209" selection-start-column="32" selection-end-line="209" selection-end-column="32" />
               <folding>
-                <marker date="1545559210619" expanded="true" signature="11:16" ph="..." />
-                <marker date="1545559210619" expanded="true" signature="133:138" ph="..." />
+                <element signature="e#0#26#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Opdracht 1/Tim/Gelinkte Ketting.py">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Geheel/TweeDrieBoom.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="731">
-              <caret line="79" lean-forward="true" selection-start-line="79" selection-end-line="79" />
+            <state relative-caret-position="239">
+              <caret line="552" column="32" lean-forward="true" selection-start-line="552" selection-start-column="32" selection-end-line="552" selection-end-column="32" />
             </state>
           </provider>
         </entry>
@@ -143,6 +149,7 @@
         <option value="$PROJECT_DIR$/Opdracht 6/Tim/TestRBT.py" />
         <option value="$PROJECT_DIR$/Opdracht 7/Rob/hash.py" />
         <option value="$PROJECT_DIR$/Opdracht 7/Rob/LL.py" />
+        <option value="$PROJECT_DIR$/Geheel/TabelWrapper.py" />
       </list>
     </option>
   </component>
@@ -153,9 +160,9 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-7" />
-    <option name="width" value="974" />
-    <option name="height" value="1047" />
+    <option name="x" value="-8" />
+    <option name="width" value="975" />
+    <option name="height" value="1048" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -169,6 +176,11 @@
             <path>
               <item name="GASTO" type="b2602c69:ProjectViewProjectNode" />
               <item name="GASTO" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="GASTO" type="b2602c69:ProjectViewProjectNode" />
+              <item name="GASTO" type="462c0819:PsiDirectoryNode" />
+              <item name="Geheel" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="GASTO" type="b2602c69:ProjectViewProjectNode" />
@@ -339,10 +351,10 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1096" extended-state="6" />
+    <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.15351813" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.15570469" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -397,13 +409,7 @@
     <entry file="file://$PROJECT_DIR$/Opdracht 1/Arno/Python/graph.py">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/Opdracht 7/Arno/RZT.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="34" selection-start-column="34" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/Opdracht 7/Arno/RZT.py" />
     <entry file="file://$PROJECT_DIR$/Opdracht 8/Rob/Leerling.py">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -438,35 +444,42 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Opdracht 7/Rob/hash.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1512">
-          <caret line="84" lean-forward="true" selection-start-line="84" selection-end-line="84" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Temp/Dubbelgelinktelijst.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1717">
-          <caret line="149" selection-start-line="149" selection-end-line="149" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Temp/Dubbelgelinktelijst.py" />
     <entry file="file://$PROJECT_DIR$/Opdracht 1/Tim/Gelinkte Ketting.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="731">
-          <caret line="79" lean-forward="true" selection-start-line="79" selection-end-line="79" />
+        <state relative-caret-position="1343">
+          <caret line="79" selection-start-line="79" selection-end-line="79" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Opdracht 7/Rob/hash.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="623">
+          <caret line="84" selection-start-line="84" selection-end-line="84" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Opdracht 7/Rob/LL.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="306">
-          <caret line="18" column="36" lean-forward="true" selection-start-line="18" selection-start-column="36" selection-end-line="18" selection-end-column="36" />
+          <caret line="18" column="36" selection-start-line="18" selection-start-column="36" selection-end-line="18" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Geheel/TabelWrapper.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3350">
+          <caret line="209" column="32" lean-forward="true" selection-start-line="209" selection-start-column="32" selection-end-line="209" selection-end-column="32" />
           <folding>
-            <marker date="1545559210619" expanded="true" signature="11:16" ph="..." />
-            <marker date="1545559210619" expanded="true" signature="133:138" ph="..." />
+            <element signature="e#0#26#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Geheel/TweeDrieBoom.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="239">
+          <caret line="552" column="32" lean-forward="true" selection-start-line="552" selection-start-column="32" selection-end-line="552" selection-end-column="32" />
         </state>
       </provider>
     </entry>
