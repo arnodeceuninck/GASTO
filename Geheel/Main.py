@@ -151,8 +151,7 @@ while True:
             print("This feauture is not yet supported.")
             pass
         elif input_str == "4":
-            print("This feauture is not yet supported.")
-            pass
+            geheel.deleteLeerling(input("Stamboomnummer: "))
         elif input_str == "5":
             geheel.deletePuntenlijst(input("ID: "))
         elif input_str == "6":

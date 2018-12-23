@@ -95,6 +95,7 @@ class system:
 
     def deletePunt(self, ID):
         # verwijdert een eerder aangemaakt punt
+        #TODO: alle toetsen overlopen en de punten uit de toetsen halen
         self.punten.delete(ID)
         return True
 
@@ -114,8 +115,49 @@ class system:
             print("ERROR: Klas" + naam + "Zit niet in het systeem")
 
     def deleteLeerling(self, key):
-        if 
+        #TODO: elke datastructuur toevoegen aan de delete
 
+        #de punten die gelinkt zijn aan het stamboom nummer verwijderen
+
+        if self.punten.type == "cl":
+            node = self.punten.dataStructure.head.next
+            for x in range(self.toetsen.dataStructure.count):
+                if node.value.getStamboekNummer == key:
+                    nextnode = node.next
+                    self.deletePunt(node.value.getID())
+                    node = nextnode
+                else:
+                    node = node.next
+        elif self.punten.type == "ll":
+            node = self.punten.dataStructure.dummy.next
+            while node is not None:
+                if node.value.getStamboekNummer == key:
+                    nextnode = node.next
+                    self.deletePunt(node.value.getID())
+                else:
+                    nextnode = node.next
+                node = nextnode
+        #elif self.punten.type == "234":
+            #if self.punten.dataStructure.preorderTraversal(self.getStamboekNummer):
+
+
+        #alle punten uit de testen verwijderen
+        if self.toetsen.type == "cl":
+            node = self.toetsen.dataStructure.head.next
+            for x in range(self.toetsen.dataStructure.count):
+                for i in range(len(node.value.verzamelingVanPunten)-1):
+                    if node.value.verzamelingVanPunten[i].getStamboekNummer == key:
+                        del node.value.verzamelingVanPunten[i]
+                node = node.next
+        elif self.toetsen.type == "ll":
+            node = self.toetsen.dataStructure.dummy.next
+            while node is not None:
+                for i in range(len(node.value.verzamelingVanPunten)-1):
+                    if node.value.getStamboekNummer[i].getStamboekNummer == key:
+                        del node.verzamelingVanPunten[i]
+                node = node.next
+
+        self.leerlingen.delete(key)
 
     def deletePuntenlijst(self, key):
         puntenlijst = self.puntenlijst.retrieve(key)

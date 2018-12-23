@@ -728,5 +728,21 @@ class T234:
 
         return self.destroyNode()
 
+    def preorderTraversal(self, visit):
+        if self.item1 is not None:
+            visit(self.item1)
+        if self.left is not None:
+            self.left.preorderTraversal(visit)
+        if self.mleft is not None:
+            self.mleft.preorderTraversal(visit)
+        if self.item2 is not None:
+            visit(self.item2)
+        if self.mright is not None:
+            self.mright.preorderTraversal(visit)
+        if self.item3 is not None:
+            visit(self.item3)
+        if self.right is not None:
+            self.right.preoderTraversal(visit)
+
 def createSearchTree():
     return T234(None, None, None, None, None, None, None, None)
