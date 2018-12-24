@@ -2,6 +2,7 @@ class TreeItem():
     def __init__(self, item, key):
         self.item = item
         self.key = key
+        self.next = None
 
 class Hashmap():
     def __init__(self, size, type):
@@ -19,6 +20,22 @@ class Hashmap():
             return (key + self.step) % self.tableSize
         elif self.type == 2:
             return int((key + (self.step)**2) % self.tableSize)
+
+    def ll_insert(self, item, key):
+        treeItem = TreeItem(item, key)
+        index = self.hashf(key)
+        if self.hashTable[index] == None:
+            self.hashTable[index] = treeItem
+        else:
+            if self.hashTable[index].next == None:
+                self.hashTable[index].next = treeItem
+            else:
+                self.nu = self.hashTable[index].next
+                while True:
+                    if self.nu.next == None:
+                        self.nu.next = treeItem
+                        return False
+                    self.nu = self.nu.next
 
     def getPosition(self, key):
         index = self.hashf(key)
@@ -76,7 +93,9 @@ class Hashmap():
 
     def insert(self, key, item):
         self.count += 1
-        if self.count < self.tableSize + 1 or self.type == 3:
+        if self.type == 3:
+            self.ll_insert(item, key)
+        elif self.count < self.tableSize + 1:
             treeItem = TreeItem(item, key)
             self.step = 1
             self.hashTable[self.getPosition(key)] = treeItem
@@ -134,6 +153,39 @@ h = Hashmap(int(size), int(select))
 # h.insert(12, 2)
 # h.retrieve(12)
 # h.delete(66)
+
+
+
+### (3) ###
+# h.insert(66, 0)
+# h.insert(63, 8)
+# h.insert(71, 5)
+# h.insert(10, 10)
+# h.insert(93, 5)
+# h.insert(28, 6)
+# h.insert(18, 7)
+# h.insert(72, 6)
+# h.insert(71, 5)
+# h.insert(5, 5)
+# h.insert(12, 1)
+# h.retrieve(12)
+# h.delete(66)
+
+### (3 1 lange ketting) ###
+h.insert(71, 0)
+h.insert(5, 8)
+h.insert(49, 5)
+h.insert(71, 10)
+h.insert(27, 5)
+h.insert(5, 6)
+h.insert(18, 7)
+h.insert(71, 6)
+# h.delete(5)
+h.insert(5, 5)
+h.insert(5, 5)
+h.insert(12, 1)
+h.retrieve(18)
+# h.delete(18)
 
 h.show()
 # h.deleteHashmap()

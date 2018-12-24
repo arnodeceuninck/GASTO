@@ -1,0 +1,7 @@
+type=hashmap
+insert 2
+insert 8
+insert 9
+insert 3
+remove 2
+print

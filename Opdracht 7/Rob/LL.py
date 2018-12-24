@@ -7,7 +7,6 @@ class Node:
 class LL:
     def __init__(self):
         self.start = Node(None, None)
-        self.next = None
 
     def vrije_node(self, current_node):
         self.current = current_node
