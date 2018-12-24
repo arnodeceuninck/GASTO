@@ -16,6 +16,19 @@ class T234:
         self.mright = mright
         self.right = right
 
+    def __iter__(self):  # todo check
+        self.index = 0
+        return self
+
+    def __next__(self): #todo check
+        size = self.size()
+        if size > self.index:
+            x = self.getIndex(self.index)
+            self.index += 1
+            return (x[0].key, x[0].item)
+        else:
+            raise StopIteration
+
     def change(self):
         while self.parent is not None:
             self = self.parent
@@ -778,5 +791,62 @@ class T234:
             visit(self.item2.item, key)
         if self.item1 is not None:
             visit(self.item1.item, key)
+
+    def getIndex(self, index):  #todo recheck
+        temp = index
+        if self.item1 is not None:
+            if index == 0:
+                return (self.item1, index)
+            temp = index - 1
+        if self.item2 is not None:
+            if index == 1:
+                return (self.item2, index)
+            temp -= 1
+        if self.item3 is not None:
+            if index == 2:
+                return (self.item3, index)
+            temp -= 1
+        index = temp
+        if self.left != None:
+            returned = self.left.getIndex(index)
+            index = returned[1]
+            if returned[0] != None:
+                return returned
+        if self.mleft != None:
+            returned = self.mleft.getIndex(index)
+            index = returned[1]
+            if returned[0] != None:
+                return returned
+        if self.mright != None:
+            returned = self.mright.getIndex(index)
+            index = returned[1]
+            if returned[0] != None:
+                return returned
+        if self.right != None:
+            returned = self.right.getIndex(index)
+            index = returned[1]
+            if returned[0] != None:
+                return returned
+        return (None, index)
+
+    def size(self):
+        size = 0
+        if self.item3 is not None:
+            size = 3
+        elif self.item2 is not None:
+            size = 2
+        elif self.item1 is not None:
+            size = 1
+        if self.left is not None:
+            size += self.left.size()
+        if self.mleft is not None:
+            size += self.mleft.size()
+        if self.mright is not None:
+            size += self.mright.size()
+        if self.right is not None:
+            size += self.right.size()
+        return size
+
+
 def createSearchTree():
     return T234(None, None, None, None, None, None, None, None)
