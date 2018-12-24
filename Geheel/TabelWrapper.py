@@ -80,7 +80,7 @@ class TabelWrapper:
         elif self.type == "queue":
             return self.dataStructure.enqueue(key)
         elif self.type == "bst":
-            return self.dataStructure.insert(key)
+            return self.dataStructure.searchTreeInsert(BinarySearchTree.TreeItem(value, key))
         elif self.type == "cl":
             index = self.getLength()
             return self.dataStructure.insert(index, value)  # TODO: cl werkt met een index
@@ -105,7 +105,7 @@ class TabelWrapper:
         elif self.type == "queue":
             return self.dataStructure.getFront()
         elif self.type == "bst":
-            return self.dataStructure.retrieve(key)
+            return self.dataStructure.searchTreeRetrieve(key)
         elif self.type == "cl":
             return self.dataStructure.retrieve(key)
         elif self.type == "ll":
@@ -131,7 +131,7 @@ class TabelWrapper:
         elif self.type == "queue":
             return self.dataStructure.dequeue()
         elif self.type == "bst":
-            return self.dataStructure.delete(key)
+            return self.dataStructure.searchTreeDelete(key)
         elif self.type == "cl":
             return self.dataStructure.delete(key)
         elif self.type == "ll":
@@ -155,7 +155,7 @@ class TabelWrapper:
         elif self.type == "queue":
             return self.dataStructure.destroyQueue()
         elif self.type == "bst":
-            return self.dataStructure.destroy()
+            return self.dataStructure.destroySearchTree()
         elif self.type == "cl":
             return self.dataStructure.destroyList()
         elif self.type == "ll":
@@ -207,7 +207,9 @@ class TabelWrapper:
             return False
             # return self.dataStructure.getLength()
         elif self.type == "bst":
-            return self.dataStructure.getLength()
+            pass  # Not implemented
+            return False
+            # return self.dataStructure.getLength()
         elif self.type == "cl":
             return self.dataStructure.getLength()
         elif self.type == "ll":
