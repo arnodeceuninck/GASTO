@@ -6,6 +6,17 @@ class TweeDrieBoom():
         self.childrenMiddle = None
         self.childrenMiddle2 = None
         self.parent = None
+    def __iter__(self): #todo check
+        self.index = 0
+        return self
+    def __next__(self): #todo check
+        size = self.size()
+        if size > self.index:
+            x = self.getIndex(self.index)
+            self.index += 1
+            return (x[0].key, x[0].value)
+        else:
+            raise StopIteration
     def create23T(self):
         self.__init__()
     def destroy23T(self):
@@ -461,6 +472,42 @@ class TweeDrieBoom():
             return False
         else:
             return result
+    def inorderTravers(self, visit):    #todo check
+        if self.childrenLeft != None:
+            self.childrenLeft.inorderTraverse(visit)
+        if self.childrenMiddle != None:
+            self.childrenMiddle.inorderTraverse(visit)
+        if self.childrenRight != None:
+            self.childrenRight.inorderTraverse(visit)
+    def getIndex(self, index):  #todo check
+        if index == 0:
+            return (self.root, index)
+        index -= 1
+        if self.childrenLeft != None:
+            returned = self.childrenLeft.getIndex(index)
+            index = returned[1]
+            if len(returned[0]) != None:
+                return returned
+        if self.childrenMiddle != None:
+            returned = self.childrenMiddle.getIndex(index)
+            index = returned[1]
+            if len(returned[0]) != None:
+                return returned
+        if self.childrenRight != None:
+            returned = self.childrenRight.getIndex(index)
+            index = returned[1]
+            if len(returned[0]) != None:
+                return returned
+        return (None, index)
+    def size(self): #todo check
+        size = 0
+        if self.childrenLeft != None:
+            size += self.childrenLeft.size()
+        if self.childrenMiddle != None:
+            size += self.childrenMiddle.size()
+        if self.childrenRight != None:
+            size += self.childrenRight.size()
+        return size
 class TreeItem(object):
     def __init__(self, value, key):
         self.key = key
