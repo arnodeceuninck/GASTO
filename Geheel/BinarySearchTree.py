@@ -18,9 +18,9 @@ class BinarySearchTree:
     def __next__(self):
         size = self.size()
         if size > self.index: # Of self.index-1?
-            x = self.root.getIndex(self.index)
+            x = self.getIndex(self.index)
             self.index += 1
-            return (x[0].key, x[0].value)
+            return (x[0].key, x[0].item)
         else:
             raise StopIteration
     def createSearchTree(self):
@@ -83,9 +83,9 @@ class BinarySearchTree:
                     inorder_successor = inorder_successor.left
                 self.root = inorder_successor.root
                 if stepLeft == True:
-                    previous.left = None # Dit verwijdert het blad
+                    previous.left = inorder_successor.right  # Dit verwijdert het blad
                 else:
-                    previous.right = None # De inorder succesor is het direct volgende element
+                    previous.right = inorder_successor.right  # De inorder succesor is het direct volgende element
                 # del inorder_successor
         elif searchKey < self.root.key:
             if self.left == None:
@@ -178,7 +178,7 @@ class BinarySearchTree:
             return 0
         return self.root.size()
 
-    def Size(self): #todo check
+    def size(self): #todo check
         size = 0
         if(self.left != None):
             size += self.left.size()

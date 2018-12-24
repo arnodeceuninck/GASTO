@@ -51,7 +51,7 @@ class TabelWrapper:
         elif self.type == "queue":
             self.dataStructure = ADTQueue.createQueue()
         elif self.type == "bst":
-            self.dataStructure = BinarySearchTree.createSearchTree()
+            self.dataStructure = BinarySearchTree.BinarySearchTree(None, None, None)
         elif self.type == "cl":
             self.dataStructure = ADTcircularLinkedChain.circular_chain()
         elif self.type == "ll":
@@ -297,7 +297,7 @@ bob.destroyList()
 bob2.destroy()
 
 
-bob3 = TabelWrapper("23")
+bob3 = TabelWrapper("bst")
 bob3.insert("tien", 10)
 bob3.insert("twee", 2)
 bob3.insert("vier", 4)
