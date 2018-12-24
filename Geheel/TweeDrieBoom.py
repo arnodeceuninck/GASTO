@@ -485,20 +485,20 @@ class TweeDrieBoom:
         else:
             return result
 
-    def traverse(self, visit):
-        return self.inorderTravers(visit)
+    def traverse(self, visit, key=None):
+        return self.inorderTravers(visit, key)
 
-    def inorderTravers(self, visit):    #todo check
+    def inorderTravers(self, visit, key=None):    #todo check
         if self.childrenLeft != None:
-            self.childrenLeft.inorderTraverse(visit)
+            self.childrenLeft.inorderTraverse(visit, key)
         if self.childrenMiddle != None:
-            visit(self.root[0].key)
-            self.childrenMiddle.inorderTraverse(visit)
-            visit(self.root[1].key)
+            visit(self.root[0].key, key)
+            self.childrenMiddle.inorderTraverse(visit, key)
+            visit(self.root[1].key, key)
         else:
-            visit(self.root[0].key)
+            visit(self.root[0].key, key)
         if self.childrenRight != None:
-            self.childrenRight.inorderTraverse(visit)
+            self.childrenRight.inorderTraverse(visit, key)
 
     def getIndex(self, index):  #todo recheck
         if index == 0 and len(self.root) >= 1:
