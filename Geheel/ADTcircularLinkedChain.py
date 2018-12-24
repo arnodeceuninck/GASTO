@@ -13,6 +13,21 @@ class circular_chain:
         self.head = node("head")
         self.count = 0
 
+    def __iter__(self):
+        self.current = self.head
+        self.index = 0
+        return self
+
+    def __next__(self):
+        # Extra controle op lengte om eeuwige for-loops te vermijden,
+        # kan je altijd verwijderen natuurlijk als je wel eeuwig wil loopen
+        if self.current.next is None or self.index >= self.getLength():
+            raise StopIteration
+        else:
+            self.current = self.current.next
+            self.index += 1
+            return (self.current.value, self.current.value)
+
     def createList(self):
         self.__init__()
 

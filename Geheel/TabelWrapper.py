@@ -21,6 +21,16 @@ class TabelWrapper:
         self.dataStructure = None
         self.create(structure_type)
 
+    # Currently datastructures supporting iterators: cl, ll, rb, heap
+    # !!! Alle iterators returnen een tuple (key, value)
+    # Als je niet weet hoe je dit moet implementeren, kijk dan in een van de reeds geimplementeerde
+    # https://www.w3schools.com/python/python_iterators.asp
+    def __iter__(self):
+        self.iterator = iter(self.dataStructure)
+        return self.iterator
+    def __next__(self):
+        return next(self.iterator)
+
     def type_assigned(self):
         if self.type is not None:
             return True
@@ -219,7 +229,6 @@ class TabelWrapper:
         elif self.type == "heap":
             return self.dataStructure.size()
 
-    # Moet een wrapper traverse ook ondersteunen?
     def print(self):    #todo eigen functie namen aanpassen
         if not self.type_assigned:
             return False
@@ -248,6 +257,35 @@ class TabelWrapper:
         elif self.type == "heap":
             return self.dataStructure.print("heap.dot")
 
+    # visit is een functie die telkens toegepast wordt op de root value
+    def traverse(self, visit):    #todo eigen functie namen aanpassen
+        if not self.type_assigned:
+            return False
+        elif self.type == "stack":
+            return self.dataStructure.traverse(visit)
+        elif self.type == "queue":
+            return self.dataStructure.traverse(visit)
+        elif self.type == "bst":
+            return self.dataStructure.traverse(visit)
+        elif self.type == "cl":
+            return self.dataStructure.traverse(visit)
+        elif self.type == "ll":
+            return self.dataStructure.traverse(visit)
+        elif self.type == "23":
+            return self.dataStructure.traverse(visit)
+        elif self.type == "234":
+            return self.dataStructure.traverse(visit)
+        elif self.type == "rb":
+            return self.dataStructure.traverse(visit)
+        elif self.type == "hlin":
+            return self.dataStructure.traverse(visit)
+        elif self.type == "hquad":
+            return self.dataStructure.traverse(visit)
+        elif self.type == "hsep":
+            return self.dataStructure.traverse(visit)
+        elif self.type == "heap":
+            return self.dataStructure.traverse(visit)
+
 
 bob = Dubbelgelinktelijst.createLinkedChain()
 bob.insert(Dubbelgelinktelijst.Node(70, 1))  # Value - key
@@ -257,4 +295,21 @@ bob2.insert(70, 1)  # Value - key
 
 bob.destroyList()
 bob2.destroy()
+
+
+bob3 = TabelWrapper("cl")
+bob3.insert("tien", 10)
+bob3.insert("twee", 2)
+bob3.insert("vier", 4)
+
+# bob3.traverse(print)
+
+iterator = iter(bob3)
+print(next(iterator)[0])
+print(next(iterator)[0])
+print(next(iterator)[0])
+print()
+
+for root in bob3:
+    print(root[0])
 pass

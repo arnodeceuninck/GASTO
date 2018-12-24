@@ -5,7 +5,20 @@ class Heap:
     def __init__(self):
         self.top = None
         self.createHeap()
-        
+
+    def __iter__(self):
+        self.index = 0
+        return self
+
+    def __next__(self):
+        size = self.size()
+        if size > self.index:  # Of self.index-1?
+            x = self.top.getIndex(self.index)
+            self.index += 1
+            return (x[0].key, x[0].value)
+        else:
+            raise StopIteration
+
     def createHeap(self):
         self.top = HeapNode()
         
@@ -190,6 +203,22 @@ class HeapNode:
             lastItem.parent.right_tree = None
         lastItem.destroy()
         self.trickleDown()
+
+    def getIndex(self, index):
+        if index == 0:
+            return (self.root, index)
+        index -= 1
+        if self.left_tree is not None:
+            returned = self.left_tree.getIndex(index)
+            index = returned[1]
+            if returned[0] != None:
+                return returned
+        if self.right_tree is not None:
+            returned = self.right_tree.getIndex(index)
+            index = returned[1]
+            if returned[0] != None:
+                return returned
+        return (None, index)
 
 def createHeap():
     return Heap()

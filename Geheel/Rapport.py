@@ -1,4 +1,5 @@
 class Rapport:
+    # TODO: html bestanden laten genereren met de input
     def __init__(self, list, Zoeksleutel):
         self.list = list
         self.Zoeksleutel = Zoeksleutel

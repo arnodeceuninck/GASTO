@@ -171,7 +171,7 @@ class system:
         for i in range(len(toets.verzamelingVanPunten)-1, -1, -1):
             self.deletePunt(toets.verzamelingVanPunten[i].getID())
             del toets.verzamelingVanPunten[i]
-        #TODO: Als het een cl is dan is dit het speciaal geval, controleren hoe te werk gaan bij andere datastructuren
+        #TODO: Als het een cl is dan is dit het speciaal geval, controleren hoe te werk gaan bij andere datastructuren # Hoezo een speciaal geval?
         self.toetsen.delete(self.toetsen.dataStructure.findIndexValue(naam))
 
     def retrievePunt(self, key):

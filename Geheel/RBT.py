@@ -8,6 +8,19 @@ class RoodZwartBoom:
         self.root = None # Alle waarden moeten eerst in de __init__ voorkomen
         self.createRBT()
 
+    def __iter__(self):
+        self.index = 0
+        return self
+
+    def __next__(self):
+        size = self.size()
+        if size > self.index: # Of self.index-1?
+            x = self.root.getIndex(self.index)
+            self.index += 1
+            return (x[0].key, x[0].value)
+        else:
+            raise StopIteration
+
     def createRBT(self):
         # Stelt alle waarden in op de default-waarden
         self.root = RBTNode()
@@ -60,6 +73,14 @@ class RoodZwartBoom:
     def getRoot(self):
         # Returnt het RBTItem dat in de top van de RZB zit
         return self.root
+
+    def traverse(self, visit):
+        return self.root.inorderTraverse(visit)
+
+    def size(self):
+        if self.root == None:
+            return 0
+        return self.root.size()
 
 class RBTNode:
 
@@ -637,23 +658,39 @@ class RBTNode:
     def inorderTraverse(self, visit):
         if self.left_tree is not None:
             self.left_tree.inorderTraverse(visit)
-        visit(self) # Todo: test if works
+        visit(self.root.value) # Todo: test if works
         if self.right_tree is not None:
-            self.right_tree.inorderTravers(visit)
+            self.right_tree.inorderTraverse(visit)
 
     def preorderTraverse(self, visit):
-        visit(self)
+        visit(self.root.value)
         if self.left_tree is not None:
             self.left_tree.inorderTraverse(visit)
         if self.right_tree is not None:
-            self.right_tree.inorderTravers(visit)
+            self.right_tree.inorderTraverse(visit)
+
+    def getIndex(self, index):
+        if index == 0:
+            return (self.root, index)
+        index -= 1
+        if self.left_tree is not None:
+            returned = self.left_tree.getIndex(index)
+            index = returned[1]
+            if returned[0] != None:
+                return returned
+        if self.right_tree is not None:
+            returned = self.right_tree.getIndex(index)
+            index = returned[1]
+            if returned[0] != None:
+                return returned
+        return (None, index)
 
     def postorderTraverse(self, visit):
         if self.left_tree is not None:
             self.left_tree.inorderTraverse(visit)
         if self.right_tree is not None:
-            self.right_tree.inorderTravers(visit)
-        visit(self)
+            self.right_tree.inorderTraverse(visit)
+        visit(self.root.value)
 
     def size(self):
         size = 0

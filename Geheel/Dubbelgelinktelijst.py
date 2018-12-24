@@ -11,6 +11,17 @@ class DGL:
         self.start = self.dummy
         self.dummy.back = self.start
 
+    def __iter__(self):
+        self.current = self.dummy
+        return self
+
+    def __next__(self):
+        if self.current.next is None:
+            raise StopIteration
+        else:
+            self.current = self.current.next
+            return (self.current.key, self.current.value)
+
     def isEmpty(self):
         if self.dummy.next is None:
             return True
