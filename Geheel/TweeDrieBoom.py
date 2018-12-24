@@ -523,7 +523,12 @@ class TweeDrieBoom:
                 return returned
         return (None, index)
 
-    def size(self): #todo check
+    def size(self):
+        if len(self.root) == 0:
+            return 0
+        return self.size()
+
+    def Size(self): #todo check
         size = 0
         size += len(self.root)
         if self.childrenLeft != None:
