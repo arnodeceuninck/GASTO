@@ -11,6 +11,18 @@ class BinarySearchTree:
         self.left = left_tree
         self.right = right_tree
 
+    def __iter__(self):
+        self.index = 0
+        return self
+
+    def __next__(self):
+        size = self.size()
+        if size > self.index: # Of self.index-1?
+            x = self.root.getIndex(self.index)
+            self.index += 1
+            return (x[0].key, x[0].value)
+        else:
+            raise StopIteration
     def createSearchTree(self):
         self.__init__(None, None, None)
 
@@ -125,27 +137,56 @@ class BinarySearchTree:
             if self.right != None:
                 self.right.deleteEmpty()
 
-    def inorderTraverse(self):
+    def inorderTraverse(self, visit):   #todo check
         """
 
         """
-        if (not self.isEmpty()):
-            if self.left != None:
-                self.left.preorderTraverse()
-            print(self.root.item)
-            if self.right != None:
-                self.right.preorderTraverse()
+        if self.left is not None:
+            self.left.inorderTraverse(visit)
+        visit(self.root.value) # Todo: test if works
+        if self.right is not None:
+            self.right.inorderTraverse(visit)
 
-    def inorderTraverse(self):
-        """
+        # if (not self.isEmpty()):
+        #     if self.left != None:
+        #         self.left.preorderTraverse()
+        #     print(self.root.item)
+        #     if self.right != None:
+        #         self.right.preorderTraverse()
 
-        """
-        if (not self.isEmpty()):
-            if self.left != None:
-                self.left.preorderTraverse()
-            if self.right != None:
-                self.right.preorderTraverse()
-            print(self.root.item)
+    def traverse(self, visit):  #todo check
+        return self.root.inorderTraverse(visit)
+
+    def getIndex(self, index):  #todo check
+        if index == 0:
+            return (self.root, index)
+        index -= 1
+        if self.left is not None:
+            returned = self.left.getIndex(index)
+            index = returned[1]
+            if returned[0] != None:
+                return returned
+        if self.right is not None:
+            returned = self.right.getIndex(index)
+            index = returned[1]
+            if returned[0] != None:
+                return returned
+        return (None, index)
+
+    def size(self): #todo check
+        if self.root == None:
+            return 0
+        return self.root.size()
+
+    def Size(self): #todo check
+        size = 0
+        if(self.left != None):
+            size += self.left.size()
+        if(self.right != None):
+            size += self.right.size()
+        if(self.root != None):
+            size += 1
+        return size
 
     def print(self):
         vgraph = Graph()
