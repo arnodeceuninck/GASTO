@@ -68,8 +68,9 @@ class Hashmap():
         for i in file:
             if i[0] != "#":
                 words = i.split("- ")
-                print(words[0])
-                print(words[1])
+                # print(words[0])
+                # print(words[1])
+                self.insert(int(words[0]), int(words[1]))
             else:
                 print("Oei")
 
@@ -112,7 +113,7 @@ size = input("Hoe groot moet de hashmap worden? ")
 select = input("Wilt u linair probing (1), qwadratic probing (2) of seperate chaining (3) gebruiken? ")
 h = Hashmap(int(size), int(select))
 
-file = open("test.txt", "r")
+file = open("test2.txt", "r")
 h.lees(file)
 
 #h.insert(searchKey, item)
