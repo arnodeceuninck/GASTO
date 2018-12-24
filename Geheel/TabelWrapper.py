@@ -223,13 +223,13 @@ class TabelWrapper:
         elif self.type == "rb":
             pass  # Not implemented
             return False
-            return self.dataStructure.getLength()
+            # return self.dataStructure.getLength()
         elif self.type == "hlin" or self.type == "hquad" or self.type == "hsep":
             return self.dataStructure.getLength()
         elif self.type == "heap":
             return self.dataStructure.size()
 
-    def print(self):    #todo eigen functie namen aanpassen
+    def Print(self):    #todo eigen functie namen aanpassen
         if not self.type_assigned:
             return False
         elif self.type == "stack":
