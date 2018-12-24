@@ -13,8 +13,6 @@ import Heap
 # GLOBAL VARIABLES
 supportedDataStructures = ["stack", "queue", "bst", "cl", "ll", "23", "234", "rb", "hlin", "hquad", "hsep", "heap"]
 
-# TODO: traversals
-
 class TabelWrapper:
     def __init__(self, structure_type):  # structure_type is een string
         self.type = None
@@ -274,7 +272,7 @@ class TabelWrapper:
         elif self.type == "ll":
             return self.dataStructure.traverse(visit, key)
         elif self.type == "23":
-            return self.dataStructure.traverse(visit, key)
+            return self.dataStructure.traverse(visit, key)  #InorderTraverse
         elif self.type == "234":
             return self.dataStructure.traverse(visit, key)
         elif self.type == "rb":
