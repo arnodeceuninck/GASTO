@@ -64,9 +64,14 @@ class Hashmap():
                 print("Op plaats %s staat niets" %i)
             i += 1
 
-    # def deleteHashmap(self):
-    #     for i in range(self.tableSize + 1):
-    #         delete(i)
+    def lees(self, file):
+        for i in file:
+            if i[0] != "#":
+                words = i.split("- ")
+                print(words[0])
+                print(words[1])
+            else:
+                print("Oei")
 
     def delete(self, key):
         self.count -= 1
@@ -106,6 +111,10 @@ class Hashmap():
 size = input("Hoe groot moet de hashmap worden? ")
 select = input("Wilt u linair probing (1), qwadratic probing (2) of seperate chaining (3) gebruiken? ")
 h = Hashmap(int(size), int(select))
+
+file = open("test.txt", "r")
+h.lees(file)
+
 #h.insert(searchKey, item)
 ### (1) ###
 # h.insert(66, 0)
@@ -172,20 +181,20 @@ h = Hashmap(int(size), int(select))
 # h.delete(66)
 
 ### (3 1 lange ketting) ###
-h.insert(71, 0)
-h.insert(5, 8)
-h.insert(49, 5)
-h.insert(71, 10)
-h.insert(27, 5)
-h.insert(5, 6)
-h.insert(18, 7)
-h.insert(71, 6)
-# h.delete(5)
-h.insert(5, 5)
-h.insert(5, 5)
-h.insert(12, 1)
-h.retrieve(18)
-# h.delete(18)
+# h.insert(71, 0)
+# h.insert(5, 8)
+# h.insert(49, 5)
+# h.insert(71, 10)
+# h.insert(27, 5)
+# h.insert(5, 6)
+# h.insert(18, 7)
+# h.insert(71, 6)
+# # h.delete(5)
+# h.insert(5, 5)
+# h.insert(5, 5)
+# h.insert(12, 1)
+# h.retrieve(18)
+# # h.delete(18)
 
 h.show()
 # h.deleteHashmap()
