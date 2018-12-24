@@ -488,9 +488,9 @@ class TweeDrieBoom():
     def getIndex(self, index):  #todo check
         if index == 0:
             return (self.root[0], index)
-        if index == 1 and len(self.root) >= 2:
+        if index == 1 and len(self.root) >= 2:  #voor wa groter of gelijk aan 2? een node kan maximum 2 elementen bevatten
             return (self.root[1], index-1)
-        if index == 2 and len(self.root) >= 3:
+        if index == 2 and len(self.root) >= 3:  #zelfde geval
             return (self.root[2], index-2)
         index -= 1
         if self.childrenLeft != None:
