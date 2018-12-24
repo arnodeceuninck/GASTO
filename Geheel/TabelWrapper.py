@@ -260,33 +260,33 @@ class TabelWrapper:
             return self.dataStructure.print("heap.dot")
 
     # visit is een functie die telkens toegepast wordt op de root value
-    def traverse(self, visit):    #todo eigen functie namen aanpassen
+    def traverse(self, visit, key=None):    #todo eigen functie namen aanpassen
         if not self.type_assigned:
             return False
         elif self.type == "stack":
-            return self.dataStructure.traverse(visit)
+            return self.dataStructure.traverse(visit, key)
         elif self.type == "queue":
-            return self.dataStructure.traverse(visit)
+            return self.dataStructure.traverse(visit, key)
         elif self.type == "bst":
-            return self.dataStructure.traverse(visit)
+            return self.dataStructure.traverse(visit, key)
         elif self.type == "cl":
-            return self.dataStructure.traverse(visit)
+            return self.dataStructure.traverse(visit, key)
         elif self.type == "ll":
-            return self.dataStructure.traverse(visit)
+            return self.dataStructure.traverse(visit, key)
         elif self.type == "23":
-            return self.dataStructure.traverse(visit)
+            return self.dataStructure.traverse(visit, key)
         elif self.type == "234":
-            return self.dataStructure.traverse(visit)
+            return self.dataStructure.traverse(visit, key)
         elif self.type == "rb":
-            return self.dataStructure.traverse(visit)
+            return self.dataStructure.traverse(visit, key)
         elif self.type == "hlin":
-            return self.dataStructure.traverse(visit)
+            return self.dataStructure.traverse(visit, key)
         elif self.type == "hquad":
-            return self.dataStructure.traverse(visit)
+            return self.dataStructure.traverse(visit, key)
         elif self.type == "hsep":
-            return self.dataStructure.traverse(visit)
+            return self.dataStructure.traverse(visit, key)
         elif self.type == "heap":
-            return self.dataStructure.traverse(visit)
+            return self.dataStructure.traverse(visit, key)
 
 
 bob = Dubbelgelinktelijst.createLinkedChain()

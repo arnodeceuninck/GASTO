@@ -140,9 +140,9 @@ class system:
                     nextnode = node.next
                 node = nextnode
         elif self.punten.type == "234":
-            self.punten.dataStructure.traverse(self.collector, key)
+            self.punten.traverse(self.collector, key)
         elif self.punten.type == "23":
-            self.punten.dataStructure.traverse(self.collector, key)
+            self.punten.traverse(self.collector, key)
 
         #alle punten uit de testen verwijderen
         if self.toetsen.type == "cl":
@@ -185,7 +185,7 @@ class system:
         #TODO: veel efficienter maken
         if item.getStamboekNummer() == key:
             self.deletePunt(item.getID())
-            self.punten.dataStructure.traverse(self.collector, key)
+            self.punten.traverse(self.collector, key)
             return True
         else:
             return False
