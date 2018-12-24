@@ -19,7 +19,7 @@ class system:
         # TODO: De klassen toets, rapport, puntenlijst moeten ontworpen zoals de ADT tabel.
         #  Deze klassen zijn dus een verzameling van als ik het goed begrijp
         # TODO: Fix error: alle elementen met zelfde datastructuur komen samen in eenzelfde datastructuur
-        self.punten = TabelWrapper("ll")  # dit is de create # puntenlijst nog nodig om punten aan te passen
+        self.punten = TabelWrapper("234")  # dit is de create # puntenlijst nog nodig om punten aan te passen
         self.toetsen = TabelWrapper("cl")  # TODO: verander dit terug naar cl
         self.puntenlijst = TabelWrapper("234")  # TODO: verander terug naar bst als er een bst in Geheel zit
         # self.puntenlijst = TabelWrapper("bst")  # Is dus eigenlijk een verzameling van alle puntenlijsten
@@ -137,9 +137,10 @@ class system:
                 else:
                     nextnode = node.next
                 node = nextnode
-        #elif self.punten.type == "234":
-            #if self.punten.dataStructure.preorderTraversal(self.getStamboekNummer):
-
+        elif self.punten.type == "234":
+            self.punten.dataStructure.traverse(self.collector, key)
+        elif self.punten.type == "23":
+            pass
 
         #alle punten uit de testen verwijderen
         if self.toetsen.type == "cl":
@@ -171,7 +172,7 @@ class system:
         for i in range(len(toets.verzamelingVanPunten)-1, -1, -1):
             self.deletePunt(toets.verzamelingVanPunten[i].getID())
             del toets.verzamelingVanPunten[i]
-        #TODO: Als het een cl is dan is dit het speciaal geval, controleren hoe te werk gaan bij andere datastructuren # Hoezo een speciaal geval?
+        #TODO: Als het een cl is dan is dit het speciaal geval, controleren hoe te werk gaan bij andere datastructuren # Hoezo een speciaal geval? # Omda ge eerst de index moet vinden en bij de andere niet
         self.toetsen.delete(self.toetsen.dataStructure.findIndexValue(naam))
 
     def retrievePunt(self, key):
@@ -181,6 +182,16 @@ class system:
     def removeAllPunten(self):
         # Verwijdert alle punten in het systeem (in theorie nooit nodig)
         self.punten.destroy()
+
+    def collector(self, item, key):
+        #TODO: veel efficienter maken
+        if item.getStamboekNummer() == key:
+            self.deletePunt(item.getID())
+            self.punten.dataStructure.traverse(self.collector, key)
+            return True
+        else:
+            return False
+
 
     # def addToets(self):
     #     # Maakt toetsen aan bij puntenlijst 'ID'

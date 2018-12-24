@@ -728,21 +728,55 @@ class T234:
 
         return self.destroyNode()
 
-    def preorderTraversal(self, visit):
-        if self.item1 is not None:
-            visit(self.item1)
-        if self.left is not None:
-            self.left.preorderTraversal(visit)
-        if self.mleft is not None:
-            self.mleft.preorderTraversal(visit)
-        if self.item2 is not None:
-            visit(self.item2)
-        if self.mright is not None:
-            self.mright.preorderTraversal(visit)
-        if self.item3 is not None:
-            visit(self.item3)
-        if self.right is not None:
-            self.right.preoderTraversal(visit)
+    def traverse(self, visit, key=None):
+        self.inorderTraversal(visit, key)
 
+    def inorderTraversal(self, visit, key=None):
+        if self.left is not None:
+            self.left.inorderTraversal(visit, key)
+        if self.item1 is not None:
+            visit(self.item1.item, key)
+        if self.mleft is not None:
+            self.mleft.inorderTraversal(visit, key)
+        if self.item2 is not None:
+            visit(self.item2.item, key)
+        if self.mright is not None:
+            self.mright.inorderTraversal(visit, key)
+        if self.item3 is not None:
+            visit(self.item3.item, key)
+        if self.right is not None:
+            self.right.inorderTraversal(visit, key)
+
+    def preorderTraversal(self, visit, key=None):
+        if self.item1 is not None:
+            visit(self.item1.item, key)
+        if self.left is not None:
+            self.left.preorderTraversal(visit, key)
+        if self.mleft is not None:
+            self.mleft.preorderTraversal(visit, key)
+        if self.item2 is not None:
+            visit(self.item2.item, key)
+        if self.mright is not None:
+            self.mright.preorderTraversal(visit, key)
+        if self.item3 is not None:
+            visit(self.item3.item, key)
+        if self.right is not None:
+            self.right.preoderTraversal(visit, key)
+
+    def postorderTraversal(self, visit, key=None):
+        if self.left is not None:
+            self.left.postorderTraversal(visit, key)
+        if self.mleft is not None:
+            self.mleft.postorderTraversal(visit, key)
+        if self.mright is not None:
+            self.mright.postorderTraversal(visit, key)
+        if self.right is not None:
+            self.right.postorderTraversal(visit, key)
+        if self.item3 is not None:
+            visit(self.item3.item, key)
+        if self.item2 is not None:
+            visit(self.item2.item, key)
+        if self.item1 is not None:
+            visit(self.item1.item, key)
 def createSearchTree():
     return T234(None, None, None, None, None, None, None, None)
