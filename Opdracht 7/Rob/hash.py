@@ -63,16 +63,7 @@ class Hashmap():
             else:
                 print("Op plaats %s staat niets" %i)
             i += 1
-
-    def lees(self, file):
-        for i in file:
-            if i[0] != "#":
-                words = i.split("- ")
-                # print(words[0])
-                # print(words[1])
-                self.insert(int(words[0]), int(words[1]))
-            else:
-                print("Oei")
+        print("\n")
 
     def delete(self, key):
         self.count -= 1
@@ -108,13 +99,33 @@ class Hashmap():
         else:
             print("Je kan maximaal %s items inserten! Item (%s, %s) is niet geinsert geweest." %(self.tableSize, key, item))
 
+def lees(file, size):
+    for i in file:
+        if i[0] != "#":
+            zoek_type = i.split("=")
+            if zoek_type[0] == "type":
+                welke = zoek_type[1].split(" ")
+                if welke[0] == "hash":
+                    select = welke[1][:-1]
+                    h = Hashmap(int(size), int(select))
+                    h.type = int(select)
+            else:
+                words = i.split(" ")
+                if words[0] == "insert":
+                    h.insert(int(words[1]), int(words[2]))
+                if words[0] == "print\n":
+                    h.show()
+                if words[0] == "delete":
+                    h.delete(int(words[1]))
 
-size = input("Hoe groot moet de hashmap worden? ")
-select = input("Wilt u linair probing (1), qwadratic probing (2) of seperate chaining (3) gebruiken? ")
-h = Hashmap(int(size), int(select))
 
 file = open("test2.txt", "r")
-h.lees(file)
+size = input("Hoe groot moet de hashmap worden? ")
+lees(file, size)
+#select = input("Wilt u linair probing (1), qwadratic probing (2) of seperate chaining (3) gebruiken? ")
+# h = Hashmap(int(size), int(select))
+
+# h.lees(file)
 
 #h.insert(searchKey, item)
 ### (1) ###
@@ -197,6 +208,6 @@ h.lees(file)
 # h.retrieve(18)
 # # h.delete(18)
 
-h.show()
+# h.show()
 # h.deleteHashmap()
 # input()
