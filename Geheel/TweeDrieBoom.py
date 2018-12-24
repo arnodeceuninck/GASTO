@@ -1,4 +1,4 @@
-class TweeDrieBoom():
+class TweeDrieBoom:
     def __init__(self):
         self.root = []
         self.childrenLeft = None
@@ -6,9 +6,11 @@ class TweeDrieBoom():
         self.childrenMiddle = None
         self.childrenMiddle2 = None
         self.parent = None
+
     def __iter__(self): #todo check
         self.index = 0
         return self
+
     def __next__(self): #todo check
         size = self.size()
         if size > self.index:
@@ -17,8 +19,10 @@ class TweeDrieBoom():
             return (x[0].key, x[0].value)
         else:
             raise StopIteration
+
     def create23T(self):
         self.__init__()
+
     def destroy23T(self):
         if self.childrenLeft == None:
             if self.childrenMiddle != None:
@@ -40,9 +44,11 @@ class TweeDrieBoom():
                     return self.parent.destroy23T()
         else:
             return self.childrenLeft.destroy23T()
+
     def isEmpty(self):
         if len(self.root) == 0 and self.childrenLeft == self.childrenMiddle == self.childrenRight == self.parent == None:
             return True
+
     def insertItem(self, TreeItem):
         if len(self.root) == 0 and self.parent == None:
             self.root.append(TreeItem)
@@ -78,6 +84,7 @@ class TweeDrieBoom():
                 else:
                     self.root.insert(0, TreeItem)
                     self.split()
+
     def split(self):
         if self.parent == None:
             NodeLeft = TweeDrieBoom()
@@ -215,6 +222,7 @@ class TweeDrieBoom():
                         NodeMiddle.parent = self.parent
                         self.parent.childrenMiddle = NodeMiddle
                         self.parent.split()
+
     def delete(self, key):
         check = self.zoek(key, False)   #checkt of het element in de 23T zit
         if check[0] == False:
@@ -254,6 +262,7 @@ class TweeDrieBoom():
                         self.childrenMiddle.delete(key)
                     else:
                         self.childrenRight.delete(key)
+
     def fix(self):
         if len(self.root) == 0:
             if self.parent == None:
@@ -424,6 +433,7 @@ class TweeDrieBoom():
                     self.parent.fix()
         else:
             pass
+
     def inorder_successor(self, TreeItem):
         if len(self.root) == 1:
             successor = self.childrenRight.LeftElement()
@@ -435,11 +445,13 @@ class TweeDrieBoom():
             else:
                 successor = self.childrenRight.LeftElement()
                 return successor
+
     def LeftElement(self):
         node = self
         while(node.childrenLeft != None):
             node = node.childrenLeft
         return node
+
     def zoek(self, key, gevonden):
         if len(self.root) == 1 and self.childrenLeft == self.childrenRight == None and self.root[0].key != key:
             result = (gevonden, None)
@@ -472,8 +484,10 @@ class TweeDrieBoom():
             return False
         else:
             return result
+
     def traverse(self, visit):
         return self.inorderTravers(visit)
+
     def inorderTravers(self, visit):    #todo check
         if self.childrenLeft != None:
             self.childrenLeft.inorderTraverse(visit)
@@ -485,13 +499,16 @@ class TweeDrieBoom():
             visit(self.root[0].key)
         if self.childrenRight != None:
             self.childrenRight.inorderTraverse(visit)
-    def getIndex(self, index):  #todo check
+
+    def getIndex(self, index):  #todo recheck
         if index == 0:
-            return (self.root[0], index)
-        if index == 1 and len(self.root) >= 2:  #voor wa groter of gelijk aan 2? een node kan maximum 2 elementen bevatten
-            return (self.root[1], index-1)
-        if index == 2 and len(self.root) >= 3:  #zelfde geval
-            return (self.root[2], index-2)
+            return (None, index)
+        if index == 1 and len(self.root) == 1:
+            return (self.root[0], index-1)
+        if index == 1 and len(self.root) == 2:
+            return (self.root[0], index-1)
+        if index == 2 and len(self.root) == 2:
+            return (self.root[1], index-2)
         index -= 1
         if self.childrenLeft != None:
             returned = self.childrenLeft.getIndex(index)
@@ -509,6 +526,7 @@ class TweeDrieBoom():
             if returned[0] != None:
                 return returned
         return (None, index)
+
     def size(self): #todo check
         size = 0
         size += len(self.root)
@@ -519,12 +537,12 @@ class TweeDrieBoom():
         if self.childrenRight != None:
             size += self.childrenRight.size()
         return size
+
+
 class TreeItem(object):
     def __init__(self, value, key):
         self.key = key
         self.value = value
-
-
 
 
 def dot(current, parent, file):
