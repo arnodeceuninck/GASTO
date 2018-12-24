@@ -501,13 +501,9 @@ class TweeDrieBoom:
             self.childrenRight.inorderTraverse(visit)
 
     def getIndex(self, index):  #todo recheck
-        if index == 0:
-            return (None, index)
-        if index == 1 and len(self.root) == 1:
+        if index == 0 and len(self.root) >= 1:
             return (self.root[0], index-1)
         if index == 1 and len(self.root) == 2:
-            return (self.root[0], index-1)
-        if index == 2 and len(self.root) == 2:
             return (self.root[1], index-2)
         index -= 1
         if self.childrenLeft != None:
