@@ -7,6 +7,8 @@ import Toets
 import ADTQueue
 import Puntenlijst
 
+import HtmlMaker
+
 # Hier geen ADT Tabellen importeren! Dit gebeurt via TabelWrapper
 from TabelWrapper import *
 
@@ -239,3 +241,27 @@ class system:
 
     def retrieveVak(self, afkorting):
         return self.vakken.retrieve(afkorting)
+
+    def buildRapport(self):
+
+        # TODO: Maak hier nu een echt rapport van
+
+        rapport = HtmlMaker.HtmlRapport("Rapport.html")
+        rapport.addStructure(HtmlMaker.HtmlTitle("Rapport: eigenlijk gewoon een overzicht van alle punten"))
+
+        puntentabel = []
+        puntentabel.append(["ID", "Student", "Toets", "Score", "Maxscore", "Timestamp"])
+        for punt in self.punten:
+            punt_value = punt[1]
+            puntentabel.append([punt_value.id,
+                                punt_value.stamboomnummer,
+                                punt_value.name,
+                                punt_value.waarde,
+                                self.toetsen.retrieve(punt_value.name).maximum,
+                                punt_value.timestamp])
+
+        rapport.addStructure(HtmlMaker.HtmlTable(puntentabel))
+
+        rapport.buildfile()
+
+
