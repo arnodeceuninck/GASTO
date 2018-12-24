@@ -177,10 +177,6 @@ class system:
         #TODO: Als het een cl is dan is dit het speciaal geval, controleren hoe te werk gaan bij andere datastructuren # Hoezo een speciaal geval? # Omda ge eerst de index moet vinden en bij de andere niet
         self.toetsen.delete(self.toetsen.dataStructure.findIndexValue(naam))
 
-    def retrievePunt(self, key):
-        # Vraag een specifiek punt op
-        return self.punten.retrieve(key)
-
     def removeAllPunten(self):
         # Verwijdert alle punten in het systeem (in theorie nooit nodig)
         self.punten.destroy()
@@ -221,6 +217,10 @@ class system:
     #     self.toetsen.insert(Toets.createToets(ID, input("Maximum: "), puntenlist),  # Value
     #                         ID)  # Key
 
+    def retrievePunt(self, key):
+        # Vraag een specifiek punt op
+        return self.punten.retrieve(key)
+
     def retrieveToets(self, naam_toets):
         return self.toetsen.retrieve(naam_toets)
 
@@ -236,7 +236,7 @@ class system:
     def retrieveLeeraar(self, afkorting):
         return self.leraars.retrieve(afkorting)
 
-    def retrieveKlas(self, naam):
+    def retrieveKlas(self, naam):   #waarom 2 keer retrieveKlas??
         return naam
 
     def retrieveVak(self, afkorting):
@@ -263,5 +263,26 @@ class system:
         rapport.addStructure(HtmlMaker.HtmlTable(puntentabel))
 
         rapport.buildfile()
+
+    # def printPunt(self):    #todo moet dit want want een dot file maken van 1 waarde is toch nutteloos?
+    #     return self.punten.Print()
+
+    def printToets(self):
+        return self.toetsen.Print()
+
+    def printKlas(self):
+        return self.klassen.Print()
+
+    def printPuntenlijst(self):
+        return self.puntenlijst.Print()
+
+    def printLeerling(self):
+        return self.leerlingen.Print()
+
+    def printLeeraar(self):
+        return self.leraars.Print()
+
+    def printVak(self):
+        return self.vakken.Print()
 
 
