@@ -59,7 +59,7 @@ class TabelWrapper:
         elif self.type == "ll":
             self.dataStructure = Dubbelgelinktelijst.createLinkedChain()
         elif self.type == "23":
-            self.dataStructure = Stack.create23T()
+            self.dataStructure = TweeDrieBoom.TweeDrieBoom()
         elif self.type == "234":
             self.dataStructure = T234.createSearchTree()
         elif self.type == "rb":
@@ -297,7 +297,7 @@ bob.destroyList()
 bob2.destroy()
 
 
-bob3 = TabelWrapper("cl")
+bob3 = TabelWrapper("23")
 bob3.insert("tien", 10)
 bob3.insert("twee", 2)
 bob3.insert("vier", 4)

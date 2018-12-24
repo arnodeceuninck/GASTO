@@ -487,26 +487,31 @@ class TweeDrieBoom():
             self.childrenRight.inorderTraverse(visit)
     def getIndex(self, index):  #todo check
         if index == 0:
-            return (self.root, index)
+            return (self.root[0], index)
+        if index == 1 and len(self.root) >= 2:
+            return (self.root[1], index-1)
+        if index == 2 and len(self.root) >= 3:
+            return (self.root[2], index-2)
         index -= 1
         if self.childrenLeft != None:
             returned = self.childrenLeft.getIndex(index)
             index = returned[1]
-            if len(returned[0]) != None:
+            if returned[0] != None:
                 return returned
         if self.childrenMiddle != None:
             returned = self.childrenMiddle.getIndex(index)
             index = returned[1]
-            if len(returned[0]) != None:
+            if returned[0] != None:
                 return returned
         if self.childrenRight != None:
             returned = self.childrenRight.getIndex(index)
             index = returned[1]
-            if len(returned[0]) != None:
+            if returned[0] != None:
                 return returned
         return (None, index)
     def size(self): #todo check
         size = 0
+        size += len(self.root)
         if self.childrenLeft != None:
             size += self.childrenLeft.size()
         if self.childrenMiddle != None:
