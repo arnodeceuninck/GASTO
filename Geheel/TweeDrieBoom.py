@@ -21,7 +21,7 @@ class TweeDrieBoom:
             raise StopIteration
 
     def create23T(self):
-        self.__init__()
+        return TweeDrieBoom()
 
     def destroy23T(self):
         if self.childrenLeft == None:
@@ -596,8 +596,3 @@ def write_dot(file, tree):
     global globalCounter
     dot(tree, tree.parent, dotFile)
     dotFile.write("}")
-
-
-
-
-

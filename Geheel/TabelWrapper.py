@@ -1,7 +1,7 @@
 from KeyValueItem import *
 import Stack
 import ADTQueue
-# import bst
+import BinarySearchTree
 import Dubbelgelinktelijst
 import ADTcircularLinkedChain
 import TweeDrieBoom
@@ -53,13 +53,13 @@ class TabelWrapper:
         elif self.type == "queue":
             self.dataStructure = ADTQueue.createQueue()
         elif self.type == "bst":
-            self.dataStructure = Stack.createStack()
+            self.dataStructure = BinarySearchTree.createSearchTree()
         elif self.type == "cl":
             self.dataStructure = ADTcircularLinkedChain.circular_chain()
         elif self.type == "ll":
             self.dataStructure = Dubbelgelinktelijst.createLinkedChain()
         elif self.type == "23":
-            self.dataStructure = TweeDrieBoom.TweeDrieBoom()
+            self.dataStructure = TweeDrieBoom.create23T()
         elif self.type == "234":
             self.dataStructure = T234.createSearchTree()
         elif self.type == "rb":
