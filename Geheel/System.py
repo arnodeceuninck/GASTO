@@ -186,6 +186,7 @@ class system:
         if item.getStamboekNummer() == key:
             self.deletePunt(item.getID())
             self.punten.traverse(self.collector, key)
+            self.punten.Print()
             return True
         else:
             return False

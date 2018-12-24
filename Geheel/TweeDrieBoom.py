@@ -20,9 +20,6 @@ class TweeDrieBoom:
         else:
             raise StopIteration
 
-    def create23T(self):
-        return TweeDrieBoom()
-
     def destroy23T(self):
         if self.childrenLeft == None:
             if self.childrenMiddle != None:
@@ -486,17 +483,17 @@ class TweeDrieBoom:
             return result
 
     def traverse(self, visit, key=None):
-        return self.inorderTravers(visit, key)
+        return self.inorderTraverse(visit, key)
 
-    def inorderTravers(self, visit, key=None):    #todo check
+    def inorderTraverse(self, visit, key=None):    #todo check
         if self.childrenLeft != None:
             self.childrenLeft.inorderTraverse(visit, key)
         if self.childrenMiddle != None:
-            visit(self.root[0].key, key)
+            visit(self.root[0].value, key)
             self.childrenMiddle.inorderTraverse(visit, key)
-            visit(self.root[1].key, key)
+            visit(self.root[1].value, key)
         else:
-            visit(self.root[0].key, key)
+            visit(self.root[0].value, key)
         if self.childrenRight != None:
             self.childrenRight.inorderTraverse(visit, key)
 
@@ -601,3 +598,7 @@ def write_dot(file, tree):
     global globalCounter
     dot(tree, tree.parent, dotFile)
     dotFile.write("}")
+
+
+def create23T():
+    return TweeDrieBoom()
