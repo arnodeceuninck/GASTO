@@ -7,6 +7,8 @@ import Toets
 import ADTQueue
 import Puntenlijst
 
+import datetime
+
 import HtmlMaker
 
 # Hier geen ADT Tabellen importeren! Dit gebeurt via TabelWrapper
@@ -53,7 +55,9 @@ class system:
         return self.leerlingen.insert(Leerling.Leerling(naam, voornaam, klas, klasnummer, studentennummer),
                                           studentennummer)
 
-    def addPunt(self, ID, stamboeknummer_leerling, naam_toets, Waarde, Timestamp):
+    def addPunt(self, stamboeknummer_leerling, naam_toets, Waarde, Leerkracht):
+        # TODO: controleren of leerkracht bevoegd is om aan deze toets een punt toe te voegen
+        ID = self.punten.getLength()
         # maakt een nieuw punt aan met een uniek ID, Stamboomnummer, Naam, Waarde en Timestamp
         toets = self.toetsen.retrieve(naam_toets)
         if toets is None:
@@ -64,7 +68,7 @@ class system:
             print("ERROR: Het studentennummer " + stamboeknummer_leerling + " werd niet teruggevonden in het systeem. "
                   "Gelieve deze eerst aan te maken.")
             return False
-        punt = Punt.createPunt(ID, stamboeknummer_leerling, naam_toets, Waarde, Timestamp)
+        punt = Punt.createPunt(ID, stamboeknummer_leerling, naam_toets, Waarde, datetime.datetime.now())  # https://stackoverflow.com/questions/415511/how-to-get-the-current-time-in-python
         self.punten.insert(punt, ID)  # Key
         #TODO: de retrieve van een LL geeft een tuple terug ma is da echt nodig?
         if self.toetsen.type == "ll":
@@ -321,13 +325,15 @@ class system:
     # def printPunt(self):    #todo moet dit want want een dot file maken van 1 waarde is toch nutteloos?
     #     return self.punten.Print()
 
-    def buildRapport(self, samengestelde_zoeksleutel):  # Bv. voor "M2"
+    def buildRapport(self, samengestelde_zoeksleutel, klas):  # Bv. voor "M2"
         # TODO: fix nested for loops
         punten_per_leerling = []  # structuur: [[jan, [wiskunde, 7, 3, 5]]] # 7u, 3/5
         rapport = self.rapporten.retrieve(samengestelde_zoeksleutel)[1]
         for puntenlijst in rapport.getList():
             leerkrachten = puntenlijst.namecodes
             klas = puntenlijst.klas
+            if klas != klas:
+                continue
             aantal_uren = puntenlijst.uren
             vak = puntenlijst.vakcode
             for toets in puntenlijst.getToetsen():
@@ -353,9 +359,9 @@ class system:
                     if not leerlingFound:
                         punten_per_leerling.append([leerlingnr, [vak, aantal_uren, leerkrachten, int(score), int(max)]])
 
+        rapportFile = HtmlMaker.HtmlRapport(str("rapport-" + str(samengestelde_zoeksleutel) + "-" + str(klas) + ".html"))
         for leerling in punten_per_leerling:
             gegevens_leerling = self.leerlingen.retrieve(leerling[0])[1]
-            rapportFile = HtmlMaker.HtmlRapport(str("rapport_" + str(leerling[0]) + ".html"))
             klas = gegevens_leerling.getKlas()
             voornaam = gegevens_leerling.getVoornaam()
             naam = gegevens_leerling.getNaam()
@@ -373,10 +379,20 @@ class system:
                     leraren += gegevens_leeraar.getNaam() + " " + gegevens_leeraar.getAchternaam()
                     if j != len(huidig_vak[2]):
                         leraren += ", "
-                totaal = str(100*huidig_vak[3]/huidig_vak[4]) + "%"
+                totaal = 100*huidig_vak[3]/huidig_vak[4]
                 resultaten.append([naam_vak, uren_vak, leraren, totaal])
+
+            totaal_aantal_uren = 0
+            totaal_punten = 0
+            for i in range(1, len(resultaten)):
+                totaal_aantal_uren += int(resultaten[i][1])
+                totaal_punten += int(resultaten[i][3])*int(resultaten[i][1])
+                resultaten[i][3] = str(round(int(resultaten[i][3]))) + "%"
+            totaal = totaal_punten/totaal_aantal_uren
+            totaal = str(round(totaal)) + "%"
+            resultaten.append(["Totaal", "", "", totaal])
             rapportFile.addStructure(HtmlMaker.HtmlTable(resultaten))
-            rapportFile.buildfile()
+        rapportFile.buildfile()
 
     def printToets(self):
         return self.toetsen.Print()

@@ -27,17 +27,17 @@ geheel.addToets("1", "integralen", "20")
 
 geheel.addToets("2", "opstel", "5")
 
-geheel.addPunt("1", "1800001", "afgeleiden", "5", 20181223000912)  # TODO: Wat doet de afkorting van de leerkracht erbij in system.txt?
+geheel.addPunt("1800001", "afgeleiden", "5", "HOFKT")  # TODO: Wat doet de afkorting van de leerkracht erbij in system.txt?
                                                                    #  moet dit mee opgeslaan worden?
                                                                    # TODO: Enkel leerkracht die dit vak geeft aan de kla mag punten toevoegen
                                                                    # Timestamp is momenteel: yyyymmddhhmmss
-geheel.addPunt("2", "1800002", "afgeleiden", "9", 20181223001024)  # TODO: timestamp = time.now()
-geheel.addPunt("3", "1800001", "integralen", "15", 20181223001024)
-geheel.addPunt("4", "1800002", "integralen", "19", 20181223001024)
-geheel.addPunt("5", "1800001", "opstel", "5", 20181223001024)
-geheel.addPunt("6", "1800002", "opstel", "2", 20181223001024)
+geheel.addPunt("1800002", "afgeleiden", "9", "HOFKT")  # TODO: timestamp = time.now()
+geheel.addPunt("1800001", "integralen", "15", "PAUWS")
+geheel.addPunt("1800002", "integralen", "19", "PAUWS")
+geheel.addPunt("1800001", "opstel", "5", "LAENE")
+geheel.addPunt("1800002", "opstel", "2", "LAENE")
 
-geheel.buildRapport("M1")
+geheel.buildRapport("M1", "6WEWI")
 
 # #### Starting #### #
 
