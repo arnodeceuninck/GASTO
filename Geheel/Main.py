@@ -37,7 +37,7 @@ geheel.addPunt("4", "1800002", "integralen", "19", 20181223001024)
 geheel.addPunt("5", "1800001", "opstel", "5", 20181223001024)
 geheel.addPunt("6", "1800002", "opstel", "2", 20181223001024)
 
-geheel.buildRapport()
+geheel.buildRapport("M1")
 
 # #### Starting #### #
 

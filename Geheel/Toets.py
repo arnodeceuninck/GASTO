@@ -33,7 +33,7 @@ class Toets:
 
     def addPunt(self, punt):
         # TODO: controleer of punt kleiner is dan maxpunten en strikt positief
-        if punt.waarde >= "0" and punt.waarde <= self.maximum:
+        if int(punt.waarde) >= 0 and int(punt.waarde) <= int(self.maximum):
             self.verzamelingVanPunten.append(punt)
             return True
         else:

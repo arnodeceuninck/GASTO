@@ -110,13 +110,13 @@ class DGL:
     def retrieve(self, key):
         node = self.dummy.next
         if node is None:
-            return False
+            return (False, None)
 
         while True:
             if node.key == key:
-                return node.value
+                return (True, node.value)
             elif node.next is None:
-                return False
+                return (False, None)
             else:
                 node = node.next
 

@@ -29,6 +29,7 @@ class system:
         self.klassen = TabelWrapper("ll")
         self.leraars = TabelWrapper("ll")
         self.leerlingen = TabelWrapper("ll")
+        self.rapporten = TabelWrapper("ll")
 
     def addVak(self, afkorting, naam):
         return self.vakken.insert(naam, afkorting)
@@ -40,7 +41,7 @@ class system:
         return self.leraars.insert(Leraar.Leraar(afkorting, naam, achternaam), afkorting)
 
     def addLeerling(self, naam, voornaam, klas, klasnummer, studentennummer):
-        if self.retrieveLeerling(studentennummer) is not False:
+        if self.leerlingen.retrieve(studentennummer)[0] is not False:
             print("De gegeven studenten nummer is al in gebruik")
             return False
         # Kijk of de klas al is aangemaakt
@@ -80,10 +81,19 @@ class system:
                 print("ERROR: De leraar " + leraar + " werd niet teruggevonden in het systeem. "
                       "Gelieve deze eerst aan te maken")
                 return False
+        puntenlijst = Puntenlijst.createPuntenLijst(ID, type, periode, leraren, vak_afkorting, klas, uren, [])
+        self.puntenlijst.insert(puntenlijst, ID)
 
-        return self.puntenlijst.insert(Puntenlijst.createPuntenLijst(ID, type, periode, namecodes, vak_afkorting,
-                                                                     klas, uren, []),
-                                       ID)  # Dit kan niet, want ID is meegegeven: Zoeksleutel is bv "M" + "3" = "M3"
+        key = str(type) + str(periode)
+        rapport = self.rapporten.retrieve(key)
+        if rapport[0] == False:
+            self.rapporten.insert(Rapport.Rapport([puntenlijst], key), key)
+        else:
+            rapport[1].addList(puntenlijst)
+            # Volgende 2 lijnen nodig indien problemen met mutable types
+            # self.rapporten.delete(key)
+            # self.rapporten.insert(rapport, key)
+        return True
 
     def addToets(self, puntenlijst_id, titel, maxscore):
         puntenlijst = self.puntenlijst.retrieve(puntenlijst_id)
@@ -243,7 +253,7 @@ class system:
     def retrieveVak(self, afkorting):
         return self.vakken.retrieve(afkorting)
 
-    def buildRapport(self):
+    def buildGradeOverview(self):
 
         # TODO: Maak hier nu een echt rapport van
 
@@ -267,6 +277,63 @@ class system:
 
     # def printPunt(self):    #todo moet dit want want een dot file maken van 1 waarde is toch nutteloos?
     #     return self.punten.Print()
+
+    def buildRapport(self, samengestelde_zoeksleutel):  # Bv. voor "M2"
+        # TODO: fix nested for loops
+        punten_per_leerling = []  # structuur: [[jan, [wiskunde, 7, 3, 5]]] # 7u, 3/5
+        rapport = self.rapporten.retrieve(samengestelde_zoeksleutel)[1]
+        for puntenlijst in rapport.getList():
+            leerkrachten = puntenlijst.namecodes
+            klas = puntenlijst.klas
+            aantal_uren = puntenlijst.uren
+            vak = puntenlijst.vakcode
+            for toets in puntenlijst.getToetsen():
+                max = toets.maximum
+                punten = toets.verzamelingVanPunten
+                for punt in punten:
+                    leerlingnr = punt.stamboomnummer
+                    score = punt.waarde
+                    leerlingFound = False
+                    for leerling in punten_per_leerling:
+                        if leerling[0] == leerlingnr:
+                            leerlingFound = True
+                            vakFound = False
+                            for i in range(1, len(leerling)):  # De naam + uren dus niet meegerekend
+                                if leerling[i][0] == vak:
+                                    vakFound = True
+                                    leerling[i][3] += int(score)
+                                    leerling[i][4] += int(max)
+                                    break
+                            if not vakFound:
+                                leerling.append([vak, aantal_uren, leerkrachten, int(score), int(max)])
+                            break
+                    if not leerlingFound:
+                        punten_per_leerling.append([leerlingnr, [vak, aantal_uren, leerkrachten, int(score), int(max)]])
+
+        for leerling in punten_per_leerling:
+            gegevens_leerling = self.leerlingen.retrieve(leerling[0])[1]
+            rapportFile = HtmlMaker.HtmlRapport(str("rapport_" + str(leerling[0]) + ".html"))
+            klas = gegevens_leerling.getKlas()
+            voornaam = gegevens_leerling.getVoornaam()
+            naam = gegevens_leerling.getNaam()
+            rapportFile.addStructure(HtmlMaker.HtmlTitle("Rapport " + klas + " - " + voornaam + " " + naam))
+            resultaten = [["vak", "uren", "leraar", "totaal"]]
+            for i in range(1, len(leerling)): #  Overloop alle vakken, skip het studentennr vd leerling
+                huidig_vak = leerling[i]
+                naam_vak = self.vakken.retrieve(huidig_vak[0])[1]
+                uren_vak = huidig_vak[1]
+                leraren = ""
+                j = 0
+                for leraar in huidig_vak[2]:
+                    j += 1
+                    gegevens_leeraar = self.leraars.retrieve(leraar)[1]
+                    leraren += gegevens_leeraar.getNaam() + " " + gegevens_leeraar.getAchternaam()
+                    if j != len(huidig_vak[2]):
+                        leraren += ", "
+                totaal = str(100*huidig_vak[3]/huidig_vak[4]) + "%"
+                resultaten.append([naam_vak, uren_vak, leraren, totaal])
+            rapportFile.addStructure(HtmlMaker.HtmlTable(resultaten))
+            rapportFile.buildfile()
 
     def printToets(self):
         return self.toetsen.Print()

@@ -11,6 +11,9 @@ class Rapport:
         self.list = list
         return True
 
+    def addList(self, list):
+        return self.list.append(list)
+
     def getZoeksleutel(self):
         return self.Zoeksleutel
 
