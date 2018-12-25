@@ -49,13 +49,11 @@ class DGL:
             node = node.next
         return counter
 
-    def traverse(self):
-        values = []
+    def traverse(self, visit, key=None):
         node = self.dummy.next
         while node is not None:
-            values.append(node.value)
+            visit(node.value, key)
             node = node.next
-        return values
 
     def insert(self, newnode):
         node = self.dummy

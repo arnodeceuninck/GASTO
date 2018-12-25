@@ -21,8 +21,8 @@ class system:
         # TODO: De klassen toets, rapport, puntenlijst moeten ontworpen zoals de ADT tabel.
         #  Deze klassen zijn dus een verzameling van als ik het goed begrijp
         # TODO: Fix error: alle elementen met zelfde datastructuur komen samen in eenzelfde datastructuur
-        self.punten = TabelWrapper("23")  # dit is de create # puntenlijst nog nodig om punten aan te passen
-        self.toetsen = TabelWrapper("cl")  # TODO: verander dit terug naar cl
+        self.punten = TabelWrapper("ll")  # dit is de create # puntenlijst nog nodig om punten aan te passen
+        self.toetsen = TabelWrapper("ll")  # TODO: verander dit terug naar cl
         self.puntenlijst = TabelWrapper("234")  # TODO: verander terug naar bst als er een bst in Geheel zit
         # self.puntenlijst = TabelWrapper("bst")  # Is dus eigenlijk een verzameling van alle puntenlijsten
         self.vakken = TabelWrapper("ll")  # Key = afkorting, Value = volledige naam
@@ -66,7 +66,11 @@ class system:
             return False
         punt = Punt.createPunt(ID, stamboeknummer_leerling, naam_toets, Waarde, Timestamp)
         self.punten.insert(punt, ID)  # Key
-        toets.addPunt(punt)
+        #TODO: de retrieve van een LL geeft een tuple terug ma is da echt nodig?
+        if self.toetsen.type == "ll":
+            toets[1].addPunt(punt)
+        else:
+            toets.addPunt(punt)
         return True
 
     def addPuntenLijst(self, ID, type, periode, namecodes, vak_afkorting, klas, uren):
@@ -108,6 +112,7 @@ class system:
     def deletePunt(self, ID):
         # verwijdert een eerder aangemaakt punt
         #TODO: alle toetsen overlopen en de punten uit de toetsen halen
+        self.toetsen.traverse(self.puntenDetect, ID)
         self.punten.delete(ID)
         return True
 
@@ -141,34 +146,35 @@ class system:
                 else:
                     node = node.next
         elif self.punten.type == "ll":
-            node = self.punten.dataStructure.dummy.next
-            while node is not None:
-                if node.value.getStamboekNummer == key:
-                    nextnode = node.next
-                    self.deletePunt(node.value.getID())
-                else:
-                    nextnode = node.next
-                node = nextnode
+            self.punten.traverse(self.collector, key)
+            # node = self.punten.dataStructure.dummy.next
+            # while node is not None:
+            #     if node.value.getStamboekNummer == key:
+            #         nextnode = node.next
+            #         self.deletePunt(node.value.getID())
+            #     else:
+            #         nextnode = node.next
+            #     node = nextnode
         elif self.punten.type == "234":
             self.punten.traverse(self.collector, key)
         elif self.punten.type == "23":
             self.punten.traverse(self.collector, key)
 
         #alle punten uit de testen verwijderen
-        if self.toetsen.type == "cl":
-            node = self.toetsen.dataStructure.head.next
-            for x in range(self.toetsen.dataStructure.count):
-                for i in range(len(node.value.verzamelingVanPunten)-1):
-                    if node.value.verzamelingVanPunten[i].getStamboekNummer == key:
-                        del node.value.verzamelingVanPunten[i]
-                node = node.next
-        elif self.toetsen.type == "ll":
-            node = self.toetsen.dataStructure.dummy.next
-            while node is not None:
-                for i in range(len(node.value.verzamelingVanPunten)-1):
-                    if node.value.getStamboekNummer[i].getStamboekNummer == key:
-                        del node.verzamelingVanPunten[i]
-                node = node.next
+        # if self.toetsen.type == "cl":
+        #     node = self.toetsen.dataStructure.head.next
+        #     for x in range(self.toetsen.dataStructure.count):
+        #         for i in range(len(node.value.verzamelingVanPunten)-1):
+        #             if node.value.verzamelingVanPunten[i].getStamboekNummer == key:
+        #                 del node.value.verzamelingVanPunten[i]
+        #         node = node.next
+        # elif self.toetsen.type == "ll":
+        #     node = self.toetsen.dataStructure.dummy.next
+        #     while node is not None:
+        #         for i in range(len(node.value.verzamelingVanPunten)-1):
+        #             if node.value.getStamboekNummer[i].getStamboekNummer == key:
+        #                 del node.verzamelingVanPunten[i]
+        #         node = node.next
 
         self.leerlingen.delete(key)
 
@@ -196,11 +202,12 @@ class system:
         if item.getStamboekNummer() == key:
             self.deletePunt(item.getID())
             self.punten.traverse(self.collector, key)
-            self.punten.Print()
             return True
         else:
             return False
 
+    def puntenDetect(self, item, key):
+        item.removePunt(key)
 
     # def addToets(self):
     #     # Maakt toetsen aan bij puntenlijst 'ID'

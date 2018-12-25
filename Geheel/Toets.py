@@ -40,6 +40,10 @@ class Toets:
             print("De waarde van het punt in ongeldig")
             return False
 
+    def removePunt(self, ID):
+        for i in range(len(self.verzamelingVanPunten)-1, -1, -1):
+            if self.verzamelingVanPunten[i].id == ID:
+                del self.verzamelingVanPunten[i]
 
 def createToets(puntenlijst, naam, maximum, verzamelingVanPunten):
     return Toets(puntenlijst, naam, maximum, verzamelingVanPunten)
