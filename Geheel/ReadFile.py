@@ -48,14 +48,6 @@ for line in instructionFile:
             continue
         geheel.addVak(words[1], words[2])
 
-    elif words[0] == "vak":
-        if not actiefSysteem():
-            continue
-        if len(words) < 3:
-            print("Geen 2 parameters gevonden: vak AFK Naam")
-            continue
-        geheel.addVak(words[1], words[2])
-
     elif words[0] == "klas":
         if not actiefSysteem():
             continue
@@ -112,7 +104,7 @@ for line in instructionFile:
     elif words[0] == "undo":
         if not actiefSysteem():
             continue
-        # geheel.undo() # TODO: implement undo
+        geheel.undo() # TODO: implement undo
 
     elif words[0] == "rapport":
         if not actiefSysteem():

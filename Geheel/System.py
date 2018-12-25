@@ -32,17 +32,23 @@ class system:
         self.leraars = TabelWrapper("ll")
         self.leerlingen = TabelWrapper("ll")
         self.rapporten = TabelWrapper("ll")
+        self.instructies = TabelWrapper("stack")  # NOTE: Don't change this ADT
 
     def addVak(self, afkorting, naam):
+        self.instructies.insert("vak " + str(afkorting) + " " + str(naam))
         return self.vakken.insert(naam, afkorting)
 
     def addKlas(self, naam):
+        self.instructies.insert("klas " + str(naam))
         return self.klassen.insert(naam)
 
     def addLeraar(self, afkorting, naam, achternaam):
+        self.instructies.insert("leraar " + str(naam) + " " + str(achternaam) + " " + str(afkorting))
         return self.leraars.insert(Leraar.Leraar(afkorting, naam, achternaam), afkorting)
 
     def addLeerling(self, naam, voornaam, klas, klasnummer, studentennummer):
+        self.instructies.insert("leeling " + str(voornaam) + " " + str(naam) + " " + str(klas) + " " +
+                                str(klasnummer) + " " + str(studentennummer))
         if self.leerlingen.retrieve(studentennummer)[0] is not False:
             print("De gegeven studenten nummer is al in gebruik")
             return False
@@ -55,9 +61,12 @@ class system:
         return self.leerlingen.insert(Leerling.Leerling(naam, voornaam, klas, klasnummer, studentennummer),
                                           studentennummer)
 
-    def addPunt(self, stamboeknummer_leerling, naam_toets, Waarde, Leerkracht):
-        # TODO: controleren of leerkracht bevoegd is om aan deze toets een punt toe te voegen
+    def addPunt(self, stamboeknummer_leerling, naam_toets, Waarde, leerkracht):
         ID = self.punten.getLength()
+        self.instructies.insert("punt " + str(leerkracht) + " " + str(naam_toets) + " " +
+                                str(stamboeknummer_leerling) + " " + str(Waarde) + " " + str(ID))
+        # TODO: controleren of leerkracht bevoegd is om aan deze toets een punt toe te voegen
+
         # maakt een nieuw punt aan met een uniek ID, Stamboomnummer, Naam, Waarde en Timestamp
         toets = self.toetsen.retrieve(naam_toets)
         if toets is None:
@@ -78,6 +87,8 @@ class system:
         return True
 
     def addPuntenLijst(self, ID, type, periode, namecodes, vak_afkorting, klas, uren):
+        self.instructies.insert(str(ID) + " puntenlijst " + str(type) + " " + str(periode) + " " +
+                                str(namecodes) + " " + str(vak_afkorting) + " " + str(klas) + " " + str(uren))
         if self.klassen.retrieve(klas) is None:
             print("ERROR: De klas waaraan je wil dat de leeraar les geeft (" + klas + "), bestaat nog niet. "
                   "Gelieve deze eerst aan te maken.")
@@ -104,6 +115,7 @@ class system:
         return True
 
     def addToets(self, puntenlijst_id, titel, maxscore):
+        self.instructies.insert("toets " + str(puntenlijst_id) + " " + str(titel) + " " + str(maxscore))
         puntenlijst = self.puntenlijst.retrieve(puntenlijst_id)
         if puntenlijst is None:
             print("ERROR: De puntenlijst met id " + puntenlijst_id + " werd niet teruggevonden in het systeem. "
@@ -411,5 +423,46 @@ class system:
 
     def printVak(self):
         return self.vakken.Print()
+
+    def undo(self):
+        vorige_instructie = self.instructies.retrieve()
+        print("Undo: " + vorige_instructie)
+        words = vorige_instructie.split(' ')
+
+        if words[0] == "init":
+            print("Instruction \"init\" can't be undone")
+
+        elif words[0] == "vak":
+            self.deleteVak(words[1])
+
+        elif words[0] == "klas":
+            self.deleteKlas(words[1])
+
+        elif words[0] == "leraar":
+            self.deleteLeraar(words[3])
+
+        elif words[0] == "leerling":
+            self.deleteLeerling(words[5])
+
+        elif len(words) > 1 and words[1] == "puntenlijst":
+            self.deletePuntenlijst(words[0])
+
+        elif words[0] == "start":
+            print("Instruction \"start\" can't be undone")
+
+        elif words[0] == "toets":
+            self.deleteToets(words[2])
+
+        elif words[0] == "punt":
+            self.deletePunt(words[5])
+
+        elif words[0] == "undo":
+            print("Instruction \"undo\" can't be undone")
+
+        elif words[0] == "rapport":
+            print("Instruction \"rapport\" can't be undone")
+
+        self.instructies.delete()
+
 
 
