@@ -13,7 +13,13 @@ class Hashmap():
         self.count = 0
 
     def hashf(self, key):
-        return key % self.tableSize
+        num = 0
+        if type(key) != int:
+            for char in key:
+                num += ord(char)
+            return num % self.tableSize
+        else:
+            return key % self.tableSize
 
     def herHashf(self, key):
         if self.type == 1:
@@ -66,6 +72,24 @@ class Hashmap():
         print("\n")
 
     def delete_sep(self, key):
+        index = self.hashf(key)
+        if self.hashTable[index].next == None:
+            self.hashTable[index] = None
+            return False
+        else:
+            self.nu = self.hashTable[index].next
+            count = 0
+            while True:
+                if self.nu.next == None and self.nu.key == key:
+                    next_str = ".next"
+                    for i in range(count+1):
+                        self.aj = "self.hashTable[index].next" + next_str
+                    self.aj = None
+                    return False
+                else:
+                    count += 1
+                    self.nu = self.nu.next
+
 
     def delete(self, key):
         self.count -= 1
@@ -117,7 +141,10 @@ def lees(file, size):
             else:
                 words = i.split(" ")
                 if words[0] == "insert":
+                    # if type(words[1]) == int:
                     h.insert(int(words[1]), int(words[2]))
+                    # else:
+                    #     h.insert(words[1], int(words[2]))
                 if words[0] == "print\n":
                     h.show()
                 if words[0] == "delete":
@@ -129,7 +156,7 @@ size = input("Hoe groot moet de hashmap worden? ")
 lees(file, size)
 #select = input("Wilt u linair probing (1), qwadratic probing (2) of seperate chaining (3) gebruiken? ")
 # h = Hashmap(int(size), int(select))
-
+input()
 # h.lees(file)
 
 #h.insert(searchKey, item)
