@@ -232,7 +232,10 @@ class TweeDrieBoom:
         if Treeitem != None:
             if self.childrenLeft == None:
                 self.root.remove(Treeitem)
-                self.fix()
+                if self.parent == None and self.childrenLeft == None:
+                    pass
+                else:
+                    self.fix()
             else:
                 successor = self.inorder_successor(Treeitem)
                 if len(self.root) == 1:
@@ -453,7 +456,7 @@ class TweeDrieBoom:
         if len(self.root) == 1 and self.childrenLeft == self.childrenRight == None and self.root[0].key != key:
             result = (gevonden, None)
             return result
-        elif len(self.root) == 2 and self.childrenLeft == self.childrenRight == self.childrenMiddle == None and self.root[0].key != key and self.root[1] != key:
+        elif len(self.root) == 2 and self.childrenLeft == self.childrenRight == self.childrenMiddle == None and self.root[0].key != key and self.root[1].key != key:
             result = (gevonden, None)
             return result
         if key == self.root[0].key:
@@ -551,7 +554,6 @@ class TreeItem(object):
 def dot(current, parent, file):
 
     if current.parent != None:
-        # schrijf dotcode voor parent naar current_node node met als ID's:  current_count en parent_count
         if len(current.root) == 1:
             if len(parent.root) > 1:
                 parentKeys = ""
@@ -595,10 +597,27 @@ def write_dot(file, tree):
     dotFile = open(file, "w")
     dotFile.write("digraph Two_Three_Tree { \n")
     dotFile.write("\t"+"size=8.5\n")
-    global globalCounter
-    dot(tree, tree.parent, dotFile)
+    if tree.childrenRight == None and len(tree.root) >= 1:
+        current = ""
+        current += str(tree.root[0].key)
+        if len(tree.root) == 1:
+            dotFile.write("\t\"" + current + "\";\n")
+        else:
+            current += "|"
+            current += str(tree.root[1].key)
+            dotFile.write("\t\"" + current + "\";\n")
+    elif tree.childrenLeft != None:
+        global globalCounter
+        dot(tree, tree.parent, dotFile)
     dotFile.write("}")
 
 
 def create23T():
     return TweeDrieBoom()
+
+test = create23T()
+test.insertItem(TreeItem(1, 10))
+test.insertItem(TreeItem(1, 20))
+write_dot("test23T.dot", test)
+test.delete(20)
+write_dot("test23T.dot", test)
