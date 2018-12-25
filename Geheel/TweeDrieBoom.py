@@ -237,20 +237,32 @@ class TweeDrieBoom:
                 else:
                     self.fix()
             else:
-                successor = self.inorder_successor(Treeitem)
-                if len(self.root) == 1:
+                size = self.size()
+                if 3 < size < 6 and self.parent == None and len(self.root) == 1:
                     self.root.clear()
-                    self.root.append(successor.root[0])
-                    successor.root.remove(successor.root[0])
-                    successor.fix()
+                    if len(self.childrenLeft.root) == 2:
+                        successor = self.childrenLeft.root[1]
+                        self.root.append(successor)
+                        self.childrenLeft.root.remove(successor)
+                    elif len(self.childrenRight.root) == 2:
+                        successor = self.childrenRight.root[0]
+                        self.root.append(successor)
+                        self.childrenRight.remove(successor)
                 else:
-                    if self.root[0] == Treeitem:
-                        self.root.insert(0, successor.root[0])
-                    else:
+                    successor = self.inorder_successor(Treeitem)
+                    if len(self.root) == 1:
+                        self.root.clear()
                         self.root.append(successor.root[0])
-                    self.root.remove(Treeitem)
-                    successor.root.remove(successor.root[0])
-                    successor.fix()
+                        successor.root.remove(successor.root[0])
+                        successor.fix()
+                    else:
+                        if self.root[0] == Treeitem:
+                            self.root.insert(0, successor.root[0])
+                        else:
+                            self.root.append(successor.root[0])
+                        self.root.remove(Treeitem)
+                        successor.root.remove(successor.root[0])
+                        successor.fix()
         else:
             if key < self.root[0].key:
                 self.childrenLeft.delete(key)
@@ -615,10 +627,17 @@ def write_dot(file, tree):
 def create23T():
     return TweeDrieBoom()
 
-# test = create23T()
-# test.insertItem(TreeItem(1, 10))
-# test.insertItem(TreeItem(1, 20))
-# test.insertItem(TreeItem(1, 30))
+test = create23T()
+test.insertItem(TreeItem(1, 10))
+test.insertItem(TreeItem(1, 20))
+test.insertItem(TreeItem(1, 30))
+test.insertItem(TreeItem(1, 5))
 # write_dot("test23T.dot", test)
-# test.delete(20)
-# write_dot("test23T.dot", test)
+test.delete(20)
+write_dot("test23T.dot", test)
+test.delete(10)
+write_dot("test23T.dot", test)
+test.delete(30)
+write_dot("test23T.dot", test)
+
+
