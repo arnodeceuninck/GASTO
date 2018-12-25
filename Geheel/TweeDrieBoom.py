@@ -615,9 +615,10 @@ def write_dot(file, tree):
 def create23T():
     return TweeDrieBoom()
 
-test = create23T()
-test.insertItem(TreeItem(1, 10))
-test.insertItem(TreeItem(1, 20))
-write_dot("test23T.dot", test)
-test.delete(20)
-write_dot("test23T.dot", test)
+# test = create23T()
+# test.insertItem(TreeItem(1, 10))
+# test.insertItem(TreeItem(1, 20))
+# test.insertItem(TreeItem(1, 30))
+# write_dot("test23T.dot", test)
+# test.delete(20)
+# write_dot("test23T.dot", test)
