@@ -1,0 +1,45 @@
+#start
+#table grootte van 23
+#getallen tussen 5 en 50
+type=hash 3
+insert 25 2
+insert 43 20
+insert 18 18
+insert 37 14
+insert 25 2
+insert 36 13
+insert 44 21
+insert 6 6
+insert 7 7
+insert 10 10
+insert 12 12
+insert 24 1
+insert 36 13
+insert 19 19
+insert 21 21
+insert 26 3
+insert 50 4
+insert 41 18
+insert 39 16
+insert 23 0
+insert 33 10
+insert 34 11
+insert 2 2
+print
+#delete 2
+#print
+insert 42 19
+insert 49 3
+print
+#45 - 22 - 0 - 1 - 2 - 3- 4 - 5 - 6 -7 -8 - 9
+#30 - 7 - 8 - 9 - 10 - 11 - 12 - 13 - 14 - 15 - 16 - 17 - 18 - 19 - 20 - 21 - 22 - 0 - 1 - 2 3 - 4- 5- 6
+#33
+#45
+#37
+#28
+#11
+#27
+#37
+#47
+#17
+#end

@@ -65,17 +65,22 @@ class Hashmap():
             i += 1
         print("\n")
 
+    def delete_sep(self, key):
+
     def delete(self, key):
         self.count -= 1
-        index = self.hashf(key)
-        if len(self.hashTable) == 0:
-            return False
-        if self.hashTable[index].key != key:
-            while self.hashTable[index].key != key:
-                index = self.herHashf(index)
-            self.hashTable[index] = None
+        if self.type == 3:
+            self.delete_sep(key)
         else:
-            self.hashTable[index] = None
+            index = self.hashf(key)
+            if len(self.hashTable) == 0:
+                return False
+            if self.hashTable[index].key != key:
+                while self.hashTable[index].key != key:
+                    index = self.herHashf(index)
+                self.hashTable[index] = None
+            else:
+                self.hashTable[index] = None
 
     def retrieve(self, key):
         index = self.hashf(key)
@@ -101,7 +106,7 @@ class Hashmap():
 
 def lees(file, size):
     for i in file:
-        if i[0] != "#":
+        if i[0] != "#" or i[0] != "\n":
             zoek_type = i.split("=")
             if zoek_type[0] == "type":
                 welke = zoek_type[1].split(" ")
@@ -119,7 +124,7 @@ def lees(file, size):
                     h.delete(int(words[1]))
 
 
-file = open("test2.txt", "r")
+file = open("sep_test.txt", "r")
 size = input("Hoe groot moet de hashmap worden? ")
 lees(file, size)
 #select = input("Wilt u linair probing (1), qwadratic probing (2) of seperate chaining (3) gebruiken? ")

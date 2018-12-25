@@ -3,7 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="02db20bb-13fa-4680-8bb0-acfadcd6223a" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/Opdracht 7/Rob/hash.py" beforeDir="false" afterPath="$PROJECT_DIR$/Opdracht 7/Rob/hash.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Opdracht 7/Rob/test2.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Opdracht 7/Rob/test2.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Opdracht 7/Rob/test.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Opdracht 7/Rob/test2.txt" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -14,7 +15,7 @@
   <component name="CoverageDataManager">
     <SUITE FILE_PATH="coverage/GASTO$LL.coverage" NAME="LL Coverage Results" MODIFIED="1545559217179" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Opdracht 7/Rob" />
     <SUITE FILE_PATH="coverage/GASTO$TweeDrieBoom__2_.coverage" NAME="TweeDrieBoom (2) Coverage Results" MODIFIED="1545588395403" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Opdracht 7/Sen" />
-    <SUITE FILE_PATH="coverage/GASTO$hash.coverage" NAME="hash Coverage Results" MODIFIED="1545688015434" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Opdracht 7/Rob" />
+    <SUITE FILE_PATH="coverage/GASTO$hash.coverage" NAME="hash Coverage Results" MODIFIED="1545689395203" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Opdracht 7/Rob" />
     <SUITE FILE_PATH="coverage/GASTO$Dubbelgelinktelijst.coverage" NAME="Dubbelgelinktelijst Coverage Results" MODIFIED="1545553160480" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$USER_HOME$/AppData/Local/Temp" />
     <SUITE FILE_PATH="coverage/GASTO$RZT.coverage" NAME="RZT Coverage Results" MODIFIED="1542841852562" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Opdracht 7/Arno" />
   </component>
@@ -66,27 +67,27 @@
       <usages-collector id="statistics.file.extensions.open">
         <counts>
           <entry key="html" value="1" />
-          <entry key="py" value="22" />
-          <entry key="txt" value="7" />
+          <entry key="py" value="23" />
+          <entry key="txt" value="9" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
           <entry key="HTML" value="1" />
-          <entry key="PLAIN_TEXT" value="7" />
-          <entry key="Python" value="22" />
+          <entry key="PLAIN_TEXT" value="9" />
+          <entry key="Python" value="23" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="py" value="3601" />
-          <entry key="txt" value="884" />
+          <entry key="py" value="3735" />
+          <entry key="txt" value="907" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="PLAIN_TEXT" value="884" />
-          <entry key="Python" value="3601" />
+          <entry key="PLAIN_TEXT" value="907" />
+          <entry key="Python" value="3735" />
         </counts>
       </usages-collector>
     </session>
@@ -127,17 +128,22 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Opdracht 7/Rob/hash.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="280">
-              <caret line="66" lean-forward="true" selection-start-line="66" selection-end-line="66" />
+            <state relative-caret-position="-625">
+              <caret line="70" column="23" selection-start-line="70" selection-start-column="23" selection-end-line="70" selection-end-column="23" />
+              <folding>
+                <marker date="1545690493561" expanded="true" signature="2171:2177" ph="..." />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Opdracht 7/Rob/test2.txt">
+        <entry file="file://$PROJECT_DIR$/Opdracht 7/Arno/RBT.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="438">
-              <caret line="32" column="5" selection-start-line="32" selection-start-column="5" selection-end-line="32" selection-end-column="5" />
+            <state relative-caret-position="-9971">
+              <folding>
+                <element signature="e#0#19#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -168,14 +174,27 @@
       </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Opdracht 7/Rob/adt.txt">
-          <provider selected="true" editor-type-id="text-editor" />
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="124">
+              <caret line="4" column="8" lean-forward="true" selection-start-line="4" selection-start-column="8" selection-end-line="4" selection-end-column="8" />
+            </state>
+          </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Opdracht 7/Rob/test.txt">
+        <entry file="file://$PROJECT_DIR$/Opdracht 7/Rob/sep_test.txt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="65">
-              <caret line="51" column="7" lean-forward="true" selection-start-line="51" selection-start-column="7" selection-end-line="51" selection-end-column="7" />
+            <state relative-caret-position="288">
+              <caret line="12" column="10" selection-start-line="12" selection-start-column="10" selection-end-line="12" selection-end-column="10" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Opdracht 7/Rob/lin_test.txt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="68">
+              <caret line="4" column="11" lean-forward="true" selection-start-line="4" selection-start-column="11" selection-end-line="4" selection-end-column="11" />
             </state>
           </provider>
         </entry>
@@ -213,6 +232,7 @@
         <option value="$PROJECT_DIR$/Opdracht 7/Rob/LL.py" />
         <option value="$PROJECT_DIR$/Opdracht 7/Rob/test.txt" />
         <option value="$PROJECT_DIR$/Opdracht 7/Rob/test2.txt" />
+        <option value="$PROJECT_DIR$/Opdracht 7/Rob/sep_test.txt" />
         <option value="$PROJECT_DIR$/Opdracht 7/Rob/hash.py" />
       </list>
     </option>
@@ -465,7 +485,7 @@
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.49107143" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.42063493" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.61706346" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -685,16 +705,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Opdracht 7/Rob/test.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="65">
-          <caret line="51" column="7" lean-forward="true" selection-start-line="51" selection-start-column="7" selection-end-line="51" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Opdracht 7/Rob/adt.txt">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/Opdracht 7/Arno/ReadADTFile.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="527">
@@ -747,10 +757,50 @@
     <entry file="file://$PROJECT_DIR$/Opdracht 7/Arno/Graph.py">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
+    <entry file="file://$PROJECT_DIR$/Opdracht 7/Rob/test.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="867">
+          <caret line="51" column="7" lean-forward="true" selection-start-line="51" selection-start-column="7" selection-end-line="51" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Opdracht 7/Rob/adt.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="124">
+          <caret line="4" column="8" lean-forward="true" selection-start-line="4" selection-start-column="8" selection-end-line="4" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Opdracht 7/Rob/lin_test.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" column="11" lean-forward="true" selection-start-line="4" selection-start-column="11" selection-end-line="4" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Opdracht 7/Rob/sep_test.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="288">
+          <caret line="12" column="10" selection-start-line="12" selection-start-column="10" selection-end-line="12" selection-end-column="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Opdracht 7/Arno/RBT.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-9971">
+          <folding>
+            <element signature="e#0#19#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Opdracht 7/Rob/hash.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="280">
-          <caret line="66" lean-forward="true" selection-start-line="66" selection-end-line="66" />
+        <state relative-caret-position="-625">
+          <caret line="70" column="23" selection-start-line="70" selection-start-column="23" selection-end-line="70" selection-end-column="23" />
+          <folding>
+            <marker date="1545690493561" expanded="true" signature="2171:2177" ph="..." />
+          </folding>
         </state>
       </provider>
     </entry>
