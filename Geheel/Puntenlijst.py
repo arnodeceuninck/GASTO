@@ -22,6 +22,16 @@ class PuntenLijst:
         self.toetsen.append(toets)
         return True
 
+    def deleteToets(self, naam):
+        for i in range(len(self.toetsen)-1, -1, -1):
+            if self.toetsen[i].naam == naam:
+                del self.toetsen[i]
+
+    def deleteNamecodes(self, code):
+        for i in range(len(self.namecodes)-1, -1, -1):
+            if self.namecodes[i] == code:
+                del self.namecodes[i]
+
     def getID(self):
         return self.id
 

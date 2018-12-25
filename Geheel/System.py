@@ -22,7 +22,7 @@ class system:
         #  Deze klassen zijn dus een verzameling van als ik het goed begrijp
         # TODO: Fix error: alle elementen met zelfde datastructuur komen samen in eenzelfde datastructuur
         self.punten = TabelWrapper("ll")  # dit is de create # puntenlijst nog nodig om punten aan te passen
-        self.toetsen = TabelWrapper("ll")  # TODO: verander dit terug naar cl
+        self.toetsen = TabelWrapper("cl")  # TODO: verander dit terug naar cl
         self.puntenlijst = TabelWrapper("234")  # TODO: verander terug naar bst als er een bst in Geheel zit
         # self.puntenlijst = TabelWrapper("bst")  # Is dus eigenlijk een verzameling van alle puntenlijsten
         self.vakken = TabelWrapper("ll")  # Key = afkorting, Value = volledige naam
@@ -118,6 +118,7 @@ class system:
 
     def deleteVak(self, afkorting):
         if self.vakken.delete(afkorting):
+            self.puntenlijst.traverse(self.puntenlijstVakDelete, afkorting)
             print("Vak succesvol verwijderd")
             return True
         else:
@@ -126,6 +127,9 @@ class system:
 
     def deleteKlas(self, naam):
         if self.klassen.delete(naam):
+            self.puntenlijst.traverse(self.puntenlijstKlasdelete, naam)
+            self.leerlingen.traverse(self.leerlingKlasdelete, naam)
+            self.rapporten.traverse(self.rapportKlasdetect, naam)
             print("Klas succesvol verwijderd")
             return True
         else:
@@ -138,10 +142,10 @@ class system:
 
         if self.punten.type == "cl":
             node = self.punten.dataStructure.head.next
-            for x in range(self.toetsen.dataStructure.count):
-                if node.value.getStamboekNummer == key:
+            for x in range(self.punten.dataStructure.count):
+                if node.value.getStamboekNummer() == key:
                     nextnode = node.next
-                    self.deletePunt(node.value.getID())
+                    self.deletePunt(self.punten.dataStructure.findIndexValue(node.value.getID()))
                     node = nextnode
                 else:
                     node = node.next
@@ -182,16 +186,19 @@ class system:
         puntenlijst = self.puntenlijst.retrieve(key)
         for i in range(len(puntenlijst.toetsen)-1, -1, -1):
             self.deleteToets(puntenlijst.toetsen[i].getNaam())
-            del puntenlijst.toetsen[i]
         self.puntenlijst.delete(key)
 
     def deleteToets(self, naam):
         toets = self.retrieveToets(naam)
         for i in range(len(toets.verzamelingVanPunten)-1, -1, -1):
             self.deletePunt(toets.verzamelingVanPunten[i].getID())
-            del toets.verzamelingVanPunten[i]
+        self.puntenlijst.traverse(self.puntenlijstToetsenDetect, naam)
         #TODO: Als het een cl is dan is dit het speciaal geval, controleren hoe te werk gaan bij andere datastructuren # Hoezo een speciaal geval? # Omda ge eerst de index moet vinden en bij de andere niet
         self.toetsen.delete(self.toetsen.dataStructure.findIndexValue(naam))
+
+    def deleteLeraar(self, naam):
+        self.puntenlijst.traverse(self.puntenlijstleerkrachtdetect, naam)
+        self.leraars.delete(naam)
 
     def removeAllPunten(self):
         # Verwijdert alle punten in het systeem (in theorie nooit nodig)
@@ -206,8 +213,37 @@ class system:
         else:
             return False
 
+    def puntenlijstToetsenDetect(self, item, key):
+        item.deleteToets(key)
+
     def puntenDetect(self, item, key):
         item.removePunt(key)
+
+    def puntenlijstleerkrachtdetect(self, item, key):
+        item.deleteNamecodes(key)
+        if len(item.getNameCodes()) == 0:
+            self.deletePuntenlijst(item.getID())
+
+    def puntenlijstVakDelete(self, item, key):
+        if item.getVakcode() == key:
+            self.deletePuntenlijst(item.getID())
+            self.puntenlijst.traverse(self.puntenlijstVakDelete, key)
+
+    def puntenlijstKlasdelete(self, item, key):
+        if item.getKlas() == key:
+            self.deletePuntenlijst(item.getID())
+            self.puntenlijst.traverse(self.puntenlijstKlasdelete, key)
+
+    def leerlingKlasdelete(self, item, key):
+        if item.getKlas() == key:
+            self.deleteLeerling(item.getNummer())
+            self.leerlingen.traverse(self.leerlingKlasdelete, key)
+
+    def rapportKlasdetect(self, item, key):
+        for i in range(len(item.list)-1, -1, -1):
+            if item.list[i].getKlas() == key:
+                del item.list[i]
+                i -= 1
 
     # def addToets(self):
     #     # Maakt toetsen aan bij puntenlijst 'ID'

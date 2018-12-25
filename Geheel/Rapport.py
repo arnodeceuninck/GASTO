@@ -21,6 +21,10 @@ class Rapport:
         self.Zoeksleutel = Zoeksteutel
         return True
 
+    def deletePuntenLijst(self, key):
+        for i in range(len(self.list)-1, -1, -1):
+            if self.list[i].getID() == key:
+                del self.list[i]
 
 def createRapport(list, Zoeksleutel):
     return Rapport(list, Zoeksleutel)

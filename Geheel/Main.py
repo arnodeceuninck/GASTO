@@ -147,11 +147,9 @@ while True:
         if input_str == "1":
             geheel.deleteVak(input("Afkorting: "))
         elif input_str == "2":
-            print("This feauture is not yet supported.")
-            pass
+            geheel.deleteKlas(input("Naam: "))
         elif input_str == "3":
-            print("This feauture is not yet supported.")
-            pass
+            geheel.deleteLeraar(input("Afkorting: "))
         elif input_str == "4":
             geheel.deleteLeerling(input("Stamboomnummer: "))
         elif input_str == "5":

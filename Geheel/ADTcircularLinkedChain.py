@@ -142,6 +142,11 @@ class circular_chain:
             node = node.next
         self.grafiek.rebuild_file()
 
+    def traverse(self, visit, key=None):
+        node = self.head.next
+        for i in range(self.count):
+            visit(node.value, key)
+
 def createList():
     return circular_chain()
 
