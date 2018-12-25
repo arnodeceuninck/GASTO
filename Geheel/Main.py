@@ -60,6 +60,7 @@ while True:
             "(5) Puntenlijst, "
             "(6) Toets, "
             "(7) Punt, "
+            "(8) Rapport maken,"
             "(c) Cancel" + '\n')
 
         # TODO: Bij het opvragen ook een .dot file laten genereren van de structuur waaruit geretrieved wordt
@@ -77,6 +78,9 @@ while True:
             print(str(geheel.retrieveToets(input("Naam: "))))
         elif input_str == "7":
             print(str(geheel.retrievePunt(input("ID: "))))
+        elif input_str == "7":
+            geheel.buildRapport(input("Samengestelde zoeksleutel TP: "), input("Klas: "))
+            print("Done. Je kan het rapport terugvinden tussen je bestanden.")
         elif input_str == "c":
             continue  # Ga terug naar het begin van de While-loop
 
