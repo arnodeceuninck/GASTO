@@ -432,16 +432,34 @@ class TweeDrieBoom:
                     nodemiddle = TweeDrieBoom()
                     nodemiddle.parent = self.parent
                     if self == self.parent.childrenLeft:
-                        nodemiddle.root.append(self.parent.root[0])
-                        nodemiddle.root.append(self.parent.childrenRight.root[0])
-                        self.parent.root.clear()
-                        self.parent.childrenMiddle = nodemiddle
-                        self.parent.childrenLeft = None
-                        self.parent.childrenRight = None
+                        if len(self.parent.root) == 2:
+                            self.root.append(self.parent.root[0])
+                            self.root.append(self.parent.childrenMiddle.root[0])
+                            self.parent.root.remove(self.parent.root[0])
+                            self.parent.childrenMiddle.root.clear()
+                            self.parent.childrenMiddle = None
+                        else:
+                            nodemiddle.root.append(self.parent.root[0])
+                            nodemiddle.root.append(self.parent.childrenRight.root[0])
+                            self.parent.root.clear()
+                            self.parent.childrenMiddle = nodemiddle
+                            self.parent.childrenLeft = None
+                            self.parent.childrenRight = None
+                    elif self == self.parent.childrenMiddle and len(self.parent.root) == 2:
+                        self.parent.childrenLeft.root.append(self.parent.root[0])
+                        self.parent.root.remove(self.parent.root[0])
+                        self.parent.childrenMiddle = None
                     else:
-                        self.parent.root.insert(0, self.parent.childrenLeft.root[0])
-                        self.parent.childrenLeft = None
-                        self.parent.childrenRight = None
+                        if len(self.parent.root) == 2:
+                            self.root.append(self.parent.root[1])
+                            self.root.append(self.parent.childrenMiddle.root[0])
+                            self.parent.root.remove(self.parent.root[1])
+                            self.parent.childrenMiddle.root.clear()
+                            self.parent.childrenMiddle = None
+                        else:
+                            self.parent.root.insert(0, self.parent.childrenLeft.root[0])
+                            self.parent.childrenLeft = None
+                            self.parent.childrenRight = None
                     self.parent.fix()
         else:
             pass
@@ -632,12 +650,24 @@ test.insertItem(TreeItem(1, 10))
 test.insertItem(TreeItem(1, 20))
 test.insertItem(TreeItem(1, 30))
 test.insertItem(TreeItem(1, 5))
+test.insertItem(TreeItem(1, 7))
+test.insertItem(TreeItem(1, 12))
+test.insertItem(TreeItem(1, 25))
+test.insertItem(TreeItem(1, 3))
+test.insertItem(TreeItem(1, 35))
+test.insertItem(TreeItem(1, 37))
+test.insertItem(TreeItem(1, 40))
+
+write_dot("test23T.dot", test)
+test.delete(35)
+write_dot("test23T.dot", test)
+# test.delete(7)
 # write_dot("test23T.dot", test)
-test.delete(20)
-write_dot("test23T.dot", test)
-test.delete(10)
-write_dot("test23T.dot", test)
-test.delete(30)
-write_dot("test23T.dot", test)
+# test.delete(10)
+# write_dot("test23T.dot", test)
+# test.delete(30)
+# write_dot("test23T.dot", test)
+# test.delete(5)
+# write_dot("test23T.dot", test)
 
 
