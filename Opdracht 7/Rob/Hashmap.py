@@ -128,6 +128,9 @@ class Hashmap():
         else:
             print("Je kan maximaal %s items inserten! Item (%s, %s) is niet geinsert geweest." %(self.tableSize, key, item))
 
+def createHashmap(size, type):
+    return Hashmap(int(size), int(type))
+
 def lees(file, size):
     for i in file:
         if i[0] != "#" or i[0] != "\n":
@@ -151,94 +154,16 @@ def lees(file, size):
                     h.delete(int(words[1]))
 
 
-file = open("sep_test.txt", "r")
-size = input("Hoe groot moet de hashmap worden? ")
-lees(file, size)
+# file = open("sep_test.txt", "r")
+# size = input("Hoe groot moet de hashmap worden? ")
+# type = 1
+# print(createHashmap(size, type))
+
+
+#lees(file, size)
 #select = input("Wilt u linair probing (1), qwadratic probing (2) of seperate chaining (3) gebruiken? ")
 # h = Hashmap(int(size), int(select))
-input()
-# h.lees(file)
-
-#h.insert(searchKey, item)
-### (1) ###
-# h.insert(66, 0)
-# h.insert(63, 8)
-# h.insert(71, 5)
-# h.insert(10, 10)
-# h.insert(93, 6)
-# h.insert(28, 7)
-# h.insert(18, 9)
-# h.insert(72, 1)
-# h.insert(71, 2)
-# h.insert(5, 3)
-# h.insert(12, 4)
-# h.delete(12)
-# h.insert(12, 345334353)
-# h.insert(24, 3453)
-# h.retrieve(12)
-# h.delete(18)
-
-### (1) delete met aanpassingen aan het invoeren ###
-# h.insert(66, 0)
-# h.insert(63, 8)
-# h.insert(71, 5)
-# h.insert(10, 10)
-# h.delete(71)
-# h.insert(93, 5)
-# h.insert(28, 6)
-# h.insert(18, 7)
-# h.insert(72, 9)
-# h.insert(71, 1)
-# h.insert(5, 2)
-# h.insert(12, 3)
-
-### (2) ###
-# h.insert(66, 0)
-# h.insert(63, 8)
-# h.insert(71, 5)
-# h.insert(10, 10)
-# h.insert(93, 6)
-# h.insert(28, 7)
-# h.insert(18, 1)
-# h.insert(72, 4)
-# h.insert(71, 9)
-# h.insert(5, 3)
-# h.insert(12, 2)
-# h.retrieve(12)
-# h.delete(66)
-
-
-
-### (3) ###
-# h.insert(66, 0)
-# h.insert(63, 8)
-# h.insert(71, 5)
-# h.insert(10, 10)
-# h.insert(93, 5)
-# h.insert(28, 6)
-# h.insert(18, 7)
-# h.insert(72, 6)
-# h.insert(71, 5)
-# h.insert(5, 5)
-# h.insert(12, 1)
-# h.retrieve(12)
-# h.delete(66)
-
-### (3 1 lange ketting) ###
-# h.insert(71, 0)
-# h.insert(5, 8)
-# h.insert(49, 5)
-# h.insert(71, 10)
-# h.insert(27, 5)
-# h.insert(5, 6)
-# h.insert(18, 7)
-# h.insert(71, 6)
-# # h.delete(5)
-# h.insert(5, 5)
-# h.insert(5, 5)
-# h.insert(12, 1)
-# h.retrieve(18)
-# # h.delete(18)
+# input()
 
 # h.show()
 # h.deleteHashmap()

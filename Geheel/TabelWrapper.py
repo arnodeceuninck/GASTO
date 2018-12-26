@@ -7,7 +7,7 @@ import ADTcircularLinkedChain
 import TweeDrieBoom
 import T234
 import RBT
-# import hashmap
+import Hashmap
 import Heap
 
 # GLOBAL VARIABLES
@@ -44,6 +44,8 @@ class TabelWrapper:
             self.type = structure_type
             # return self.dataStructure
 
+            #TODO: grootte hashtabel?
+            self.grootte = 23
         if not self.type_assigned:
             return False
         elif self.type == "stack":
@@ -62,8 +64,12 @@ class TabelWrapper:
             self.dataStructure = T234.createSearchTree()
         elif self.type == "rb":
             self.dataStructure = RBT.createRBT()
-        elif self.type == "hlin" or self.type == "hquad" or self.type == "hsep":
-            self.dataStructure = Stack.createStack()
+        elif self.type == "hlin" :
+            self.dataStructure = Hashmap.createHashmap(self.grootte, 1)
+        elif self.type == "hquad":
+            self.dataStructure = Hashmap.createHashmap(self.grootte, 2)
+        elif self.type == "hsep":
+            self.dataStructure = Hashmap.createHashmap(self.grootte, 3)
         elif self.type == "heap":
             self.dataStructure = Heap.createHeap()
 
@@ -91,7 +97,7 @@ class TabelWrapper:
         elif self.type == "rb":
             return self.dataStructure.insert(KeyValueItem(key, value))
         elif self.type == "hlin" or self.type == "hquad" or self.type == "hsep":
-            return self.dataStructure.insert(key)
+            return self.dataStructure.insert(key, value)
         elif self.type == "heap":
             return self.dataStructure.insert(KeyValueItem(key, value))
 
@@ -114,8 +120,10 @@ class TabelWrapper:
             return self.dataStructure.retrieve(key).item
         elif self.type == "rb":
             return self.dataStructure.retrieve(key)[1][1]  # TODO: Why een tuple in een tuple? Fix nodig voor if None
-        elif self.type == "hlin" or self.type == "hquad" or self.type == "hsep":
-            return self.dataStructure.retrieve(key)
+        elif self.type == "hlin" or self.type == "hquad":
+            return self.dataStructure.retrieve(key) #enkel voor lin en quad, sep heeft ook item nodig
+        elif self.type == "hsep":
+            return self.dataStructure.retrieve(key, value)  # TODO: nog afmaken in de hashmap en heb hier nog wel een vraag over
         elif self.type == "heap":
             print("Retrieve is niet mogelijk bij een heap")  # Not implemented
             return False
@@ -140,8 +148,10 @@ class TabelWrapper:
             return self.dataStructure.T234Delete(key)
         elif self.type == "rb":
             return self.dataStructure.remove(key)
-        elif self.type == "hlin" or self.type == "hquad" or self.type == "hsep":
+        elif self.type == "hlin" or self.type == "hquad":
             return self.dataStructure.delete(key)
+        elif self.type == "hsep":
+            return self.dataStructure.delete(key, value)    #TODO: Zelfde opmerking als bij retrieve
         elif self.type == "heap":
             return self.dataStructure.remove() # Altijd de top die verwijderd wordt
 
@@ -164,7 +174,7 @@ class TabelWrapper:
             return self.dataStructure.destroySearchtree()
         elif self.type == "rb":
             return self.dataStructure.destroyRBT()
-        elif self.type == "hlin" or self.type == "hquad" or self.type == "hsep":
+        elif self.type == "hlin" or self.type == "hquad" or self.type == "hsep": # TODO: nog te doen
             return self.dataStructure.destroy()
         elif self.type == "heap":
             return self.dataStructure.destroy()
@@ -188,7 +198,7 @@ class TabelWrapper:
             return self.dataStructure.isEmpty(key)
         elif self.type == "rb":
             return self.dataStructure.isEmpty(key)
-        elif self.type == "hlin" or self.type == "hquad" or self.type == "hsep":
+        elif self.type == "hlin" or self.type == "hquad" or self.type == "hsep": # TODO: Nog te doen
             return self.dataStructure.isEmpty(key)
         elif self.type == "heap":
             return self.dataStructure.isEmpty(key)
@@ -223,7 +233,10 @@ class TabelWrapper:
             pass  # Not implemented
             return False
             # return self.dataStructure.getLength()
-        elif self.type == "hlin" or self.type == "hquad" or self.type == "hsep":
+        elif self.type == "hlin" or self.type == "hquad":
+            return self.grootte #TODO: Niet wat hiermee bedoeld wordt zeker? Wss gwn het aantal elementen in de hashmap?
+                                # dan is het hetzelfde als bij de hsep
+        elif self.type == "hsep":
             return self.dataStructure.getLength()
         elif self.type == "heap":
             return self.dataStructure.size()
