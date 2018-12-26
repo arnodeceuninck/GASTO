@@ -34,6 +34,13 @@ class stack:
             self.pop()
         return
 
+    def getLength(self):
+        size = 0
+        node = self.getTop()
+        while node is not None:
+            size += 1
+            node = node.below
+
 def createstack():
     return stack()
 

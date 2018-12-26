@@ -71,6 +71,7 @@ class Hashmap():
             i += 1
         print("\n")
 
+<<<<<<< HEAD
     def destroy(self):
         self.hashTable.clear()
         self.count = 0
@@ -78,6 +79,8 @@ class Hashmap():
         #     self.hashTable[i] = None
 
 
+=======
+>>>>>>> fa498c50e7292c94ab98105ba16e6f709acbf0a2
     def delete_sep(self, key):
         index = self.hashf(key)
         if self.hashTable[index].next == None:

@@ -45,5 +45,6 @@ class Toets:
             if self.verzamelingVanPunten[i].id == ID:
                 del self.verzamelingVanPunten[i]
 
+
 def createToets(puntenlijst, naam, maximum, verzamelingVanPunten):
     return Toets(puntenlijst, naam, maximum, verzamelingVanPunten)

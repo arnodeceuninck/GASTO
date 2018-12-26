@@ -207,16 +207,13 @@ class TabelWrapper:
         if not self.type_assigned:
             return False
         elif self.type == "stack":
-            pass  # Not implemented
-            return False
+            return self.dataStructure.getLength()
             # return self.dataStructure.getLength()
         elif self.type == "queue":
-            pass  # Not implemented
-            return False
+            return self.dataStructure.getLength()
             # return self.dataStructure.getLength()
         elif self.type == "bst":
-            pass  # Not implemented
-            return False
+            return self.dataStructure.size()
             # return self.dataStructure.getLength()
         elif self.type == "cl":
             return self.dataStructure.getLength()
@@ -226,12 +223,10 @@ class TabelWrapper:
             return self.dataStructure.size()
             # return self.dataStructure.getLength()
         elif self.type == "234":
-            pass  # Not implemented
-            return False
+            return self.dataStructure.size()
             # return self.dataStructure.getLength()
         elif self.type == "rb":
-            pass  # Not implemented
-            return False
+            return self.dataStructure.size()
             # return self.dataStructure.getLength()
         elif self.type == "hlin" or self.type == "hquad":
             return self.grootte #TODO: Niet wat hiermee bedoeld wordt zeker? Wss gwn het aantal elementen in de hashmap?
