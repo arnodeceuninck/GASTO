@@ -71,6 +71,9 @@ class Hashmap():
             i += 1
         print("\n")
 
+    def destroy(self):
+        for _ in len
+
     def delete_sep(self, key):
         index = self.hashf(key)
         if self.hashTable[index].next == None:
@@ -106,6 +109,14 @@ class Hashmap():
             else:
                 self.hashTable[index] = None
 
+    def isEmpty(self):
+        leeg = True
+        for i in self.hashTable:
+            if i != None:
+                leeg = False
+        return leeg
+
+
     def retrieve(self, key):
         index = self.hashf(key)
         if len(self.hashTable) == 0:
@@ -127,6 +138,9 @@ class Hashmap():
             self.hashTable[self.getPosition(key)] = treeItem
         else:
             print("Je kan maximaal %s items inserten! Item (%s, %s) is niet geinsert geweest." %(self.tableSize, key, item))
+
+
+
 
 def createHashmap(size, type):
     return Hashmap(int(size), int(type))
@@ -153,6 +167,12 @@ def lees(file, size):
                 if words[0] == "delete":
                     h.delete(int(words[1]))
 
+
+h = Hashmap(0, 1)
+print(h.isEmpty())
+h.insert(4, 5)
+h.show()
+print(h.isEmpty())
 
 # file = open("sep_test.txt", "r")
 # size = input("Hoe groot moet de hashmap worden? ")
