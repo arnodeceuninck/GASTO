@@ -241,13 +241,11 @@ class TweeDrieBoom:
                 if 3 < size < 6 and self.parent == None and len(self.root) == 1:
                     self.root.clear()
                     if len(self.childrenLeft.root) == 2:
-                        successor = self.childrenLeft.root[1]
-                        self.root.append(successor)
-                        self.childrenLeft.root.remove(successor)
+                        self.root.append(self.childrenLeft.root[1])
+                        self.childrenLeft.root.remove(self.childrenLeft.root[1])
                     elif len(self.childrenRight.root) == 2:
-                        successor = self.childrenRight.root[0]
-                        self.root.append(successor)
-                        self.childrenRight.remove(successor)
+                        self.root.append(self.childrenRight.root[0])
+                        self.childrenRight.root.remove(self.childrenRight.root[0])
                 else:
                     successor = self.inorder_successor(Treeitem)
                     if len(self.root) == 1:
@@ -451,8 +449,8 @@ class TweeDrieBoom:
                         self.parent.childrenMiddle = None
                     else:
                         if len(self.parent.root) == 2:
-                            self.root.append(self.parent.root[1])
                             self.root.append(self.parent.childrenMiddle.root[0])
+                            self.root.append(self.parent.root[1])
                             self.parent.root.remove(self.parent.root[1])
                             self.parent.childrenMiddle.root.clear()
                             self.parent.childrenMiddle = None
@@ -646,28 +644,28 @@ def create23T():
     return TweeDrieBoom()
 
 test = create23T()
-test.insertItem(TreeItem(1, 10))
-test.insertItem(TreeItem(1, 20))
-test.insertItem(TreeItem(1, 30))
+test.insertItem(TreeItem(1, 9))
+test.insertItem(TreeItem(1, 15))
+test.insertItem(TreeItem(1, 19))
 test.insertItem(TreeItem(1, 5))
-test.insertItem(TreeItem(1, 7))
-test.insertItem(TreeItem(1, 12))
-test.insertItem(TreeItem(1, 25))
-test.insertItem(TreeItem(1, 3))
-test.insertItem(TreeItem(1, 35))
-test.insertItem(TreeItem(1, 37))
-test.insertItem(TreeItem(1, 40))
+test.insertItem(TreeItem(1, 2))
+# test.insertItem(TreeItem(1, 12))
+# test.insertItem(TreeItem(1, 25))
+# test.insertItem(TreeItem(1, 3))
+# test.insertItem(TreeItem(1, 35))
+# test.insertItem(TreeItem(1, 37))
+# test.insertItem(TreeItem(1, 40))
 
 write_dot("test23T.dot", test)
-test.delete(35)
-write_dot("test23T.dot", test)
-test.delete(40)
-write_dot("test23T.dot", test)
-test.delete(10)
-write_dot("test23T.dot", test)
-test.delete(30)
+test.delete(15)
 write_dot("test23T.dot", test)
 test.delete(5)
 write_dot("test23T.dot", test)
-
+# test.delete(10)
+# write_dot("test23T.dot", test)
+# test.delete(30)
+# write_dot("test23T.dot", test)
+# test.delete(5)
+# write_dot("test23T.dot", test)
+#
 
