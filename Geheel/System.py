@@ -23,9 +23,9 @@ class system:
         # TODO: De klassen toets, rapport, puntenlijst moeten ontworpen zoals de ADT tabel.
         #  Deze klassen zijn dus een verzameling van als ik het goed begrijp
         # TODO: Fix error: alle elementen met zelfde datastructuur komen samen in eenzelfde datastructuur
-        self.punten = TabelWrapper("23")  # dit is de create # puntenlijst nog nodig om punten aan te passen
+        self.punten = TabelWrapper("rb")  # dit is de create # puntenlijst nog nodig om punten aan te passen
         self.toetsen = TabelWrapper("cl")  # TODO: verander dit terug naar cl
-        self.puntenlijst = TabelWrapper("234")  # TODO: verander terug naar bst als er een bst in Geheel zit
+        self.puntenlijst = TabelWrapper("ll")  # TODO: verander terug naar bst als er een bst in Geheel zit
         # self.puntenlijst = TabelWrapper("bst")  # Is dus eigenlijk een verzameling van alle puntenlijsten
         self.vakken = TabelWrapper("ll")  # Key = afkorting, Value = volledige naam
         self.klassen = TabelWrapper("ll")
@@ -123,11 +123,13 @@ class system:
             return False
         toets = Toets.createToets(puntenlijst, titel, maxscore, [])
         self.toetsen.insert(toets, titel)
-        puntenlijst.addToets(toets)
+        if type(puntenlijst) == tuple:
+            puntenlijst[1].addToets(toets)
+        else:
+            puntenlijst.addToets(toets)
 
     def deletePunt(self, ID):
         # verwijdert een eerder aangemaakt punt
-        #TODO: alle toetsen overlopen en de punten uit de toetsen halen
         self.toetsen.traverse(self.puntenDetect, ID)
         self.punten.delete(ID)
         return True
@@ -175,10 +177,9 @@ class system:
             #     else:
             #         nextnode = node.next
             #     node = nextnode
-        elif self.punten.type == "234":
+        elif self.punten.type == "234" or self.punten.type == "23" or self.punten.type == "bst" or self.punten.type == "rb":
             self.punten.traverse(self.collector, key)
-        elif self.punten.type == "23":
-            self.punten.traverse(self.collector, key)
+
 
         #alle punten uit de testen verwijderen
         # if self.toetsen.type == "cl":

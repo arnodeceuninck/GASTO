@@ -74,8 +74,8 @@ class RoodZwartBoom:
         # Returnt het RBTItem dat in de top van de RZB zit
         return self.root
 
-    def traverse(self, visit):
-        return self.root.inorderTraverse(visit)
+    def traverse(self, visit, key=None):
+        return self.root.inorderTraverse(visit, key)
 
     def size(self):
         if self.root == None:
@@ -655,12 +655,12 @@ class RBTNode:
         else:
             return (False, None)
 
-    def inorderTraverse(self, visit):
+    def inorderTraverse(self, visit, key):
         if self.left_tree is not None:
-            self.left_tree.inorderTraverse(visit)
-        visit(self.root.value) # Todo: test if works
+            self.left_tree.inorderTraverse(visit, key)
+        visit(self.root.value, key) # Todo: test if works
         if self.right_tree is not None:
-            self.right_tree.inorderTraverse(visit)
+            self.right_tree.inorderTraverse(visit, key)
 
     def preorderTraverse(self, visit):
         visit(self.root.value)
