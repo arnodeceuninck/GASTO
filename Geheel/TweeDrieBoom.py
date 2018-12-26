@@ -387,8 +387,8 @@ class TweeDrieBoom:
                 elif self == self.parent.childrenRight and len(self.parent.childrenLeft.root) == 2 and len(self.parent.root) == 1:
                     self.root.append(self.parent.root[0])
                     self.parent.root.clear()
-                    self.parent.root.append(self.parent.childrenRight.root[0])
-                    self.parent.childrenRight.root.remove(self.parent.childrenRight.root[0])
+                    self.parent.root.append(self.parent.childrenLeft.root[1])
+                    self.parent.childrenLeft.root.remove(self.parent.childrenLeft.root[1])
                 elif self == self.parent.childrenLeft and self.parent.childrenMiddle != None and (len(self.parent.childrenRight.root) == 2 or len(self.parent.childrenMiddle.root) == 2) and len(self.parent.root) == 2:
                     if len(self.parent.childrenRight.root) == 2:
                         self.root.append(self.parent.root[0])
@@ -661,13 +661,13 @@ test.insertItem(TreeItem(1, 40))
 write_dot("test23T.dot", test)
 test.delete(35)
 write_dot("test23T.dot", test)
-# test.delete(7)
-# write_dot("test23T.dot", test)
-# test.delete(10)
-# write_dot("test23T.dot", test)
-# test.delete(30)
-# write_dot("test23T.dot", test)
-# test.delete(5)
-# write_dot("test23T.dot", test)
+test.delete(40)
+write_dot("test23T.dot", test)
+test.delete(10)
+write_dot("test23T.dot", test)
+test.delete(30)
+write_dot("test23T.dot", test)
+test.delete(5)
+write_dot("test23T.dot", test)
 
 
