@@ -47,6 +47,11 @@ class TweeDrieBoom:
             return True
 
     def insertItem(self, TreeItem):
+        size = self.size()
+        if size > 0:
+            check = self.zoek(TreeItem.key, False)  # checkt of het element in de 23T zit
+            if check[0] == True:
+                return False
         if len(self.root) == 0 and self.parent == None:
             self.root.append(TreeItem)
         elif len(self.root) == 0:
