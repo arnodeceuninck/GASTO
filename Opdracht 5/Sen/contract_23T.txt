@@ -16,12 +16,12 @@
 // Postcondition: De method returnt false indien de 23T elementen bevat. Als de 23T
 // geen elementen bevat, zal je een true terugkrijgen.
 
-+insertItem(in tree:TwoThreeTree, in newItem: TreeItemType)
++insertItem(in tree:TwoThreeTree, in newItem: TreeItemType) boolean
 // Precondition: Je wilt een nieuw element toevoegen aan de 2-3 boom.
 // Postcondition:  Voegt newItem toe in een 2-3 boom tree. Alle zoeksleutels in tree zijn
-// verschillend en verschillen ook van de zoeksleutel van newItem.
+// verschillend en verschillen ook van de zoeksleutel van newItem. Geeft False terug als het item al in de 23T zit.
 
-split(in n: TreeNode)
++split(in n: TreeNode)
 // Precondition: Je wilt de knopen splitsen die 3 items bevatten en geen blad zijn.
 // Postcondition: Splitst de knoop n, die 3 items bevat, op. Als n geen blad is, dan heeft n
 // 4 kinderen.
@@ -37,12 +37,41 @@ split(in n: TreeNode)
 // herverdelen van items of het samenvoegen van knopen. Indien n geen blad is,
 // heeft n 1 kind.
 
-inorder(in tree: TwoThreetree)
++inorder_successor(in n: TreeNode, in item: TreeItem)
+// Precondition: Je wilt de inorder successor gaan zoeken voor het element TreeItem:
+// Postcondition: Geeft de inorder successor terug.
+
++LeftElement(in n: TreeNode) TreeNode
+// Precondition: Je wilt de meest linkse node hebben.
+// Postcondition: Geeft de meest linkse node terug.
+
++zoek(in n: TreeNode, in searchKey: KeyType, boolean) (TreeItem, boolean)
+// Precondition: Je wilt een element gaan zoeken in de 23T.
+// Postcondition: Geeft een tuple terug met de True waarde en het TreeItem als het in de 23T zit.
+// Geeft een tuple terug met False en None terug als het TreeItem niet in de 23T zit.
+
++Size(in tree: TwoThreetree)
+// Precondition: Je wilt het aantal elementen in de 23T weten:
+// Postcondition: Geeft het aantal elementen terug.
+
++getIndex(in item: TreeItem, in index: index)
+// Precondition: Je wilt de index weten van een TreeItem.
+// Postcondition: Geeft de index van een bepaald TreeItem terug.
+
++traverse(in tree: TwoThreetree)
 // Precondition: Je wilt de 2-3 boom inorder doorlopen.
 // Postcondition: doorloopt de niet-lege 2-3 boom tree in volgorde van de zoeksleutels
 
-retrieveItem( in tree: TwoThreetree, in searchkey: KeyType) (boolean, treeItem: TreeItemType)
++retrieve( in tree: TwoThreetree, in searchkey: KeyType) (boolean, treeItem: TreeItemType)
 // Precondition: Je wilt een item uit de 2-3 boom halen.
 // Postcondition: Plaatst het item met zoeksleutel searchKey uit de niet-lege 2-3 boom tree
 // in treeItem. De functie geeft de waarde true als het item gevonden is en
 // false als het niet aanwezig is.
+
++write_dot( in file: Filename, in tree: TwoThreetree)
+// Precondition: Je wilt een dotfile maken met daarin de 23T.
+// Postcondition: Geeft een dotfile terug met de naam file, met daarin de 23T.
+
++dot(in current: TreeNode, in parent: None, in file: Filename)
+// precondition: Je wilt de 23T overlopen en dan in de dotfile schrijven.
+// Postcondition: Overloopt de 23T inorder en schrijft die dan vervolgens in de dotfile.
