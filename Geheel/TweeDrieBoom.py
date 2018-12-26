@@ -519,12 +519,12 @@ class TweeDrieBoom:
     def inorderTraverse(self, visit, key=None):    #todo check
         if self.childrenLeft != None:
             self.childrenLeft.inorderTraverse(visit, key)
+        if len(self.root) >= 1:
+            visit(self.root[0].value, key)
         if self.childrenMiddle != None:
-            visit(self.root[0].value, key)
             self.childrenMiddle.inorderTraverse(visit, key)
+        if len(self.root) == 2:
             visit(self.root[1].value, key)
-        else:
-            visit(self.root[0].value, key)
         if self.childrenRight != None:
             self.childrenRight.inorderTraverse(visit, key)
 

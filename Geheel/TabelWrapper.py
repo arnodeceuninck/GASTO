@@ -213,8 +213,7 @@ class TabelWrapper:
         elif self.type == "ll":
             return self.dataStructure.getLength()
         elif self.type == "23":
-            pass  # Not implemented
-            return False
+            return self.dataStructure.size()
             # return self.dataStructure.getLength()
         elif self.type == "234":
             pass  # Not implemented
