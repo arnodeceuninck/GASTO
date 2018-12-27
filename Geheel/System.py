@@ -25,14 +25,13 @@ class system:
         # TODO: Fix error: alle elementen met zelfde datastructuur komen samen in eenzelfde datastructuur
         self.punten = TabelWrapper("ll")  # dit is de create # puntenlijst nog nodig om punten aan te passen
         self.puntenQueue = TabelWrapper("queue")
-        self.toetsen = TabelWrapper("cl")  # TODO: verander dit terug naar cl
-        self.puntenlijst = TabelWrapper("ll")  # TODO: verander terug naar bst als er een bst in Geheel zit
-        # self.puntenlijst = TabelWrapper("bst")  # Is dus eigenlijk een verzameling van alle puntenlijsten
+        self.toetsen = TabelWrapper("cl")
+        self.puntenlijst = TabelWrapper("bst")
         self.vakken = TabelWrapper("ll")  # Key = afkorting, Value = volledige naam
         self.klassen = TabelWrapper("ll")
         self.leraars = TabelWrapper("ll")
         self.leerlingen = TabelWrapper("ll")
-        self.rapporten = TabelWrapper("ll")
+        self.rapporten = TabelWrapper("234")
         self.instructies = TabelWrapper("stack")  # NOTE: Don't change this ADT
         self.undoPuntStack = TabelWrapper("ll")  # Dit bevat als zoeksleutel een leerkracht, als value een stack
 
@@ -176,57 +175,8 @@ class system:
             print("ERROR: Klas" + naam + "Zit niet in het systeem")
 
     def deleteLeerling(self, key):
-        # TODO: elke datastructuur toevoegen aan de delete
-
         # de punten die gelinkt zijn aan het stamboom nummer verwijderen
-
-        # TODO: verwijder heel het comment block hieronder
         self.punten.traverse(self.collector, key)
-            # node = self.punten.dataStructure.head.next
-            # for x in range(self.punten.dataStructure.count):
-            #     if node.value.getStamboekNummer() == key:
-            #         nextnode = node.next
-            #         self.deletePunt(self.punten.dataStructure.findIndexValue(node.value.getID()))
-            #         node = nextnode
-            #     else:
-            #         node = node.next
-        #self.punten.traverse(self.collector, key)
-            # node = self.punten.dataStructure.dummy.next
-            # while node is not None:
-            #     if node.value.getStamboekNummer == key:
-            #         nextnode = node.next
-            #         self.deletePunt(node.value.getID())
-            #     else:
-            #         nextnode = node.next
-            #     node = nextnode
-        #elif self.punten.type == "234" or self.punten.type == "23" or self.punten.type == "bst" or self.punten.type == "rb" or self.punten.type == "hlin" or self.punten.type == "hquad":
-            #self.punten.traverse(self.collector, key)
-        #
-        # # alle punten uit de testen verwijderen
-        # # if self.toetsen.type == "cl":
-        # #     node = self.toetsen.dataStructure.head.next
-        # #     for x in range(self.toetsen.dataStructure.count):
-        # #         for i in range(len(node.value.verzamelingVanPunten)-1):
-        # #             if node.value.verzamelingVanPunten[i].getStamboekNummer == key:
-        # #                 del node.value.verzamelingVanPunten[i]
-        # #         node = node.next
-        # # elif self.toetsen.type == "ll":
-        # #     node = self.toetsen.dataStructure.dummy.next
-        # #     while node is not None:
-        # #         for i in range(len(node.value.verzamelingVanPunten)-1):
-        # #             if node.value.getStamboekNummer[i].getStamboekNummer == key:
-        # #                 del node.verzamelingVanPunten[i]
-        # #         node = node.next
-        #
-
-        # puntenToRemove = []
-        # for punt in self.punten:
-        #     if punt[1].getStamboekNummer == key:
-        #         puntenToRemove.append(punt[0])
-        # for punt in puntenToRemove:
-        #     self.punten.delete(punt)
-
-
         self.leerlingen.delete(key)
 
     def deletePuntenlijst(self, key):
@@ -247,7 +197,6 @@ class system:
         self.punten.destroy()
 
     def collector(self, item, key):
-        #TODO: veel efficienter maken
         if item is not None and item.getStamboekNummer() == key:
             self.deletePunt(item.getID())
             if self.punten.type != "hlin":
@@ -335,9 +284,6 @@ class system:
 
         rapport.buildfile()
 
-    # def printPunt(self):    #todo moet dit want want een dot file maken van 1 waarde is toch nutteloos?
-    #     return self.punten.Print()
-
     def buildRapport(self, samengestelde_zoeksleutel, klas):  # Bv. voor "M2"
         # TODO: fix nested for loops
         punten_per_leerling = []  # structuur: [[jan, [wiskunde, 7, 3, 5]]] # 7u, 3/5
@@ -407,6 +353,9 @@ class system:
             resultaten.append(["Totaal", "", "", totaal])
             rapportFile.addStructure(HtmlMaker.HtmlTable(resultaten))
         rapportFile.buildfile()
+
+    def printPunt(self):
+        return self.punten.Print()
 
     def printToets(self):
         return self.toetsen.Print()

@@ -119,7 +119,7 @@ class DGL:
                 node = node.next
 
     def print(self, nummer):
-        f = open("234-" + str(nummer) + ".dot", "w")
+        f = open("ll-" + str(nummer) + ".dot", "w")
         f.write("digraph 234{")
         f.write(str("node [shape=record];") + '\n' + "rankdir=LR;" + '\n')
         #f.write(str("edge[splines=" + "line" + "];" + '\n'))

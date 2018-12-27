@@ -660,25 +660,25 @@ class T234:
 
     def retrieve(self, key):
         if self.item1 is not None and self.item1.key == key:
-            return self.item1
+            return (True, self.item1.item)
         elif self.item2 is not None and self.item2.key == key:
-            return self.item2
+            return (True, self.item2.item)
         elif self.item3 is not None and self.item3.key == key:
-            return self.item3
+            return (True, self.item3.item)
         elif self.left is not None and key < self.item1.key:
-            self.left.retrieve(key)
+            return self.left.retrieve(key)
 
         elif self.mleft is not None and (self.item2 is None or key < self.item2.key):
-            self.mleft.retrieve(key)
+            return self.mleft.retrieve(key)
 
         elif self.mright is not None and (self.item3 is None or key < self.item3.key):
-            self.mright.retrieve(key)
+            return self.mright.retrieve(key)
 
         elif self.right is not None:
-            self.right.retrieve(key)
+            return self.right.retrieve(key)
 
         else:
-            return TreeItem(None, None)
+            return (False, None)
 
     def getRoot(self):
         if self.item1 is None:

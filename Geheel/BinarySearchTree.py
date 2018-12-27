@@ -104,17 +104,17 @@ class BinarySearchTree:
         """
         # base case
         if self.root.key == searchKey:
-            return self.root.item # item found
+            return (True, self.root.item) # item found
         elif searchKey < self.root.key:
             if self.left == None:
-                return False # item not found
+                return (False, None) # item not found
             else:
-                self.left.searchTreeRetrieve(searchKey)
+                return self.left.searchTreeRetrieve(searchKey)
         elif searchKey >= self.root.key:  # Or equals? Is a search key unique?
             if self.right == None:
-                return False # item not found
+                return (False, None) # item not found
             else:
-                self.right.searchTreeRetrieve(searchKey)
+                return self.right.searchTreeRetrieve(searchKey)
 
     def preorderTraverse(self):
         if(not self.isEmpty()):
@@ -215,20 +215,20 @@ class TreeItem:
 
 #ItemsToInsert = [561, 23, 624, 26, 324, 743, 11, 874, 325, 634]
 #ItemsToInsert = [10, 5, 15, 2, 7, 13, 17, 1, 3, 6, 8, 12, 14, 16, 18, 11]
-ItemsToInsert = [12, 11, 13, 10.5,11.5, 11.75, 11.25]
-sample_tree = BinarySearchTree(None, None, None)
-
-vgraph = Graph()
-vgraph.change_rankdir("TB")
-
-for item in ItemsToInsert:
-    sample_tree.searchTreeInsert(TreeItem(item, item))
-
-
-# sample_tree.searchTreeDelete(12)
-
-
-sample_tree.preorderTraverse()
-
-sample_tree.createVisualisation(vgraph)
-vgraph.rebuild_file()
+# ItemsToInsert = [12, 11, 13, 10.5,11.5, 11.75, 11.25]
+# sample_tree = BinarySearchTree(None, None, None)
+#
+# vgraph = Graph()
+# vgraph.change_rankdir("TB")
+#
+# for item in ItemsToInsert:
+#     sample_tree.searchTreeInsert(TreeItem(item, item))
+#
+#
+# # sample_tree.searchTreeDelete(12)
+#
+#
+# sample_tree.preorderTraverse()
+#
+# sample_tree.createVisualisation(vgraph)
+# vgraph.rebuild_file()
