@@ -1,0 +1,110 @@
+// Puntenlijst
+// verantwoordelijke implementeren: Arno
+// verantwoordelijke testen: Tim
+
+// Een lijst die een aantal punten bevat. De punten zijn allemaal voor hetzelfde vak,
+// hetzelfde type (E, M ...) en dezelfde periode (bv. 1, 2 ...).
+
++createPuntenLijst(in id: integer, in type: char, in periode: integer, in namecodes: string or tuple, in vakcode: string, in klas: string, in uren: integer, in toetsen: array): boolean
+// Precondition: Je wil voor een vak in een nieuwe periode
+// een nieuwe puntnlijst aanmaken. de paramter id is een unieke ID voor deze PuntenLijst.
+// het type is ofwel M (maandresultaten) of E (examenresultaten). De periode is een getal
+// dat aanduidt van welke periode de resultaten zijn. Namecodes is de 5 letterige
+// combinatie van de leeraar die het vak geeft. Indien dit meerdere leeraren zijn
+// worden de naamcodes doorgegeven als tuple. De vakcode is een code die bestaat
+// uit drie letters en uniek is voor ieder vak. De klas is de klas waarvan de
+// resultaten zijn. Uren is het aantal uren per week dat het vak gegeven wordt.
+// Toetsen is een array die bestaat uit een aantal toetsen. Deze toetsen moeten
+// horen bij de andere gegevens van de puntenlijst. Ze moeten dus allemaal voor
+// dezelfde klas zijn, van hetzelfde type, periode en van hetzelfde vak zijn.
+// Postconditions: Indien het aanmaken gelukt is bevat de gereturnde value true.
+// In dit geval is er dus een puntenlijst aangemaakt met als bijhorende info de
+// meegegeven parameters.
+
++addToets(in toets: toets) boolean
+// Precondition: een toets die je wilt toegevoegen waarbij het type, de periode,
+// de vakcode en de klas overeenkomen met de andere toetsen in de puntenlijst.
+// Postcondition: De toets is toegevoegd aan de lijst met toetsen, indien de
+// return-value true is.
+
++getID(): integer
+// Precondition: Je wil het id van de puntenlijst weten.
+// Postcondition: De gereturnde value is het id van de puntenlijst.
+
++setID(in id: integer): boolean
+// Precondition: Je wil het huidige id van een puntenlijst veranderen naar de paramter id.
+// Postcondition: Als de waarde die gereturnd wordt true is, dan is het id van de
+// puntenlijst succesvol verandert in id.
+
++getType(): char
+// Precondition: Je wil het type van de puntenlijst weten.
+// Postcondition: De gereturnde value is het type van de puntenlijst.
+
++setType(in type: char): boolean
+// Precondition: Je wil het type van een puntenlijst veranderen naar type.
+// Postcondition: Als de waarde die gereturnd wordt true is, dan is het type van de
+// puntenlijst succesvol verandert in type.
+
++getPeriode(): integer
+// Precondition: Je wil het periode van de puntenlijst weten.
+// Postcondition: De gereturnde value is het periode van de puntenlijst.
+
++setPeriode(in periode: integer): boolean
+// Precondition: Je wil het periode van een puntenlijst veranderen naar periode.
+// De periode is een getal dat aanduidt van welke periode de resultaten zijn.
+// Postcondition: Als de waarde die gereturnd wordt true is, dan is het periode van
+// de puntenlijst succesvol verandert in periode.
+
++getNamecodes(): tuple
+// Precondition: Je wil het namecodes van de puntenlijst weten.
+// Postcondition: De gereturnde value is het namecodes van de puntenlijst.
+
++setNamecodes(in namecodes: tuple or string): boolean
+// Precondition: Je wil het namecodes van een puntenlijst veranderen naar namecodes.
+// Namecodes worden doorgegeven in een tuple indien het vak door meerdere leraren
+// gegeven wordt. De naamcodes van elke leerkracht is steeds een string van 5
+// karakters.
+// Postcondition: Als de waarde die gereturnd wordt true is, dan is het namecodes van
+// de puntenlijst succesvol verandert in namecodes.
+
++getVakcode(): string
+// Precondition: Je wil het vakcode van de puntenlijst weten.
+// Postcondition: De gereturnde value is de vakcode van de puntenlijst.
+
++setVakcode(in vakcode: string): boolean
+// Precondition: Je wil het vakcode van een puntenlijst veranderen naar vakcode.
+// Een vakcode is een code die bestaat uit drie letters en uniek is voor ieder vak.
+// Postcondition: Als de waarde die gereturnd wordt true is, dan is het vakcode van
+// de puntenlijst succesvol verandert in vakcode.
+
++getKlas(): string
+// Precondition: Je wil het klas van de puntenlijst weten.
+// Postcondition: De gereturnde value is het klas van de puntenlijst.
+
++setKlas(in klas: string): boolean
+// Precondition: Je wil het klas van een puntenlijst veranderen naar klas. Klas is de
+// klas waarvan de resultaten zijn. Houd bij het aanpassen hiervan er rekening mee
+// dat alle toetsen in deze instantie dan ook van deze aangepaste klas moeten zijn.
+// Postcondition: Als de waarde die gereturnd wordt true is, dan is het klas van
+// de puntenlijst succesvol verandert in klas.
+
++getUren(): integer
+// Precondition: Je wil het uren van de puntenlijst weten.
+// Postcondition: De gereturnde value is het uren van de puntenlijst.
+
++setUren(in uren: integer): boolean
+// Precondition: Je wil het uren van een puntenlijst veranderen naar uren. Uren is
+// het aantal uren per week dat het vak gegeven wordt.
+// Postcondition: Als de waarde die gereturnd wordt true is, dan is het uren van
+// de puntenlijst succesvol verandert in uren.
+
++getToetsen(): array
+// Precondition: Je wil het aantal toetsen van de puntenlijst weten.
+// Postcondition: De gereturnde value is het aantal toetsen van de puntenlijst.
+
++setToetsen(in toetsen: array): boolean
+// Precondition: Je wil het toetsen van een puntenlijst veranderen naar toetsen.
+// Toetsen is een array die bestaat uit een aantal toetsen. Deze toetsen moeten horen
+// bij de andere gegevens van de puntenlijst.
+// Postcondition: Als de waarde die gereturnd wordt true is, dan is het toetsen van
+// de puntenlijst succesvol verandert in toetsen.

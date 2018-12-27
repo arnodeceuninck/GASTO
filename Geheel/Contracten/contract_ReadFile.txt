@@ -1,0 +1,19 @@
+//lees instructies
+// verantwoordelijke implementeren: Sen
+// verantwoordelijke testen: Rob
+
+//Deze classe leest een input bestand in en selecteerd dan de juiste ADT die uitgevoerd moet worden, 
+//met de bijbehorende operaties die uitgevoerd moeten worden.
+
++actiefSysteem(geheel: geheel)
+// Precondition: Geen
+// Postcondition: Geeft None terug indien het systeem niet ge activeerd is via init.
+
++readFile(file: .txt)
+// Precondition: Je wilt een bestand inlezen.
+// Postcondition: Leest het bestand in.
+
++readLine(line: line, geheel, geheel) geheel: geheel
+// Precondition: geen
+// Postcondition: seleceteerd de juiste operatie om uit te voeren.
+

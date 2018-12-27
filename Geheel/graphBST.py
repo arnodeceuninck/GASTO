@@ -69,5 +69,5 @@ class connection:
 
 graph = Graph()
 graph.add_node("a", ["yolo", "haha"], "Mrecord")
-graph.add_connection("a", "b", "arrow")
+graph.add_connection("a", "b", 0)
 graph.rebuild_file()

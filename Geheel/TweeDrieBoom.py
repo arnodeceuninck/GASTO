@@ -577,6 +577,9 @@ class TweeDrieBoom:
             size += self.childrenRight.size()
         return size
 
+    def print(self, filename):
+        return write_dot(filename, self)
+
 
 class TreeItem(object):
     def __init__(self, value, key):

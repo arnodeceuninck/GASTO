@@ -238,12 +238,14 @@ class TabelWrapper:
             return self.dataStructure.print(name)
         elif self.type == "bst":
             return self.dataStructure.print(name)
+            return self.dataStructure.print()
         elif self.type == "cl":
             return self.dataStructure.visualize()
         elif self.type == "ll":
             return self.dataStructure.print(name)
         elif self.type == "23":
             return self.dataStructure.write_dot(name, self.dataStructure)
+            return self.dataStructure.print("23.dot")
         elif self.type == "234":
             return self.dataStructure.print(name)
         elif self.type == "rb":

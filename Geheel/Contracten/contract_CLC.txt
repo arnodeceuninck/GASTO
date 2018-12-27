@@ -1,0 +1,59 @@
+// CLC: Circular Linked Chain
+// verantwoordelijke implementeren: Arno
+// verantwooedelijke testen: Sen
+
+// Een circular linked chain is een ADT die gebasseerd is op een gelinkte ketting.
+// Het verschil met een gelinkte ketting is dat het laatste element van deze ketting
+// niet een nullptr bevat, maar terug naar het eerste element verwijst.
+// Zo kan je makkelijk blijven lopen 
+
++createList()
+// Precondition: Je wilt een nieuwe CLC aanmaken.
+// Postcondition: Er is een nieuwe lege CLC aangemaakt met alle default waarden.
+ 
++destroyList()
+// Precondition: De CLC bestaat en moet verwijderd worden.
+// Postcondition: De CLC bestaat niet meer. Alle elementen ervan zijn verwijderd.
+
++isEmpty(): boolean 
+// Precondition: De queue bestaat en je wil weten of er elementen inzitten.
+// Postcondition: De method returnt true indien de queue elementen bevat.
+// als de queue geen elementen bevat zal je een false terugkrijgen.
+
++getLength(): integer
+// Precondition: De CLC bestaat en je wil er de lengte van weten.
+// Postcondition: De integer die gereturnd wordt is gelijk aan het aantal elementen in de CLC.
+
++insert(in key: integer, in newitem: ListItemType): boolean
+// Precondition: newItem is het item dat je wil toevoegen, van het zelfde datatype
+// als de andere elementen in de CLC. De index is de plaats waar je het element hebt toegevoegd. 
+// Postcondition: Indien er true gereturnd wordt is het element toegevoegd op index
+// index in de CLC. Van alle elementen die op een hogere index zaten is de index 
+// gestegen met 1.
+
++delete(in key: integer): boolean
+// Precondition: De CLC bevat een element op index index dat je wil verwijderen.
+// Postcondition: Het element op index index is verwijderd. Van alle elementen die op
+// een hogere index zaten is de index gedaald met 1.
+
++findIndexAlphaValue(in key) index: integer
+// precondition: Je wilt de index weten van een element met de key: key.
+// Postcondition: Geeft de indedx terug van het element met de key: key.
+
++findIndexValue(string: key) index
+// precondition: Je wilt de index weten van een element met de key: string.
+// Postcondition: Geeft de indedx terug van het element met de key: string.
+
++retrieve(in key: integer) (boolean, value: valueTreeitem)
+// Precondition: Je wilt de value weten van een element met de key: key.
+// Postcondition: Geeft een tuple terug met daarin True als het element aanwezig is in de clc
+// en de value van het element. Geeft een tuple terug van False en None indien het elenent
+// niet aanwezig is in de clc.
+
+visualize()
+// Precondition: Je wilt een dotfile genereren van de clc.
+// Postcondition: Maakt een dotfile aan met daarin de clc.
+
+traverse(visit: function, key: integer or None)
+// Precondition: Je wilt door de clc lopen.
+// Postcondition: Doorloopt de clc.

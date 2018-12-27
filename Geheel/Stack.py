@@ -1,3 +1,5 @@
+from Graph import *
+
 class Node:
     def __init__(self, value):
         self.value = value
@@ -55,10 +57,19 @@ class stack:
         return size
 
     def print(self):
+        # Maakt een .dot file met daarin een visuele representatie van de boom (in .dot language)
+        vgraph = Graph("Stack")
+        vgraph.change_rankdir("TB")  # Bomen worden meestal van Top to Bottem getoond
+
         node = self.stackpointer
         while node is not None:
-            print(str(node.value))
+            vgraph.add_node(node.value, node.value)
+            if node.below != None:
+                vgraph.add_connection(node.value, node.below.value)
             node = node.below
+
+        # Alle nodes en verbindingen zijn nu toegevooegd aan vgraph, maak er nu dus het bestand zelf van
+        vgraph.rebuild_file()
 
 def createstack():
     return stack()
