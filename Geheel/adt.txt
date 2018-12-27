@@ -21,8 +21,10 @@ delete 5
 # dit maakt een bestand 23-1.dot
 print
 
-type=stack
+type=queue
 insert 5
+insert 2
+insert 3
 insert 6
 delete
 # dit maakt een bestand stack-1.dot
