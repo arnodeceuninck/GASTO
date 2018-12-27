@@ -40,16 +40,16 @@ class Hashmap():
             self.index += 1
             return index_place.key, index_place.item
 
-    def getLength(self):
-        size = 0
-        for i in range(self.tableSize):
-            if self.type == "hsep":
-                if self.hashTable[i] != None:
-                    size += len(self.hashTable[i])
-            else:
-                if self.hashTable[i] != None:
-                    size += 1
-        return size
+    # def getLength(self):
+    #     size = 0
+    #     for i in range(self.tableSize):
+    #         if self.type == "hsep":
+    #             if self.hashTable[i] != None:
+    #                 size += len(self.hashTable[i])
+    #         else:
+    #             if self.hashTable[i] != None:
+    #                 size += 1
+    #     return size
 
     def hashf(self, key):
         num = 0
@@ -134,7 +134,7 @@ class Hashmap():
             return " | " + i
 
     def size(self):
-        print(self.count)
+        return self.count
 
     def show(self):
         i = 0

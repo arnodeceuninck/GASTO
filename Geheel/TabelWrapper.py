@@ -17,8 +17,8 @@ class TabelWrapper:
     def __init__(self, structure_type):  # structure_type is een string
         self.type = None
         self.dataStructure = None
-        self.create(structure_type)
         self.grootte = 211
+        self.create(structure_type)
 
     # Currently datastructures supporting iterators: cl, ll, rb, heap
     # !!! Alle iterators returnen een tuple (key, value)
@@ -63,7 +63,7 @@ class TabelWrapper:
             self.dataStructure = T234.createSearchTree()
         elif self.type == "rb":
             self.dataStructure = RBT.createRBT()
-        elif self.type == "hlin" :
+        elif self.type == "hlin":
             self.dataStructure = Hashmap.createHashmap(self.grootte, 1)
         elif self.type == "hquad":
             self.dataStructure = Hashmap.createHashmap(self.grootte, 2)
@@ -227,13 +227,13 @@ class TabelWrapper:
         elif self.type == "rb":
             return self.dataStructure.size()
             # return self.dataStructure.getLength()
-<<<<<<< HEAD
+# <<<<<<< HEAD
         elif self.type == "hlin" or self.type == "hquad" or self.type == "hsep":
             return self.dataStructure.size()
-=======
+# =======
         elif self.type == "hsep"or self.type == "hlin" or self.type == "hquad":
             return self.dataStructure.getLength()
->>>>>>> 24972d1490288eba26847bc05c039d9122ba896b
+# >>>>>>> 24972d1490288eba26847bc05c039d9122ba896b
         elif self.type == "heap":
             return self.dataStructure.size()
 
