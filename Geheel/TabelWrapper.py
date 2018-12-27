@@ -26,7 +26,7 @@ class TabelWrapper:
     # https://www.w3schools.com/python/python_iterators.asp
     def __iter__(self):
         self.iterator = iter(self.dataStructure)
-        return self.iterator
+        return self
     def __next__(self):
         return next(self.iterator)
 

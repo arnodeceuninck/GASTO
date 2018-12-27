@@ -1,39 +1,10 @@
 # Bestand voor Command Line Interface
 
 from System import *
+from ReadFile import *
 
-geheel = system()
 
-# init
-geheel.addVak("WIS", "Wiskunde")
-geheel.addVak("NED", "Nederlands")
-
-geheel.addKlas("6WEWI")
-
-geheel.addLeraar("HOFKT", "Tom", "Hofkens")
-geheel.addLeraar("PAUWS", "Stephen", "Pauwels")
-geheel.addLeraar("LAENE", "Els", "Laenens")
-
-geheel.addLeerling("Doe", "Jane", "6WEWI", "1", "1800001")
-geheel.addLeerling("Doe", "John", "6WEWI", "2", "1800002")
-
-geheel.addPuntenLijst("1", "M", "1", "HOFKT,PAUWS", "WIS", "6WEWI", "7")
-geheel.addPuntenLijst("2", "M", "1", "LAENE", "NED", "6WEWI", "4")
-
-# start
-geheel.addToets("1", "afgeleiden", "10")
-geheel.addToets("1", "integralen", "20")
-
-geheel.addToets("2", "opstel", "5")
-
-geheel.addPunt("1800001", "afgeleiden", "5", "HOFKT")
-geheel.addPunt("1800002", "afgeleiden", "9", "HOFKT")
-geheel.addPunt("1800001", "integralen", "15", "PAUWS")
-geheel.addPunt("1800002", "integralen", "19", "PAUWS")
-geheel.addPunt("1800001", "opstel", "5", "LAENE")
-geheel.addPunt("1800002", "opstel", "2", "LAENE")
-
-geheel.buildRapport("M1", "6WEWI")
+geheel = readFile("system.txt", None)
 
 # #### Starting #### #
 
@@ -41,7 +12,7 @@ print("\nWelkom!")
 
 while True:
 
-    input_str = input("\n(1) Info Opvragen, (2) Data toevoegen, (3) Data verwijderen, (e) Exit" + '\n')
+    input_str = input("\n(1) Info Opvragen, (2) Data toevoegen, (3) Data verwijderen, (4) Save, (e) Exit" + '\n')
 
     if input_str == "e":
         break  # Verlaat de While loop -> exit het programma
@@ -63,29 +34,33 @@ while True:
         # TODO: checken of dotfile gegenereerd wordt
         if input_str == "1":
             geheel.printVak()
-            print(str(geheel.retrieveVak(input("Afkorting: "))))
+            print(str(geheel.retrieveVak(input("Afkorting: "))[1]))
         elif input_str == "2":
             geheel.printKlas()
-            print(str(geheel.retrieveKlas(input("ID: "))))
+            print(str(geheel.retrieveKlas(input("ID: "))[1]))
         elif input_str == "3":
             geheel.printLeraar()
-            print(str(geheel.retrieveLeeraar(input("Afkorting: "))))
+            print(str(geheel.retrieveLeeraar(input("Afkorting: "))[1]))
         elif input_str == "4":
             geheel.printLeerling()
-            print(str(geheel.retrieveLeerling(input("ID: "))))
+            print(str(geheel.retrieveLeerling(input("ID: "))[1]))
         elif input_str == "5":
             geheel.printPuntenlijst()
-            print(str(geheel.retrievePuntenlijst(input("ID: "))))
+            print(str(geheel.retrievePuntenlijst(input("ID: "))[1]))
         elif input_str == "6":
             geheel.printToets()
-            print(str(geheel.retrieveToets(input("Naam: "))))
+            print(str(geheel.retrieveToets(input("Naam: "))[1]))
         elif input_str == "7":
-            print(str(geheel.retrievePunt(input("ID: "))))
+            print(str(geheel.retrievePunt(input("ID: "))[1]))
         elif input_str == "8":
             geheel.buildRapport(input("Samengestelde zoeksleutel TP: "), input("Klas: "))
             print("Done. Je kan het rapport terugvinden tussen je bestanden.")
         elif input_str == "9":
-            geheel.printInstructies()
+            leerkr = input("Leerkracht (leave empty for all instr.): ")
+            if leerkr == "":
+                geheel.printInstructies()
+            else:
+                geheel.printInstructies(leerkr)
         elif input_str == "c":
             continue  # Ga terug naar het begin van de While-loop
 
@@ -168,4 +143,7 @@ while True:
         elif input_str == "c":
             continue  # Ga terug naar het begin van de While-loop
         pass
+
+    elif input_str == "4":
+        geheel.save("system.txt")
 

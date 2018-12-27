@@ -13,12 +13,13 @@ import HtmlMaker
 
 # Hier geen ADT Tabellen importeren! Dit gebeurt via TabelWrapper
 from TabelWrapper import *
+from ReadFile import *
 
 
 # Todo: retrieve info over de testen geven
 
 
-class system:
+class System:
     def __init__(self):
         # TODO: De klassen toets, rapport, puntenlijst moeten ontworpen zoals de ADT tabel.
         #  Deze klassen zijn dus een verzameling van als ik het goed begrijp
@@ -34,6 +35,8 @@ class system:
         self.rapporten = TabelWrapper("234")
         self.instructies = TabelWrapper("stack")  # NOTE: Don't change this ADT
         self.undoPuntStack = TabelWrapper("ll")  # Dit bevat als zoeksleutel een leerkracht, als value een stack
+        self.instructies.insert("init")
+        self.redoStack = TabelWrapper("stack")
 
     def addVak(self, afkorting, naam):
         self.instructies.insert("vak " + str(afkorting) + " " + str(naam))
@@ -50,7 +53,7 @@ class system:
         return return_value
 
     def addLeerling(self, naam, voornaam, klas, klasnummer, studentennummer):
-        self.instructies.insert("leeling " + str(voornaam) + " " + str(naam) + " " + str(klas) + " " +
+        self.instructies.insert("leerling " + str(voornaam) + " " + str(naam) + " " + str(klas) + " " +
                                 str(klasnummer) + " " + str(studentennummer))
         if self.leerlingen.retrieve(studentennummer)[0] is not False:
             print("De gegeven studenten nummer is al in gebruik")
@@ -333,7 +336,9 @@ class system:
         rapportFile = HtmlMaker.HtmlRapport(
             str("rapport-" + str(samengestelde_zoeksleutel) + "-" + str(klas) + ".html"))
         for leerling in punten_per_leerling:
-            gegevens_leerling = self.leerlingen.retrieve(leerling[0])[1]
+            studentennr = leerling[0]
+            gegevens_leerling = self.leerlingen.retrieve(studentennr)
+            gegevens_leerling = gegevens_leerling[1]
             klas = gegevens_leerling.getKlas()
             voornaam = gegevens_leerling.getVoornaam()
             naam = gegevens_leerling.getNaam()
@@ -387,8 +392,16 @@ class system:
     def printVak(self):
         return self.vakken.Print()
 
-    def printInstructies(self):
+    def printInstructies(self, teacher=None):
+        if teacher != None:
+            return self.undoPuntStack.retrieve(teacher)[1].Print()
         return self.instructies.Print()
+
+    def redo(self):
+        instructie = self.redoStack.retrieve()
+        print("Redo: " + instructie)
+        self = readLine(instructie, self)
+        self.redoStack.delete()
 
     def undo(self, leerkr=None):
         if leerkr != None:
@@ -396,6 +409,7 @@ class system:
             vorige_instructie = self.leerkr_stack.retrieve()
         else:
             vorige_instructie = self.instructies.retrieve()
+        self.redoStack.insert(vorige_instructie)
         print("Undo: " + vorige_instructie)
         words = vorige_instructie.split(' ')
 
@@ -436,3 +450,11 @@ class system:
             self.instructies.delete()
         else:
             self.leerkr_stack.delete()
+
+    def save(self, filename):
+        filestring = ""
+        for instuction in self.instructies:
+            filestring = str(instuction) + "\n" + filestring
+        file = open(filename, 'w+')
+        file.write(filestring)
+        file.close()

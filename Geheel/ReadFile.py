@@ -1,29 +1,27 @@
-from System import *
+import System
 import sys
 
-# if len(sys.argv) != 2:
-#     print('Usage: adts.py <inputfile>')
-# else:
-#     print('Running ADT operations given in file ', sys.argv[1])
-#
-# filename = sys.argv[1]
-filename = "system.txt"  # TODO: verwijder deze regel, zodat de meegegeven argumenten worden gebruikt
-instructionFile = open(filename) # Default is read only
-
-def actiefSysteem():
+def actiefSysteem(geheel):
     if geheel == None:
         print("Gelieve eerst een systeem te activeren met init")
         return False
     else:
         return True
 
-for line in instructionFile:
-    # skip alle regels die beginnen met een '#'
-    if len(line) < 1:
-        continue
+def readFile(filename, geheel):
+    instructionFile = open(filename)  # Default is read only
+    for line in instructionFile:
+        geheel = readLine(line, geheel)
+    return geheel
 
+
+def readLine(line, geheel):
+    if len(line) < 1:
+        return geheel
+
+    # skip alle regels die beginnen met een '#'
     if line[0] == '#':
-        continue
+        return geheel
 
     if line[len(line) - 1] == '\n':
         line = line[:len(line) - 1]
@@ -31,87 +29,106 @@ for line in instructionFile:
     words = line.split(' ')
 
     if len(words) < 1:
-        continue
+        return geheel
 
     elif words[0] == "init":
-        geheel = system()
+        geheel = System.System()
 
     elif words[0] == "vak":
-        if not actiefSysteem():
-            continue
+        if not actiefSysteem(geheel):
+            return geheel
         if len(words) < 3:
             print("Geen 2 parameters gevonden: vak AFK Naam")
-            continue
+            return geheel
         geheel.addVak(words[1], words[2])
 
     elif words[0] == "klas":
-        if not actiefSysteem():
-            continue
+        if not actiefSysteem(geheel):
+            return geheel
         if len(words) < 2:
             print("Geen 1 parameters gevonden: klas 1RICH")
-            continue
+            return geheel
         geheel.addKlas(words[1])
 
     elif words[0] == "leraar":
-        if not actiefSysteem():
-            continue
+        if not actiefSysteem(geheel):
+            return geheel
         if len(words) < 4:
             print("Geen 3 parameters gevonden: leraar Voornaam Naam AFKOR")
-            continue
+            return geheel
         geheel.addLeraar(words[3], words[1], words[2])
 
     elif words[0] == "leerling":
-        if not actiefSysteem():
-            continue
+        if not actiefSysteem(geheel):
+            return geheel
         if len(words) < 6:
             print("Geen 5 parameters gevonden: leerling Voornaam Naam 1KLAS nr studentennr")
-            continue
+            return geheel
         geheel.addLeerling(words[2], words[1], words[3], words[4], words[5])
 
     elif len(words) > 1 and words[1] == "puntenlijst":
-        if not actiefSysteem():
-            continue
+        if not actiefSysteem(geheel):
+            return geheel
         if len(words) < 8:
             print("Geen 5 parameters gevonden: leerling Voornaam Naam 1KLAS nr studentennr")
-            continue
+            return geheel
         geheel.addPuntenLijst(words[0], words[2], words[3], words[4], words[5], words[6], words[7])
 
     elif words[0] == "start":
-        if not actiefSysteem():
-            continue
+        if not actiefSysteem(geheel):
+            return geheel
         # wat zou er hierbij zelfs moeten gebeuren?
 
     elif words[0] == "toets":
-        if not actiefSysteem():
-            continue
+        if not actiefSysteem(geheel):
+            return geheel
         if len(words) < 4:
             print("Geen 3 parameters gevonden: toets idpuntenlijst naam max")
-            continue
+            return geheel
         geheel.addToets(words[1], words[2], words[3])
 
     elif words[0] == "punt":
-        if not actiefSysteem():
-            continue
+        if not actiefSysteem(geheel):
+            return geheel
         if len(words) < 5:
             print("Geen 4 parameters gevonden: punt AFKOR naamtoets studentennr waarde")
-            continue
+            return geheel
         geheel.addPunt(words[3], words[2], words[4], words[1])
 
     elif words[0] == "undo":
-        if not actiefSysteem():
-            continue
+        if not actiefSysteem(geheel):
+            return geheel
         if len(words) == 1:
             geheel.undo()  # Done: implement undo
         else:
             geheel.undo(words[1])
 
+    elif words[0] == "redo":
+        if not actiefSysteem(geheel):
+            return geheel
+        geheel.redo()
+
     elif words[0] == "rapport":
-        if not actiefSysteem():
-            continue
+        if not actiefSysteem(geheel):
+            return geheel
         if len(words) < 3:
             print("Geen 2 parameters gevonden: rapport TP 1KLAS")
-            continue
+            return geheel
         geheel.buildRapport("M1", "6WEWI")
 
     else:
         pass
+
+    return geheel
+
+if __name__ == '__main__':
+    if len(sys.argv) != 2:
+        print('Usage: adts.py <inputfile>')
+    else:
+        print('Running ADT operations given in file ', sys.argv[1])
+
+    filename = sys.argv[1]
+
+    # filename = "system.txt"  # Done: verwijder deze regel, zodat de meegegeven argumenten worden gebruikt
+    readFile(filename, None)
+

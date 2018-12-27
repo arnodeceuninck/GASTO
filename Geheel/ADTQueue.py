@@ -32,8 +32,8 @@ class Queue:
             self.Back.target = newNode
             return True
         else:
-            Last.next = newNode
-            Back.target = newNode
+            self.Last.next = newNode
+            self.Back.target = newNode
             return True
 
 
