@@ -18,6 +18,7 @@ class TabelWrapper:
         self.type = None
         self.dataStructure = None
         self.create(structure_type)
+        self.grootte = 211
 
     # Currently datastructures supporting iterators: cl, ll, rb, heap
     # !!! Alle iterators returnen een tuple (key, value)
@@ -43,9 +44,6 @@ class TabelWrapper:
         else:
             self.type = structure_type
             # return self.dataStructure
-
-            #TODO: grootte hashtabel?
-            self.grootte = 23
         if not self.type_assigned:
             return False
         elif self.type == "stack":
@@ -175,7 +173,7 @@ class TabelWrapper:
             return self.dataStructure.destroySearchtree()
         elif self.type == "rb":
             return self.dataStructure.destroyRBT()
-        elif self.type == "hlin" or self.type == "hquad" or self.type == "hsep": # TODO: nog te doen
+        elif self.type == "hlin" or self.type == "hquad" or self.type == "hsep":
             return self.dataStructure.destroy()
         elif self.type == "heap":
             return self.dataStructure.destroy()
@@ -199,7 +197,7 @@ class TabelWrapper:
             return self.dataStructure.isEmpty()
         elif self.type == "rb":
             return self.dataStructure.isEmpty()
-        elif self.type == "hlin" or self.type == "hquad" or self.type == "hsep": # TODO: Nog te doen
+        elif self.type == "hlin" or self.type == "hquad" or self.type == "hsep":
             return self.dataStructure.isEmpty()
         elif self.type == "heap":
             return self.dataStructure.isEmpty()
@@ -229,8 +227,13 @@ class TabelWrapper:
         elif self.type == "rb":
             return self.dataStructure.size()
             # return self.dataStructure.getLength()
+<<<<<<< HEAD
+        elif self.type == "hlin" or self.type == "hquad" or self.type == "hsep":
+            return self.dataStructure.size()
+=======
         elif self.type == "hsep"or self.type == "hlin" or self.type == "hquad":
             return self.dataStructure.getLength()
+>>>>>>> 24972d1490288eba26847bc05c039d9122ba896b
         elif self.type == "heap":
             return self.dataStructure.size()
 
