@@ -238,7 +238,6 @@ class TabelWrapper:
             return self.dataStructure.print(name)
         elif self.type == "bst":
             return self.dataStructure.print(name)
-            return self.dataStructure.print()
         elif self.type == "cl":
             return self.dataStructure.visualize()
         elif self.type == "ll":
