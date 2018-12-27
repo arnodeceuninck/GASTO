@@ -8,6 +8,18 @@ class stack:
     def __init__(self):
             self.stackpointer = None
 
+    def __iter__(self):
+        self.iterPointer = self.stackpointer
+        return self
+
+    def __next__(self):
+        if self.iterPointer == None:
+            raise StopIteration
+        else:
+            return_value = self.iterPointer.value
+            self.iterPointer = self.iterPointer.below
+            return return_value
+
     def push(self, new):
         new.below = self.stackpointer
         self.stackpointer = new
