@@ -11,7 +11,7 @@ class HtmlRapport:
             file_string += str(structure)
         file_string += "</body>"
 
-        f = open(self.filename, 'w+') # TODO: check of w+ werkt
+        f = open(self.filename, 'w+')
         f.write(file_string)
         f.close()
 

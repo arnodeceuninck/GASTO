@@ -1,0 +1,13 @@
+digraph 234{node [shape=record];
+rankdir=LR;
+start[label= start];
+dummyhead[];
+start -> dummyhead;
+dummyhead -> start;
+dummyhead -> NED;
+NED -> dummyhead;
+NED[label=Nederlands];
+WIS[label=Wiskunde];
+NED -> WIS;
+WIS -> NED;
+}

@@ -63,18 +63,24 @@ while True:
             "(8) Rapport maken,"
             "(c) Cancel" + '\n')
 
-        # TODO: Bij het opvragen ook een .dot file laten genereren van de structuur waaruit geretrieved wordt
+        # TODO: checken of dotfile gegenereerd wordt
         if input_str == "1":
+            geheel.printVak()
             print(str(geheel.retrieveVak(input("Afkorting: "))))
         elif input_str == "2":
+            geheel.printKlas()
             print(str(geheel.retrieveKlas(input("ID: "))))
         elif input_str == "3":
+            geheel.printLeraar()
             print(str(geheel.retrieveLeeraar(input("Afkorting: "))))
         elif input_str == "4":
+            geheel.printLeerling()
             print(str(geheel.retrieveLeerling(input("ID: "))))
         elif input_str == "5":
+            geheel.printPuntenlijst()
             print(str(geheel.retrievePuntenlijst(input("ID: "))))
         elif input_str == "6":
+            geheel.printToets()
             print(str(geheel.retrieveToets(input("Naam: "))))
         elif input_str == "7":
             print(str(geheel.retrievePunt(input("ID: "))))
