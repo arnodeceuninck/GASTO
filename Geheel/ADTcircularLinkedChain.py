@@ -124,7 +124,7 @@ class circular_chain:
         while str(currentNode.value.naam) != string:
             index += 1
             currentNode = currentNode.next
-            if currentNode == firstNode:
+            if index >= self.count:
                 return None
         return index
 
@@ -137,6 +137,8 @@ class circular_chain:
         current_node = self.head
         for i in range(index+1):
             current_node = current_node.next
+            if i == self.count:
+                return False
         return (True, current_node.value)
 
     def visualize(self):

@@ -15,15 +15,9 @@ import HtmlMaker
 from TabelWrapper import *
 from ReadFile import *
 
-
-# Todo: retrieve info over de testen geven
-
-
 class System:
     def __init__(self):
-        # TODO: De klassen toets, rapport, puntenlijst moeten ontworpen zoals de ADT tabel.
         #  Deze klassen zijn dus een verzameling van als ik het goed begrijp
-        # TODO: Fix error: alle elementen met zelfde datastructuur komen samen in eenzelfde datastructuur
         self.punten = TabelWrapper("ll")  # dit is de create # puntenlijst nog nodig om punten aan te passen
         self.puntenQueue = TabelWrapper("queue")
         self.toetsen = TabelWrapper("cl")

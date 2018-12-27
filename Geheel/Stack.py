@@ -52,6 +52,7 @@ class stack:
         while node is not None:
             size += 1
             node = node.below
+        return size
 
     def print(self):
         node = self.stackpointer

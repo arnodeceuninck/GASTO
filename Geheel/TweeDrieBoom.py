@@ -7,11 +7,11 @@ class TweeDrieBoom:
         self.childrenMiddle2 = None
         self.parent = None
 
-    def __iter__(self): #todo check
+    def __iter__(self):
         self.index = 0
         return self
 
-    def __next__(self): #todo check
+    def __next__(self):
         size = self.size()
         if size > self.index:
             x = self.getIndex(self.index)
@@ -165,7 +165,7 @@ class TweeDrieBoom:
                         self.childrenMiddle2 = None
 
                         NodeMiddle.parent = self.parent
-                        self.parent.childrenMiddle2 = NodeMiddle    #todo check
+                        self.parent.childrenMiddle2 = NodeMiddle
                         self.parent.split()
                     else:
                         NodeMiddle.root.append(self.root[1])
@@ -521,7 +521,7 @@ class TweeDrieBoom:
     def traverse(self, visit, key=None):
         return self.inorderTraverse(visit, key)
 
-    def inorderTraverse(self, visit, key=None):    #todo check
+    def inorderTraverse(self, visit, key=None):
         if self.childrenLeft != None:
             self.childrenLeft.inorderTraverse(visit, key)
         if len(self.root) >= 1:
@@ -533,7 +533,7 @@ class TweeDrieBoom:
         if self.childrenRight != None:
             self.childrenRight.inorderTraverse(visit, key)
 
-    def getIndex(self, index):  #todo recheck
+    def getIndex(self, index):
         temp = index
         if len(self.root) >= 1:
             temp = index - 1
@@ -566,7 +566,7 @@ class TweeDrieBoom:
             return 0
         return self.Size()
 
-    def Size(self): #todo check
+    def Size(self):
         size = 0
         size += len(self.root)
         if self.childrenLeft != None:

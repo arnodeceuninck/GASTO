@@ -111,7 +111,7 @@ class DGL:
             return (False, None)
 
         while True:
-            if node.key == key:
+            if str(node.key) == key:
                 return (True, node.value)
             elif node.next is None:
                 return (False, None)
@@ -134,10 +134,10 @@ class DGL:
 
     def dotread(self, file):
         node = self.dummy.next
-        file.write(str(node.key) + str("[label=" + str(node.value) + "];" + '\n'))
+        file.write(str(node.key) + str("[label=" + '"' + str(node.value) + '"' + "];" + '\n'))
         node = node.next
         while node is not None:
-            file.write(str(node.key) + str("[label=" + str(node.value) + "];" + '\n' + str(node.back.key) + " -> " +
+            file.write(str(node.key) + str("[label=" + '"' + str(node.value) + '"' + "];" + '\n' + str(node.back.key) + " -> " +
                                            str(node.key) + ';' + '\n' + str(node.key) + " -> " + str(node.back.key)
                                            + ';' + '\n'))
             node = node.next

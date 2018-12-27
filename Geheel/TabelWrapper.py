@@ -121,13 +121,13 @@ class TabelWrapper:
         elif self.type == "hlin" or self.type == "hquad":
             return self.dataStructure.retrieve(key) #enkel voor lin en quad, sep heeft ook item nodig
         elif self.type == "hsep":
-            return self.dataStructure.retrieve(key, value)  # TODO: nog afmaken in de hashmap en heb hier nog wel een vraag over
+            return self.dataStructure.retrieve(key, value)
         elif self.type == "heap":
             print("Retrieve is niet mogelijk bij een heap")  # Not implemented
             return False
             # return self.dataStructure.retrieve(key)
 
-    def delete(self, key=None):
+    def delete(self, key=None, value=None):
         if not self.type_assigned:
             return False
         elif self.type == "stack":
@@ -149,7 +149,7 @@ class TabelWrapper:
         elif self.type == "hlin" or self.type == "hquad":
             return self.dataStructure.delete(key)
         elif self.type == "hsep":
-            return self.dataStructure.delete(key, value)    #TODO: Zelfde opmerking als bij retrieve
+            return self.dataStructure.delete(key, value)
         elif self.type == "heap":
             return self.dataStructure.remove() # Altijd de top die verwijderd wordt
 
@@ -230,7 +230,7 @@ class TabelWrapper:
         elif self.type == "heap":
             return self.dataStructure.size()
 
-    def Print(self):    #todo eigen functie namen aanpassen
+    def Print(self):
         if not self.type_assigned:
             return False
         elif self.type == "stack":
@@ -259,7 +259,7 @@ class TabelWrapper:
             return self.dataStructure.visualize()
 
     # visit is een functie die telkens toegepast wordt op de root value
-    def traverse(self, visit, key=None):    #todo eigen functie namen aanpassen
+    def traverse(self, visit, key=None):    
         if not self.type_assigned:
             return False
         elif self.type == "stack":

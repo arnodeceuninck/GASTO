@@ -125,7 +125,7 @@ class RBTNode:
         return self
 
     def destroyRBT(self):
-        # self.preorderTraverse(self.destroyNode) # TODO: Check if this works
+        # self.preorderTraverse(self.destroyNode)
         if(self.left_tree != None):
             self.left_tree.destroyNode()
         if (self.right_tree != None):
@@ -153,14 +153,14 @@ class RBTNode:
 
     def rotateRight(self):
         # Maakt een rotatie van 3 elementen die in dezelfde Node zitten,
-        # self.parent.left_tree == self #TODO: check this
+        # self.parent.left_tree == self
         #   en self.findConnectionWithParent == 1
         #   en self.left_tree.left_connection == 1
         # De nodes staan dus op eenzelfde rechte in het vlak
 
         # Het kind van de grootouder van de middelste node wordt veranderd naar de huidige node
         # Als self.parent.parent niet bestaat, dan moet deze ook niet veranderd worden
-        # Als self.parent niet bestaat, dan zitten we niet in de middelste node, en zijn we dus fout begonnen #TODO
+        # Als self.parent niet bestaat, dan zitten we niet in de middelste node, en zijn we dus fout begonnen
         if self.parent != None and self.parent.parent != None:
             # Hiervoor moeten we eerst weten of self.parent links of rechts staat van self.parent.parent
             if self.parent.parent.left_tree == self.parent:
@@ -305,7 +305,7 @@ class RBTNode:
             return self.parent.right_connection
 
     def insert(self, newItem):
-        # Bij een lege boom #TODO: gecheckt bij insert 14 tot in node 10 (niet met) nog geen probleem
+        # Bij een lege boom
         if self.isEmpty():
             self.root = newItem
             return True
@@ -658,7 +658,7 @@ class RBTNode:
     def inorderTraverse(self, visit, key):
         if self.left_tree is not None:
             self.left_tree.inorderTraverse(visit, key)
-        visit(self.root.value, key) # Todo: test if works
+        visit(self.root.value, key)
         if self.right_tree is not None:
             self.right_tree.inorderTraverse(visit, key)
 

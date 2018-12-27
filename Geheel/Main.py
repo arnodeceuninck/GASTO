@@ -31,7 +31,6 @@ while True:
             "(9) Vorige instructies,"
             "(c) Cancel" + '\n')
 
-        # TODO: checken of dotfile gegenereerd wordt
         if input_str == "1":
             geheel.printVak()
             print(str(geheel.retrieveVak(input("Afkorting: "))[1]))
@@ -48,9 +47,10 @@ while True:
             geheel.printPuntenlijst()
             print(str(geheel.retrievePuntenlijst(input("ID: "))[1]))
         elif input_str == "6":
-            geheel.printToets()
+            #geheel.printToets()
             print(str(geheel.retrieveToets(input("Naam: "))[1]))
         elif input_str == "7":
+            geheel.printPunt()
             print(str(geheel.retrievePunt(input("ID: "))[1]))
         elif input_str == "8":
             geheel.buildRapport(input("Samengestelde zoeksleutel TP: "), input("Klas: "))
