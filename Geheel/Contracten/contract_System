@@ -1,0 +1,140 @@
+// systeem
+
++addVak(afkorting: string, naam: string)
+// Precondition: Je wilt een nieuw vak aanmaken.
+// Postcondition: Een nieuw vak is aangemaakt met de naam: naam en afkorting:afkorting.
+
++addKlas(naam: string)
+// Precondition: Je wilt een nieuwe klas toevoegen.
+// Postcondition: Er is een nieuwe klas toevoegt met naam: naam
+
++addLeraar(afkorting: string, naam: string, achternaam: string)
+// Precondition: Je wilt een nieuwe leerkracht toevoegen.
+// Postcondition: Er is een nieuwe leerkracht toevoegt met afkorting: afkorting, naam: naam, achternaam: naam.
+
++addLeerling(naam: string, voornaam: string, klasnummer: integer, studentennummer: integer)
+// Precondition: Je wilt een nieuwe leerkracht toevoegen.
+// Postcondition: Er is een nieuwe leerling aangemaakt met naam: naam, voornaam: voornaam, klasnummer: klasnummer,
+// studentennummer: studentennummer.
+
++PermessionCheckLeerkracht(naam_toets, leerkracht: leerkracht) boolean
+// Precondition: Je wilt controleren of een leerkracht toestemming heeft om punten in te geven.
+// Postcondition: Geeft True terug indien de leerkracht toestemming heeft en False terug indien niet.
+
++addPunt(stamboeknummer_leerling: integer, naam_toets: string, Waarde: integer, leerkracht: leerkracht)
+// Precondition: Je wilt een punt toevoegen aan een toets.
+// Postcondition: Voegt een punt toe aan de toets met naam_toets: naam_toets en stamboeknummer_leerling. stamboeknummer_leerling, met waarde: waarde.
+
++addPuntenLijst(ID: string, type: string, periode: string, namecodes: string, vak_afkorting: string, klas: klas, uren: integer)
+// Precondition: Je wilt een puntenlijst toevoegen.
+// Postcondition: Er is een nieuwe puntenlijst toegevoegd met ID: ID, type: type, periode: periode, namecodes: namecodes, vak_afkorting: vakafkorting,
+// klas: klas en uren: uren.
+
++addToets(puntenlijst_id: integer, titel: string, maxscore: integer)
+// Precondition: Je wilt een nieuwe toets toeveoegen.
+// Postcondition: Er is een nieuwe toets toegevoegd aan puntenlijst met puntenlijst_id: puntenlijst_id,
+// De toets bestaat uit een titel: titel, maxscore: maxscore.
+
++deletePunt(ID: string)
+// Precondition: Je wilt een punt verwijderen met ID: ID
+// Postcondition: Er is een punt verwijdert met ID: ID.
+
++deleteKlas(naam: string)
+// Precondition: Je wilt een klas verwijderen met naam: naam.
+// Postcondition: Er is een klas verwijdert met naam: naam.
+
++deleteLeerling(key: integer)
+// Precondition: je wilt leerling verwijderen met key: key.
+// Postcondition: Een leerling is verwijdert met key: key.
+
++deletePuntenlijst(key: integer)
+// Precondition: Je wilt een puntenlijst verwijderen met key: key.
+// Postcondition: Er is een puntenlijst verwijderen met key: key.
+
++deleteLeraar(naam: string)
+// Precondition: Je wilt een leraar verwijderen met naam: naam.
+// Postcondition: Er is een leraar verwijdert met naam: naam.
+
++removeAllPunten()
+// Precondition: Je wilt alle punten in het systeem verwijderen.
+// Postcondition: Alle punten worden uit het systeem verwijdert.
+
++retrievePunt(key: integer)
+// Precondition: Je wilt een punt ophalen met key: key.
+// Postcondition: Geeft een punt terug met key: key.
+
++retrieveToets(naam_toets: string)
+// Precondition: Je wilt een Toets ophalen met naam_toets: naam_toets.
+// Postcondition: Geeft een Toets terug met naam_toets: naam_toets.
+
++retrieveKlas(naam: string)
+// Precondition: Je wilt een Klas ophalen met naam: naam.
+// Postcondition: Geeft een Klas terug met naam: naam.
+
++retrievePuntenlijst(ID: string)
+// Precondition: Je wilt een puntenlijst ophalen met ID: ID.
+// Postcondition: Geeft een puntenlijst terug met ID: ID.
+
++retrieveLeerling(studentennr: integer)
+// Precondition: Je wilt een leerling ophalen met studentennr: studentennr.
+// Postcondition: Geeft een leerling terug met studentennr: studentennr.
+
++retrieveLeeraar(afkorting: string)
+// Precondition: Je wilt een leerling ophalen met afkorting: afkorting.
+// Postcondition: Geeft een leerling terug met afkorting: afkorting.
+
++retrieveVak(afkorting: string)
+// Precondition: Je wilt een vak ophalen met afkorting: afkorting.
+// Postcondition: Geeft een vak terug met afkorting: afkorting.
+
++buildGradeOverview()
+// Precondition: Je wilt een overzicht maken in html over de punten.
+// Postcondition: Maakt een html bestand in met een overzicht van de punten.
+
++buildRapport(samengestelde_zoeksleutel: (string, integer), klas: klas)
+// Precondition: Je wilt een rapport maken van een klas.
+// Postcondition: Maakt een html bestand aan met daar in een rapport van een klas.
+
++printPunt()
+// Precondition: Je wilt een dotfile maken van een punt.
+// Postcondition: Maakt een dotfile aan van een punt:
+
++printToets()
+// Precondition: Je wilt een dotfile maken van een Toets.
+// Postcondition: Maakt een dotfile aan van een Toets:
+
++printKlas()
+// Precondition: Je wilt een dotfile maken van een Klas.
+// Postcondition: Maakt een dotfile aan van een Klas:
+
++printPuntenlijst()
+// Precondition: Je wilt een dotfile maken van een Puntenlijst.
+// Postcondition: Maakt een dotfile aan van een Puntenlijst:
+
++printLeerling()
+// Precondition: Je wilt een dotfile maken van een Leerling.
+// Postcondition: Maakt een dotfile aan van een Leerling:
+
++printLeeraar()
+// Precondition: Je wilt een dotfile maken van een Leeraar.
+// Postcondition: Maakt een dotfile aan van een Leeraar:
+
++printVak()
+// Precondition: Je wilt een dotfile maken van een Vak.
+// Postcondition: Maakt een dotfile aan van een Vak:
+
++printInstructies()
+// Precondition: Je wilt een dotfile maken van Instructies.
+// Postcondition: Maakt een dotfile aan van Instructies:
+
++redo()
+// Precondition: Je wilt een undo omkeren.
+// Postcondition: De Undo is omgekeerd.
+
++undo(leerkr: leerkracht or None)
+// Precondition: Je wilt een insert undoen
+// Postcondition: het laatste item dat geinsert is wordt verwijdert
+
+save(filename: string)
+// Precondition: Je wilt alle waarden opslaan in txt bestand.
+// Postcondition: Savet alle waarden in een txt bestand met naam filename.
