@@ -85,8 +85,9 @@ class TabelWrapper:
         elif self.type == "bst":
             return self.dataStructure.searchTreeInsert(BinarySearchTree.TreeItem(value, key))
         elif self.type == "cl":
-            index = self.getLength()
-            return self.dataStructure.insert(index, value)  # TODO: cl werkt met een index
+            if not isinstance(key, str):
+                key = self.getLength()
+            return self.dataStructure.insert(key, value)  # TODO: cl werkt met een index
         elif self.type == "ll":
             return self.dataStructure.insert(Dubbelgelinktelijst.Node(value, key))
         elif self.type == "23":

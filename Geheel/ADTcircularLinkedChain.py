@@ -42,8 +42,21 @@ class circular_chain:
     def getLength(self):
         return self.count
 
+    def findIndexAlphaValue(self, string):
+        index = 0
+        currentNode = self.head.next
+        firstNode = currentNode
+        while currentNode != None and str(currentNode.value.naam) < string:
+            index += 1
+            currentNode = currentNode.next
+            if currentNode == firstNode:
+                return index
+        return index
+
     def insert(self, index, newItem):
         # test if in chain range
+        if isinstance(index, str):
+            index = self.findIndexAlphaValue(index)
         if index > self.count or index < 0:
             return False
 
