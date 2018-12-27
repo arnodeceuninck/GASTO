@@ -23,7 +23,7 @@ class system:
         # TODO: De klassen toets, rapport, puntenlijst moeten ontworpen zoals de ADT tabel.
         #  Deze klassen zijn dus een verzameling van als ik het goed begrijp
         # TODO: Fix error: alle elementen met zelfde datastructuur komen samen in eenzelfde datastructuur
-        self.punten = TabelWrapper("hquad")  # dit is de create # puntenlijst nog nodig om punten aan te passen
+        self.punten = TabelWrapper("ll")  # dit is de create # puntenlijst nog nodig om punten aan te passen
         self.puntenQueue = TabelWrapper("queue")
         self.toetsen = TabelWrapper("cl")  # TODO: verander dit terug naar cl
         self.puntenlijst = TabelWrapper("ll")  # TODO: verander terug naar bst als er een bst in Geheel zit
@@ -47,7 +47,7 @@ class system:
     def addLeraar(self, afkorting, naam, achternaam):
         self.instructies.insert("leraar " + str(naam) + " " + str(achternaam) + " " + str(afkorting))
         return_value = self.leraars.insert(Leraar.Leraar(afkorting, naam, achternaam), afkorting)
-        self.undoPuntStack.insert(afkorting, TabelWrapper("stack"))
+        self.undoPuntStack.insert(TabelWrapper("stack"), afkorting)
         return return_value
 
     def addLeerling(self, naam, voornaam, klas, klasnummer, studentennummer):
@@ -70,7 +70,7 @@ class system:
         instructie = "punt " + str(leerkracht) + " " + str(naam_toets) + " " + \
                      str(stamboeknummer_leerling) + " " + str(Waarde) + " " + str(ID)
         self.instructies.insert(instructie)
-        stack_leerkr = self.instructies.retrieve(leerkracht)[1]
+        stack_leerkr = self.undoPuntStack.retrieve(leerkracht)[1]
         stack_leerkr.insert(instructie)
         # TODO: controleren of leerkracht bevoegd is om aan deze toets een punt toe te voegen
 
