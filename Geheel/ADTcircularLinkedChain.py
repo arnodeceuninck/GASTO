@@ -1,8 +1,9 @@
 from Graph import Graph
 
 class node:
-    def __init__(self, value):
+    def __init__(self, value, key):
         self.value = value
+        self.key = key
         self.next = None
     def attach_node(self, node):
         self.next = node
@@ -10,7 +11,7 @@ class node:
 class circular_chain:
 
     def __init__(self):
-        self.head = node("head")
+        self.head = node("head", None)
         self.count = 0
 
     def __iter__(self):
@@ -42,21 +43,20 @@ class circular_chain:
     def getLength(self):
         return self.count
 
-    def findIndexAlphaValue(self, string):
+    def findIndexAlphaValue(self, key):
         index = 0
         currentNode = self.head.next
         firstNode = currentNode
-        while currentNode != None and str(currentNode.value.naam) < string:
+        while currentNode != None and currentNode.key < key:
             index += 1
             currentNode = currentNode.next
             if currentNode == firstNode:
                 return index
         return index
 
-    def insert(self, index, newItem):
+    def insert(self, key, newItem):
         # test if in chain range
-        if isinstance(index, str):
-            index = self.findIndexAlphaValue(index)
+        index = self.findIndexAlphaValue(key)
         if index > self.count or index < 0:
             return False
 
@@ -68,7 +68,7 @@ class circular_chain:
             current_node = current_node.next
 
         # create the new node
-        new_node = node(newItem)
+        new_node = node(newItem, key)
 
         # edit all pointers that have to change
         if self.count == 0:
@@ -83,7 +83,8 @@ class circular_chain:
 
         return True
 
-    def delete(self, index):
+    def delete(self, key):
+        index = self.findIndexValue(key)
         # check if in range
         if index > self.count or index < 0:
             return False
@@ -127,11 +128,10 @@ class circular_chain:
                 return None
         return index
 
-    def retrieve(self, index):
+    def retrieve(self, key):
         # if index > self.count or index < 0:
         #     return False
-        if isinstance(index, str):
-            index = self.findIndexValue(index)
+        index = self.findIndexValue(key)
         if index == None:
             return False, None
         current_node = self.head

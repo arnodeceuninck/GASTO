@@ -237,15 +237,7 @@ class system:
         self.puntenlijst.delete(key)
 
     def deleteToets(self, naam):
-        toets = self.retrieveToets(naam)[1]
-        for i in range(len(toets.verzamelingVanPunten) - 1, -1, -1):
-            self.deletePunt(toets.verzamelingVanPunten[i].getID())
-        self.puntenlijst.traverse(self.puntenlijstToetsenDetect, naam)
-        # DONE: Als het een cl is dan is dit het speciaal geval, controleren hoe te werk gaan bij andere datastructuren
-        # Hoezo een speciaal geval?
-        # Omda ge eerst de index moet vinden en bij de andere niet
-        # Da probleem zou opgelost moeten zijn
-        self.toetsen.delete(self.toetsen.dataStructure.findIndexValue(naam))
+        self.toetsen.delete(naam)
 
     def deleteLeraar(self, naam):
         self.puntenlijst.traverse(self.puntenlijstleerkrachtdetect, naam)

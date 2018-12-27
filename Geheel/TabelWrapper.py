@@ -85,9 +85,7 @@ class TabelWrapper:
         elif self.type == "bst":
             return self.dataStructure.searchTreeInsert(BinarySearchTree.TreeItem(value, key))
         elif self.type == "cl":
-            if not isinstance(key, str):
-                key = self.getLength()
-            return self.dataStructure.insert(key, value)  # TODO: cl werkt met een index
+            return self.dataStructure.insert(key, value)
         elif self.type == "ll":
             return self.dataStructure.insert(Dubbelgelinktelijst.Node(value, key))
         elif self.type == "23":
@@ -119,7 +117,7 @@ class TabelWrapper:
         elif self.type == "234":
             return self.dataStructure.retrieve(key).item
         elif self.type == "rb":
-            return self.dataStructure.retrieve(key)  # TODO: Why een tuple in een tuple? Fix nodig voor if None
+            return self.dataStructure.retrieve(key)
         elif self.type == "hlin" or self.type == "hquad":
             return self.dataStructure.retrieve(key) #enkel voor lin en quad, sep heeft ook item nodig
         elif self.type == "hsep":
