@@ -76,3 +76,6 @@ fabric.properties
 *.xml
 *.iml
 >>>>>>> 5a5209db43ef73b14fa5e72099f54441596fd7b6
+*.iml
+*.xml
+*.iml
