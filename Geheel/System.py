@@ -380,7 +380,7 @@ class System:
     def printLeerling(self):
         return self.leerlingen.Print()
 
-    def printLeeraar(self):
+    def printLeraar(self):
         return self.leraars.Print()
 
     def printVak(self):
