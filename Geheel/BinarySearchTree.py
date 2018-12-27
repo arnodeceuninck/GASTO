@@ -182,9 +182,9 @@ class BinarySearchTree:
     def Size(self): #todo check
         size = 0
         if(self.left != None):
-            size += self.left.size()
+            size += self.left.Size()
         if(self.right != None):
-            size += self.right.size()
+            size += self.right.Size()
         if(self.root != None):
             size += 1
         return size
