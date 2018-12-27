@@ -12,6 +12,45 @@ class Hashmap():
         self.type = type
         self.count = 0
 
+    def __iter__(self):
+        self.index = 0
+        self.element = 0 # voor meerdere elementen op 1 index
+        return self
+    def __next__(self):
+        if self.index == self.tableSize:
+            raise StopIteration
+        else:
+            while self.hashTable[self.index] == None:
+                self.index += 1
+                if self.index >= self.tableSize:
+                    raise StopIteration
+            index_place = self.hashTable[self.index]
+            if self.type == "hsep":
+                if self.element != len(index_place.root):
+                    return_value = index_place.root[self.element]
+                    self.element += 1
+                    return return_value.key, return_value.item
+                else:
+                    self.index += 1
+                    return self.__next__()
+            else:
+                self.index += 1
+                return index_place.key, index_place.item
+
+            self.index += 1
+            return index_place.key, index_place.item
+
+    # def getLength(self):
+    #     size = 0
+    #     for i in range(self.tableSize):
+    #         if self.type == "hsep":
+    #             if self.hashTable[i] != None:
+    #                 size += len(self.hashTable[i])
+    #         else:
+    #             if self.hashTable[i] != None:
+    #                 size += 1
+    #     return size
+
     def hashf(self, key):
         num = 0
         if type(key) != int:
@@ -93,6 +132,9 @@ class Hashmap():
             return i
         else:
             return " | " + i
+
+    def size(self):
+        return self.count
 
     def show(self):
         i = 0
@@ -193,6 +235,7 @@ class Hashmap():
             self.hashTable[self.getPosition(key)] = treeItem
         else:
             print("Je kan maximaal %s items inserten! Item (%s, %s) is niet geinsert geweest." %(self.tableSize, key, item))
+            self.count -= 1
 
 
 def createHashmap(size, type):
@@ -236,8 +279,8 @@ h = createHashmap(5, 2)
 h.insert(2, 6)
 h.insert(3, 6)
 h.insert(4, 6)
-h.insert(5, 6)
-h.insert(6, 6)
+# h.insert(5, 6)
+# h.insert(6, 6)
 # print(h.isEmpty())
 # h.show()
 
@@ -245,6 +288,7 @@ h.insert(6, 6)
 #file = open("quad_test.txt", "r")
 # size = input("Hoe groot moet de hashmap worden? ")
 size = 23
+h.size()
 # type = 1
 # print(createHashmap(size, type))
 

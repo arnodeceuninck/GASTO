@@ -17,6 +17,7 @@ class TabelWrapper:
     def __init__(self, structure_type):  # structure_type is een string
         self.type = None
         self.dataStructure = None
+        self.grootte = 211
         self.create(structure_type)
 
     # Currently datastructures supporting iterators: cl, ll, rb, heap
@@ -43,9 +44,6 @@ class TabelWrapper:
         else:
             self.type = structure_type
             # return self.dataStructure
-
-            #TODO: grootte hashtabel?
-            self.grootte = 23
         if not self.type_assigned:
             return False
         elif self.type == "stack":
@@ -65,7 +63,7 @@ class TabelWrapper:
             self.dataStructure = T234.createSearchTree()
         elif self.type == "rb":
             self.dataStructure = RBT.createRBT()
-        elif self.type == "hlin" :
+        elif self.type == "hlin":
             self.dataStructure = Hashmap.createHashmap(self.grootte, 1)
         elif self.type == "hquad":
             self.dataStructure = Hashmap.createHashmap(self.grootte, 2)
@@ -87,8 +85,9 @@ class TabelWrapper:
         elif self.type == "bst":
             return self.dataStructure.searchTreeInsert(BinarySearchTree.TreeItem(value, key))
         elif self.type == "cl":
-            index = self.getLength()
-            return self.dataStructure.insert(index, value)  # TODO: cl werkt met een index
+            if not isinstance(key, str):
+                key = self.getLength()
+            return self.dataStructure.insert(key, value)  # TODO: cl werkt met een index
         elif self.type == "ll":
             return self.dataStructure.insert(Dubbelgelinktelijst.Node(value, key))
         elif self.type == "23":
@@ -175,7 +174,7 @@ class TabelWrapper:
             return self.dataStructure.destroySearchtree()
         elif self.type == "rb":
             return self.dataStructure.destroyRBT()
-        elif self.type == "hlin" or self.type == "hquad" or self.type == "hsep": # TODO: nog te doen
+        elif self.type == "hlin" or self.type == "hquad" or self.type == "hsep":
             return self.dataStructure.destroy()
         elif self.type == "heap":
             return self.dataStructure.destroy()
@@ -199,7 +198,7 @@ class TabelWrapper:
             return self.dataStructure.isEmpty()
         elif self.type == "rb":
             return self.dataStructure.isEmpty()
-        elif self.type == "hlin" or self.type == "hquad" or self.type == "hsep": # TODO: Nog te doen
+        elif self.type == "hlin" or self.type == "hquad" or self.type == "hsep":
             return self.dataStructure.isEmpty()
         elif self.type == "heap":
             return self.dataStructure.isEmpty()
@@ -229,8 +228,13 @@ class TabelWrapper:
         elif self.type == "rb":
             return self.dataStructure.size()
             # return self.dataStructure.getLength()
+# <<<<<<< HEAD
+        elif self.type == "hlin" or self.type == "hquad" or self.type == "hsep":
+            return self.dataStructure.size()
+# =======
         elif self.type == "hsep"or self.type == "hlin" or self.type == "hquad":
             return self.dataStructure.getLength()
+# >>>>>>> 24972d1490288eba26847bc05c039d9122ba896b
         elif self.type == "heap":
             return self.dataStructure.size()
 

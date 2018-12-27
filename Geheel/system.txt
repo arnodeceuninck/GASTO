@@ -2,6 +2,9 @@
 init
 vak WIS Wiskunde
 vak NED Nederlands
+vak FYS Fysica
+vak GES Geschiedenis
+
 klas 6WEWI
 leraar Tom Hofkens HOFKT
 leraar Stephen Pauwels PAUWS
@@ -12,6 +15,8 @@ leerling John Doe 6WEWI 2 1800002
 # dit is de puntenlijst met id 1 die de punten bevat van het eerste maandrapport
 1 puntenlijst M 1 HOFKT,PAUWS WIS 6WEWI 7
 2 puntenlijst M 1 LAENE NED 6WEWI 4
+3 puntenlijst M 1 HOFKT FYS 6WEWI 3
+4 puntenlijst M 1 LAENE GES 6WEWI 2
 
 # start het systeem op
 start
@@ -23,6 +28,10 @@ toets 1 integralen 20
 # maak toets aan bij puntenlijst 2
 toets 2 opstel 5
 
+toets 3 radioactiviteit 15
+
+toets 4 WOII 10
+
 # voeg punten toe
 punt HOFKT afgeleiden 1800001 5
 punt HOFKT afgeleiden 1800002 9
@@ -30,6 +39,10 @@ punt PAUWS integralen 1800001 15
 punt PAUWS integralen 1800002 19
 punt LAENE opstel 1800001 5
 punt LAENE opstel 1800002 3
+punt HOFKT radioactiviteit 1800001 12
+punt HOFKT radioactiviteit 1800002 7
+punt LAENE WOII 1800001 8
+punt LAENE WOII 1800002 9
 toets 2 lezen 15
 undo
 
