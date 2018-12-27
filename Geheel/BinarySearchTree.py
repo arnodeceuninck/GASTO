@@ -177,9 +177,9 @@ class BinarySearchTree:
     def size(self): #todo check
         if self.root == None:
             return 0
-        return self.root.size()
+        return self.root.Size()
 
-    def size(self): #todo check
+    def Size(self): #todo check
         size = 0
         if(self.left != None):
             size += self.left.size()

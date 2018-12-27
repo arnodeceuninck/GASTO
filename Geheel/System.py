@@ -307,8 +307,8 @@ class system:
     def retrieveLeeraar(self, afkorting):
         return self.leraars.retrieve(afkorting)
 
-    def retrieveKlas(self, naam):   #waarom 2 keer retrieveKlas??
-        return naam
+    # def retrieveKlas(self, naam):   #waarom 2 keer retrieveKlas??
+    #     return naam
 
     def retrieveVak(self, afkorting):
         return self.vakken.retrieve(afkorting)

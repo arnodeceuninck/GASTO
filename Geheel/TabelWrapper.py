@@ -101,7 +101,7 @@ class TabelWrapper:
         elif self.type == "heap":
             return self.dataStructure.insert(KeyValueItem(key, value))
 
-    def retrieve(self, key=None):
+    def retrieve(self, key=None, value=None):
         if not self.type_assigned:
             return False
         elif self.type == "stack":
@@ -273,7 +273,7 @@ class TabelWrapper:
         elif self.type == "queue":
             return self.dataStructure.traverse(visit, key)
         elif self.type == "bst":
-            return self.dataStructure.traverse(visit, key)
+            return self.dataStructure.traverse(visit, key)  #InorderTraverse
         elif self.type == "cl":
             return self.dataStructure.traverse(visit, key)
         elif self.type == "ll":
@@ -281,9 +281,9 @@ class TabelWrapper:
         elif self.type == "23":
             return self.dataStructure.traverse(visit, key)  #InorderTraverse
         elif self.type == "234":
-            return self.dataStructure.traverse(visit, key)
+            return self.dataStructure.traverse(visit, key)  #InorderTraverse
         elif self.type == "rb":
-            return self.dataStructure.traverse(visit, key)
+            return self.dataStructure.traverse(visit, key)  #InorderTraverse
         elif self.type == "hlin":
             return self.dataStructure.traverse(visit, key)
         elif self.type == "hquad":
