@@ -659,23 +659,26 @@ class T234:
             self.right.T234Delete(key)
 
     def retrieve(self, key):
-        if self.item1.key == key:
+        if self.item1 is not None and self.item1.key == key:
             return self.item1
-        elif self.item2.key == key:
+        elif self.item2 is not None and self.item2.key == key:
             return self.item2
-        elif self.item3.key == key:
+        elif self.item3 is not None and self.item3.key == key:
             return self.item3
-        elif key < self.item1.key:
+        elif self.left is not None and key < self.item1.key:
             self.left.retrieve(key)
 
-        elif self.item2 is None or key < self.item2.key:
+        elif self.mleft is not None and (self.item2 is None or key < self.item2.key):
             self.mleft.retrieve(key)
 
-        elif self.item3 is None or key < self.item3.key:
+        elif self.mright is not None and (self.item3 is None or key < self.item3.key):
             self.mright.retrieve(key)
 
-        else:
+        elif self.right is not None:
             self.right.retrieve(key)
+
+        else:
+            return TreeItem(None, None)
 
     def getRoot(self):
         if self.item1 is None:
