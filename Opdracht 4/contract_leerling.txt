@@ -4,17 +4,13 @@
 
 +createLeerling(in Naam: string, in Voornaam: string, in Klas: string, in KlasNummer: integer, in Nummer: int): boolean
 // Precondition: Je wil een nieuwe leerling aanmaken. De Naam is de naam van de leerling,
-<<<<<<< HEAD
 // Achternaam de achternaam van de leerling. Klas is de klas waarin de leerling zit en KlasNummer is de nummer
-=======
 // Achternaam is de achternaam van de leerling. Klas is de klas waarin de leerling zit en KlasNummer is de nummer
->>>>>>> ed626b0ea797929d0ba8568fee5f45f87f1165c6
 // van de klas waarin de leerling zit. Nummer is de stamboeksnummer van de leerling.
 // Postcondition: Indien het maken van de leerling succesvol is gebeurd, wordt de return value True.
 // Nu is er een nieuwe leerling aangemaakt met alle parameters in gebruik genomen.
 
 +getNummer() integer
-<<<<<<< HEAD
 //Precondition: Voor als je de Nummer van de leerling wilt te weten komen.
 //Postcondition:  De waarde die je terugkrijgt is de stamboeksnummer van de leerling.
 
@@ -30,36 +26,29 @@
 //Precondition: Wanneer je de voornaam van een leerling wilt toevoegen.
 //Postcondition: De waarde die je terugkrijgt is True als de voornaam van een leerling met succesvol is toegevoegd.
 
-
 +getNaam()  string
 //Precondition: Voor als je de naam van de leerling te weten wilt komen.
 //Postcondition: De waarde die je terugkrijgt is de naam van de leerling.
-
 
 +setNaam() boolean
 //Precondition:
 //Postcondition:
 
-
 +getKlas()  string
 //Precondition: Voor als je de klas wilt weten waarin de leerling zit.
 //Postcondition: De waarde die je terugkrijgt is de klas waarin de leerling zit.
-
 
 +setKlas() boolean
 //Precondition: Dit is voor wanneer je de klas wilt aanmaken waar een leerling in zit.
 //Postcondition: De return waarde gaat True zijn als een klas met succes is toegevoegd.
 
-
 +getKlasNummer() integer
 //Precondition: Voor als je de klasnummer van de klas wilt weten waar de leerling in zit.
 //Postcondition: De waarde die je terugkrijgt is de klasnummer.
 
-
 +setKlasNummer() boolean
 //Precondition: Voor een klasnummer toe te voegen aan de leerling.
 //Postcondition: De return waarde is True als de klasnummer succesvol is toegevoegd.
-=======
 // Precondition: Voor als je de Nummer van de leerling wilt te weten komen.
 // Postcondition:  De waarde die je terugkrijgt is de stamboeksnummer van de leerling.
 
@@ -105,4 +94,3 @@
 // Precondition: Voor een klasnummer van de leerling te veranderen
 // naar de input KlasNummer.
 // Postcondition: De return waarde is True als de klasnummer succesvol is toegevoegd.
->>>>>>> ed626b0ea797929d0ba8568fee5f45f87f1165c6

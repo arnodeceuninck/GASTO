@@ -28,7 +28,7 @@
 // Precondition: newItem is het item dat je wil toevoegen, van het zelfde datatype als de andere elementen in de queue.
 // Postcondition: Indien er true gereturnd wordt is het element achteraan toegevoegd aan de queue.
 
-+dequeue(): (boolean, QueueItemType)
++dequeue(): (QueueItemType, boolean)
 // Precondition: De queue bevat minstens één element
 // Postcondition: Het eerste item is verwijderd indien het eerste element van de gereturnde tuple true is.
 // Het tweede element in de tuple is een kopie van het net verwijderde element.

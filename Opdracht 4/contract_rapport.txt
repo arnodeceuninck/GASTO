@@ -1,26 +1,34 @@
-<<<<<<< HEAD
-=======
 // Rapport
 // verantwoordelijke implementeren: Rob
 // verantwoordelijke testen: Sen
 
-+createRapport(in PuntenLijsten: list, Zoeksleutel: string): boolean
++createRapport(in PuntenLijsten: list, Zoeksleutel: string)
 // Precondition: Je wil een nieuw rapport aanmaken. De PuntenLijsten is een lijst van alle puntenlijsten
 // de waarden van de lijst zijn de puntenlijsten.
 // De Zoeksleutel is een string besaande uit 2 karakters. Namelijk de eerste is de letter M (maandrapport)
 // of E (examenrapport). Het tweede karakter is een getal dat aangeeft over welke maand of examenperiode het gaat.
-// Postcondition: Als het aanmaken van het rapport gelukt is, is de return value True. Er is nu een rapport
-// aangemaakt met alle puntenlijsten van alle leerlingen.
+// Postcondition: Er is nu een rapport aangemaakt met alle puntenlijsten van alle leerlingen.
 
-+getPuntenLijsten(): lijst
-// Precondition: Je wil de lijst van puntenlijsten weten.
-// Postcondition: De waarde die je terugkrijgt is een lijst van alle puntenlijsten.
++getList()  list: puntenlijsten
+// precondition: Je wilt de puntenlijsten opvragen
+// Postcondition: Geeft de puntenlijsten terug.
 
-+setPuntenLijsten(in PuntenLijst: array): boolean
-// Precondition: Je wil een puntenlijst toevoegen aan de verzameling van puntenlijsten (PuntenLijsten).
-// Postcondition: Wanneer de return waarde True is, is er succesvol een puntenlijst toegevoegd aan PuntenLijsten
++setList(in list: puntenlijsten) list: puntenlijsten
+// Precondition: Je wilt de puntenlijsten aanpassen.
+// Postcondition: Geeft de aangepaste puntenlijsten terug.
 
-+search(in Zoeksleutel: string) lijst:
-// Precondition: Je wilt een bepaald rapport zoeken via de zoeksleutel: zoeksleutel.
-// Postcondition: Geeft het rapport terug met de zoeksleutel: zoeksleutel.
->>>>>>> ed626b0ea797929d0ba8568fee5f45f87f1165c6
++addList(in list: puntenlijsten) list: puntenlijsten
+// precondition: Je wilt een puntenlijst toevoegen aan de lijst met puntenlijsten.
+// postcondition: Geeft de puntenlijsten terug met list er aan toegevoegd.
+
++getZoeksleutel(l: integer) boolean
+// Precondition: Je wilt een nieuwe zoeksleutel aanmaken.
+// postcondition: Maakt een nieuwe zoeksleutel aan.
+
++getZoeksleutel(in Zoeksleutel: integer) boolean
+// Precondition: Je wilt een zoeksleutel aanpassen.
+// postcondition: Past de zoeksleutel aan.
+
++deletePuntenLijst(in key: integer)
+// precondition: Je wilt de puntenlijst met key: key verwijderen.
+// Postcondition: Verwijder de puntenlijst met key: key.
