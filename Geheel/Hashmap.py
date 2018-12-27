@@ -129,7 +129,7 @@ class Hashmap():
     def size(self):
         return self.count
 
-    def show(self):
+    def show(self, name):
         # i = 0
         # while i < self.tableSize:
         #     if self.hashTable[i] != None:
@@ -140,7 +140,7 @@ class Hashmap():
         # print("\n")
         leeg = ""
         count = 0
-        f = open("Hahsmap.dot", "w+")
+        f = open(name, "w+")
         f.write("graph hashmap{\n")
         f.write("node[shape=record];\n")
         for i in self.hashTable:
