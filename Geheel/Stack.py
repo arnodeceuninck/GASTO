@@ -36,9 +36,15 @@ class stack:
 
     def getLength(self):
         size = 0
-        node = self.getTop()
+        node = self.stackpointer
         while node is not None:
             size += 1
+            node = node.below
+
+    def print(self):
+        node = self.stackpointer
+        while node is not None:
+            print(str(node.value))
             node = node.below
 
 def createstack():

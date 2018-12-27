@@ -57,6 +57,7 @@ while True:
             "(6) Toets, "
             "(7) Punt, "
             "(8) Rapport maken,"
+            "(9) Vorige instructies,"
             "(c) Cancel" + '\n')
 
         # TODO: checken of dotfile gegenereerd wordt
@@ -80,9 +81,11 @@ while True:
             print(str(geheel.retrieveToets(input("Naam: "))))
         elif input_str == "7":
             print(str(geheel.retrievePunt(input("ID: "))))
-        elif input_str == "7":
+        elif input_str == "8":
             geheel.buildRapport(input("Samengestelde zoeksleutel TP: "), input("Klas: "))
             print("Done. Je kan het rapport terugvinden tussen je bestanden.")
+        elif input_str == "9":
+            geheel.printInstructies()
         elif input_str == "c":
             continue  # Ga terug naar het begin van de While-loop
 

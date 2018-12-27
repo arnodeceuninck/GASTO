@@ -234,13 +234,13 @@ class TabelWrapper:
         if not self.type_assigned:
             return False
         elif self.type == "stack":
-            return self.dataStructure.print("stack.dot")
+            return self.dataStructure.print()
         elif self.type == "queue":
             return self.dataStructure.print("queue.dot")
         elif self.type == "bst":
             return self.dataStructure.print("bst.dot")
         elif self.type == "cl":
-            return self.dataStructure.print("cl.dot")
+            return self.dataStructure.visualize()
         elif self.type == "ll":
             return self.dataStructure.print("ll.dot")
         elif self.type == "23":
@@ -248,7 +248,7 @@ class TabelWrapper:
         elif self.type == "234":
             return self.dataStructure.print(1)
         elif self.type == "rb":
-            return self.dataStructure.print("rb.dot")
+            return self.dataStructure.visualize()
         elif self.type == "hlin":
             return self.dataStructure.print("hlin.dot")
         elif self.type == "hquad":
@@ -256,7 +256,7 @@ class TabelWrapper:
         elif self.type == "hsep":
             return self.dataStructure.print("hsep.dot")
         elif self.type == "heap":
-            return self.dataStructure.print("heap.dot")
+            return self.dataStructure.visualize()
 
     # visit is een functie die telkens toegepast wordt op de root value
     def traverse(self, visit, key=None):    #todo eigen functie namen aanpassen

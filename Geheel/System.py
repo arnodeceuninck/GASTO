@@ -426,6 +426,9 @@ class system:
     def printVak(self):
         return self.vakken.Print()
 
+    def printInstructies(self):
+        return self.instructies.Print()
+
     def undo(self, leerkr=None):
         if leerkr != None:
             leerkr_stack = self.undoPuntStack.retrieve(leerkr)[1]
