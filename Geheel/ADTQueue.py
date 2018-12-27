@@ -1,4 +1,4 @@
-
+import Graph
 class Pointer:
     def __init__(self, target):
         self.target = target
@@ -55,6 +55,23 @@ class Queue:
         while node is not None:
             size += 1
             node = node.next
+
+    def print(self, filename):
+
+        # Maakt een .dot file met daarin een visuele representatie van de boom (in .dot language)
+
+        vgraph = Graph.Graph(filename)
+        vgraph.change_rankdir("TB")  # Bomen worden meestal van Top to Bottem getoond
+
+        node = self.Front.target
+        while node is not None:
+            vgraph.add_node(node.value, node.value)
+            if node.next != None:
+                vgraph.add_connection(node.value, node.next.value, 0)
+            node = node.next
+
+        # Alle nodes en verbindingen zijn nu toegevooegd aan vgraph, maak er nu dus het bestand zelf van
+        vgraph.rebuild_file()
 
 
 if __name__ == '__main__':
