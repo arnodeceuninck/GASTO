@@ -261,8 +261,8 @@ class system:
     def collector(self, item, key):
         #TODO: veel efficienter maken
         if item is not None and item.getStamboekNummer() == key:
-            self.deletePunt(self.punten.dataStructure.findIndexID(item.getID()))
-            if self.punten.type != "hlin" or self.punten.type != "cl":
+            self.deletePunt(item.getID())
+            if self.punten.type != "hlin":
                 self.punten.traverse(self.collector, key)
             return True
         else:
