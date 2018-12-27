@@ -1,48 +1,31 @@
 #start
 #table grootte van 23
 #getallen tussen 5 en 50
+
 type=hash 1
-insert 25 2
-#insert Rob 2
-insert 43 20
-#insert Bor 20
-insert 18 18
-#insert n}} 18
-insert 37 14
-insert 25 3
-insert 36 13
-insert 44 21
-insert 6 6
-insert 7 7
-insert 10 10
-insert 12 12
-insert 24 1
-insert 36 15
-insert 19 19
-insert 21 22
-insert 26 4
-insert 50 5
-insert 41 0
-insert 39 16
-insert 23 8
-insert 33 11
-insert 34 17
-insert 2 9
+insert 23 0
+insert 46 1
+insert 69 2
+insert 92 3
+insert 115 4
+insert 1 5
+insert 2 6
+insert 3 7
+insert 4 8
+insert 5 9
+insert 6 10
+insert 7 11
+insert 8 12
+insert 30 13
+insert 29 14
+insert 28 15
+insert 27 16
+insert 9 17
+insert 10 18
+insert 11 19
+insert 12 20
+insert 13 21
+insert 14 22
 print
-#delete 2
-#print
-#insert 42 9
-#insert 49 8
-#print
-#45 - 22 - 0 - 1 - 2 - 3- 4 - 5 - 6 -7 -8 - 9
-#30 - 7 - 8 - 9 - 10 - 11 - 12 - 13 - 14 - 15 - 16 - 17 - 18 - 19 - 20 - 21 - 22 - 0 - 1 - 2 3 - 4- 5- 6
-#33
-#45
-#37
-#28
-#11
-#27
-#37
-#47
-#17
+
 #end
