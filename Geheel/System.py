@@ -18,7 +18,7 @@ from ReadFile import *
 class System:
     def __init__(self):
         #  Deze klassen zijn dus een verzameling van als ik het goed begrijp
-        self.punten = TabelWrapper("ll")  # dit is de create # puntenlijst nog nodig om punten aan te passen
+        self.punten = TabelWrapper("rb")  # dit is de create # puntenlijst nog nodig om punten aan te passen
         self.puntenQueue = TabelWrapper("queue")
         self.toetsen = TabelWrapper("cl")
         self.puntenlijst = TabelWrapper("bst")
@@ -73,7 +73,7 @@ class System:
             return False
 
     def addPunt(self, stamboeknummer_leerling, naam_toets, Waarde, leerkracht):
-        ID = self.punten.getLength()
+        ID = str(self.punten.getLength())
         instructie = "punt " + str(leerkracht) + " " + str(naam_toets) + " " + \
                      str(stamboeknummer_leerling) + " " + str(Waarde) + " " + str(ID)
         self.instructies.insert(instructie)

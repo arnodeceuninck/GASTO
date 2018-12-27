@@ -47,7 +47,7 @@ while True:
             geheel.printPuntenlijst()
             print(str(geheel.retrievePuntenlijst(input("ID: "))[1]))
         elif input_str == "6":
-            #geheel.printToets()
+            geheel.printToets()
             print(str(geheel.retrieveToets(input("Naam: "))[1]))
         elif input_str == "7":
             geheel.printPunt()

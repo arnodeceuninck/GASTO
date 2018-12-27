@@ -691,7 +691,7 @@ class T234:
             return tuple(self.item1, self.item2, self.item3)
 
     def print(self, nummer):
-        f = open("234-" + str(nummer) + ".dot", "w")
+        f = open(nummer, "w")
         f.write("digraph 234{")
         f.write(str("node [shape=record];") + '\n')
         f.write(str("edge[splines=" + "line" + "];" + '\n'))

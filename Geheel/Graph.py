@@ -7,7 +7,7 @@ class Graph:
         self.rebuild_file()
 
     def rebuild_file(self):
-        name = self.filename + ".dot"
+        name = self.filename
         with open(name, 'w'):
             pass
         file = open(name, "w")

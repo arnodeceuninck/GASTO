@@ -61,6 +61,12 @@ class Hashmap():
             return key % self.tableSize
 
     def herHashf(self, key):
+        num = 0
+        if type(key) != int:
+            for char in key:
+                num += ord(char)
+            key = num
+
         if self.type == 1:
             return (key + self.step) % self.tableSize
         elif self.type == 2:
@@ -136,7 +142,7 @@ class Hashmap():
     def size(self):
         return self.count
 
-    def show(self):
+    def show(self, name):
         # i = 0
         # while i < self.tableSize:
         #     if self.hashTable[i] != None:
@@ -147,12 +153,12 @@ class Hashmap():
         # print("\n")
         leeg = ""
         count = 0
-        f = open("Hahsmap.dot", "w+")
+        f = open(name, "w+")
         f.write("graph hashmap{\n")
         f.write("node[shape=record];\n")
         for i in self.hashTable:
             if i != None:
-                leeg += self.addNodeForDot(str(i.key), count)
+                leeg += self.addNodeForDot(str(i.item), count)
             else:
                 leeg += self.addNodeForDot("Leeg", count)
             count += 1
@@ -261,41 +267,21 @@ def lees(file, size):
                     h.delete(int(words[1]))
 
 
-# h = Hashmap(11, 1)
-# h.insert(0, 0)
-# h.insert(11, 1)
-# h.insert(22, 2)
-# h.insert(33, 3)
-# h.delete(22)
-# h.retrieve(33)
-# h.show()
-# h.traverse()
-# print(h.isEmpty())
-# h.destroy()
-h = createHashmap(5, 2)
-h.insert(2, 6)
-h.insert(3, 6)
-h.insert(4, 6)
-# h.insert(5, 6)
-# h.insert(6, 6)
-# print(h.isEmpty())
-# h.show()
+h = createHashmap(23, 2)
+# h.insert(24, 1)
+# h.insert(47, 2)
+# h.insert(70, 5)
+# h.insert(93, 10)
 
-# h.show()
-#file = open("quad_test.txt", "r")
-# size = input("Hoe groot moet de hashmap worden? ")
-size = 23
-h.size()
-# type = 1
-# print(createHashmap(size, type))
+# h.insert(24, "Rob")
+# h.insert(47, "Roel")
+# h.insert(70, "Aline")
+# h.insert(93, "Dylan")
+
+h.insert("Rob", "Vijftien") #291 -> 15
+h.insert("Bor", "Zestien") #291
+h.insert("Orb", "Negentien") #291
+h.insert("Bro", "Een")
 
 
-#lees(file, size)
-#h.traverse()
-#select = input("Wilt u linair probing (1), qwadratic probing (2) of seperate chaining (3) gebruiken? ")
-# h = Hashmap(int(size), int(select))
-# input()
-
-#h.show()
-# h.deleteHashmap()
-#input()
+h.show()
