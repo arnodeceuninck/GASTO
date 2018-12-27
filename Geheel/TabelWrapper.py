@@ -146,10 +146,8 @@ class TabelWrapper:
             return self.dataStructure.T234Delete(key)
         elif self.type == "rb":
             return self.dataStructure.remove(key)
-        elif self.type == "hlin" or self.type == "hquad":
+        elif self.type == "hlin" or self.type == "hquad" or self.type == "hsep":
             return self.dataStructure.delete(key)
-        elif self.type == "hsep":
-            return self.dataStructure.delete(key, value)
         elif self.type == "heap":
             return self.dataStructure.remove() # Altijd de top die verwijderd wordt
 
@@ -249,17 +247,13 @@ class TabelWrapper:
             return self.dataStructure.print(1)
         elif self.type == "rb":
             return self.dataStructure.visualize()
-        elif self.type == "hlin":
-            return self.dataStructure.print("hlin.dot")
-        elif self.type == "hquad":
-            return self.dataStructure.print("hquad.dot")
-        elif self.type == "hsep":
-            return self.dataStructure.print("hsep.dot")
+        elif self.type == "hlin" or self.type == "hquad" or self.type == "hsep":
+            return self.dataStructure.show()
         elif self.type == "heap":
             return self.dataStructure.visualize()
 
     # visit is een functie die telkens toegepast wordt op de root value
-    def traverse(self, visit, key=None):    
+    def traverse(self, visit, key=None):
         if not self.type_assigned:
             return False
         elif self.type == "stack":

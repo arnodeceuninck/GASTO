@@ -70,4 +70,9 @@ fabric.properties
 .idea/workspace.xml
 *.pyc
 *.xml
+<<<<<<< HEAD
 *.py___jb_tmp___
+=======
+*.xml
+*.iml
+>>>>>>> 5a5209db43ef73b14fa5e72099f54441596fd7b6
