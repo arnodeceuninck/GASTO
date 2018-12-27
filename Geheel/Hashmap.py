@@ -137,17 +137,14 @@ class Hashmap():
         return self.count
 
     def show(self):
-        i = 0
-        while i < self.tableSize:
-            if self.hashTable[i] != None:
-                print("Op plaats %s staat: %s" %(i, self.hashTable[i].item))
-            else:
-                print("Op plaats %s staat niets" %i)
-            i += 1
-        print("\n")
-
-
-
+        # i = 0
+        # while i < self.tableSize:
+        #     if self.hashTable[i] != None:
+        #         print("Op plaats %s staat: %s" %(i, self.hashTable[i].item))
+        #     else:
+        #         print("Op plaats %s staat niets" %i)
+        #     i += 1
+        # print("\n")
         leeg = ""
         count = 0
         f = open("Hahsmap.dot", "w+")

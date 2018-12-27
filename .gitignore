@@ -70,3 +70,5 @@ fabric.properties
 .idea/workspace.xml
 *.pyc
 *.xml
+*.xml
+*.iml
