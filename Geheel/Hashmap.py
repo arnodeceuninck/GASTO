@@ -9,7 +9,7 @@ class Hashmap():
         self.tableSize = size
         self.hashTable = [None] * (self.tableSize)
         self.step = 1
-        self.type = type
+        self.type = type  # 1 lineair, 2 quadratic, 3 bucketing
         self.count = 0
 
     def __iter__(self):
@@ -28,9 +28,9 @@ class Hashmap():
             index_place = self.hashTable[self.index]
             if self.type == "hsep":
                 if self.element != len(index_place.root):
-                    return_value = index_place.root[self.element]
+                    return_item = index_place.root[self.element]
                     self.element += 1
-                    return return_value.key, return_value.item
+                    return return_item.key, return_item.item
                 else:
                     self.index += 1
                     return self.__next__()
@@ -74,6 +74,21 @@ class Hashmap():
                         self.nu.next = treeItem
                         return False
                     self.nu = self.nu.next
+
+    def ll_retrieve(self, key):
+        index = self.hashf(key)
+        if self.hashTable[index] == None:
+            return (False, None) # Not found
+        elif self.hashTable[index].key == key:
+            return (True, self.hashTable[index].item)
+        else:
+            currentItem = self.hashTable[index]
+            while currentItem.next is not None:
+                currentItem = currentItem.next
+                if currentItem.key == key:
+                    return (True, currentItem.item)
+            return (False, None)
+
 
     def getPosition(self, key):
         index = self.hashf(key)
@@ -199,17 +214,46 @@ class Hashmap():
                 leeg = False
         return leeg
 
+    def getRetrievePosition(self, key):
+        index = self.hashf(key)
+        if self.hashTable[index] == key:
+            return index
+        else:
+            if self.hashTable[index] != key:
+                maxAttempts = 211
+                attempts = 0
+                while self.hashTable[index].key != key and attempts < maxAttempts:
+                    attempts += 1
+                    if self.hashTable[index].key == key:
+                        return index
+                    else:
+                        if self.type == 1:
+                            index = self.herHashf(index)
+                        else:
+                            index = self.herHashf(key)
+                        if self.type == 2:
+                            self.step += 1
+                if attempts >= maxAttempts:
+                    return -1
+            return index
 
     def retrieve(self, key):
+        self.step = 1
+
+        if self.type == 3:
+            return self.ll_retrieve(key)
+
         index = self.hashf(key)
-        if len(self.hashTable) == 0:
-            return False
+        if self.count == 0:
+            return (False, None)
         if self.hashTable[index].key != key:
-            while self.hashTable[index].key != key:
-                index = self.herHashf(index)
-            print(self.hashTable[index].item)
-        else:
-            print(self.hashTable[index].item)
+            index = self.getRetrievePosition(key)
+            if index == -1:
+                return False, None
+            else:
+                return True, self.hashTable[index].item
+
+        return True, self.hashTable[index].item
 
     def insert(self, key, item):
         self.count += 1
@@ -248,7 +292,7 @@ def lees(file, size):
                 if words[0] == "delete":
                     h.delete(int(words[1]))
 
-h = createHashmap(23, 2)
+h = createHashmap(23, 1)
 # h.insert(24, 1)
 # h.insert(47, 2)
 # h.insert(70, 5)
@@ -263,5 +307,6 @@ h.insert("Rob", "Vijftien") #291 -> 15
 h.insert("Bor", "Zestien") #291
 h.insert("Orb", "Negentien") #291
 h.insert("Bro", "Een")
+test = h.retrieve("Bro")
 
-h.show()
+h.show("h.dot")
