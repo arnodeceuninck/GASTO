@@ -1,6 +1,3 @@
-# TODO: Stel python folderstructuur op
-# TODO: Steek deze klasse in een apart bestand
-
 class Graph:
     def __init__(self, filename):
         self.nodes = []

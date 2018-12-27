@@ -32,7 +32,7 @@ class circular_chain:
         self.__init__()
 
     def destroyList(self):
-        del self  # Todo: test if possible
+        del self
 
     def isEmpty(self):
         if self.count == 0:

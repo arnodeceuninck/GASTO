@@ -62,7 +62,7 @@ class BinarySearchTree:
         if self.root.key == searchKey:
             if self.left == None and self.right == None:
                 self.root = None
-                del self # Todo: test if works
+                del self
             elif self.left == None and self.right != None:
                 self.root = self.right.root
                 self.left = self.right.left
@@ -137,14 +137,14 @@ class BinarySearchTree:
             if self.right != None:
                 self.right.deleteEmpty()
 
-    def inorderTraverse(self, visit, key):   #todo check
+    def inorderTraverse(self, visit, key):
         """
 
         """
         if self.left is not None:
             self.left.inorderTraverse(visit, key)
         if self.root is not None:
-            visit(self.root.item, key) # Todo: test if works
+            visit(self.root.item, key)
         if self.right is not None:
             self.right.inorderTraverse(visit, key)
 
@@ -155,10 +155,10 @@ class BinarySearchTree:
         #     if self.right != None:
         #         self.right.preorderTraverse()
 
-    def traverse(self, visit, key=None):  #todo check
+    def traverse(self, visit, key=None):
         return self.inorderTraverse(visit, key)
 
-    def getIndex(self, index):  #todo check
+    def getIndex(self, index):
         if index == 0:
             return (self.root, index)
         index -= 1
@@ -174,12 +174,12 @@ class BinarySearchTree:
                 return returned
         return (None, index)
 
-    def size(self): #todo check
+    def size(self):
         if self.root == None:
             return 0
         return self.Size()
 
-    def Size(self): #todo check
+    def Size(self):
         size = 0
         if(self.left != None):
             size += self.left.Size()

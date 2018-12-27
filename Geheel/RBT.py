@@ -68,7 +68,7 @@ class RoodZwartBoom:
         if self.root is not None:
             return self.root.retrieve(key)
         else:
-            return False
+            return False, None
 
     def getRoot(self):
         # Returnt het RBTItem dat in de top van de RZB zit
@@ -639,7 +639,7 @@ class RBTNode:
     def retrieve(self, key):
 
         if self.root is not None and self.root.key == key:
-            return (True, (self.root.key, self.root.value))
+            return (True, self.root.value)
 
         elif self.root is not None \
                 and self.root.key < key \
