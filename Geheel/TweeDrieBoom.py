@@ -626,6 +626,7 @@ def dot(current, parent, file):
     if current.childrenRight != None:
         dot(current.childrenRight, current, file)
 
+
 def write_dot(file, tree):
     dotFile = open(file, "w")
     dotFile.write("digraph Two_Three_Tree { \n")
