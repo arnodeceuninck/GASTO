@@ -56,9 +56,9 @@ class stack:
             node = node.below
         return size
 
-    def print(self):
+    def print(self, name):
         # Maakt een .dot file met daarin een visuele representatie van de boom (in .dot language)
-        vgraph = Graph("Stack")
+        vgraph = Graph(name)
         vgraph.change_rankdir("TB")  # Bomen worden meestal van Top to Bottem getoond
 
         node = self.stackpointer
