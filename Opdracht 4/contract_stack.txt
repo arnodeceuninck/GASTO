@@ -8,7 +8,7 @@
 // StackItemType is het type van de elementen die in de stack zitten.
 
 +createStack()
-// Precondition: Geen
+// Precondition: Maakt een nieuwe stack aan.
 // Postcondition: Er is een nieuwe lege stack aangemaakt met alle default waarden.
 
 +destroyStack()
@@ -20,7 +20,7 @@
 // Postcondition: De method returnt true indien de stack elementen bevat. Als de
 // stack geen elementen bevat zal je een false terugkrijgen.
 
-+push(in newItem:StackItemType) boolean
++push(in newItem:StackItemType)
 // Preconditon: Je wilt een nieuw item toeveogen aan de stack.
 // Postcondition: indien er true gereturnd wordt is het element bovenaan toegevoegd aan de stack.
 
@@ -34,3 +34,11 @@
 // Precondition: Je wilt het laatst toegevoegde element opvragen.
 // Postconditin: Plaatst de top van een stack (d.i. het laatst toegevoegde element) in
 // ‘stackTop’ en laat de stack ongewijzigd. ‘success’ duidt aan of het gelukt is.
+
++getLength() size: integer
+// precondition: Je wilt de lengte van de stack weten.
+// Postcondition: Geeft de lengte van de stack terug.
+
++print()
+// Precondition: Je wilt een dotfile van de stack.
+// Postcondition: Maakt een dotfile van de stack.
