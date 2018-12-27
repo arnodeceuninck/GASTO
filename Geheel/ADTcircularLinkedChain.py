@@ -141,8 +141,8 @@ class circular_chain:
                 return False
         return (True, current_node.value)
 
-    def visualize(self):
-        self.grafiek = Graph("cl.dot")
+    def visualize(self, name):
+        self.grafiek = Graph(name)
         node = self.head
         # loop once through all nodes, and add the nodes and connections to the graph
         firstTime = True

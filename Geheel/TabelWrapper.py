@@ -239,18 +239,17 @@ class TabelWrapper:
         elif self.type == "bst":
             return self.dataStructure.print(name)
         elif self.type == "cl":
-            return self.dataStructure.visualize()
+            return self.dataStructure.visualize(name)
         elif self.type == "ll":
             return self.dataStructure.print(name)
         elif self.type == "23":
-            return self.dataStructure.write_dot(name, self.dataStructure)
-            return self.dataStructure.print("23.dot")
+            return self.dataStructure.print(name)
         elif self.type == "234":
             return self.dataStructure.print(name)
         elif self.type == "rb":
             return self.dataStructure.visualize(name)
         elif self.type == "hlin" or self.type == "hquad" or self.type == "hsep":
-            return self.dataStructure.show()
+            return self.dataStructure.show(name)
         elif self.type == "heap":
             return self.dataStructure.visualize(name)
 
