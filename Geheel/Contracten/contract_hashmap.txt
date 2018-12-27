@@ -1,0 +1,44 @@
+// Hashmap
+// verantwoordelijke implementeren: Rob
+// verantwoordelijke testen: Arno
+
+// Alle items in een hashmap hebben hetzelfde type. In dit operation contract
+// wordt er naar dit type verwezen als 'HashItemType'.
+// Bovendien hebben ook alle items in een hashmap hetzelfde type voor hun
+// zoeksleutel. In dit operation contract wordt er naar dit type verwezen als
+// 'KeyType'.
+
++createHashmap()
+// Dit maakt een nieuwe hashmap aan.
+// Precondition: Je wilt een hashmap aanmaken.
+// Postcondition: De hashmap is aangemaakt.
+
++insert(in newItem: HashItemType): boolean
+// Hiermee voeg je een nieuw element toe aan een hashmap.
+// Precondition: Je wilt een nieuw element toevoegen aan de hashmap.
+// Postcondition: Het nieuwe element is succesvol toegevoegd indien de
+// gereturnde waarde true is.
+
++hashf(in searchKey: KeyType): integer
+// Hier wordt de index berekend.
+// Precondition: Je wilt de index berekenen. searchKey is de zoeksleutel van
+// het element waarvan je de index wil gaan berekenen.
+// Postcondition: De index is berkend en wordt ook teruggegeven.
+
++herHashf(in searchKey: KeyType): integer
+// Hier wordt de index berekend.
+// Precondition: Je wilt de index berekenen. searchKey is de zoeksleutel van
+// het element waarvan je de index wil gaan berekenen.
+// Postcondition: De index is berkend en wordt ook teruggegeven.
+
++retrieve(in searchKey: KeyType): (TableItemType, boolean)
+// Hier kan je item door middel van een searchKey gaan ophalen.
+// Precondition: Je wilt een item uit de tabel met als zoeksleutel de parameter
+// searchKey.
+// Postcondition: Geeft true als tweede element van de tuple wanneer het
+// gewenste item is teruggegeven als eerste element van de tuple.
+
++delete(in searchKey: KeyType): boolean
+// Hier kan een element uit de hashmap verwijderd worden.
+// Precondition: Je wilt een item met gegeven searchKey verwijderen.
+// Postcondition: Geeft true terug als het gewenste item verwijderd is.
