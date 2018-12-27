@@ -12,6 +12,45 @@ class Hashmap():
         self.type = type
         self.count = 0
 
+    def __iter__(self):
+        self.index = 0
+        self.element = 0 # voor meerdere elementen op 1 index
+        return self
+    def __next__(self):
+        if self.index == self.tableSize:
+            raise StopIteration
+        else:
+            while self.hashTable[self.index] == None:
+                self.index += 1
+                if self.index >= self.tableSize:
+                    raise StopIteration
+            index_place = self.hashTable[self.index]
+            if self.type == "hsep":
+                if self.element != len(index_place.root):
+                    return_value = index_place.root[self.element]
+                    self.element += 1
+                    return return_value.key, return_value.item
+                else:
+                    self.index += 1
+                    return self.__next__()
+            else:
+                self.index += 1
+                return index_place.key, index_place.item
+
+            self.index += 1
+            return index_place.key, index_place.item
+
+    def getLength(self):
+        size = 0
+        for i in range(self.tableSize):
+            if self.type == "hsep":
+                if self.hashTable[i] != None:
+                    size += len(self.hashTable[i])
+            else:
+                if self.hashTable[i] != None:
+                    size += 1
+        return size
+
     def hashf(self, key):
         num = 0
         if type(key) != int:
