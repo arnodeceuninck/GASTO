@@ -79,7 +79,7 @@ for line in instructionFile:
     elif words[0] == "start":
         if not actiefSysteem():
             continue
-        # TODO: wat zou er hierbij zelfs moeten gebeuren?
+        # wat zou er hierbij zelfs moeten gebeuren?
 
     elif words[0] == "toets":
         if not actiefSysteem():
@@ -101,7 +101,7 @@ for line in instructionFile:
         if not actiefSysteem():
             continue
         if len(words) == 1:
-            geheel.undo() # TODO: implement undo
+            geheel.undo()  # Done: implement undo
         else:
             geheel.undo(words[1])
 

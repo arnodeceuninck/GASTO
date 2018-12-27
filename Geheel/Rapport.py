@@ -1,5 +1,5 @@
 class Rapport:
-    # TODO: html bestanden laten genereren met de input
+    # Done: html bestanden laten genereren met de input: Gebeurt in System.py
     def __init__(self, list, Zoeksleutel):
         self.list = list
         self.Zoeksleutel = Zoeksleutel

@@ -37,10 +37,11 @@ class Heap:
         return self.top.root # Returnt het volledige item, dus de key en de value als een object
 
     def remove(self):
-        top = self.top.root
-        # TODO: Remove top + heaprebuild
-        self.top.remove()
-        return top
+        if self.top != None:
+            top = self.top.root
+            self.top.remove()
+            return top
+        return False
 
     def size(self):
         if self.top is None:
@@ -196,11 +197,11 @@ class HeapNode:
             return self.destroy()
         lastItem = self.findLastItem()
         self.root = lastItem.root
-        # TODO: What if no parent exists?
-        if lastItem.parent.left_tree == lastItem:
-            lastItem.parent.left_tree = None
-        elif lastItem.parent.right_tree == lastItem:
-            lastItem.parent.right_tree = None
+        if lastItem.parent != None:
+            if lastItem.parent.left_tree == lastItem:
+                lastItem.parent.left_tree = None
+            elif lastItem.parent.right_tree == lastItem:
+                lastItem.parent.right_tree = None
         lastItem.destroy()
         self.trickleDown()
 

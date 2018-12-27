@@ -4,7 +4,6 @@ from System import *
 
 geheel = system()
 
-# TODO: Overal waar een ID wordt meegegeven er zelf eentje laten genereren (tabel.getLength() + 1) als ID bv
 # init
 geheel.addVak("WIS", "Wiskunde")
 geheel.addVak("NED", "Nederlands")
@@ -27,11 +26,8 @@ geheel.addToets("1", "integralen", "20")
 
 geheel.addToets("2", "opstel", "5")
 
-geheel.addPunt("1800001", "afgeleiden", "5", "HOFKT")  # TODO: Wat doet de afkorting van de leerkracht erbij in system.txt?
-                                                                   #  moet dit mee opgeslaan worden?
-                                                                   # TODO: Enkel leerkracht die dit vak geeft aan de klas mag punten toevoegen
-                                                                   # Timestamp is momenteel: yyyymmddhhmmss
-geheel.addPunt("1800002", "afgeleiden", "9", "HOFKT")  # TODO: timestamp = time.now()
+geheel.addPunt("1800001", "afgeleiden", "5", "HOFKT")
+geheel.addPunt("1800002", "afgeleiden", "9", "HOFKT")
 geheel.addPunt("1800001", "integralen", "15", "PAUWS")
 geheel.addPunt("1800002", "integralen", "19", "PAUWS")
 geheel.addPunt("1800001", "opstel", "5", "LAENE")
@@ -130,14 +126,10 @@ while True:
                             input("Naam toets: "),
                             input("Max. Score: "))
         elif input_str == "7":
-            # TODO: uitleggen wat het ID van een punt is, is dit gewoon een random gekozen getal?
-            # Misschien kunnen we het ID zelf genereren en returnen, want als 'leerkracht' is het niet de bedoeling
-            # dat je dit moet ingeven denk ik (bv. eerst geinserte punt heeft ID 1, daarna 2, 3, 4...)
-            geheel.addPunt(input("ID: "),
-                           input("Stamboomnummer: "),
+            geheel.addPunt(input("Stamboomnummer: "),
                            input("Naam: "),
                            input("Waarde: "),
-                           input("Timestamp: "))
+                           input("Afkorting leerkracht: "))
         elif input_str == "c":
             continue  # Ga terug naar het begin van de While-loop
 
@@ -151,9 +143,9 @@ while True:
             "(5) Puntenlijst, "
             "(6) Toets, "
             "(7) Punt, "
+            "(z) Undo, "
             "(c) Cancel" + '\n')
 
-        # TODO: support unsupported feautures
         if input_str == "1":
             geheel.deleteVak(input("Afkorting: "))
         elif input_str == "2":
@@ -168,6 +160,8 @@ while True:
             geheel.deleteToets(input("Naam toets: "))
         elif input_str == "7":
             geheel.deletePunt(input("ID: "))
+        elif input_str == "z":
+            geheel.undo()
         elif input_str == "c":
             continue  # Ga terug naar het begin van de While-loop
         pass
