@@ -23,11 +23,8 @@ class system:
         # TODO: De klassen toets, rapport, puntenlijst moeten ontworpen zoals de ADT tabel.
         #  Deze klassen zijn dus een verzameling van als ik het goed begrijp
         # TODO: Fix error: alle elementen met zelfde datastructuur komen samen in eenzelfde datastructuur
-<<<<<<< HEAD
         self.punten = TabelWrapper("cl")  # dit is de create # puntenlijst nog nodig om punten aan te passen
-=======
         self.punten = TabelWrapper("hlin")  # dit is de create # puntenlijst nog nodig om punten aan te passen
->>>>>>> e301d5c3ab6b0228eac1b8bcd396a22591eac3bc
         self.puntenQueue = TabelWrapper("queue")
         self.toetsen = TabelWrapper("cl")  # TODO: verander dit terug naar cl
         self.puntenlijst = TabelWrapper("ll")  # TODO: verander terug naar bst als er een bst in Geheel zit
@@ -231,7 +228,7 @@ class system:
         #     self.punten.delete(punt)
 
 
-        self.leerlingen.delete(key)
+    self.leerlingen.delete(key)
 
     def deletePuntenlijst(self, key):
         puntenlijst = self.puntenlijst.retrieve(key)
