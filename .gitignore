@@ -68,3 +68,4 @@ fabric.properties
 *.xml
 *.xml
 .idea/workspace.xml
+*.pyc

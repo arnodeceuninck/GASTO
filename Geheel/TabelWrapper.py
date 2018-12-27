@@ -229,7 +229,7 @@ class TabelWrapper:
             return self.dataStructure.size()
             # return self.dataStructure.getLength()
         elif self.type == "hlin" or self.type == "hquad":
-            return self.grootte #TODO: Niet wat hiermee bedoeld wordt zeker? Wss gwn het aantal elementen in de hashmap?
+            return self.dataStructure.count #TODO: Niet wat hiermee bedoeld wordt zeker? Wss gwn het aantal elementen in de hashmap?
                                 # dan is het hetzelfde als bij de hsep
         elif self.type == "hsep":
             return self.dataStructure.getLength()

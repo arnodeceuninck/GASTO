@@ -83,7 +83,7 @@ class Hashmap():
             return None
         else:
             for i in range(len(self.hashTable)):
-                if self.hashTable[i] != None:
+                if self.hashTable[i] != None and self.hashTable[i].item is not None:
                     visit(self.hashTable[i].item, key)
                 else:
                     print("None")
@@ -195,8 +195,6 @@ class Hashmap():
             print("Je kan maximaal %s items inserten! Item (%s, %s) is niet geinsert geweest." %(self.tableSize, key, item))
 
 
-
-
 def createHashmap(size, type):
     return Hashmap(int(size), int(type))
 
@@ -244,7 +242,7 @@ h.insert(6, 6)
 # h.show()
 
 # h.show()
-file = open("quad_test.txt", "r")
+#file = open("quad_test.txt", "r")
 # size = input("Hoe groot moet de hashmap worden? ")
 size = 23
 # type = 1
@@ -252,7 +250,7 @@ size = 23
 
 
 #lees(file, size)
-h.traverse()
+#h.traverse()
 #select = input("Wilt u linair probing (1), qwadratic probing (2) of seperate chaining (3) gebruiken? ")
 # h = Hashmap(int(size), int(select))
 # input()
