@@ -29,8 +29,6 @@ punt HOFKT afgeleiden 1800002 9
 punt PAUWS integralen 1800001 15
 punt PAUWS integralen 1800002 19
 punt LAENE opstel 1800001 5
-punt LAENE opstel 1800002 2
-
 toets 2 lezen 15
 undo
 

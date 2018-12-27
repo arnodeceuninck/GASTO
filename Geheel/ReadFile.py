@@ -25,14 +25,10 @@ for line in instructionFile:
     if line[0] == '#':
         continue
 
+    if line[len(line) - 1] == '\n':
+        line = line[:len(line) - 1]
+
     words = line.split(' ')
-    i = 0
-    # verwijder alle enters op het einde
-    for word in words:
-        if word[len(word)-1] == '\n':
-            word = word[:len(word)-1]
-            words[i] = word
-        i += 1
 
     if len(words) < 1:
         continue

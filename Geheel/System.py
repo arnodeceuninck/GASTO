@@ -24,6 +24,7 @@ class system:
         #  Deze klassen zijn dus een verzameling van als ik het goed begrijp
         # TODO: Fix error: alle elementen met zelfde datastructuur komen samen in eenzelfde datastructuur
         self.punten = TabelWrapper("hquad")  # dit is de create # puntenlijst nog nodig om punten aan te passen
+        self.puntenQueue = TabelWrapper("queue")
         self.toetsen = TabelWrapper("cl")  # TODO: verander dit terug naar cl
         self.puntenlijst = TabelWrapper("ll")  # TODO: verander terug naar bst als er een bst in Geheel zit
         # self.puntenlijst = TabelWrapper("bst")  # Is dus eigenlijk een verzameling van alle puntenlijsten
@@ -33,6 +34,7 @@ class system:
         self.leerlingen = TabelWrapper("ll")
         self.rapporten = TabelWrapper("ll")
         self.instructies = TabelWrapper("stack")  # NOTE: Don't change this ADT
+        self.undoPuntStack = TabelWrapper("ll")  # Dit bevat als zoeksleutel een leerkracht, als value een stack
 
     def addVak(self, afkorting, naam):
         self.instructies.insert("vak " + str(afkorting) + " " + str(naam))
@@ -44,7 +46,9 @@ class system:
 
     def addLeraar(self, afkorting, naam, achternaam):
         self.instructies.insert("leraar " + str(naam) + " " + str(achternaam) + " " + str(afkorting))
-        return self.leraars.insert(Leraar.Leraar(afkorting, naam, achternaam), afkorting)
+        return_value = self.leraars.insert(Leraar.Leraar(afkorting, naam, achternaam), afkorting)
+        self.undoPuntStack.insert(afkorting, TabelWrapper("stack"))
+        return return_value
 
     def addLeerling(self, naam, voornaam, klas, klasnummer, studentennummer):
         self.instructies.insert("leeling " + str(voornaam) + " " + str(naam) + " " + str(klas) + " " +
@@ -59,34 +63,49 @@ class system:
             return False
 
         return self.leerlingen.insert(Leerling.Leerling(naam, voornaam, klas, klasnummer, studentennummer),
-                                          studentennummer)
+                                      studentennummer)
 
     def addPunt(self, stamboeknummer_leerling, naam_toets, Waarde, leerkracht):
         ID = self.punten.getLength()
-        self.instructies.insert("punt " + str(leerkracht) + " " + str(naam_toets) + " " +
-                                str(stamboeknummer_leerling) + " " + str(Waarde) + " " + str(ID))
+        instructie = "punt " + str(leerkracht) + " " + str(naam_toets) + " " + \
+                     str(stamboeknummer_leerling) + " " + str(Waarde) + " " + str(ID)
+        self.instructies.insert(instructie)
+        stack_leerkr = self.instructies.retrieve(leerkracht)[1]
+        stack_leerkr.insert(instructie)
         # TODO: controleren of leerkracht bevoegd is om aan deze toets een punt toe te voegen
 
         # maakt een nieuw punt aan met een uniek ID, Stamboomnummer, Naam, Waarde en Timestamp
-        toets = self.toetsen.retrieve(naam_toets)
+        toets = self.toetsen.retrieve(naam_toets)[1]
         if toets is None:
             print("ERROR: De toets " + naam_toets + " werd niet teruggevonden in het systeem. "
-                  "Gelieve deze eerst aan te maken.")
+                                                    "Gelieve deze eerst aan te maken.")
             return False
         if self.leerlingen.retrieve(stamboeknummer_leerling) is None:
             print("ERROR: Het studentennummer " + stamboeknummer_leerling + " werd niet teruggevonden in het systeem. "
-                  "Gelieve deze eerst aan te maken.")
+                                                                            "Gelieve deze eerst aan te maken.")
             return False
-        punt = Punt.createPunt(ID, stamboeknummer_leerling, naam_toets, Waarde, datetime.datetime.now())  # https://stackoverflow.com/questions/415511/how-to-get-the-current-time-in-python
-        self.punten.insert(punt, ID)  # Key
-        #TODO: de retrieve van een LL geeft een tuple terug ma is da echt nodig?
-        if type(toets) == tuple:
-            if type(toets[1]) == TweeDrieBoom.TreeItem:
-                toets[1].value.addPunt(punt)
-            else:
-                toets[1].addPunt(punt)
-        else:
-            toets.addPunt(punt)
+        punt = Punt.createPunt(ID, stamboeknummer_leerling, naam_toets, Waarde,
+                               datetime.datetime.now())  # https://stackoverflow.com/questions/415511/how-to-get-the-current-time-in-python
+        self.puntenQueue.insert(punt)
+        while not self.puntenQueue.isEmpty():
+            current_punt = self.puntenQueue.retrieve()[1]
+            stamboeknummer_leerling = current_punt.getStamboekNummer()
+            naam_toets = current_punt.getNaam()
+            for punt2 in self.punten:
+                punt2 = punt2[1]
+                if punt2.getStamboekNummer() == stamboeknummer_leerling and punt2.getNaam() == naam_toets:
+                    print("Error bij punt: " + str(punt))
+                    print("Punt voor deze leerling en toets al in puntenlijst. "
+                          "Gelieve het vorige punt eerst te verwijderen "
+                          "(mbv undo bij de leerkracht die dit heeft toegevoegd")
+                    return False
+            # Controleer of er al een punt voor deze toets en deze leerkracht in de lijst met punten zit
+            self.punten.insert(current_punt, ID)  # Key
+            self.puntenQueue.delete()  # Verwwijder het eerste element van de queue
+        # DONE: de retrieve van een LL geeft een tuple terug ma is da echt nodig?
+        # JHAAAA, alle retrieves returnen een tuple
+
+        toets.addPunt(punt)
         return True
 
     def addPuntenLijst(self, ID, type, periode, namecodes, vak_afkorting, klas, uren):
@@ -157,9 +176,9 @@ class system:
             print("ERROR: Klas" + naam + "Zit niet in het systeem")
 
     def deleteLeerling(self, key):
-        #TODO: elke datastructuur toevoegen aan de delete
+        # TODO: elke datastructuur toevoegen aan de delete
 
-        #de punten die gelinkt zijn aan het stamboom nummer verwijderen
+        # de punten die gelinkt zijn aan het stamboom nummer verwijderen
 
         if self.punten.type == "cl":
             node = self.punten.dataStructure.head.next
@@ -183,7 +202,7 @@ class system:
         elif self.punten.type == "234" or self.punten.type == "23" or self.punten.type == "bst" or self.punten.type == "rb" or self.punten.type == "hlin" or self.punten.type == "hquad":
             self.punten.traverse(self.collector, key)
 
-        #alle punten uit de testen verwijderen
+        # alle punten uit de testen verwijderen
         # if self.toetsen.type == "cl":
         #     node = self.toetsen.dataStructure.head.next
         #     for x in range(self.toetsen.dataStructure.count):
@@ -203,16 +222,19 @@ class system:
 
     def deletePuntenlijst(self, key):
         puntenlijst = self.puntenlijst.retrieve(key)
-        for i in range(len(puntenlijst.toetsen)-1, -1, -1):
+        for i in range(len(puntenlijst.toetsen) - 1, -1, -1):
             self.deleteToets(puntenlijst.toetsen[i].getNaam())
         self.puntenlijst.delete(key)
 
     def deleteToets(self, naam):
-        toets = self.retrieveToets(naam)
-        for i in range(len(toets.verzamelingVanPunten)-1, -1, -1):
+        toets = self.retrieveToets(naam)[1]
+        for i in range(len(toets.verzamelingVanPunten) - 1, -1, -1):
             self.deletePunt(toets.verzamelingVanPunten[i].getID())
         self.puntenlijst.traverse(self.puntenlijstToetsenDetect, naam)
-        #TODO: Als het een cl is dan is dit het speciaal geval, controleren hoe te werk gaan bij andere datastructuren # Hoezo een speciaal geval? # Omda ge eerst de index moet vinden en bij de andere niet
+        # DONE: Als het een cl is dan is dit het speciaal geval, controleren hoe te werk gaan bij andere datastructuren
+        # Hoezo een speciaal geval?
+        # Omda ge eerst de index moet vinden en bij de andere niet
+        # Da probleem zou opgelost moeten zijn
         self.toetsen.delete(self.toetsen.dataStructure.findIndexValue(naam))
 
     def deleteLeraar(self, naam):
@@ -260,36 +282,10 @@ class system:
             self.leerlingen.traverse(self.leerlingKlasdelete, key)
 
     def rapportKlasdetect(self, item, key):
-        for i in range(len(item.list)-1, -1, -1):
+        for i in range(len(item.list) - 1, -1, -1):
             if item.list[i].getKlas() == key:
                 del item.list[i]
                 i -= 1
-
-    # def addToets(self):
-    #     # Maakt toetsen aan bij puntenlijst 'ID'
-    #     # TODO: Verplaats alles van input naar main, dat maakt het makkelijker om achteraf een GUI te maken
-    #
-    #     ID = input("Naam: ")  # De titel van de toets
-    #     puntenlist = []  # !!! Is een verzameling van punten, geen puntenlijst !!! # TODO: change name?
-    #
-    #     while True:
-    #         # Blijf punten toevoegen aan de lijst tot je geen ID meegeeft
-    #         IDPunt = input("ID Punt: ")
-    #
-    #         if IDPunt == "":
-    #             break
-    #         else:
-    #             punt = self.retrievePunt(IDPunt)
-    #             if punt is not None:
-    #                 puntenlist.append(punt)
-    #             else:
-    #                 print("ID van punt bestaat niet")
-    #
-    #     # idascii = int(''.join(str(ord(c)) for c in ID))
-    #     # idascii = idascii[1:(len(idascii)-1)]
-    #
-    #     self.toetsen.insert(Toets.createToets(ID, input("Maximum: "), puntenlist),  # Value
-    #                         ID)  # Key
 
     def retrievePunt(self, key):
         # Vraag een specifiek punt op
@@ -375,7 +371,8 @@ class system:
                     if not leerlingFound:
                         punten_per_leerling.append([leerlingnr, [vak, aantal_uren, leerkrachten, int(score), int(max)]])
 
-        rapportFile = HtmlMaker.HtmlRapport(str("rapport-" + str(samengestelde_zoeksleutel) + "-" + str(klas) + ".html"))
+        rapportFile = HtmlMaker.HtmlRapport(
+            str("rapport-" + str(samengestelde_zoeksleutel) + "-" + str(klas) + ".html"))
         for leerling in punten_per_leerling:
             gegevens_leerling = self.leerlingen.retrieve(leerling[0])[1]
             klas = gegevens_leerling.getKlas()
@@ -383,7 +380,7 @@ class system:
             naam = gegevens_leerling.getNaam()
             rapportFile.addStructure(HtmlMaker.HtmlTitle("Rapport " + klas + " - " + voornaam + " " + naam))
             resultaten = [["vak", "uren", "leraar", "totaal"]]
-            for i in range(1, len(leerling)): #  Overloop alle vakken, skip het studentennr vd leerling
+            for i in range(1, len(leerling)):  # Overloop alle vakken, skip het studentennr vd leerling
                 huidig_vak = leerling[i]
                 naam_vak = self.vakken.retrieve(huidig_vak[0])[1]
                 uren_vak = huidig_vak[1]
@@ -395,16 +392,16 @@ class system:
                     leraren += gegevens_leeraar.getNaam() + " " + gegevens_leeraar.getAchternaam()
                     if j != len(huidig_vak[2]):
                         leraren += ", "
-                totaal = 100*huidig_vak[3]/huidig_vak[4]
+                totaal = 100 * huidig_vak[3] / huidig_vak[4]
                 resultaten.append([naam_vak, uren_vak, leraren, totaal])
 
             totaal_aantal_uren = 0
             totaal_punten = 0
             for i in range(1, len(resultaten)):
                 totaal_aantal_uren += int(resultaten[i][1])
-                totaal_punten += int(resultaten[i][3])*int(resultaten[i][1])
+                totaal_punten += int(resultaten[i][3]) * int(resultaten[i][1])
                 resultaten[i][3] = str(round(int(resultaten[i][3]))) + "%"
-            totaal = totaal_punten/totaal_aantal_uren
+            totaal = totaal_punten / totaal_aantal_uren
             totaal = str(round(totaal)) + "%"
             resultaten.append(["Totaal", "", "", totaal])
             rapportFile.addStructure(HtmlMaker.HtmlTable(resultaten))
@@ -428,8 +425,12 @@ class system:
     def printVak(self):
         return self.vakken.Print()
 
-    def undo(self):
-        vorige_instructie = self.instructies.retrieve()
+    def undo(self, leerkr=None):
+        if leerkr != None:
+            leerkr_stack = self.undoPuntStack.retrieve(leerkr)[1]
+            vorige_instructie = self.leerkr_stack.retrieve()
+        else:
+            vorige_instructie = self.instructies.retrieve()
         print("Undo: " + vorige_instructie)
         words = vorige_instructie.split(' ')
 
@@ -466,7 +467,7 @@ class system:
         elif words[0] == "rapport":
             print("Instruction \"rapport\" can't be undone")
 
-        self.instructies.delete()
-
-
-
+        if leerkr == None:
+            self.instructies.delete()
+        else:
+            self.leerkr_stack.delete()

@@ -21,7 +21,7 @@ class Punt:
         return self.stamboomnummer
 
     def getNaam(self):
-        return self.naam
+        return self.name
 
     def getTimestamp(self):
         return self.timestamp

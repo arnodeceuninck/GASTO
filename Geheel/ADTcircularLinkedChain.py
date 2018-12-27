@@ -117,13 +117,14 @@ class circular_chain:
     def retrieve(self, index):
         # if index > self.count or index < 0:
         #     return False
-        index = self.findIndexValue(index)
+        if isinstance(index, str):
+            index = self.findIndexValue(index)
         if index == None:
-            return None
+            return False, None
         current_node = self.head
         for i in range(index+1):
             current_node = current_node.next
-        return current_node.value
+        return (True, current_node.value)
 
     def visualize(self):
         self.grafiek = Graph("cll.dot")

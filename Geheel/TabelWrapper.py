@@ -51,7 +51,8 @@ class TabelWrapper:
         elif self.type == "stack":
             self.dataStructure = Stack.createstack()
         elif self.type == "queue":
-            self.dataStructure = ADTQueue.createQueue()
+            self.dataStructure = ADTQueue.Queue()
+            self.dataStructure.createQueue()
         elif self.type == "bst":
             self.dataStructure = BinarySearchTree.BinarySearchTree(None, None, None)
         elif self.type == "cl":
@@ -185,23 +186,23 @@ class TabelWrapper:
         elif self.type == "stack":
             return self.dataStructure.pop()
         elif self.type == "queue":
-            return self.dataStructure.isEmpty(key)
+            return self.dataStructure.isEmpty()
         elif self.type == "bst":
-            return self.dataStructure.isEmpty(key)
+            return self.dataStructure.isEmpty()
         elif self.type == "cl":
-            return self.dataStructure.isEmpty(key)
+            return self.dataStructure.isEmpty()
         elif self.type == "ll":
-            return self.dataStructure.isEmpty(key)
+            return self.dataStructure.isEmpty()
         elif self.type == "23":
-            return self.dataStructure.isEmpty(key)
+            return self.dataStructure.isEmpty()
         elif self.type == "234":
-            return self.dataStructure.isEmpty(key)
+            return self.dataStructure.isEmpty()
         elif self.type == "rb":
-            return self.dataStructure.isEmpty(key)
+            return self.dataStructure.isEmpty()
         elif self.type == "hlin" or self.type == "hquad" or self.type == "hsep": # TODO: Nog te doen
-            return self.dataStructure.isEmpty(key)
+            return self.dataStructure.isEmpty()
         elif self.type == "heap":
-            return self.dataStructure.isEmpty(key)
+            return self.dataStructure.isEmpty()
 
     def getLength(self):
         if not self.type_assigned:
