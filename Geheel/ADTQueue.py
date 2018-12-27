@@ -48,6 +48,14 @@ def dequeue():
 def getFront():
     return Front.target.value, True
 
+def getLenght():
+    size = 0
+    node = getFront()
+    while node is not None:
+        size += 1
+        node = node.next
+
+
 if __name__ == '__main__':
     createQueue()
     enqueue(10)

@@ -29,7 +29,7 @@ geheel.addToets("2", "opstel", "5")
 
 geheel.addPunt("1800001", "afgeleiden", "5", "HOFKT")  # TODO: Wat doet de afkorting van de leerkracht erbij in system.txt?
                                                                    #  moet dit mee opgeslaan worden?
-                                                                   # TODO: Enkel leerkracht die dit vak geeft aan de kla mag punten toevoegen
+                                                                   # TODO: Enkel leerkracht die dit vak geeft aan de klas mag punten toevoegen
                                                                    # Timestamp is momenteel: yyyymmddhhmmss
 geheel.addPunt("1800002", "afgeleiden", "9", "HOFKT")  # TODO: timestamp = time.now()
 geheel.addPunt("1800001", "integralen", "15", "PAUWS")
