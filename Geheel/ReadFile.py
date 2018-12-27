@@ -100,7 +100,10 @@ for line in instructionFile:
     elif words[0] == "undo":
         if not actiefSysteem():
             continue
-        geheel.undo() # TODO: implement undo
+        if len(words) == 1:
+            geheel.undo() # TODO: implement undo
+        else:
+            geheel.undo(words[1])
 
     elif words[0] == "rapport":
         if not actiefSysteem():
