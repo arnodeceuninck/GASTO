@@ -228,7 +228,7 @@ class system:
         #     self.punten.delete(punt)
 
 
-    self.leerlingen.delete(key)
+        self.leerlingen.delete(key)
 
     def deletePuntenlijst(self, key):
         puntenlijst = self.puntenlijst.retrieve(key)
@@ -426,6 +426,9 @@ class system:
 
     def printVak(self):
         return self.vakken.Print()
+
+    def printInstructies(self):
+        return self.instructies.Print()
 
     def undo(self, leerkr=None):
         if leerkr != None:

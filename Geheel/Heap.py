@@ -49,7 +49,7 @@ class Heap:
         return self.top.size()
 
     def visualize(self):
-        vgraph = Graph("heap")
+        vgraph = Graph("heap.dot")
         vgraph.change_rankdir("TB")
         self.top.createVisualisation(vgraph)
         vgraph.rebuild_file()

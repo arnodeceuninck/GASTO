@@ -140,7 +140,7 @@ class circular_chain:
         return (True, current_node.value)
 
     def visualize(self):
-        self.grafiek = Graph("cll.dot")
+        self.grafiek = Graph("cl.dot")
         node = self.head
         # loop once through all nodes, and add the nodes and connections to the graph
         firstTime = True
