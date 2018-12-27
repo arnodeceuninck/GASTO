@@ -1,9 +1,5 @@
 digraph {
-12 -> 11 
-11 -> 10.5 
-11 -> 11.5 
-11.5 -> 11.25 
-11.5 -> 11.75 
-12 -> 13 
-rankdir=TB
+a [label="yolo| haha| " shape=Mrecord]
+a -> b 
+rankdir=LR
 }
