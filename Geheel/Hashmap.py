@@ -16,6 +16,7 @@ class Hashmap():
         self.index = 0
         self.element = 0 # voor meerdere elementen op 1 index
         return self
+
     def __next__(self):
         if self.index == self.tableSize:
             raise StopIteration
@@ -36,21 +37,7 @@ class Hashmap():
             else:
                 self.index += 1
                 return index_place.key, index_place.item
-
-            self.index += 1
-            return index_place.key, index_place.item
-
-    # def getLength(self):
-    #     size = 0
-    #     for i in range(self.tableSize):
-    #         if self.type == "hsep":
-    #             if self.hashTable[i] != None:
-    #                 size += len(self.hashTable[i])
-    #         else:
-    #             if self.hashTable[i] != None:
-    #                 size += 1
-    #     return size
-
+            
     def hashf(self, key):
         num = 0
         if type(key) != int:
@@ -169,9 +156,6 @@ class Hashmap():
     def destroy(self):
         self.hashTable.clear()
         self.count = 0
-        # for i in range(self.tableSize):
-        #     self.hashTable[i] = None
-
 
     def delete_sep(self, key):
         index = self.hashf(key)
@@ -191,7 +175,6 @@ class Hashmap():
                 else:
                     count += 1
                     self.nu = self.nu.next
-
 
     def delete(self, key):
         legeNode = TreeItem(None, -1)
@@ -240,7 +223,6 @@ class Hashmap():
             print("Je kan maximaal %s items inserten! Item (%s, %s) is niet geinsert geweest." %(self.tableSize, key, item))
             self.count -= 1
 
-
 def createHashmap(size, type):
     return Hashmap(int(size), int(type))
 
@@ -266,7 +248,6 @@ def lees(file, size):
                 if words[0] == "delete":
                     h.delete(int(words[1]))
 
-
 h = createHashmap(23, 2)
 # h.insert(24, 1)
 # h.insert(47, 2)
@@ -282,6 +263,5 @@ h.insert("Rob", "Vijftien") #291 -> 15
 h.insert("Bor", "Zestien") #291
 h.insert("Orb", "Negentien") #291
 h.insert("Bro", "Een")
-
 
 h.show()
