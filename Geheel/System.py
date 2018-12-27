@@ -180,43 +180,53 @@ class system:
 
         # de punten die gelinkt zijn aan het stamboom nummer verwijderen
 
-        if self.punten.type == "cl":
-            node = self.punten.dataStructure.head.next
-            for x in range(self.punten.dataStructure.count):
-                if node.value.getStamboekNummer() == key:
-                    nextnode = node.next
-                    self.deletePunt(self.punten.dataStructure.findIndexValue(node.value.getID()))
-                    node = nextnode
-                else:
-                    node = node.next
-        elif self.punten.type == "ll":
-            self.punten.traverse(self.collector, key)
-            # node = self.punten.dataStructure.dummy.next
-            # while node is not None:
-            #     if node.value.getStamboekNummer == key:
-            #         nextnode = node.next
-            #         self.deletePunt(node.value.getID())
-            #     else:
-            #         nextnode = node.next
-            #     node = nextnode
-        elif self.punten.type == "234" or self.punten.type == "23" or self.punten.type == "bst" or self.punten.type == "rb" or self.punten.type == "hlin" or self.punten.type == "hquad":
-            self.punten.traverse(self.collector, key)
+        # TODO: verwijder heel het comment block hieronder
+        # if self.punten.type == "cl":
+        #     node = self.punten.dataStructure.head.next
+        #     for x in range(self.punten.dataStructure.count):
+        #         if node.value.getStamboekNummer() == key:
+        #             nextnode = node.next
+        #             self.deletePunt(self.punten.dataStructure.findIndexValue(node.value.getID()))
+        #             node = nextnode
+        #         else:
+        #             node = node.next
+        # elif self.punten.type == "ll":
+        #     self.punten.traverse(self.collector, key)
+        #     # node = self.punten.dataStructure.dummy.next
+        #     # while node is not None:
+        #     #     if node.value.getStamboekNummer == key:
+        #     #         nextnode = node.next
+        #     #         self.deletePunt(node.value.getID())
+        #     #     else:
+        #     #         nextnode = node.next
+        #     #     node = nextnode
+        # elif self.punten.type == "234" or self.punten.type == "23" or self.punten.type == "bst" or self.punten.type == "rb" or self.punten.type == "hlin" or self.punten.type == "hquad":
+        #     self.punten.traverse(self.collector, key)
+        #
+        # # alle punten uit de testen verwijderen
+        # # if self.toetsen.type == "cl":
+        # #     node = self.toetsen.dataStructure.head.next
+        # #     for x in range(self.toetsen.dataStructure.count):
+        # #         for i in range(len(node.value.verzamelingVanPunten)-1):
+        # #             if node.value.verzamelingVanPunten[i].getStamboekNummer == key:
+        # #                 del node.value.verzamelingVanPunten[i]
+        # #         node = node.next
+        # # elif self.toetsen.type == "ll":
+        # #     node = self.toetsen.dataStructure.dummy.next
+        # #     while node is not None:
+        # #         for i in range(len(node.value.verzamelingVanPunten)-1):
+        # #             if node.value.getStamboekNummer[i].getStamboekNummer == key:
+        # #                 del node.verzamelingVanPunten[i]
+        # #         node = node.next
+        #
 
-        # alle punten uit de testen verwijderen
-        # if self.toetsen.type == "cl":
-        #     node = self.toetsen.dataStructure.head.next
-        #     for x in range(self.toetsen.dataStructure.count):
-        #         for i in range(len(node.value.verzamelingVanPunten)-1):
-        #             if node.value.verzamelingVanPunten[i].getStamboekNummer == key:
-        #                 del node.value.verzamelingVanPunten[i]
-        #         node = node.next
-        # elif self.toetsen.type == "ll":
-        #     node = self.toetsen.dataStructure.dummy.next
-        #     while node is not None:
-        #         for i in range(len(node.value.verzamelingVanPunten)-1):
-        #             if node.value.getStamboekNummer[i].getStamboekNummer == key:
-        #                 del node.verzamelingVanPunten[i]
-        #         node = node.next
+        puntenToRemove = []
+        for punt in self.punten:
+            if punt[1].getStamboekNummer == key:
+                puntenToRemove.append(punt[0])
+        for punt in puntenToRemove:
+            self.punten.delete(punt)
+
 
         self.leerlingen.delete(key)
 
