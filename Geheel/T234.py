@@ -16,11 +16,11 @@ class T234:
         self.mright = mright
         self.right = right
 
-    def __iter__(self):  # todo check
+    def __iter__(self):
         self.index = 0
         return self
 
-    def __next__(self): #todo check
+    def __next__(self):
         size = self.size()
         if size > self.index:
             x = self.getIndex(self.index)
@@ -795,7 +795,7 @@ class T234:
         if self.item1 is not None:
             visit(self.item1.item, key)
 
-    def getIndex(self, index):  #todo recheck
+    def getIndex(self, index):
         temp = index
         if self.item1 is not None:
             if index == 0:

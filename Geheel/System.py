@@ -64,6 +64,17 @@ class system:
         return self.leerlingen.insert(Leerling.Leerling(naam, voornaam, klas, klasnummer, studentennummer),
                                       studentennummer)
 
+    def PermissionCheckLeerkracht(self, naam_toets, leerkracht):
+        test = self.toetsen.retrieve(naam_toets)[1]
+        if test.puntenlijst[0] is False:
+            return False
+        else:
+            Len = len(test.puntenlijst[1].namecodes)
+            for i in range(len(test.puntenlijst[1].namecodes)):
+                if test.puntenlijst[1].namecodes[i] == leerkracht:
+                    return True
+            return False
+
     def addPunt(self, stamboeknummer_leerling, naam_toets, Waarde, leerkracht):
         ID = self.punten.getLength()
         instructie = "punt " + str(leerkracht) + " " + str(naam_toets) + " " + \
@@ -71,7 +82,6 @@ class system:
         self.instructies.insert(instructie)
         stack_leerkr = self.undoPuntStack.retrieve(leerkracht)[1]
         stack_leerkr.insert(instructie)
-        # TODO: controleren of leerkracht bevoegd is om aan deze toets een punt toe te voegen
 
         # maakt een nieuw punt aan met een uniek ID, Stamboomnummer, Naam, Waarde en Timestamp
         toets = self.toetsen.retrieve(naam_toets)[1]
@@ -83,6 +93,10 @@ class system:
             print("ERROR: Het studentennummer " + stamboeknummer_leerling + " werd niet teruggevonden in het systeem. "
                                                                             "Gelieve deze eerst aan te maken.")
             return False
+        if self.PermissionCheckLeerkracht(naam_toets, leerkracht) is False:
+            print("ERROR: De leerkracht: " + leerkracht + " Heeft geen toesteming om dit punt toe te voegen")
+            return False
+
         punt = Punt.createPunt(ID, stamboeknummer_leerling, naam_toets, Waarde,
                                datetime.datetime.now())  # https://stackoverflow.com/questions/415511/how-to-get-the-current-time-in-python
         self.puntenQueue.insert(punt)
@@ -199,9 +213,7 @@ class system:
     def collector(self, item, key):
         if item is not None and item.getStamboekNummer() == key:
             self.deletePunt(item.getID())
-            if self.punten.type != "hlin":
-                self.punten.traverse(self.collector, key)
-            return True
+            self.punten.traverse(self.collector, key)
         else:
             return False
 
