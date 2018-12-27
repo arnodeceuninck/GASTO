@@ -229,28 +229,29 @@ class TabelWrapper:
             return self.dataStructure.size()
 
     def Print(self):
+        name = self.filenamegenerate()
         if not self.type_assigned:
             return False
         elif self.type == "stack":
             return self.dataStructure.print()
         elif self.type == "queue":
-            return self.dataStructure.print("queue.dot")
+            return self.dataStructure.print(name)
         elif self.type == "bst":
-            return self.dataStructure.print("bst.dot")
+            return self.dataStructure.print(name)
         elif self.type == "cl":
             return self.dataStructure.visualize()
         elif self.type == "ll":
-            return self.dataStructure.print(1)
+            return self.dataStructure.print(name)
         elif self.type == "23":
-            return self.dataStructure.write_dot("23.dot", self.dataStructure)
+            return self.dataStructure.write_dot(name, self.dataStructure)
         elif self.type == "234":
-            return self.dataStructure.print(1)
+            return self.dataStructure.print(name)
         elif self.type == "rb":
-            return self.dataStructure.visualize()
+            return self.dataStructure.visualize(name)
         elif self.type == "hlin" or self.type == "hquad" or self.type == "hsep":
             return self.dataStructure.show()
         elif self.type == "heap":
-            return self.dataStructure.visualize()
+            return self.dataStructure.visualize(name)
 
     # visit is een functie die telkens toegepast wordt op de root value
     def traverse(self, visit, key=None):
@@ -281,6 +282,17 @@ class TabelWrapper:
         elif self.type == "heap":
             return self.dataStructure.traverse(visit, key)
 
+    def filenamegenerate(self):
+        count = 0
+        string = self.type + '-' + str(count) + ".dot"
+        exist = True
+        while exist:
+            try:
+                fh = open(string, 'r')
+            except FileNotFoundError:
+                return string
+            count += 1
+            string = self.type + '-' + str(count) + ".dot"
 
 # bob = Dubbelgelinktelijst.createLinkedChain()
 # bob.insert(Dubbelgelinktelijst.Node(70, 1))  # Value - key

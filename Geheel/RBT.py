@@ -53,9 +53,9 @@ class RoodZwartBoom:
         else:
             return False
 
-    def visualize(self):
+    def visualize(self, name):
         # Maakt een .dot file met daarin een visuele representatie van de boom (in .dot language)
-        vgraph = Graph("RBT")
+        vgraph = Graph(name)
         vgraph.change_rankdir("TB") # Bomen worden meestal van Top to Bottem getoond
         # Doorloop de boom, startende bij de root om er een visualisatie van te maken
         self.root.createVisualisation(vgraph)
@@ -706,24 +706,24 @@ def createRBT():
     return RoodZwartBoom()
 
 
-# Maak een nieuwe boom aan
-sprookjesboom = createRBT()
-
-# Voeg er een hoop key-value pairs aan toe
-sprookjesboom.insert(KeyValueItem(3, 3))
-sprookjesboom.insert(KeyValueItem(4, 4))
-sprookjesboom.insert(KeyValueItem(2, 2))
-sprookjesboom.insert(KeyValueItem(1, 1))
-sprookjesboom.insert(KeyValueItem(5, 5))
-sprookjesboom.visualize()
-sprookjesboom.insert(KeyValueItem(7, 7))
-sprookjesboom.insert(KeyValueItem(8, 8))
-sprookjesboom.insert(KeyValueItem(6, 6))
-sprookjesboom.insert(KeyValueItem(9, 9))
-# Verwijder het item met zoeksleutel 7
-# sprookjesboom.remove(7)
-
-# Maak een .dot file voor deze boom
-sprookjesboom.visualize()
+# # Maak een nieuwe boom aan
+# sprookjesboom = createRBT()
+#
+# # Voeg er een hoop key-value pairs aan toe
+# sprookjesboom.insert(KeyValueItem(3, 3))
+# sprookjesboom.insert(KeyValueItem(4, 4))
+# sprookjesboom.insert(KeyValueItem(2, 2))
+# sprookjesboom.insert(KeyValueItem(1, 1))
+# sprookjesboom.insert(KeyValueItem(5, 5))
+# sprookjesboom.visualize()
+# sprookjesboom.insert(KeyValueItem(7, 7))
+# sprookjesboom.insert(KeyValueItem(8, 8))
+# sprookjesboom.insert(KeyValueItem(6, 6))
+# sprookjesboom.insert(KeyValueItem(9, 9))
+# # Verwijder het item met zoeksleutel 7
+# # sprookjesboom.remove(7)
+#
+# # Maak een .dot file voor deze boom
+# sprookjesboom.visualize()
 
 pass
