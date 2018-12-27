@@ -77,14 +77,14 @@ class Hashmap():
                         root[i].next = self.reserve.next
 
 
-    def traverse(self):
+    def traverse(self, visit, key=None):
         if self.type == 3:
             # self.traverse_sep(self.hashTable)
             return None
         else:
             for i in range(len(self.hashTable)):
                 if self.hashTable[i] != None:
-                    print(self.hashTable[i].key, self.hashTable[i].item)
+                    visit(self.hashTable[i].item, key)
                 else:
                     print("None")
 
