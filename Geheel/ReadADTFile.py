@@ -1,3 +1,5 @@
+# NOTE: wordt alphabetisch gesorteerd
+
 from TabelWrapper import *
 import sys
 
@@ -19,13 +21,15 @@ for line in instructionFile:
 
     words = line.split(' ')
     if line[0:4] == "type":
-        structureName = line[5:len(line)-1]
+        structureName = line[5:]
         dataStructure = TabelWrapper(structureName)
 
     if words[0] == "insert":
-        dataStructure.insert(KeyValueItem(words[1], words[1]))  # Key is number, value string
+        dataStructure.insert(words[1], words[1])  # Key is number, value string
 
-    if words[0] == "remove":
+    if words[0] == "delete":
+        if len(words) < 2:
+            words.append(None)
         dataStructure.delete(words[1])
 
     if words[0] == "print":

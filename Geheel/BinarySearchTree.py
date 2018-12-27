@@ -1,4 +1,4 @@
-from graphBST import Graph
+from Graph import *
 
 class BinarySearchTree:
     """
@@ -190,7 +190,7 @@ class BinarySearchTree:
         return size
 
     def print(self):
-        vgraph = Graph()
+        vgraph = Graph("BST.dot")
         vgraph.change_rankdir("TB")
         self.createVisualisation(vgraph)
         vgraph.rebuild_file()
@@ -199,11 +199,17 @@ class BinarySearchTree:
         self.deleteEmpty()
         if (not self.isEmpty()):
             if self.left != None:
-                vgraph.add_connection(self.root.key, self.left.root.key, "arrow")
+                vgraph.add_connection(self.root.key, self.left.root.key, 0)
                 self.left.createVisualisation(vgraph)
+            else:
+                vgraph.add_node("left" + str(self.root.key), "0", "circle", "style=invis")
+                vgraph.add_connection(self.root.key, "left" + str(self.root.key), 0, "style=invis")
             if self.right != None:
-                vgraph.add_connection(self.root.key, self.right.root.key, "arrow")
+                vgraph.add_connection(self.root.key, self.right.root.key, 0)
                 self.right.createVisualisation(vgraph)
+            else:
+                vgraph.add_node("right" + str(self.root.key), "0", "circle", "style=invis")
+                vgraph.add_connection(self.root.key, "right" + str(self.root.key), 0, "style=invis")
 
 
 
