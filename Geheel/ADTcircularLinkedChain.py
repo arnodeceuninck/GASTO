@@ -114,6 +114,17 @@ class circular_chain:
                 return None
         return index
 
+    def findIndexID(self, id):
+        index = 0
+        currentNode = self.head.next
+        firstNode = currentNode
+        while currentNode.value.id != id:
+            index += 1
+            currentNode = currentNode.next
+            if currentNode == firstNode:
+                return None
+        return index
+
     def retrieve(self, index):
         # if index > self.count or index < 0:
         #     return False
@@ -147,6 +158,7 @@ class circular_chain:
         node = self.head.next
         for i in range(self.count):
             visit(node.value, key)
+            node = node.next
 
 def createList():
     return circular_chain()

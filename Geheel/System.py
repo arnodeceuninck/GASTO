@@ -23,7 +23,7 @@ class system:
         # TODO: De klassen toets, rapport, puntenlijst moeten ontworpen zoals de ADT tabel.
         #  Deze klassen zijn dus een verzameling van als ik het goed begrijp
         # TODO: Fix error: alle elementen met zelfde datastructuur komen samen in eenzelfde datastructuur
-        self.punten = TabelWrapper("ll")  # dit is de create # puntenlijst nog nodig om punten aan te passen
+        self.punten = TabelWrapper("cl")  # dit is de create # puntenlijst nog nodig om punten aan te passen
         self.puntenQueue = TabelWrapper("queue")
         self.toetsen = TabelWrapper("cl")  # TODO: verander dit terug naar cl
         self.puntenlijst = TabelWrapper("ll")  # TODO: verander terug naar bst als er een bst in Geheel zit
@@ -181,27 +181,26 @@ class system:
         # de punten die gelinkt zijn aan het stamboom nummer verwijderen
 
         # TODO: verwijder heel het comment block hieronder
-        # if self.punten.type == "cl":
-        #     node = self.punten.dataStructure.head.next
-        #     for x in range(self.punten.dataStructure.count):
-        #         if node.value.getStamboekNummer() == key:
-        #             nextnode = node.next
-        #             self.deletePunt(self.punten.dataStructure.findIndexValue(node.value.getID()))
-        #             node = nextnode
-        #         else:
-        #             node = node.next
-        # elif self.punten.type == "ll":
-        #     self.punten.traverse(self.collector, key)
-        #     # node = self.punten.dataStructure.dummy.next
-        #     # while node is not None:
-        #     #     if node.value.getStamboekNummer == key:
-        #     #         nextnode = node.next
-        #     #         self.deletePunt(node.value.getID())
-        #     #     else:
-        #     #         nextnode = node.next
-        #     #     node = nextnode
-        # elif self.punten.type == "234" or self.punten.type == "23" or self.punten.type == "bst" or self.punten.type == "rb" or self.punten.type == "hlin" or self.punten.type == "hquad":
-        #     self.punten.traverse(self.collector, key)
+        self.punten.traverse(self.collector, key)
+            # node = self.punten.dataStructure.head.next
+            # for x in range(self.punten.dataStructure.count):
+            #     if node.value.getStamboekNummer() == key:
+            #         nextnode = node.next
+            #         self.deletePunt(self.punten.dataStructure.findIndexValue(node.value.getID()))
+            #         node = nextnode
+            #     else:
+            #         node = node.next
+        #self.punten.traverse(self.collector, key)
+            # node = self.punten.dataStructure.dummy.next
+            # while node is not None:
+            #     if node.value.getStamboekNummer == key:
+            #         nextnode = node.next
+            #         self.deletePunt(node.value.getID())
+            #     else:
+            #         nextnode = node.next
+            #     node = nextnode
+        #elif self.punten.type == "234" or self.punten.type == "23" or self.punten.type == "bst" or self.punten.type == "rb" or self.punten.type == "hlin" or self.punten.type == "hquad":
+            #self.punten.traverse(self.collector, key)
         #
         # # alle punten uit de testen verwijderen
         # # if self.toetsen.type == "cl":
@@ -220,12 +219,12 @@ class system:
         # #         node = node.next
         #
 
-        puntenToRemove = []
-        for punt in self.punten:
-            if punt[1].getStamboekNummer == key:
-                puntenToRemove.append(punt[0])
-        for punt in puntenToRemove:
-            self.punten.delete(punt)
+        # puntenToRemove = []
+        # for punt in self.punten:
+        #     if punt[1].getStamboekNummer == key:
+        #         puntenToRemove.append(punt[0])
+        # for punt in puntenToRemove:
+        #     self.punten.delete(punt)
 
 
         self.leerlingen.delete(key)
@@ -258,8 +257,8 @@ class system:
     def collector(self, item, key):
         #TODO: veel efficienter maken
         if item is not None and item.getStamboekNummer() == key:
-            self.deletePunt(item.getID())
-            if self.punten.type != "hlin":
+            self.deletePunt(self.punten.dataStructure.findIndexID(item.getID()))
+            if self.punten.type != "hlin" or self.punten.type != "cl":
                 self.punten.traverse(self.collector, key)
             return True
         else:
