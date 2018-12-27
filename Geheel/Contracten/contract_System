@@ -137,4 +137,4 @@
 
 save(filename: string)
 // Precondition: Je wilt alle waarden opslaan in txt bestand.
-// Postcondition: Savet alle waarden in een txt bestand met naam filename. 
+// Postcondition: Savet alle waarden in een txt bestand met naam filename.

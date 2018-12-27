@@ -1,0 +1,48 @@
+// tabelWrapper
+
++type_assigned()
+// Precondition: geen
+// postcondition: indien de datastructuur niet begint met create(structure_type) geeft het False terug.
+
++create(structure_type: string)
+// precondition: je wilt de juiste create functie selecteren van de adt큦
+// postcondition: Selecteert de adt die overeenkomt met de structure_type en voert daarvan de create uit.
+
++insert(value: value, key: integer or None)
+// precondition: je wilt de juiste insert functie selecteren van de adt큦
+// postcondition: Selecteert de adt die overeenkomt met de structure_type en voert daarvan de insert uit.
+
++retrieve(value: value or None, key: integer or None) (boolean, value)
+// precondition: je wilt de juiste retrieve functie selecteren van de adt큦
+// postcondition: Selecteert de adt die overeenkomt met de structure_type en voert daarvan de retrieve uit
+// en geef de value en key terug.
+
++delete(value: value or None, key: integer or None)
+// precondition: je wilt de juiste delete functie selecteren van de adt큦
+// postcondition: Selecteert de adt die overeenkomt met de structure_type en voert daarvan de delete uit.
+
++destroy()
+// precondition: je wilt de juiste destroy functie selecteren van de adt큦
+// postcondition: Selecteert de adt die overeenkomt met de structure_type en voert daarvan de destroy uit.
+
++isEmpty(key: integer or None) boolean
+// precondition: je wilt de juiste isEmpty functie selecteren van de adt큦
+// postcondition: Selecteert de adt die overeenkomt met de structure_type en voert daarvan de isEmpty uit.
+// geeft True terug als het leeg is.
+
++GetLength() length: integer
+// precondition: je wilt de juiste GetLength functie selecteren van de adt큦
+// postcondition: Selecteert de adt die overeenkomt met de structure_type en voert daarvan de GetLength uit.
+// geeft de lengte terug
+
++Print()
+// precondition: je wilt de juiste Print functie selecteren van de adt큦
+// postcondition: Selecteert de adt die overeenkomt met de structure_type en voert daarvan de Print uit.
+
++Traverse(visit: functie, key: integer or None)
+// precondition: je wilt de juiste Traverse functie selecteren van de adt큦
+// postcondition: Selecteert de adt die overeenkomt met de structure_type en voert daarvan de Traverse uit.
+
++filenamegenerate()
+// Precondition: geen
+// postcondition: genereert een filename.
