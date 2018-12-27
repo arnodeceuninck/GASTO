@@ -1,0 +1,39 @@
+// Queue
+// verantwoordelijke implementeren: Arno
+// verantwoordelijke testen: Tim
+
+// Een queue is een ADT die een FIFO systeem (First In, First Out) toepast.
+// Het eerste element dat je aan deze ADT toevoegd, is ook het eerste element dat de ADT zal teruggeven.
+// Alle elementen hebben hetzelfde datatype.
+// QueItemType is het type van de elementen die in de queue zitten.
+
++createQueue()
+// Precondition: Geen
+// Postcondition: Er is een nieuwe lege queue aangemaakt met alle default waarden.
+
++destroyQueue()
+// Precondition: De queue bestaat en moet verwijderd worden.
+// Postcondition: De queue bestaat niet meer. Alle elementen en verwijzigingen zijn verwijderd.
+
++isEmpty(): boolean
+// Precondition: De queue bestaat en je wil weten of er elementen inzitten.
+// Postcondition: De method returnt true indien de queue elementen bevat. Als de
+// queue geen elementen bevat zal je een false terugkrijgen.
+
++getLength(): integer
+// Precondition: De queue bestaat en je wil er de lengte van weten.
+// Postcondition: De integer die gereturnd wordt is gelijk aan het aantal elementen in de queue.
+
++enqueue(in newItem: QueueItemType): boolean
+// Precondition: newItem is het item dat je wil toevoegen, van het zelfde datatype als de andere elementen in de queue.
+// Postcondition: Indien er true gereturnd wordt is het element achteraan toegevoegd aan de queue.
+
++dequeue(): (QueueItemType, boolean)
+// Precondition: De queue bevat minstens één element
+// Postcondition: Het eerste item is verwijderd indien het eerste element van de gereturnde tuple true is.
+// Het tweede element in de tuple is een kopie van het net verwijderde element.
+
++getFront(): (boolean, QueItemType)
+// Precondition: De queue bevat één of meer elementen.
+// Postcondition: Indien het eerste element van de tuple true is,
+// bevat het tweede element van de tuple het eerste item uit de queue.

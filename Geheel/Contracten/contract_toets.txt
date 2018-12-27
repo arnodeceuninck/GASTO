@@ -1,0 +1,48 @@
+// Toets
+// verantwoordelijke implementeren: Sen
+// verantwoordelijke testen: Arno
+
+// Toets is een verzameling van alle punten van de leerlingen op die toets, ook de maximum score en de naam van de test staat hier in.
+//Deze testen hebben searchkey naam.
+
++createToets(in naam: string, in maximum: integer, in verzamelingVanPunten: array): boolean
+// Precondition: Je wil een nieuwe toets aanmaken. De naam is de naam van de toets zonder spaties. Het maximum is het maximaal aantal punten dat behaald kan worden. 
+// De array is een verzameling van alle punten die de leerlingen behaald hebben
+// op deze test.
+
++getNaam(): string
+// Precondition: Je wil de naam van de toets weten.
+// Postcondition: De gereturnde value is de naam van de toets.
+
++setNaam(in naam: string): boolean
+// Precondition: Je wil de naam van de toets veranderen naar naam.
+// Postcondition: Als de waarde die gereturnd wordt true is, dan is de naam
+// van de toets succesvol verandert in naam.
+
++getMaximum(): integer
+// Precondition: Je wil het maximum van de toets weten.
+// Postcondition: De gereturnde value is het maximum van de toets.
+
++setMaximum(in maximum: integer): boolean
+// Precondition: Je will het maximum van de toets veranderen naar maximum.
+// Postcondition: Als de waarde die gereturnd wordt true is, dan is het maximum
+// van de toets succesvol verandert in maximum.
+
++getVerzamelingVanPunten(in searchkey: string): array
+// Precondition: Je will de verzameling van punten voor deze toets weten.
+// Postcondition: de gereturnde value is de verzameling van punten voor deze toets.
+
++setVerzamelingVanPunten(in verzamelingVanPunten: array): boolean
+// Precondition: Je will de verzamelingVanPunten van de toets veranderen naar verzamelingVanPunten.
+//Postcondition: Als de waarde die gereturnd wordt true is, dan is de verzamelingVanPunten
+// van de toets succesvol verandert in verzamelingVanPunten.
+
++addPunt(in punt: punt)
+// Precondition: Je wilt een punt toevoegen aan een toets.
+// Postcondition: Punt is toegevoegd aan een toets.
+
++removePunt(in ID: ID)
+// Precondition: Je wilt een punt verwijderen met ID: ID.
+// Postcondition: Het punt met ID: ID is verwijdert van de toets.
+
+

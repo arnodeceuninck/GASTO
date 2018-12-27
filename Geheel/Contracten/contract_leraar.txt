@@ -1,0 +1,38 @@
+// Leraar
+// verantwoordelijke implementeren: Arno
+// verantwoordelijke testen: Rob
+
++createLeraar(in afkorting: string, in naam: string, in achternaam: string): boolean
+// Precondition: Je wil een nieuwe leeraar aanmaken. De afkorting is een 
+// vijf-letterige code. naam is de naam van de leerkracht. achternaam is de 
+// achternaam van de leerkracht.
+// Postcondition: Indien het aanmaken gelukt is bevat de gereturnde value true. In 
+// dit geval is er dus een leerkracht aangemaakt met als bijhorende info de 
+// meegegeven parameters. 
+
++getAfkorting(): string
+// Precondition: Je wil de afkorting van de leeraar weten.
+// Postcondition: De gereturnde value is de afkorting van de leerkracht.
+
++setAfkorting(in afkorting: string): boolean
+// Precondition: Je wil de afkorting van een leeraar veranderen naar afkorting.
+// Postcondition: Als de waarde die gereturnd wordt true is, dan is de afkorting
+// van de leeraar succesvol verandert in afkorting.
+
++getNaam(): string
+// Precondition: Je wil de naam van de leeraar weten.
+// Postcondition: De gereturnde value is de naam van de leerkracht.
+
++setNaam(in naam: string): boolean
+// Precondition: Je wil de naam van een leeraar veranderen naar naam.
+// Postcondition: Als de waarde die gereturnd wordt true is, dan is de naam
+// van de leeraar succesvol verandert in naam.
+
++getAchternaam(): string
+// Precondition: Je wil de achternaam van de leeraar weten.
+// Postcondition: De gereturnde value is de achternaam van de leerkracht.
+
++setAchternaam(in achternaam: string): boolean
+// Precondition: Je wil de achteraam van een leeraar veranderen naar achternaam.
+// Postcondition: Als de waarde die gereturnd wordt true is, dan is de achternaam
+// van de leeraar succesvol verandert in achternaam.

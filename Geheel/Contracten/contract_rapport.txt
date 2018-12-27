@@ -1,0 +1,34 @@
+// Rapport
+// verantwoordelijke implementeren: Rob
+// verantwoordelijke testen: Sen
+
++createRapport(in PuntenLijsten: list, Zoeksleutel: string)
+// Precondition: Je wil een nieuw rapport aanmaken. De PuntenLijsten is een lijst van alle puntenlijsten
+// de waarden van de lijst zijn de puntenlijsten.
+// De Zoeksleutel is een string besaande uit 2 karakters. Namelijk de eerste is de letter M (maandrapport)
+// of E (examenrapport). Het tweede karakter is een getal dat aangeeft over welke maand of examenperiode het gaat.
+// Postcondition: Er is nu een rapport aangemaakt met alle puntenlijsten van alle leerlingen.
+
++getList()  list: puntenlijsten
+// precondition: Je wilt de puntenlijsten opvragen
+// Postcondition: Geeft de puntenlijsten terug.
+
++setList(in list: puntenlijsten) list: puntenlijsten
+// Precondition: Je wilt de puntenlijsten aanpassen.
+// Postcondition: Geeft de aangepaste puntenlijsten terug.
+
++addList(in list: puntenlijsten) list: puntenlijsten
+// precondition: Je wilt een puntenlijst toevoegen aan de lijst met puntenlijsten.
+// postcondition: Geeft de puntenlijsten terug met list er aan toegevoegd.
+
++getZoeksleutel(l: integer) boolean
+// Precondition: Je wilt een nieuwe zoeksleutel aanmaken.
+// postcondition: Maakt een nieuwe zoeksleutel aan.
+
++getZoeksleutel(in Zoeksleutel: integer) boolean
+// Precondition: Je wilt een zoeksleutel aanpassen.
+// postcondition: Past de zoeksleutel aan.
+
++deletePuntenLijst(in key: integer)
+// precondition: Je wilt de puntenlijst met key: key verwijderen.
+// Postcondition: Verwijder de puntenlijst met key: key.

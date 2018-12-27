@@ -1,0 +1,96 @@
+// Leerling
+// verantwoordelijke implementeren: Rob
+// verantwoordelijke testen: Tim
+
++createLeerling(in Naam: string, in Voornaam: string, in Klas: string, in KlasNummer: integer, in Nummer: int): boolean
+// Precondition: Je wil een nieuwe leerling aanmaken. De Naam is de naam van de leerling,
+// Achternaam de achternaam van de leerling. Klas is de klas waarin de leerling zit en KlasNummer is de nummer
+// Achternaam is de achternaam van de leerling. Klas is de klas waarin de leerling zit en KlasNummer is de nummer
+// van de klas waarin de leerling zit. Nummer is de stamboeksnummer van de leerling.
+// Postcondition: Indien het maken van de leerling succesvol is gebeurd, wordt de return value True.
+// Nu is er een nieuwe leerling aangemaakt met alle parameters in gebruik genomen.
+
++getNummer() integer
+//Precondition: Voor als je de Nummer van de leerling wilt te weten komen.
+//Postcondition:  De waarde die je terugkrijgt is de stamboeksnummer van de leerling.
+
++setNummer(in Nummer: integer) boolean
+//Precondition: Je wilt de stamboeksnummer van de leerling toevoegen.
+//Postcondition: De return waarde is True indien de nummer correct is toegevoegd.
+
++getVoornaam()  string
+//Precondition: Voor als je de voornaam van de leerling wilt weten.
+//Postcondition: De waarde die je terugkrijgt is de voornaam van de leerling.
+
++setVoornaam() boolean
+//Precondition: Wanneer je de voornaam van een leerling wilt toevoegen.
+//Postcondition: De waarde die je terugkrijgt is True als de voornaam van een leerling met succesvol is toegevoegd.
+
++getNaam()  string
+//Precondition: Voor als je de naam van de leerling te weten wilt komen.
+//Postcondition: De waarde die je terugkrijgt is de naam van de leerling.
+
++setNaam() boolean
+//Precondition:
+//Postcondition:
+
++getKlas()  string
+//Precondition: Voor als je de klas wilt weten waarin de leerling zit.
+//Postcondition: De waarde die je terugkrijgt is de klas waarin de leerling zit.
+
++setKlas() boolean
+//Precondition: Dit is voor wanneer je de klas wilt aanmaken waar een leerling in zit.
+//Postcondition: De return waarde gaat True zijn als een klas met succes is toegevoegd.
+
++getKlasNummer() integer
+//Precondition: Voor als je de klasnummer van de klas wilt weten waar de leerling in zit.
+//Postcondition: De waarde die je terugkrijgt is de klasnummer.
+
++setKlasNummer() boolean
+//Precondition: Voor een klasnummer toe te voegen aan de leerling.
+//Postcondition: De return waarde is True als de klasnummer succesvol is toegevoegd.
+// Precondition: Voor als je de Nummer van de leerling wilt te weten komen.
+// Postcondition:  De waarde die je terugkrijgt is de stamboeksnummer van de leerling.
+
++setNummer(in Nummer: integer) boolean
+// Precondition: Je wilt de oude stamboeksnummer van de leerling veranderen in
+// het nieuwe input Nummer.
+// Postcondition: De return waarde is True indien de nummer correct is toegevoegd.
+
++getVoornaam()  string
+// Precondition: Voor als je de voornaam van de leerling wilt weten.
+// Postcondition: De waarde die je terugkrijgt is de voornaam van de leerling.
+
++setVoornaam(in Voornaam: string) boolean
+// Precondition: Wanneer je de voornaam van een leerling wilt veranderen naar de
+// nieuwe input Voornaam.
+// Postcondition: De waarde die je terugkrijgt is True als de voornaam van een
+// leerling met succesvol is toegevoegd.
+
++getNaam()  string
+// Precondition: Voor als je de naam van de leerling te weten wilt komen.
+// Postcondition: De waarde die je terugkrijgt is de naam van de leerling.
+
++setNaam(in Naam: string) boolean
+// Precondition: Voor als je de naam van de leerling wilt veranderen naar de nieuwe
+// input Naam.
+// Postcondition: De waarde die je terugkrijgt is True indien de naam met succes
+// is toegevoegd aan de leerling.
+
++getKlas()  string
+// Precondition: Voor als je de klas wilt weten waarin de leerling zit.
+// Postcondition: De waarde die je terugkrijgt is de klas waarin de leerling zit.
+
++setKlas(in Klas: string) boolean
+// Precondition: Dit is voor wanneer je de klas van de leerling wilt veranderen
+// naar de input Klas.
+// Postcondition: De return waarde gaat True zijn als een klas met succes is toegevoegd.
+
++getKlasNummer() integer
+// Precondition: Voor als je de klasnummer van de klas wilt weten waar de leerling in zit.
+// Postcondition: De waarde die je terugkrijgt is de klasnummer.
+
++setKlasNummer(in KlasNummer: integer) boolean
+// Precondition: Voor een klasnummer van de leerling te veranderen
+// naar de input KlasNummer.
+// Postcondition: De return waarde is True als de klasnummer succesvol is toegevoegd.

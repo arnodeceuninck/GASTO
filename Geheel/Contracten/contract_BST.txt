@@ -1,0 +1,87 @@
+// BST: Binary Search Tree
+// verantwoordelijke implementeren: Arno
+// verantwoordelijke testen: Tim
+
+// Een Binary Search Tree is een ADT die bestaat uit drie disjuncte verzemelingen:
+// De root, de linkerdeelboom en de rechterdeelboom. De linker- en rechterdeelboom
+// zijn allebei ook instanties van een BST. Alle elementen in de linkerdeelboom
+// zijn kleiner dan de root. Alle elementen in de rechterdeelboom zijn groter
+// dan de root.
+
+
++createBST()
+// Precondition: De root van een nieuwe binaire boom word aangemaakt,
+// Postcondition: Er is een nieuwe lege BST aangemaakt.
+
++destroyBST() boolean
+// Precondition: De BST bestaat en moet verwijderd worden.
+// Postcondition: De BST bestaat niet meer. Alle elementen en de verwijzigingen
+// ervan zijn verwijderd. De functie geeft ook een boolean terug om te laten zitten
+// of de operatie gelukt is.
+
++isEmpty(): boolean
+// Precondition: De BST bestaat en je wil weten of er elementen inzitten.
+// Postcondition: De method returnt false indien de BST elementen bevat. Als de BST
+// geen elementen bevat, zal je een true terugkrijgen.
+
++searchTreeInsert(in newItem: BSTItemType): boolean
+// Precondition: newItem is het item dat je wil toevoegen en is van hetzelde datatype
+// als de andere elementen in de queue.
+// Postcondition: Indien er true gereturnt wordt is het element op de correcte positie
+// toegevoegd. De correcte positie is een blad, zodanig dat de eigenschappen van een
+// BST bewaard blijft. (Hiermee bedoel ik onder andere volgende eigenschappen: Alle
+// elementen in de linkerdeelboom zijn kleiner dan de root. Alle elementen in de
+// rechterdeelboom zijn groter dan de root.
+
++searchTreeDelete(in rootKey: integer): boolean
+// Deze method zal het item met zoeksleutel rootKey verwijderen, zodanig dat na
+// het verwijderen van het item, nogsteeds alle eigenschappen van een BST
+// behouden blijven.
+// Precondition: rootKey is de zoeksleutel gelinkt aan het item dat je wilt
+// verwijderen.
+// Postcondition: Het item is verwijderd indien true gereturnd wordt.
+
++searchTreeRetrieve(in rootKey: integer): (boolean, BSTItemType)
+// Precondition: De BST bevat een element met als zoeksleutel rootKey.
+// Postcondition: Indien het eerste element van de tuple true is, bevat het
+// het tweede element het element uit de BST met als zoeksleutel rootKey.
+
++inorderTraverse(in visit: function, in rootKey: integer): boolean
+// Precondition: Je wil alle knopen overlopen in de binair binaire zoekboom,
+// zodanig dat je eerst alle elementen in de linkerdeelboom overloopt,
+// gevolgd door de root en ten slotte alle elementen in de rechterdeelboom. Zo
+// worden alle elementen in volgorde overlopen. De functie die je hebt meegegeven
+// (visit) zal op elke knoop toegepast worden in de volgorde die hierboven
+// beschreven is.
+// Postcondition: Alle knopen zijn bezocht in volgorde (van kleinste zoeksleutel)
+// en de functie visit is ook in deze volgorde op alle knopen toegepast.
+// Er word een bool gereturnd die zegt of de operatie gelukt is.
+
++preorderTraverse(in visit: function, in rootKey: integer): boolean
+// Precondition: Je wil alle knopen overlopen in de binair binaire zoekboom,
+// zodanig dat je eerst de root overloopt, gevolgd door de elementen in de
+// linkerdeelboom en ten slotte alle elementen in de rechterdeelboom. Zo
+// worden alle elementen preorder overlopen. De functie die je hebt meegegeven
+// (visit) zal op elke knoop toegepast worden in de volgorde die hierboven
+// beschreven is.
+// Postcondition: Alle knopen zijn bezocht preorder en de functie visit is ook
+// in deze volgorde op alle knopen toegepast. Er word een bool gereturnd die zegt
+// of de operatie gelukt is.
+
++traverse(in visit: function, in rootKey: integer) boolean
+// Precondition: Je wilt een element zoeken in de binaire zoekboom.
+// Postcondition: Doorloopt de zoekboom en en geeft True terug als het element in de zoekboom zit.
+// Geeft False terug indien het element niet in de zoekboom zit.
+
++getIndex(in Node: TreeNode, in index: integer) (Node: TreeNode, index)
+// precondition: Je wilt de index weten van een bepaald node.
+// Postcondition: Geeft een tuple terug met daarin de gezochte node + de index.
+// Geeft een tuple met None en false terug indien de node niet in de binaire zoekboom zit.
+
++size() size: integer
+// Precondition: Je wilt het aantal elementen in de binaire zoekboom weten.
+// Postcondition: Geeft het aantal elementen terug die in de binaire zoekboom zitten.
+
++print()
+// precondition: Je wilt de binaire zoekboom in een dotfile steken.
+// Postcondition: maakt een file aan met daarin de binaire zoekboom in.
