@@ -227,14 +227,8 @@ class TabelWrapper:
             # return self.dataStructure.getLength()
         elif self.type == "rb":
             return self.dataStructure.size()
-            # return self.dataStructure.getLength()
-# <<<<<<< HEAD
         elif self.type == "hlin" or self.type == "hquad" or self.type == "hsep":
             return self.dataStructure.size()
-# =======
-        elif self.type == "hsep"or self.type == "hlin" or self.type == "hquad":
-            return self.dataStructure.getLength()
-# >>>>>>> 24972d1490288eba26847bc05c039d9122ba896b
         elif self.type == "heap":
             return self.dataStructure.size()
 
