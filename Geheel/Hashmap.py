@@ -86,7 +86,7 @@ class Hashmap():
                 if self.hashTable[i] != None and self.hashTable[i].item is not None:
                     visit(self.hashTable[i].item, key)
                 else:
-                    print("None")
+                    return False
 
     def addNodeForDot(self, i, count):
         if count == 0:

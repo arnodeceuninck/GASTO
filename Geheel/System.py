@@ -23,7 +23,7 @@ class system:
         # TODO: De klassen toets, rapport, puntenlijst moeten ontworpen zoals de ADT tabel.
         #  Deze klassen zijn dus een verzameling van als ik het goed begrijp
         # TODO: Fix error: alle elementen met zelfde datastructuur komen samen in eenzelfde datastructuur
-        self.punten = TabelWrapper("hlin")  # dit is de create # puntenlijst nog nodig om punten aan te passen
+        self.punten = TabelWrapper("hquad")  # dit is de create # puntenlijst nog nodig om punten aan te passen
         self.toetsen = TabelWrapper("cl")  # TODO: verander dit terug naar cl
         self.puntenlijst = TabelWrapper("ll")  # TODO: verander terug naar bst als er een bst in Geheel zit
         # self.puntenlijst = TabelWrapper("bst")  # Is dus eigenlijk een verzameling van alle puntenlijsten
@@ -180,7 +180,7 @@ class system:
             #     else:
             #         nextnode = node.next
             #     node = nextnode
-        elif self.punten.type == "234" or self.punten.type == "23" or self.punten.type == "bst" or self.punten.type == "rb" or self.punten.type == "hlin":
+        elif self.punten.type == "234" or self.punten.type == "23" or self.punten.type == "bst" or self.punten.type == "rb" or self.punten.type == "hlin" or self.punten.type == "hquad":
             self.punten.traverse(self.collector, key)
 
         #alle punten uit de testen verwijderen
