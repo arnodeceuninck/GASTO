@@ -1,5 +1,0 @@
-digraph {
-a [label="yolo| haha| " shape=Mrecord]
-a -> b 
-rankdir=LR
-}

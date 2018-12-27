@@ -247,21 +247,3 @@ def lees(file, size):
                     h.show()
                 if words[0] == "delete":
                     h.delete(int(words[1]))
-
-h = createHashmap(23, 2)
-# h.insert(24, 1)
-# h.insert(47, 2)
-# h.insert(70, 5)
-# h.insert(93, 10)
-
-# h.insert(24, "Rob")
-# h.insert(47, "Roel")
-# h.insert(70, "Aline")
-# h.insert(93, "Dylan")
-
-h.insert("Rob", "Vijftien") #291 -> 15
-h.insert("Bor", "Zestien") #291
-h.insert("Orb", "Negentien") #291
-h.insert("Bro", "Een")
-
-h.show()
