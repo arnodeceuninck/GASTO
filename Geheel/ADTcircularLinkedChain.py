@@ -160,6 +160,7 @@ class circular_chain:
         node = self.head.next
         for i in range(self.count):
             visit(node.value, key)
+            node = node.next
 
 def createList():
     return circular_chain()
