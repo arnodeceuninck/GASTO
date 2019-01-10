@@ -5,8 +5,8 @@ class lees:
         self.file = open(file, 'r')
         self.element = 0
         self.start_lijn_operaties = 0
-        self.lees()
         self.nummer_file = 0
+        self.lees()
     def lees(self):
         type = ""
         operatie = False
@@ -22,10 +22,11 @@ class lees:
                 elif operatie == True:
                     type += char
             if type == "23":
-                TTT = TweeDrieBoom.TweeDrieBoom()
-                TTT.create23T()
+                TTT = TweeDrieBoom.create23T()
                 self.lees_operaties(TTT)
-                break
+                del TTT
+                operatie = False
+                pass
             elif type != "" and type != "bst":
                 print("onbekend type")
                 type = ""
@@ -45,9 +46,10 @@ class lees:
                         TTT.insertItem(Item)
                     elif words[0] == "delete":
                         self.element = int(words[1])
-                        # TTT.delete(self.element)
+                        TTT.delete(self.element)
                     elif words[0] == "print":
-                        TTT.print(self.nummer_file)
+                        filename = "23Tree_"+str(self.nummer_file)+".dot"
+                        TweeDrieBoom.write_dot(filename, TTT)
                         self.nummer_file += 1
 
 lees("adt.txt")
