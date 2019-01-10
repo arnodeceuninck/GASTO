@@ -45,7 +45,7 @@ class lees:
         TTT.delete(int(wordsInLine[1]))
         return
     def print(self, TTT):
-        filename = "23T-" + str(self.nummer_file) + ".dot"
+        filename = "23-" + str(self.nummer_file) + ".dot"
         TweeDrieBoom.write_dot(filename, TTT)
         self.nummer_file += 1
         return
