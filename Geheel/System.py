@@ -20,7 +20,7 @@ class System:
         #  Deze klassen zijn dus een verzameling van als ik het goed begrijp
         self.punten = TabelWrapper("ll")  # dit is de create # puntenlijst nog nodig om punten aan te passen
         self.puntenQueue = TabelWrapper("queue")
-        self.toetsen = TabelWrapper("cl")
+        self.toetsen = TabelWrapper("bst")
         self.puntenlijst = TabelWrapper("bst")
         self.vakken = TabelWrapper("ll")  # Key = afkorting, Value = volledige naam
         self.klassen = TabelWrapper("ll")
@@ -197,6 +197,7 @@ class System:
         self.puntenlijst.delete(key)
 
     def deleteToets(self, naam):
+        # TODO: Why tfuck wordt een toets niet uit een puntenlijst verwijderd als ik die wil verwijderen???
         self.toetsen.delete(naam)
 
     def deleteLeraar(self, naam):
@@ -293,7 +294,7 @@ class System:
 
         rapport.buildfile()
 
-    def buildRapport(self, samengestelde_zoeksleutel, klas):  # Bv. voor "M2"
+    def buildRapport(self, samengestelde_zoeksleutel, klas, student=None):  # Bv. voor "M2"
         # TODO: fix nested for loops
         punten_per_leerling = []  # structuur: [[jan, [wiskunde, 7, 3, 5]]] # 7u, 3/5
         rapport = self.rapporten.retrieve(samengestelde_zoeksleutel)[1]
@@ -330,40 +331,41 @@ class System:
         rapportFile = HtmlMaker.HtmlRapport(
             str("rapport-" + str(samengestelde_zoeksleutel) + "-" + str(klas) + ".html"))
         for leerling in punten_per_leerling:
-            studentennr = leerling[0]
-            gegevens_leerling = self.leerlingen.retrieve(studentennr)
-            gegevens_leerling = gegevens_leerling[1]
-            klas = gegevens_leerling.getKlas()
-            voornaam = gegevens_leerling.getVoornaam()
-            naam = gegevens_leerling.getNaam()
-            rapportFile.addStructure(HtmlMaker.HtmlTitle("Rapport " + klas + " - " + voornaam + " " + naam))
-            resultaten = [["vak", "uren", "leraar", "totaal"]]
-            for i in range(1, len(leerling)):  # Overloop alle vakken, skip het studentennr vd leerling
-                huidig_vak = leerling[i]
-                naam_vak = self.vakken.retrieve(huidig_vak[0])[1]
-                uren_vak = huidig_vak[1]
-                leraren = ""
-                j = 0
-                for leraar in huidig_vak[2]:
-                    j += 1
-                    gegevens_leeraar = self.leraars.retrieve(leraar)[1]
-                    leraren += gegevens_leeraar.getNaam() + " " + gegevens_leeraar.getAchternaam()
-                    if j != len(huidig_vak[2]):
-                        leraren += ", "
-                totaal = 100 * huidig_vak[3] / huidig_vak[4]
-                resultaten.append([naam_vak, uren_vak, leraren, totaal])
+            if student==None or leerling[0]==student:
+                studentennr = leerling[0]
+                gegevens_leerling = self.leerlingen.retrieve(studentennr)
+                gegevens_leerling = gegevens_leerling[1]
+                klas = gegevens_leerling.getKlas()
+                voornaam = gegevens_leerling.getVoornaam()
+                naam = gegevens_leerling.getNaam()
+                rapportFile.addStructure(HtmlMaker.HtmlTitle("Rapport " + klas + " - " + voornaam + " " + naam))
+                resultaten = [["vak", "uren", "leraar", "totaal"]]
+                for i in range(1, len(leerling)):  # Overloop alle vakken, skip het studentennr vd leerling
+                    huidig_vak = leerling[i]
+                    naam_vak = self.vakken.retrieve(huidig_vak[0])[1]
+                    uren_vak = huidig_vak[1]
+                    leraren = ""
+                    j = 0
+                    for leraar in huidig_vak[2]:
+                        j += 1
+                        gegevens_leeraar = self.leraars.retrieve(leraar)[1]
+                        leraren += gegevens_leeraar.getNaam() + " " + gegevens_leeraar.getAchternaam()
+                        if j != len(huidig_vak[2]):
+                            leraren += ", "
+                    totaal = 100 * huidig_vak[3] / huidig_vak[4]
+                    resultaten.append([naam_vak, uren_vak, leraren, totaal])
 
-            totaal_aantal_uren = 0
-            totaal_punten = 0
-            for i in range(1, len(resultaten)):
-                totaal_aantal_uren += int(resultaten[i][1])
-                totaal_punten += int(resultaten[i][3]) * int(resultaten[i][1])
-                resultaten[i][3] = str(round(int(resultaten[i][3]))) + "%"
-            totaal = totaal_punten / totaal_aantal_uren
-            totaal = str(round(totaal)) + "%"
-            resultaten.append(["Totaal", "", "", totaal])
-            rapportFile.addStructure(HtmlMaker.HtmlTable(resultaten))
-        rapportFile.buildfile()
+                totaal_aantal_uren = 0
+                totaal_punten = 0
+                for i in range(1, len(resultaten)):
+                    totaal_aantal_uren += int(resultaten[i][1])
+                    totaal_punten += int(resultaten[i][3]) * int(resultaten[i][1])
+                    resultaten[i][3] = str(round(int(resultaten[i][3]))) + "%"
+                totaal = totaal_punten / totaal_aantal_uren
+                totaal = str(round(totaal)) + "%"
+                resultaten.append(["Totaal", "", "", totaal])
+                rapportFile.addStructure(HtmlMaker.HtmlTable(resultaten))
+        return rapportFile.buildfile()
 
     def printPunt(self):
         return self.punten.Print()
@@ -452,3 +454,102 @@ class System:
         file = open(filename, 'w+')
         file.write(filestring)
         file.close()
+
+
+    # Functies aangemaakt voor GUI
+    def isLeerkracht(self, naam):
+        for leerkracht in self.leraars:
+            searchkey = leerkracht[0] # De afkorting van de leerkracht
+            if searchkey == naam:
+                return True
+        return False
+
+    def isLeerling(self, naam):
+        for leerling in self.leerlingen:
+            if leerling[0] == naam:
+                return True
+        return False
+
+    def lijstLeerkrachtenToStr(self, leerkrachten):
+        string = ""
+        i = 0
+        for afkorting in leerkrachten:
+            leerkracht = self.retrieveLeeraar(afkorting)[1]
+            string += leerkracht.getNaam() + " " + leerkracht.getAchternaam()
+            i+=1
+            if i < len(leerkrachten):
+                string += ", "
+        return string
+
+    def permissionCheckPuntenlijst(self, afkorting, puntenlijst):
+        for leraar in puntenlijst.getNameCodes():
+            if leraar == afkorting:
+                return True
+        return False
+
+    def puntenLijstenVanLeerkracht(self, naam):
+        lijsten = []
+        for puntenlijst in self.puntenlijst:
+            if self.permissionCheckPuntenlijst(naam, puntenlijst[1]):
+                puntenlijst = puntenlijst[1]
+                lijstarray = [puntenlijst.getID(),
+                              puntenlijst.getKlas(),
+                              puntenlijst.getVakcode(),
+                              puntenlijst.getType()+puntenlijst.getPeriode(),
+                              self.lijstLeerkrachtenToStr(puntenlijst.getNameCodes()),
+                              puntenlijst.getUren()]
+                lijsten.append(lijstarray)
+        return lijsten
+
+    def toetsenVanPuntenlijst(self, ID):
+        toetsen = []
+        for toets in self.retrievePuntenlijst(ID)[1].getToetsen():
+            toetsarray = [toets.getNaam(), toets.getMaximum(), toets.getGemiddelde()]
+            toetsen.append(toetsarray)
+        return toetsen
+
+
+    def puntenVanToets(self, naam):
+        punten = []
+        toets = self.retrieveToets(naam)[1]
+        for punt in toets.getVerzamelingVanPunten():
+            stamboeknr = punt.getStamboekNummer()
+            leerling = self.retrieveLeerling(stamboeknr)[1]
+            naam_leerling = leerling.getVoornaam() + " " + leerling.getNaam()
+            puntarray = [punt.getID(), stamboeknr, naam_leerling, punt.getWaarde(), punt.getTimestamp()]
+            punten.append(puntarray)
+        return punten
+
+
+    def tabelVakken(self):
+        tabel = []
+        for vak in self.vakken:
+            vakrij = [vak[0], vak[1]]
+            tabel.append(vakrij)
+        return tabel
+
+
+    def tabelLeraars(self):
+        tabel = []
+        for leraar in self.leraars:
+            naam = leraar[1].getNaam() + " " + leraar[1].getAchternaam()
+            rij = [leraar[0], naam]
+            tabel.append(rij)
+        return tabel
+
+    def tabelKlassen(self):
+        tabel = []
+        for klas in self.klassen:
+            rij = [klas[0]]
+            tabel.append(rij)
+        return tabel
+
+    def tabelLeerlingen(self):
+        tabel = []
+        for leerling in self.leerlingen:
+            naam = leerling[1].getVoornaam() + " " + leerling[1].getNaam()
+            klas = leerling[1].getKlas()
+            klasnr = leerling[1].getKlasNummer()
+            rij = [leerling[0], naam, klas, klasnr]
+            tabel.append(rij)
+        return tabel

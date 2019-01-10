@@ -44,6 +44,13 @@ class Toets:
             if self.verzamelingVanPunten[i].id == ID:
                 del self.verzamelingVanPunten[i]
 
+    def getGemiddelde(self):
+        totaal = 0
+        for punt in self.verzamelingVanPunten:
+            totaal += int(punt.waarde)
+        if len(self.verzamelingVanPunten) != 0:
+            return totaal/len(self.verzamelingVanPunten)
+        return 0
 
 def createToets(puntenlijst, naam, maximum, verzamelingVanPunten):
     return Toets(puntenlijst, naam, maximum, verzamelingVanPunten)

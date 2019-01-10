@@ -14,6 +14,7 @@ class HtmlRapport:
         f = open(self.filename, 'w+')
         f.write(file_string)
         f.close()
+        return file_string
 
     def addStructure(self, structure):
         self.file_structure.append(structure)

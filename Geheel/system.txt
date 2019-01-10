@@ -33,3 +33,11 @@ vak BIO Biologie
 toets 5 overerving 15
 punt HOFKT overerving 1800001 12 10
 punt HOFKT overerving 1800002 12 11
+toets 5 celorganellen 15
+punt HOFKT celorganellen 1800001 8 12
+punt HOFKT celorganellen 1800002 10 13
+vak ENG Engels
+6 puntenlijst M 1 HOFKT,LAENE ENG 6WEWI 2
+toets 6 verbs 10
+punt LAENE verbs 1800001 8 14
+punt LAENE verbs 1800002 10 15
