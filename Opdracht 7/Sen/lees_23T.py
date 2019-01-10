@@ -42,7 +42,7 @@ class lees:
                     words = line.split()
                     if words[0] == "insert":
                         self.element = int(words[1])
-                        Item = TweeDrieBoom.TreeItem(0, self.element)
+                        Item = TweeDrieBoom.TreeItem(self.element, self.element)
                         TTT.insertItem(Item)
                     elif words[0] == "delete":
                         self.element = int(words[1])
