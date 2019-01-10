@@ -5,30 +5,24 @@
     <title>GASTO</title>
 </head>
 <body>
-    <h1> Welcome to the site for our GAS-TO!</h1>
+    <h1> Welcome bij het Flask Tutorial, {{ naam }}!</h1>
+    <p> Zoals je kan zien wordt de {{ naam }} vanboven zelf ingevuld door de name die we hebben meegegeven in ons
+        pythonbestand. cool he.</p>
+
     <h2> Dit is slechts een site om Flask te testen. Dit is dus nog niet de site voor ons GASTO project.</h2>
     <p> Deze website maakt gebruik van cookies dus fuck off als je geen cookies aanvaardt <br>
     Door op eender welke knop op deze site te klikken, aanvaard je de cookies.</p>
-    <form action="/login_form" method="post">
-        <p>Enter Name:</p>
-        <p><input type="text" name="naam"></p>
-        <p>Enter Result:</p>
-        <p><input type="text" name="score"></p>
-        <p><input type="submit" value="submit"></p>
-    </form>
-    <form action="/setcookie" method="post">
-        <p>Enter Message:</p>
-        <p><input type="text" name="message"></p>
-        <p><input type="submit" value="submit"></p>
-    </form>
 
-    <table border=1>
-        {% for key, value in result.items() %}
-        <tr>
-            <th> {{ key }} </th>
-            <th> {{ value }}</th>
-        </tr>
-        {% endfor %}
-    </table>
+    <p> We gaan met veel 'forms' moeten werken, omdat een form een manier is om info op te vragen van de gebruiker.
+        In deze site maken we door elkaar gebruik van post en get (kijk dus in het python bestand welke je moet
+        gebruiken! </p>
+
+
+    <p> GET zet de data van de form mee in de url, POST geeft de data iets subtieler door</p>
+    <form action="/page2" method="get">
+        <p>Enter Some Text:</p>
+        <p><input type="text" name="tekstDieJeHebtIngegeven"></p>
+        <p><input type="submit" value="Verzend"></p>
+    </form>
 </body>
 </html>
