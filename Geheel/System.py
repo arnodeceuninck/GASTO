@@ -33,47 +33,80 @@ class System:
         self.redoStack = TabelWrapper("stack")
 
     def addVak(self, afkorting, naam):
+        return_messages = []
+        for vak in self.vakken:
+            if vak[0] == afkorting:
+                return_messages.append("ERROR: Er is al een vak met deze afkorting.")
         self.instructies.insert("vak " + str(afkorting) + " " + str(naam))
-        return self.vakken.insert(naam, afkorting)
+        self.vakken.insert(naam, afkorting)
+        return return_messages
 
     def addKlas(self, naam):
+        for klas in self.klassen:
+            if klas[0] == naam:
+                return ["ERROR: Er is al een klas met deze naam."]
         self.instructies.insert("klas " + str(naam))
-        return self.klassen.insert(naam)
+        self.klassen.insert(naam)
+        return []
 
     def addLeraar(self, afkorting, naam, achternaam):
+        for leraar in self.leraars:
+            if leraar[0] == leraar:
+                return ["ERROR: Er bestaat al een leerkracht met deze afkorting"]
         self.instructies.insert("leraar " + str(naam) + " " + str(achternaam) + " " + str(afkorting))
-        return_value = self.leraars.insert(Leraar.Leraar(afkorting, naam, achternaam), afkorting)
+        self.leraars.insert(Leraar.Leraar(afkorting, naam, achternaam), afkorting)
         self.undoPuntStack.insert(TabelWrapper("stack"), afkorting)
-        return return_value
+        return []
 
     def addLeerling(self, naam, voornaam, klas, klasnummer, studentennummer):
+        return_messages = []
         self.instructies.insert("leerling " + str(voornaam) + " " + str(naam) + " " + str(klas) + " " +
                                 str(klasnummer) + " " + str(studentennummer))
         if self.leerlingen.retrieve(studentennummer)[0] is not False:
-            print("De gegeven studenten nummer is al in gebruik")
-            return False
+            return_messages.append("De gegeven studenten nummer is al in gebruik")
+            print(return_messages[0])
+            return return_messages
         # Kijk of de klas al is aangemaakt
         if self.klassen.retrieve(klas) is None:
-            print("ERROR: De klas waar je de leerling wil insteken (" + klas + "), bestaat nog niet. "
+            return_messages.append("ERROR: De klas waar je de leerling wil insteken (" + klas + "), bestaat nog niet. "
                                                                                "Gelieve deze eerst aan te maken.")
-            return False
+            print(return_messages[0])
+            return return_messages
 
-        return self.leerlingen.insert(Leerling.Leerling(naam, voornaam, klas, klasnummer, studentennummer),
+        for student in self.leerlingen:
+            if student[1].getKlas() == klas and student[1].getKlasNummer == klasnummer:
+                return_messages.append("ERROR: Er zit al een leerling met hetzelfde klasnummer in de klas.")
+                print(return_messages[0])
+                return return_messages
+
+        self.leerlingen.insert(Leerling.Leerling(naam, voornaam, klas, klasnummer, studentennummer),
                                       studentennummer)
+        return []
 
     def PermissionCheckLeerkracht(self, naam_toets, leerkracht):
         test = self.toetsen.retrieve(naam_toets)[1]
         if test.puntenlijst[0] is False:
             return False
         else:
-            Len = len(test.puntenlijst[1].namecodes)
-            for i in range(len(test.puntenlijst[1].namecodes)):
+            aantal_punten = len(test.puntenlijst[1].namecodes)
+            for i in range(aantal_punten):
                 if test.puntenlijst[1].namecodes[i] == leerkracht:
                     return True
             return False
 
+    def puntMetIDExists(self, ID):
+        for punt in self.punten:
+            if punt[0] == ID:
+                return True
+        else:
+            return False
+
     def addPunt(self, stamboeknummer_leerling, naam_toets, Waarde, leerkracht):
-        ID = str(self.punten.getLength())
+        return_messages = []
+        ID = 0
+        while self.puntMetIDExists(ID):
+            ID += 1
+
         instructie = "punt " + str(leerkracht) + " " + str(naam_toets) + " " + \
                      str(stamboeknummer_leerling) + " " + str(Waarde) + " " + str(ID)
         self.instructies.insert(instructie)
@@ -83,16 +116,19 @@ class System:
         # maakt een nieuw punt aan met een uniek ID, Stamboomnummer, Naam, Waarde en Timestamp
         toets = self.toetsen.retrieve(naam_toets)[1]
         if toets is None:
-            print("ERROR: De toets " + naam_toets + " werd niet teruggevonden in het systeem. "
+            return_messages.append("ERROR: De toets " + naam_toets + " werd niet teruggevonden in het systeem. "
                                                     "Gelieve deze eerst aan te maken.")
-            return False
-        if self.leerlingen.retrieve(stamboeknummer_leerling) is None:
-            print("ERROR: Het studentennummer " + stamboeknummer_leerling + " werd niet teruggevonden in het systeem. "
+            print(return_messages[0])
+            return return_messages
+        if self.leerlingen.retrieve(stamboeknummer_leerling)[1] is None:
+            return_messages.append("ERROR: Het studentennummer " + stamboeknummer_leerling + " werd niet teruggevonden in het systeem. "
                                                                             "Gelieve deze eerst aan te maken.")
+            print(return_messages[0])
             return False
         if self.PermissionCheckLeerkracht(naam_toets, leerkracht) is False:
-            print("ERROR: De leerkracht: " + leerkracht + " Heeft geen toesteming om dit punt toe te voegen")
-            return False
+            return_messages.append("ERROR: De leerkracht: " + leerkracht + " Heeft geen toesteming om dit punt toe te voegen")
+            print(return_messages[0])
+            return return_messages
 
         punt = Punt.createPunt(ID, stamboeknummer_leerling, naam_toets, Waarde,
                                datetime.datetime.now())  # https://stackoverflow.com/questions/415511/how-to-get-the-current-time-in-python
@@ -104,11 +140,11 @@ class System:
             for punt2 in self.punten:
                 punt2 = punt2[1]
                 if punt2.getStamboekNummer() == stamboeknummer_leerling and punt2.getNaam() == naam_toets:
-                    print("Error bij punt: " + str(punt))
-                    print("Punt voor deze leerling en toets al in puntenlijst. "
-                          "Gelieve het vorige punt eerst te verwijderen "
-                          "(mbv undo bij de leerkracht die dit heeft toegevoegd")
-                    return False
+                    return_messages.append("Error bij punt: " + str(punt) +
+                                           "Punt voor deze leerling en toets al in puntenlijst. "
+                                           "Gelieve het vorige punt eerst te verwijderen ")
+                    print(return_messages[0])
+                    return return_messages
             # Controleer of er al een punt voor deze toets en deze leerkracht in de lijst met punten zit
             self.punten.insert(current_punt, ID)  # Key
             self.puntenQueue.delete()  # Verwwijder het eerste element van de queue
@@ -116,22 +152,38 @@ class System:
         # JHAAAA, alle retrieves returnen een tuple
 
         toets.addPunt(punt)
-        return True
+        return return_messages
 
     def addPuntenLijst(self, ID, type, periode, namecodes, vak_afkorting, klas, uren):
+        return_messages = []
         self.instructies.insert(str(ID) + " puntenlijst " + str(type) + " " + str(periode) + " " +
                                 str(namecodes) + " " + str(vak_afkorting) + " " + str(klas) + " " + str(uren))
         if self.klassen.retrieve(klas) is None:
-            print("ERROR: De klas waaraan je wil dat de leeraar les geeft (" + klas + "), bestaat nog niet. "
+            return_messages.append("ERROR: De klas waaraan je wil dat de leeraar les geeft (" + klas + "), bestaat nog niet. "
                   "Gelieve deze eerst aan te maken.")
-            return False
+            print(return_messages[0])
+            return return_messages
 
         leraren = namecodes.split(',')
         for leraar in leraren:
             if self.leraars.retrieve(leraar) is None:
-                print("ERROR: De leraar " + leraar + " werd niet teruggevonden in het systeem. "
+                return_messages.append("ERROR: De leraar " + leraar + " werd niet teruggevonden in het systeem. "
                       "Gelieve deze eerst aan te maken")
-                return False
+                print(return_messages[0])
+                return return_messages
+
+        for puntenlijst in self.puntenlijst:
+            if puntenlijst[1].getID() == ID:
+                return_messages.append("ERROR: ID is reeds gebruikt.")
+                print(return_messages[0])
+                return return_messages
+
+        if self.retrieveVak(vak_afkorting)[0] == False:
+            return_messages.append("Het vak werd niet teruggevonden. "
+                                   "Gelieve aan een admin te vragen om dit aan te maken.")
+            return return_messages
+
+            print(return_messages[0])
         puntenlijst = Puntenlijst.createPuntenLijst(ID, type, periode, leraren, vak_afkorting, klas, uren, [])
         self.puntenlijst.insert(puntenlijst, ID)
 
@@ -144,15 +196,24 @@ class System:
             # Volgende 2 lijnen nodig indien problemen met mutable types
             # self.rapporten.delete(key)
             # self.rapporten.insert(rapport, key)
-        return True
+        return return_messages
 
     def addToets(self, puntenlijst_id, titel, maxscore):
+        return_messages = []
         self.instructies.insert("toets " + str(puntenlijst_id) + " " + str(titel) + " " + str(maxscore))
         puntenlijst = self.puntenlijst.retrieve(puntenlijst_id)
-        if puntenlijst is None:
-            print("ERROR: De puntenlijst met id " + puntenlijst_id + " werd niet teruggevonden in het systeem. "
+        if puntenlijst[1] is None:
+            return_messages.append("ERROR: De puntenlijst met id " + puntenlijst_id + " werd niet teruggevonden in het systeem. "
                                                  "Gelieve deze eerst aan te maken")
-            return False
+            print(return_messages[0])
+            return return_messages
+
+        for toets in puntenlijst[1].getToetsen():
+            if toets.getNaam() == titel:
+                return_messages.append("ERROR: Er bestaad al een toets met dezelfde titel.")
+                print(return_messages[0])
+                return return_messages
+
         toets = Toets.createToets(puntenlijst, titel, maxscore, [])
         self.toetsen.insert(toets, titel)
         if type(puntenlijst) == tuple:

@@ -1,5 +1,7 @@
-from flask import Flask, redirect, request, url_for, render_template, make_response
+from flask import Flask, redirect, request, url_for, render_template, make_response, flash
+
 app = Flask(__name__)
+app.secret_key = "krGcQlz" # Een random string (
 
 # Moest flask nog niet geinstalleerd zijn:
 #   klik op r.1 van dit bestand op flask (dat een error geeft omdat het nog niet geinstalleerd is)
@@ -67,6 +69,10 @@ def setcookie():
     resp = make_response(redirect('/page4'))
     # De ccokie met als variabelenaam "bericht" wordt gelijkgesteld aan message
     resp.set_cookie("bericht", message)
+
+    # Stel er is ergens een error gebeurd, dan "flashen" we die om die te laten zien.
+    # Eens je een flash-melding hebt laten zien in je html, wordt de lijst met flash messages leeggemaakt.
+    flash("Dit is een vooebeeld van een error")
 
     return resp  # resp betekent een redirect, dus je wordt naar pagina 4 doorverwezen
 

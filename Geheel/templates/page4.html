@@ -7,6 +7,19 @@
 <body>
     <h1> {{ dict["Cookie"] }}</h1>
 
+    <p>Hieronder zie je errors, moesten er zijn die nog niet zijn getoond:</p>
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <ul class=flashes>
+        {% for message in messages %}
+          <li>{{ message }}</li>
+        {% endfor %}
+        </ul>
+      {% endif %}
+    {% endwith %}
+
+    <p> Probeer de pagina eens te herladen. Dan zal je merken dat de error er niet meer staat.</p>
+
     <table border="1">
         <p> Merk op dat er hier geen dubbele accolade gebruikt wordt, maar accolade %.</p>
         <tbody>

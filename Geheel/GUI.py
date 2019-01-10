@@ -1,8 +1,13 @@
+# Voor het maken van deze GUI werd volgende bron meermaals gebruikt: http://flask.pocoo.org/docs/0.12/
+
 from System import *
-from flask import Flask, redirect, request, url_for, render_template, make_response
+from flask import Flask, redirect, request, url_for, render_template, make_response, flash
 app = Flask(__name__)
+app.secret_key = "9j3faDq"
+
 
 geheel = None
+messages = []
 
 @app.route('/')
 def index():
@@ -41,6 +46,7 @@ def verifylogin():
         print("Cookie created")
         return resp
     else:
+        flash("Login not found.")
         return redirect('/login')
 
 
@@ -115,7 +121,8 @@ def addpuntenlijst():
     periode = rapport[1:]
     leerkrachten = request.args.get("leerkrachten")
     uren = request.args.get("uren")
-    geheel.addPuntenLijst(ID, type, periode, leerkrachten, vak, klas, uren)
+    for message in geheel.addPuntenLijst(ID, type, periode, leerkrachten, vak, klas, uren):
+        flash(message)
     geheel.save("system.txt")
     return redirect(request.referrer)
 
@@ -124,7 +131,8 @@ def addtoets():
     naam = request.args.get("naam")
     maximum = request.args.get("maximum")
     puntenlijst = request.cookies.get("puntenlijstID")
-    geheel.addToets(puntenlijst, naam, maximum)
+    for message in geheel.addToets(puntenlijst, naam, maximum):
+        flash(message)
     geheel.save("system.txt")
     return redirect(request.referrer)
 
@@ -235,3 +243,6 @@ if __name__ == '__main__':
     geheel = readFile("system.txt", None)
     app.debug = True
     app.run()
+
+    # vul hier je local ip in om vanaf een ander toestel op je LAN netwerk de site te bereiken
+    # app.run(host='192.168.0.135')
