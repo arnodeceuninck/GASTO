@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>GASTO - Vakken</title>
+</head>
+<body>
+    <h1>Vakken</h1>
+
+    <form action="/addvak" method="get">
+    <table border=1>
+        <thead>
+            <tr>
+                <td>Afkorting</td>
+                <td>Vak</td>
+                <td><form></form></td>
+            </tr>
+        </thead>
+        <tbody>
+            {% for vak in vakken %}
+                <tr>
+                    <td>{{ vak[0] }}</td>
+                    <td>{{ vak[1] }}</td>
+                    <td>
+                        <form action="/removevak" method="get">
+                          <button name="afkorting" type="submit" value={{ vak[0] }}>Delete</button>
+                        </form>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+        <tfoot> <!-- Aparte foot of mee in body steken? -->
+            <td><input type="text" name="afkorting"></td>
+            <td><input type="text" name="vak"></td>
+            <td><input type="submit" value="Add"></td>
+        </tfoot>
+    </table>
+    </form>
+    </table>
+
+</body>
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>GASTO - Leeracht</title>
+</head>
+<body>
+    <h1>Welkom leerkracht!</h1>
+    <p> Je bent ingelogd als {{ name }} <br></p>
+
+    <!-- Heel de table is een gigantische form, zodat onderaan iets getypt kan worden -->
+    <form action="/addpuntenlijst" method="get">
+    <table border=1>
+        <thead>
+            <tr>
+                <td>ID</td>
+                <td>Klas</td>
+                <td>Vak</td>
+                <td>Rapport</td>
+                <td>Leerkrachten</td>
+                <td>Uren</td>
+                <td></td>
+                <td><form></form></td> <!-- eerste form heeft ook als actie addtopuntenlijst (bug? fix) -->
+            </tr>
+        </thead>
+        <tbody>
+            {% for tabelitem in puntenlijsten %}
+                <tr>
+                    <td>{{ tabelitem[0] }}</td>
+                    <td>{{ tabelitem[1] }}</td>
+                    <td>{{ tabelitem[2] }}</td>
+                    <td>{{ tabelitem[3] }}</td>
+                    <td>{{ tabelitem[4] }}</td>
+                    <td>{{ tabelitem[5] }}</td>
+                    <td>
+                        <form action="/puntenlijst" method="get">
+                          <button name="ID" type="submit" value={{ tabelitem[0] }}>View</button>
+                        </form>
+                    </td>
+                    <td>
+                        <form action="/removepuntenlijst" method="get">
+                          <button name="ID" type="submit" value={{ tabelitem[0] }}>Delete</button>
+                        </form>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+        <tfoot> <!-- Aparte foot of mee in body steken? -->
+            <td><input type="text" name="ID"></td>
+            <td><input type="text" name="klas"></td>
+            <td><input type="text" name="vak"></td>
+            <td><input type="text" name="rapport"></td>
+            <td><input type="text" name="leerkrachten"></td>
+            <td><input type="text" name="uren"></td>
+            <td></td>
+            <td><input type="submit" value="Add"></td>
+        </tfoot>
+    </table>
+    </form>
+
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>GASTO - Toets</title>
+</head>
+<body>
+    <h1>{{ title }}</h1>
+
+    <form action="/addpunt" method="get">
+    <table border=1>
+        <thead>
+            <tr>
+                <td>ID</td>
+                <td>Stamboeknr</td>
+                <td>Naam</td>
+                <td>Waarde</td>
+                <td><form></form></td>
+            </tr>
+        </thead>
+        <tbody>
+            {% for punt in punten %}
+                <tr>
+                    <td>{{ punt[0] }}</td>
+                    <td>{{ punt[1] }}</td>
+                    <td>{{ punt[2] }}</td> <!-- TODO: Fancy kleurtjes geven afhankelijk van je score? -->
+                    <td>{{ punt[3] }}</td>
+                    <td>
+                        <form action="/removepunt" method="get">
+                          <button name="ID" type="submit" value={{ punt[0] }}>Delete</button>
+                        </form>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+        <tfoot> <!-- Aparte foot of mee in body steken? -->
+            <td></td>
+            <td><input type="text" name="stamboeknr"></td>
+            <td></td>
+            <td><input type="text" name="waarde"></td>
+            <td><input type="submit" value="Add"></td>
+        </tfoot>
+    </table>
+    </form>
+    </table>
+
+</body>
+</html>

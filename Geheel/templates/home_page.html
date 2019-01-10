@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>GASTO</title>
+</head>
+<body>
+    <h1> Welcome to the site for our GAS-TO!</h1>
+    <h2> Dit is slechts een site om Flask te testen. Dit is dus nog niet de site voor ons GASTO project.</h2>
+    <p> Deze website maakt gebruik van cookies dus fuck off als je geen cookies aanvaardt <br>
+    Door op eender welke knop op deze site te klikken, aanvaard je de cookies.</p>
+    <form action="/login_form" method="post">
+        <p>Enter Name:</p>
+        <p><input type="text" name="naam"></p>
+        <p>Enter Result:</p>
+        <p><input type="text" name="score"></p>
+        <p><input type="submit" value="submit"></p>
+    </form>
+    <form action="/setcookie" method="post">
+        <p>Enter Message:</p>
+        <p><input type="text" name="message"></p>
+        <p><input type="submit" value="submit"></p>
+    </form>
+
+    <table border=1>
+        {% for key, value in result.items() %}
+        <tr>
+            <th> {{ key }} </th>
+            <th> {{ value }}</th>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

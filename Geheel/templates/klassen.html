@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>GASTO - Klassen</title>
+</head>
+<body>
+    <h1>Klassen</h1>
+
+    <form action="/addklas" method="get">
+    <table border=1>
+        <thead>
+            <tr>
+                <td>Klas</td>
+                <td><form></form></td>
+            </tr>
+        </thead>
+        <tbody>
+            {% for klas in klassen %}
+                <tr>
+                    <td>{{ klas[0] }}</td>
+                    <td>
+                        <form action="/removeklas" method="get">
+                          <button name="klas" type="submit" value={{ klas[0] }}>Delete</button>
+                        </form>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+        <tfoot> <!-- Aparte foot of mee in body steken? -->
+            <td><input type="text" name="klas"></td>
+            <td><input type="submit" value="Add"></td>
+        </tfoot>
+    </table>
+    </form>
+    </table>
+
+</body>
+</html>

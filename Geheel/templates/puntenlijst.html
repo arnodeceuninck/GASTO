@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>GASTO - Puntenlijst</title>
+</head>
+<body>
+    <h1>{{ title }}</h1>
+
+    <form action="/addtoets" method="get">
+    <table border=1>
+        <thead>
+            <tr>
+                <td>Naam</td>
+                <td>Maximum</td>
+                <td>Gemiddelde</td>
+                <td></td>
+                <td><form></form></td>
+            </tr>
+        </thead>
+        <tbody>
+            {% for toets in toetsen %}
+                <tr>
+                    <td>{{ toets[0] }}</td>
+                    <td>{{ toets[1] }}</td>
+                    <td>{{ toets[2] }}</td>
+                    <td>
+                        <form action="/toets" method="get">
+                          <button name="naam" type="submit" value={{ toets[0] }}>View</button>
+                        </form>
+                    </td>
+                    <td>
+                        <form action="/removetoets" method="get">
+                          <button name="naam" type="submit" value={{ toets[0] }}>Delete</button>
+                        </form>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+        <tfoot> <!-- Aparte foot of mee in body steken? -->
+            <td><input type="text" name="naam"></td>
+            <td><input type="text" name="maximum"></td>
+            <td></td>
+            <td></td>
+            <td><input type="submit" value="Add"></td>
+        </tfoot>
+    </table>
+    </form>
+    </table>
+
+</body>
+</html>

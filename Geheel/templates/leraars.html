@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>GASTO - Leraars</title>
+</head>
+<body>
+    <h1>Leraars</h1>
+
+    <form action="/addleraar" method="get">
+    <table border=1>
+        <thead>
+            <tr>
+                <td>Naamcode</td>
+                <td>Naam</td>
+                <td><form></form></td>
+            </tr>
+        </thead>
+        <tbody>
+            {% for leraar in leraars %}
+                <tr>
+                    <td>{{ leraar[0] }}</td>
+                    <td>{{ leraar[1] }}</td>
+                    <td>
+                        <form action="/removeleraar" method="get">
+                          <button name="naamcode" type="submit" value={{ leraar[0] }}>Delete</button>
+                        </form>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+        <tfoot> <!-- Aparte foot of mee in body steken? -->
+            <td><input type="text" name="naamcode"></td>
+            <td><input type="text" name="naam"></td>
+            <td><input type="submit" value="Add"></td>
+        </tfoot>
+    </table>
+    </form>
+    </table>
+
+</body>
+</html>
