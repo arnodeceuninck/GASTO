@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>GASTO</title>
+</head>
+<body>
+    {% if num<50 %}
+    <h1>Je bent niet geslaagd</h1>
+    {% else %}
+    <h1>Je bent geslaagd</h1>
+    {% endif %}
+    <p> Afhankelijk van je nummer laat deze pagina dus een andere tekst zien.</p>
+
+    <p> We kunnen ook data in cookies opslaan. Hiervoor moeten we het eerst via een get/post form opvragen.
+    Het opslaan in cookies zal vanuit het pythonbestand gebeuren.</p>
+    <p> Merk op dat we als action een aparte pagina gebruiken om een cookie in te stellen.</p>
+    <form action="/page3_setcookie" method="post">
+        <p>Enter a number between 0 and 100:</p>
+        <p><input type="text" name="message"</p>
+        <p><input type="submit" value="Verzend"></p>
+    </form>
+</body>
+</html>

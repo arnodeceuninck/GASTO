@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>GASTO</title>
+</head>
+<body>
+    <h1>{{ tekst }}</h1>
+    <p> Hierboven zie je de tekst die je op de vorige pagina had ingegeven.</p>
+
+    <p> GET zet de data van de form mee in de url, POST geeft de data iets subtieler door,
+        laten we nu dus een post form maken.</p>
+    <form action="/page3" method="post">
+        <p>Enter a number between 0 and 100:</p>
+        <p><input type="number" name="nummer" min="0" max="100"></p>
+        <p><input type="submit" value="Verzend"></p>
+    </form>
+</body>
+</html>
