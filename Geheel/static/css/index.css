@@ -1,25 +1,25 @@
 body{
-    /* background-color: #ccc; */
+    /* background-color: #cafd; */
     padding: 0px;
     margin: 0px;
 }
 
-.Login{
-  background-color: white;
-  border: 1px solid black;
-  margin-left: 40%;
-  margin-top: 10%;
-  height: 400px;
-  width: 20%;
-  padding: 0px;
+
+.welcome{
+  height: 200px;
+  width: 200px;
+  border-radius: 50%;
+  text-align: center;
+  background-color: pink;
+  color: white;
+  margin-right: auto;
+  margin-left: auto;
+  margin-top: 15%;
 }
 
-#myButton{
-  display: block;
-  height: 10%;
-  width: 20%;
-  font-size: 20px;
-  margin-top: 20%;
-  margin-left: 40%;
-  border-radius: 100%;
+.welcome h2{
+  padding: 0;
+  margin:0;
+  padding-top: 40%;
+  font-size: 28px;
 }

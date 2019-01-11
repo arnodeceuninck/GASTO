@@ -2,22 +2,32 @@
 <html lang="en">
 <head>
     <link rel="stylesheet" href="../static/css/wrapper.css">
+    <!-- <link rel="stylesheet" href="../static/css/sidemenu.css"> -->
     <meta charset="UTF-8">
     <title>GASTO</title>
 </head>
 <body>
-  <header>
-    <a href="/" class="button">Home</a>
-    <button id="myButton" class="float-left submit-button" >Logout</button>
-  </header>
+    <header>
+      <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="#">Back</a></li>
+        <li id="loguit"><a href="/login">Logout</a></li>
+      </ul>
+    </header>
 
-    <button id="vakken" class="float-left submit-button" >Vakken beheren</button>
-    <button id="klassen" class="float-left submit-button" >Klassen beheren</button>
-    <button id="leraars" class="float-left submit-button" >Leraars beheren</button>
-    <button id="leerlingen" class="float-left submit-button" >Leerlingen beheren</button>
-    <button id="datastructure" class="float-left submit-button" >Datastructuren bekijken</button>
-
-    <script type="text/javascript">
+    <div class="sidemenu">
+      <ul>
+        <li><a href="/vakken">Vakken</a></li>
+        <li><a href="/klassen">Klassen</a></li>
+        <li><a href="/leraars">Leraars</a></li>
+        <li><a href="/leerlingen">Leerlingen</a></li>
+        <li><a href="/datastructuren">Datastructuren</a></li>
+      </ul>
+    </div>
+    <content>
+      <p>Hey lekkerding</p>
+    </content>
+    <!-- <script type="text/javascript">
         document.getElementById("vakken").onclick = function () {
             location.href = "/vakken";
         };
@@ -45,6 +55,8 @@
         document.getElementById("datastructure").onclick = function () {
             location.href = "/datastructuren";
         };
-    </script>
+    </script> -->
+
+
 </body>
 </html>

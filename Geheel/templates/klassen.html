@@ -2,11 +2,29 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="../static/css/wrapper.css">
     <title>GASTO - Klassen</title>
 </head>
 <body>
-    <h1>Klassen</h1>
+  <header>
+    <ul>
+      <li><a href="/">Home</a></li>
+      <li><a href="#">Back</a></li>
+      <li id="loguit"><a href="/login">Logout</a></li>
+    </ul>
+  </header>
 
+  <div class="sidemenu">
+    <ul>
+      <li><a href="/vakken">Vakken</a></li>
+      <li><a href="/klassen">Klassen</a></li>
+      <li><a href="/leraars">Leraars</a></li>
+      <li><a href="/leerlingen">Leerlingen</a></li>
+      <li><a href="/datastructuren">Datastructuren</a></li>
+    </ul>
+  </div>
+    <content>
+      <h1>Klassen</h1>
     <form action="/addklas" method="get">
     <table border=1>
         <thead>
@@ -34,6 +52,7 @@
     </table>
     </form>
     </table>
+  </content>
 
 </body>
 </html>
