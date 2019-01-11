@@ -262,6 +262,8 @@ def ADTchanges():
     leraar = request.args.get("datatypeleraar")
     if geheel.punten.type != punt:
         geheel.puntdatatypechange(punt)
+    if geheel.leraars.type != leraar:
+        geheel.leraardatatypechange(leraar)
     return redirect(request.referrer)
 
 if __name__ == '__main__':
