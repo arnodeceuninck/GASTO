@@ -19,6 +19,10 @@ def login():
     print("Showint the login page")
     return render_template('login.html')
 
+@app.route('/back')
+def back():
+    return redirect(request.referrer)
+
 
 # type kan leerling of leerkracht zijn
 @app.route('/verifylogin', methods=['POST'])

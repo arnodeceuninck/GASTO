@@ -2,28 +2,38 @@
 <html lang="en">
 <head>
     <link rel="stylesheet" href="../static/css/wrapper.css">
-    <!-- <link rel="stylesheet" href="../static/css/index.css"> -->
+    <link rel="stylesheet" href="../static/css/index.css">
     <meta charset="UTF-8">
     <title>GASTO</title>
 </head>
+
 <body>
+
   <header>
     <ul>
       <li><a href="/">Home</a></li>
-      <li><a href="#">Back</a></li>
+      <li><a onclick="goBack()">Back</a></li>
       <li><a href="/login">Login</a></li>
     </ul>
+
+    <script>
+        function goBack() {
+            window.history.back();
+        }
+    </script>
+
   </header>
 
-    <h2>Welkom bij onze school! </h2>
-    <p>Hier kan u alle gegevens vinden omtrent
-    leerkrachten, leerlingen, punten rapporten en zo veel meer.</p>
+  <div class="welcome">
+    <h2><b>Welkom</b></h2>
+  </div>
 
-    <script type="text/javascript">
+
+    <!-- <script type="text/javascript">
         document.getElementById("myButton").onclick = function () {
             location.href = "/login";
         };
-    </script>
+    </script> -->
 
     <!-- <p> Je bent altijd welkom om de visuele afwerking te doen van deze site. :-)</p>
     <p> Deze site gebruikt cookies blablabla... Door op eender welke knop op deze site te klikken ben je hier akkoord mee.</p> -->

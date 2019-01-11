@@ -1,0 +1,34 @@
+.sidemenu{
+  float: left;
+  background-color: pink;
+  width: 6%;
+  height: 100%;
+  padding: 0;
+}
+
+.sidemenu ul{
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  /* padding-top: 20px; */
+}
+
+.sidemenu ul li{
+  float: left;
+  width: 100%;
+}
+
+.sidemenu ul li a{
+  text-align: center;
+
+  text-decoration: none;
+  display: block;
+  color: white;
+  padding: 5px;
+}
+
+.sidemenu ul li a:hover{
+  background-color: white;
+  color: black;
+}
