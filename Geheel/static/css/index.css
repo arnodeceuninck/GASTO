@@ -1,0 +1,25 @@
+body{
+    background-color: #ccc;
+    padding: 0px;
+    margin: 0px;
+}
+
+.Login{
+  background-color: white;
+  border: 1px solid black;
+  margin-left: 40%;
+  margin-top: 10%;
+  height: 400px;
+  width: 20%;
+  padding: 0px;
+}
+
+#myButton{
+  display: block;
+  height: 10%;
+  width: 20%;
+  font-size: 20px;
+  margin-top: 20%;
+  margin-left: 40%;
+  border-radius: 100%;
+}
