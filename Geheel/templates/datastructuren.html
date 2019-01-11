@@ -42,13 +42,13 @@
           <td>{{ vakken[0] }}</td>
           <td>
             <form action="/change" method="get">
-              <button type="submit" name="change">change</button>
+              <button type="submit" name="change" value="vakken">change</button>
             </form>
           </td>
           <td>{{ vakken[1] }}</td>
           <td>
             <form action="/view" method="get">
-              <button type="submit" name="view" value={{ "vakken" }}>View</button>
+              <button type="submit" name="view" value="vakken">View</button>
             </form>
           </td>
         </tr>
@@ -72,7 +72,7 @@
         <td>{{ leraars[1] }}</td>
         <td>
           <form action="/view" method="get">
-            <button type="submit" name="view" value={{ "vakken" }}>View</button>
+            <button type="submit" name="view" value="leraars">View</button>
           </form>
         </td>
         </tr>
@@ -96,7 +96,7 @@
           <td>{{ punt[1] }}</td>
           <td>
             <form action="/view" method="get">
-              <button type="submit" name="view" value={{ "vakken" }}>View</button>
+              <button type="submit" name="view" value="punt">View</button>
             </form>
           </td>
         </tr>

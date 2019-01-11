@@ -235,25 +235,26 @@ class TabelWrapper:
         else:
             name = self.filenamegenerate()
             if self.type == "stack":
-                return self.dataStructure.print(name)
+                self.dataStructure.print(name)
             elif self.type == "queue":
-                return self.dataStructure.print(name)
+                self.dataStructure.print(name)
             elif self.type == "bst":
-                return self.dataStructure.print(name)
+                self.dataStructure.print(name)
             elif self.type == "cl":
-                return self.dataStructure.visualize(name)
+                self.dataStructure.visualize(name)
             elif self.type == "ll":
-                return self.dataStructure.print(name)
+                self.dataStructure.print(name)
             elif self.type == "23":
-                return self.dataStructure.print(name)
+                self.dataStructure.print(name)
             elif self.type == "234":
-                return self.dataStructure.print(name)
+                self.dataStructure.print(name)
             elif self.type == "rb":
-                return self.dataStructure.visualize(name)
+                self.dataStructure.visualize(name)
             elif self.type == "hlin" or self.type == "hquad" or self.type == "hsep":
-                return self.dataStructure.show(name)
+                self.dataStructure.show(name)
             elif self.type == "heap":
-                return self.dataStructure.visualize(name)
+                self.dataStructure.visualize(name)
+            return name
 
     # visit is een functie die telkens toegepast wordt op de root value
     def traverse(self, visit, key=None):

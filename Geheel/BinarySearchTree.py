@@ -189,8 +189,8 @@ class BinarySearchTree:
             size += 1
         return size
 
-    def print(self):
-        vgraph = Graph("BST.dot")
+    def print(self, name):
+        vgraph = Graph(name)
         vgraph.change_rankdir("TB")
         self.createVisualisation(vgraph)
         vgraph.rebuild_file()

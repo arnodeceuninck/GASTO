@@ -2,6 +2,10 @@
 
 from System import *
 from flask import Flask, redirect, request, url_for, render_template, make_response, flash
+
+import pydot # Nodig voor datastructuren
+import os # Nodig voor datastructuren
+
 app = Flask(__name__)
 app.secret_key = "9j3faDq"
 
@@ -340,12 +344,24 @@ def datastructuren():
 @app.route('/view', methods=['GET'])
 def view():
     if request.cookies.get("type") != "ADM":
+        flash("Access denied.")
         return redirect("/login")
 
-    data = request.args.get("view")
-    if data == "vakken":
-        geheel.printVak()
-    return redirect(request.referrer)
+    structuur = request.args.get("view")
+    if structuur == "leraars":
+        png = geheel.printLeraar()
+    elif structuur == "punt":
+        png = geheel.printPunt()
+    elif structuur == "vakken":
+        png = geheel.printVak()
+    else:
+        flash("Error: Datastructure not founnd")
+        return redirect(request.referrer)
+
+    (graph, ) = pydot.graph_from_dot_file(png) # Bewust een halve tuple gedaan
+    graph.write_png('static/datastructuur.png')
+
+    return render_template("view.html", png="/static/datastructuur.png")
 
 @app.route('/logout')
 def logout():
@@ -364,6 +380,7 @@ def ADTchanges():
     if geheel.leraars.type != leraar:
         geheel.leraardatatypechange(leraar)
     return redirect(request.referrer)
+
 
 if __name__ == '__main__':
     geheel = readFile("system.txt", None)

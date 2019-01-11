@@ -18,13 +18,13 @@ from ReadFile import *
 class System:
     def __init__(self):
         #  Deze klassen zijn dus een verzameling van als ik het goed begrijp
-        self.punten = TabelWrapper("ll")  # dit is de create # puntenlijst nog nodig om punten aan te passen
+        self.punten = TabelWrapper("234")  # dit is de create # puntenlijst nog nodig om punten aan te passen
         self.puntenQueue = TabelWrapper("queue")
         self.toetsen = TabelWrapper("bst")
         self.puntenlijst = TabelWrapper("bst")
         self.vakken = TabelWrapper("ll")  # Key = afkorting, Value = volledige naam
         self.klassen = TabelWrapper("ll")
-        self.leraars = TabelWrapper("ll")
+        self.leraars = TabelWrapper("234")
         self.leerlingen = TabelWrapper("ll")
         self.rapporten = TabelWrapper("234")
         self.instructies = TabelWrapper("stack")  # NOTE: Don't change this ADT
