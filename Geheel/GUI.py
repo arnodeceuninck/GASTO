@@ -69,12 +69,14 @@ def home():
         naam = leerling.getVoornaam() + " " + leerling.getNaam()
         return render_template('student.html', name=naam)
     else:
+        flash("No homepage found. Please login first.")
         return redirect('/login')
 
 # @app.route('/puntenlijst?ID=<ID>')
 @app.route('/puntenlijst')
 def puntenlijst():
     if request.cookies.get("type") != "LKR":
+        flash("Access denied")
         return redirect("/login")
 
     ID = request.args.get("ID")
@@ -90,6 +92,7 @@ def puntenlijst():
 @app.route('/toets')
 def toets():
     if request.cookies.get("type") != "LKR":
+        flash("Access denied")
         return redirect("/login")
 
     naam = request.args.get("naam")
@@ -104,6 +107,7 @@ def toets():
 @app.route('/removepunt')
 def removepunt():
     if request.cookies.get("type") != "LKR":
+        flash("Access denied")
         return redirect("/login")
 
     ID = request.args.get("ID")
@@ -114,6 +118,7 @@ def removepunt():
 @app.route('/removetoets')
 def removetoets():
     if request.cookies.get("type") != "LKR":
+        flash("Access denied")
         return redirect("/login")
 
     naam = request.args.get("naam")
@@ -124,6 +129,7 @@ def removetoets():
 @app.route('/removepuntenlijst')
 def removepuntenlijst():
     if request.cookies.get("type") != "LKR":
+        flash("Access denied")
         return redirect("/login")
 
     ID = request.args.get("ID")
@@ -134,6 +140,7 @@ def removepuntenlijst():
 @app.route('/addpuntenlijst', methods=['GET', 'POST'])
 def addpuntenlijst():
     if request.cookies.get("type") != "LKR":
+        flash("Access denied")
         return redirect("/login")
 
     ID = request.args.get("ID")
@@ -152,6 +159,7 @@ def addpuntenlijst():
 @app.route('/addtoets', methods=['GET', 'POST'])
 def addtoets():
     if request.cookies.get("type") != "LKR":
+        flash("Access denied")
         return redirect("/login")
 
     naam = request.args.get("naam")
@@ -165,6 +173,7 @@ def addtoets():
 @app.route('/addpunt', methods=['GET', 'POST'])
 def addpunt():
     if request.cookies.get("type") != "LKR":
+        flash("Access denied")
         return redirect("/login")
 
     stamboeknr = request.args.get("stamboeknr")
@@ -178,6 +187,7 @@ def addpunt():
 @app.route('/vakken')
 def vakken():
     if request.cookies.get("type") != "ADM":
+        flash("Access denied")
         return redirect("/login")
 
     return render_template('vakken.html', vakken=geheel.tabelVakken())
@@ -185,6 +195,7 @@ def vakken():
 @app.route('/addvak', methods=['GET'])
 def addvak():
     if request.cookies.get("type") != "ADM":
+        flash("Access denied")
         return redirect("/login")
 
     afkorting = request.args.get("afkorting")
@@ -196,6 +207,7 @@ def addvak():
 @app.route('/removevak')
 def removevak():
     if request.cookies.get("type") != "ADM":
+        flash("Access denied")
         return redirect("/login")
 
     afkorting = request.args.get("afkorting")
@@ -207,6 +219,7 @@ def removevak():
 @app.route('/leraars')
 def leraars():
     if request.cookies.get("type") != "ADM":
+        flash("Access denied")
         return redirect("/login")
 
     return render_template('leraars.html', leraars=geheel.tabelLeraars())
@@ -214,6 +227,7 @@ def leraars():
 @app.route('/addleraar', methods=['GET'])
 def addleraar():
     if request.cookies.get("type") != "ADM":
+        flash("Access denied")
         return redirect("/login")
 
     afkorting = request.args.get("naamcode")
@@ -227,6 +241,7 @@ def addleraar():
 @app.route('/removeleraar')
 def removeleraar():
     if request.cookies.get("type") != "ADM":
+        flash("Access denied")
         return redirect("/login")
 
     afkorting = request.args.get("naamcode")
@@ -237,6 +252,7 @@ def removeleraar():
 @app.route('/klassen')
 def klassen():
     if request.cookies.get("type") != "ADM":
+        flash("Access denied")
         return redirect("/login")
 
     return render_template('klassen.html', klassen=geheel.tabelKlassen())
@@ -244,6 +260,7 @@ def klassen():
 @app.route('/addklas', methods=['GET'])
 def addklas():
     if request.cookies.get("type") != "ADM":
+        flash("Access denied")
         return redirect("/login")
 
     klas = request.args.get("klas")
@@ -254,6 +271,7 @@ def addklas():
 @app.route('/removeklas')
 def removeklas():
     if request.cookies.get("type") != "ADM":
+        flash("Access denied")
         return redirect("/login")
 
     klas = request.args.get("klas")
@@ -264,6 +282,7 @@ def removeklas():
 @app.route('/leerlingen')
 def leerlingen():
     if request.cookies.get("type") != "ADM":
+        flash("Access denied")
         return redirect("/login")
 
     return render_template('leerlingen.html', leerlingen=geheel.tabelLeerlingen())
@@ -271,6 +290,7 @@ def leerlingen():
 @app.route('/addleerling', methods=['GET'])
 def addleerling():
     if request.cookies.get("type") != "ADM":
+        flash("Access denied")
         return redirect("/login")
 
     stamboeknr = request.args.get("stamboeknr")
@@ -286,6 +306,7 @@ def addleerling():
 @app.route('/removeleerling')
 def removeleerling():
     if request.cookies.get("type") != "ADM":
+        flash("Access denied")
         return redirect("/login")
 
     stamboeknr = request.args.get("stamboeknr")
