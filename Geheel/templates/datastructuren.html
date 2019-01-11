@@ -2,14 +2,29 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
+    <link rel="stylesheet" href="../static/css/wrapper.css">
+    <link rel="stylesheet" href="../static/css/datastructuren.css">
     <title>GASTO - dataStructure</title>
-    <style media="screen">
-table, th, td {
-    border: 1px solid black;
-  }
-    </style>
   </head>
   <body>
+    <header>
+      <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="#">Back</a></li>
+        <li id="loguit"><a href="/login">Logout</a></li>
+      </ul>
+    </header>
+
+    <div class="sidemenu">
+      <ul>
+        <li><a href="/vakken">Vakken</a></li>
+        <li><a href="/klassen">Klassen</a></li>
+        <li><a href="/leraars">Leraars</a></li>
+        <li><a href="/leerlingen">Leerlingen</a></li>
+        <li><a href="/datastructuren">Datastructuren</a></li>
+      </ul>
+    </div>
+    <content>
     <form action="/ADTchanges">
     <table>
       <thead>
@@ -80,5 +95,6 @@ table, th, td {
     </table>
     <button type="submit" name="ADTchanges">commit changes</button>
     </form>
-  </body>
+  </content>
+</body>
 </html>
