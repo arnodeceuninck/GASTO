@@ -21,8 +21,13 @@
     <header>
       <ul>
         <li><a href="/">Home</a></li>
-        <li><a href="./">Back</a></li>
+        <li><a onclick="goBack()">Back</a></li>
       </ul>
+      <script>
+        function goBack() {
+            window.history.back();
+        }
+       </script>
     </header>
     <form class="Login" action="/verifylogin" method="post">
       <label> Naam: </label><br>
