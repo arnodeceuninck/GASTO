@@ -1,18 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link rel="stylesheet" href="../static/css/wrapper.css">
+    <!-- <link rel="stylesheet" href="../static/css/login.css"> -->
     <meta charset="UTF-8">
     <title>GASTO</title>
 </head>
 <body>
     <!--login gaat nog opgesplitst worden in leerling-login en leerkracht login,
     momenteel maak ik het vooral voor leerkrachten-->
-    <form action="/verifylogin" method="post">
-        <p>Enter Name:</p>
-        <p><input type="text" name="name"></p>
-        <p><input type="submit" value="Login"></p>
-    </form>
+    <!-- <header>
+      <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="#">Back</a></li>
+        <li><a href="#">Logout</a></li>
+      </ul>
+    </header> -->
 
+
+    <header>
+      <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="#">Back</a></li>
+      </ul>
+    </header>
+    <form class="Login" action="/verifylogin" method="post">
+      <label> Naam: </label><br>
+      <input type="text" name="name" placeholder="Rob van Capelle"><br>
+      <label>Wachtwoord: </label><br>
+      <input type="password" name="password" placeholder="Wachtwoord"><br>
+
+      <input class="submit" type="submit" value="Login"><br>
+    </form>
     <!-- Error messages -->
     {% with messages = get_flashed_messages() %}
       {% if messages %}

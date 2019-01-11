@@ -1,0 +1,57 @@
+body{
+  padding: 0;
+  margin: 0;
+  /* background-color: #ddd; */
+  /* background-image: url("cube.png"); */
+  /* background-image: url("tim.gif"); */
+  /* als tom inlogt: background-image: url("tom.png"); */
+}
+
+header{
+  background-color: pink;
+  height: 15%;
+  padding: 0;
+}
+
+header ul{
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+header li{
+  float: left;
+}
+
+
+header li a{
+  display: inline-block;
+  text-decoration: none;
+  color: white;
+  padding: 5px;
+}
+
+.active{
+  background-color: white;
+  color: black;
+}
+
+header a:hover{
+  background-color: white;
+  color: black;
+}
+
+.Login{
+  /* border: 1px solid black; */
+  width: 10%;
+  margin-left: 45%;
+  margin-top: 10%;
+  font-size: 18px;
+}
+
+.Login input{
+  margin-top: 10px;
+  margin-bottom: 10px;
+  font-size: 16px;
+}
