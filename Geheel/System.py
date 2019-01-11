@@ -621,5 +621,13 @@ class System:
     def datastructuresinfo(self):
         vakken = [self.vakken.type, self.vakken.getLength()]
         leraars = [self.leraars.type, self.leraars.getLength()]
-        punt = [self.leraars.type, self.punten.getLength()]
+        punt = [self.punten.type, self.punten.getLength()]
         return [vakken, leraars, punt]
+
+    def puntdatatypechange(self, new):
+        temp = TabelWrapper(new)
+        self.punten.traverse(self.transfer, temp)
+        self.punten = temp
+
+    def transfer(self, value, newadt):
+        return newadt.insert(value, value.id)

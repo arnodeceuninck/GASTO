@@ -252,6 +252,14 @@ def view():
         geheel.printVak()
     return redirect(request.referrer)
 
+@app.route('/ADTchanges', methods=['GET'])
+def ADTchanges():
+    punt = request.args.get("datatypepunt")
+    leraar = request.args.get("datatypeleraar")
+    if geheel.punten.type != punt:
+        geheel.puntdatatypechange(punt)
+    return redirect(request.referrer)
+
 if __name__ == '__main__':
     geheel = readFile("system.txt", None)
     app.debug = True

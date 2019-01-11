@@ -218,7 +218,7 @@ class T234:
         elif self.item3 is None or treeitem.key > self.item2.key and treeitem.key < self.item3.key:
             self.mright.T234Insert(treeitem)
         elif treeitem.key > self.item3.key:
-            self.right._234TInsert(treeitem)
+            self.right.T234Insert(treeitem)
 
     def inorder1(self):
         target = self.mleft
