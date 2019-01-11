@@ -182,7 +182,7 @@ def addleraar():
 
 @app.route('/removeleraar')
 def removeleraar():
-    afkorting = request.args.get("afkorting")
+    afkorting = request.args.get("naamcode")
     geheel.deleteLeraar(afkorting)
     geheel.save("system.txt")
     return redirect(request.referrer)

@@ -253,15 +253,18 @@ class System:
 
     def deletePuntenlijst(self, key):
         puntenlijst = self.puntenlijst.retrieve(key)
-        for i in range(len(puntenlijst.toetsen) - 1, -1, -1):
-            self.deleteToets(puntenlijst.toetsen[i].getNaam())
+        for i in range(len(puntenlijst[1].toetsen) - 1, -1, -1):
+            self.deleteToets(puntenlijst[1].toetsen[i].getNaam())
         self.puntenlijst.delete(key)
 
     def deleteToets(self, naam):
-        # TODO: Why tfuck wordt een toets niet uit een puntenlijst verwijderd als ik die wil verwijderen???
+        #probleem opgelost
+        self.puntenlijst.traverse(self.puntenlijstToetsenDetect, naam)
         self.toetsen.delete(naam)
 
     def deleteLeraar(self, naam):
+        self.puntenlijst.traverse(self.puntenlijstleerkrachtdetect, naam)
+        #TODO: (note to self) temp fix
         self.puntenlijst.traverse(self.puntenlijstleerkrachtdetect, naam)
         self.leraars.delete(naam)
 
