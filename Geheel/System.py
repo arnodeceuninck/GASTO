@@ -617,3 +617,9 @@ class System:
             rij = [leerling[0], naam, klas, klasnr]
             tabel.append(rij)
         return tabel
+
+    def datastructuresinfo(self):
+        vakken = [self.vakken.type, self.vakken.getLength()]
+        leraars = [self.leraars.type, self.leraars.getLength()]
+        punt = [self.leraars.type, self.punten.getLength()]
+        return [vakken, leraars, punt]
