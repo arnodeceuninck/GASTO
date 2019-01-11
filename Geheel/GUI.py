@@ -34,18 +34,18 @@ def verifylogin():
     if geheel.isLeerkracht(name):
         resp = make_response(redirect('/home'))
         resp.set_cookie('name', name)
-        resp.set_cookie('type', "Leerkracht")
+        resp.set_cookie('type', "LKR")
         print("Cookie created")
         return resp
     elif geheel.isLeerling(name):
         resp = make_response(redirect('/home'))
         resp.set_cookie('name', name)
-        resp.set_cookie('type', "Leerling")
+        resp.set_cookie('type', "LRL")
         print("Cookie created")
         return resp
     elif name == "admin":
         resp = make_response(redirect('/home'))
-        resp.set_cookie('type', "admin")
+        resp.set_cookie('type', "ADM")
         resp.set_cookie('name', name)
         print("Cookie created")
         return resp
@@ -58,21 +58,25 @@ def verifylogin():
 def home():
     print("Showing homepage")
     name = request.cookies.get('name') # bv. HOFKT
-    if request.cookies.get('type') == "Leerkracht":
+    if request.cookies.get('type') == "LKR":
         leerkracht = geheel.retrieveLeeraar(name)[1]
         naam = leerkracht.getNaam() + " " + leerkracht.getAchternaam()
         return render_template('teacher.html', name=naam, puntenlijsten=geheel.puntenLijstenVanLeerkracht(name))
-    elif request.cookies.get("type") == "admin":
+    elif request.cookies.get("type") == "ADM":
         return render_template('admin.html')
-    else:
+    elif request.cookies.get("type") == "LRL":
         leerling = geheel.retrieveLeerling(name)[1]
         naam = leerling.getVoornaam() + " " + leerling.getNaam()
         return render_template('student.html', name=naam)
-
+    else:
+        return redirect('/login')
 
 # @app.route('/puntenlijst?ID=<ID>')
 @app.route('/puntenlijst')
 def puntenlijst():
+    if request.cookies.get("type") != "LKR":
+        return redirect("/login")
+
     ID = request.args.get("ID")
     titel = str(geheel.retrievePuntenlijst(ID)[1])
     toetsen = geheel.toetsenVanPuntenlijst(ID)
@@ -85,6 +89,9 @@ def puntenlijst():
 
 @app.route('/toets')
 def toets():
+    if request.cookies.get("type") != "LKR":
+        return redirect("/login")
+
     naam = request.args.get("naam")
     punten = geheel.puntenVanToets(naam)
 
@@ -96,6 +103,9 @@ def toets():
 
 @app.route('/removepunt')
 def removepunt():
+    if request.cookies.get("type") != "LKR":
+        return redirect("/login")
+
     ID = request.args.get("ID")
     geheel.deletePunt(ID)
     geheel.save("system.txt")
@@ -103,6 +113,9 @@ def removepunt():
 
 @app.route('/removetoets')
 def removetoets():
+    if request.cookies.get("type") != "LKR":
+        return redirect("/login")
+
     naam = request.args.get("naam")
     geheel.deleteToets(naam)
     geheel.save("system.txt")
@@ -110,6 +123,9 @@ def removetoets():
 
 @app.route('/removepuntenlijst')
 def removepuntenlijst():
+    if request.cookies.get("type") != "LKR":
+        return redirect("/login")
+
     ID = request.args.get("ID")
     geheel.deletePunt(ID)
     geheel.save("system.txt")
@@ -117,6 +133,9 @@ def removepuntenlijst():
 
 @app.route('/addpuntenlijst', methods=['GET', 'POST'])
 def addpuntenlijst():
+    if request.cookies.get("type") != "LKR":
+        return redirect("/login")
+
     ID = request.args.get("ID")
     klas = request.args.get("klas")
     vak = request.args.get("vak")
@@ -132,6 +151,9 @@ def addpuntenlijst():
 
 @app.route('/addtoets', methods=['GET', 'POST'])
 def addtoets():
+    if request.cookies.get("type") != "LKR":
+        return redirect("/login")
+
     naam = request.args.get("naam")
     maximum = request.args.get("maximum")
     puntenlijst = request.cookies.get("puntenlijstID")
@@ -142,6 +164,9 @@ def addtoets():
 
 @app.route('/addpunt', methods=['GET', 'POST'])
 def addpunt():
+    if request.cookies.get("type") != "LKR":
+        return redirect("/login")
+
     stamboeknr = request.args.get("stamboeknr")
     waarde = request.args.get("waarde")
     toets = request.cookies.get("toetsNaam")
@@ -152,10 +177,16 @@ def addpunt():
 
 @app.route('/vakken')
 def vakken():
+    if request.cookies.get("type") != "ADM":
+        return redirect("/login")
+
     return render_template('vakken.html', vakken=geheel.tabelVakken())
 
 @app.route('/addvak', methods=['GET'])
 def addvak():
+    if request.cookies.get("type") != "ADM":
+        return redirect("/login")
+
     afkorting = request.args.get("afkorting")
     vak = request.args.get("vak")
     geheel.addVak(afkorting, vak)
@@ -164,6 +195,9 @@ def addvak():
 
 @app.route('/removevak')
 def removevak():
+    if request.cookies.get("type") != "ADM":
+        return redirect("/login")
+
     afkorting = request.args.get("afkorting")
     geheel.deleteVak(afkorting)
     geheel.save("system.txt")
@@ -172,10 +206,16 @@ def removevak():
 
 @app.route('/leraars')
 def leraars():
+    if request.cookies.get("type") != "ADM":
+        return redirect("/login")
+
     return render_template('leraars.html', leraars=geheel.tabelLeraars())
 
 @app.route('/addleraar', methods=['GET'])
 def addleraar():
+    if request.cookies.get("type") != "ADM":
+        return redirect("/login")
+
     afkorting = request.args.get("naamcode")
     naam = request.args.get("naam")
     voornaam = naam.split(" ")[0]
@@ -186,6 +226,9 @@ def addleraar():
 
 @app.route('/removeleraar')
 def removeleraar():
+    if request.cookies.get("type") != "ADM":
+        return redirect("/login")
+
     afkorting = request.args.get("naamcode")
     geheel.deleteLeraar(afkorting)
     geheel.save("system.txt")
@@ -193,10 +236,16 @@ def removeleraar():
 
 @app.route('/klassen')
 def klassen():
+    if request.cookies.get("type") != "ADM":
+        return redirect("/login")
+
     return render_template('klassen.html', klassen=geheel.tabelKlassen())
 
 @app.route('/addklas', methods=['GET'])
 def addklas():
+    if request.cookies.get("type") != "ADM":
+        return redirect("/login")
+
     klas = request.args.get("klas")
     geheel.addKlas(klas)
     geheel.save("system.txt")
@@ -204,6 +253,9 @@ def addklas():
 
 @app.route('/removeklas')
 def removeklas():
+    if request.cookies.get("type") != "ADM":
+        return redirect("/login")
+
     klas = request.args.get("klas")
     geheel.deleteKlas(klas)
     geheel.save("system.txt")
@@ -211,10 +263,16 @@ def removeklas():
 
 @app.route('/leerlingen')
 def leerlingen():
+    if request.cookies.get("type") != "ADM":
+        return redirect("/login")
+
     return render_template('leerlingen.html', leerlingen=geheel.tabelLeerlingen())
 
 @app.route('/addleerling', methods=['GET'])
 def addleerling():
+    if request.cookies.get("type") != "ADM":
+        return redirect("/login")
+
     stamboeknr = request.args.get("stamboeknr")
     naam = request.args.get("naam")
     voornaam = naam.split(" ")[0]
@@ -227,6 +285,9 @@ def addleerling():
 
 @app.route('/removeleerling')
 def removeleerling():
+    if request.cookies.get("type") != "ADM":
+        return redirect("/login")
+
     stamboeknr = request.args.get("stamboeknr")
     geheel.deleteLeerling(stamboeknr)
     geheel.save("system.txt")
@@ -235,6 +296,9 @@ def removeleerling():
 
 @app.route('/getrapport', methods=['GET'])
 def getrapport():
+    if request.cookies.get("type") != "LRL":
+        return redirect("/login")
+
     zoeksleutel = request.args.get("zoeksleutel")
     studentennr = request.cookies.get("name")
     klas = geheel.retrieveLeerling(studentennr)[1].getKlas()
@@ -245,16 +309,30 @@ def getrapport():
 
 @app.route('/datastructuren')
 def datastructuren():
+    if request.cookies.get("type") != "ADM":
+        return redirect("/login")
+
     info = geheel.datastructuresinfo()
     return render_template('datastructuren.html', vakken=info[0], leraars=info[1], punt=info[2])
 
 
 @app.route('/view', methods=['GET'])
 def view():
+    if request.cookies.get("type") != "ADM":
+        return redirect("/login")
+
     data = request.args.get("view")
     if data == "vakken":
         geheel.printVak()
     return redirect(request.referrer)
+
+@app.route('/logout')
+def logout():
+    resp = make_response(redirect('/login'))
+    resp.set_cookie('name', '', expires=0)
+    resp.set_cookie('type', '', expires=0)
+    return resp
+
 
 @app.route('/ADTchanges', methods=['GET'])
 def ADTchanges():
@@ -262,6 +340,8 @@ def ADTchanges():
     leraar = request.args.get("datatypeleraar")
     if geheel.punten.type != punt:
         geheel.puntdatatypechange(punt)
+    if geheel.leraars.type != leraar:
+        geheel.leraardatatypechange(leraar)
     return redirect(request.referrer)
 
 if __name__ == '__main__':

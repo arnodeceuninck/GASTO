@@ -626,8 +626,16 @@ class System:
 
     def puntdatatypechange(self, new):
         temp = TabelWrapper(new)
-        self.punten.traverse(self.transfer, temp)
+        self.punten.traverse(self.transferpunt, temp)
         self.punten = temp
 
-    def transfer(self, value, newadt):
+    def leraardatatypechange(self, new):
+        temp = TabelWrapper(new)
+        self.leraars.traverse(self.transferleraar, temp)
+        self.leraars = temp
+
+    def transferpunt(self, value, newadt):
         return newadt.insert(value, value.id)
+
+    def transferleraar(self, value, newadt):
+        return newadt.insert(value, value.afkorting)
