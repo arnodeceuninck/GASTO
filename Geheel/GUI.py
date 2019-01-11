@@ -239,6 +239,19 @@ def getrapport():
     return rapport
 
 
+@app.route('/datastructuren')
+def datastructuren():
+    info = geheel.datastructuresinfo()
+    return render_template('datastructuren.html', vakken=info[0], leraars=info[1], punt=info[2])
+
+
+@app.route('/view', methods=['GET'])
+def view():
+    data = request.args.get("view")
+    if data == "vakken":
+        geheel.printVak()
+    return redirect(request.referrer)
+
 if __name__ == '__main__':
     geheel = readFile("system.txt", None)
     app.debug = True
