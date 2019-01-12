@@ -574,11 +574,11 @@ class TweeDrieBoom:
         elif len(self.root) == 2:
             size = 2
         if self.childrenLeft != None:
-            size += self.childrenLeft.size()
+            size += self.childrenLeft.Size()
         if self.childrenMiddle != None:
-            size += self.childrenMiddle.size()
+            size += self.childrenMiddle.Size()
         if self.childrenRight != None:
-            size += self.childrenRight.size()
+            size += self.childrenRight.Size()
         return size
 
 

@@ -622,20 +622,52 @@ class System:
         vakken = [self.vakken.type, self.vakken.getLength()]
         leraars = [self.leraars.type, self.leraars.getLength()]
         punt = [self.punten.type, self.punten.getLength()]
-        return [vakken, leraars, punt]
+        puntenlijst = [self.puntenlijst.type, self.puntenlijst.getLength()]
+        leerling = [self.leerlingen.type, self.leerlingen.getLength()]
+        rapport = [self.rapporten.type, self.rapporten.getLength()]
+        return [vakken, leraars, punt, puntenlijst, leerling, rapport]
 
     def puntdatatypechange(self, new):
         temp = TabelWrapper(new)
-        self.punten.traverse(self.transferpunt, temp)
+        self.punten.traverse(self.transferid, temp)
         self.punten = temp
 
     def leraardatatypechange(self, new):
         temp = TabelWrapper(new)
-        self.leraars.traverse(self.transferleraar, temp)
+        self.leraars.traverse(self.transferafkorting, temp)
         self.leraars = temp
 
-    def transferpunt(self, value, newadt):
+    def vakkendatatypechange(self, new):
+        temp = TabelWrapper(new)
+        self.vakken.traverse(self.transferafkorting, temp)
+        self.vakken = temp
+
+    def puntenlijstdatatypechange(self, new):
+        temp = TabelWrapper(new)
+        self.puntenlijst.traverse(self.transferid, temp)
+        self.puntenlijst = temp
+
+    def leerlingdatatypechange(self, new):
+        temp = TabelWrapper(new)
+        self.puntenlijst.traverse(self.transferid, temp)
+        self.puntenlijst = temp
+
+    def rapportdatatypechange(self, new):
+        temp = TabelWrapper(new)
+        self.rapporten.traverse(self.transferzoeksleutel, temp)
+        self.rapporten = temp
+
+    def transferid(self, value, newadt):
         return newadt.insert(value, value.id)
 
-    def transferleraar(self, value, newadt):
+    def transferafkorting(self, value, newadt):
         return newadt.insert(value, value.afkorting)
+
+    def transfervak(self, value, newadt):
+        return newadt.insert(value, value)
+
+    def transfernummer(self, value, newadt):
+        return newadt.insert(value, value.naam)
+
+    def transferzoeksleutel(self, value, newadt):
+        return newadt.insert(value, value.zoeksleutel)
