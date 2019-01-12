@@ -65,18 +65,18 @@ def verifylogin():
     if geheel.isLeerkracht(name):
         resp = make_response(redirect('/home'))
         resp.set_cookie('name', encrypt(name))
-        resp.set_cookie('type', encrypt("LKR"))
+        resp.set_cookie('type', encrypt("Leerkracht"))
         print("Cookie created")
         return resp
     elif geheel.isLeerling(name):
         resp = make_response(redirect('/home'))
         resp.set_cookie('name', encrypt(name))
-        resp.set_cookie('type', encrypt("LRL"))
+        resp.set_cookie('type', encrypt("Leerling"))
         print("Cookie created")
         return resp
     elif name == "admin":
         resp = make_response(redirect('/home'))
-        resp.set_cookie('type', encrypt("ADM"))
+        resp.set_cookie('type', encrypt("System Administrator"))
         resp.set_cookie('name', encrypt(name))
         print("Cookie created")
         return resp
@@ -90,13 +90,13 @@ def home():
     print("Showing homepage")
     name = request.cookies.get('name') # bv. HOFKT
     name = decrypt(name)
-    if request.cookies.get('type') == encrypt("LKR"):
+    if request.cookies.get('type') == encrypt("Leerkracht"):
         leerkracht = geheel.retrieveLeeraar(name)[1]
         naam = leerkracht.getNaam() + " " + leerkracht.getAchternaam()
         return render_template('teacher.html', name=naam, puntenlijsten=geheel.puntenLijstenVanLeerkracht(name), login=naam)
-    elif request.cookies.get("type") == encrypt("ADM"):
+    elif request.cookies.get("type") == encrypt("System Administrator"):
         return render_template('admin.html', login=name)
-    elif request.cookies.get("type") == encrypt("LRL"):
+    elif request.cookies.get("type") == encrypt("Leerling"):
         leerling = geheel.retrieveLeerling(name)[1]
         naam = leerling.getVoornaam() + " " + leerling.getNaam()
         return render_template('student.html', name=naam, login=naam)
@@ -107,7 +107,7 @@ def home():
 # @app.route('/puntenlijst?ID=<ID>')
 @app.route('/puntenlijst')
 def puntenlijst():
-    if request.cookies.get("type") != encrypt("LKR"):
+    if request.cookies.get("type") != encrypt("Leerkracht"):
         flash("Access denied")
         return redirect("/login")
 
@@ -123,7 +123,7 @@ def puntenlijst():
 
 @app.route('/toets')
 def toets():
-    if request.cookies.get("type") != encrypt("LKR"):
+    if request.cookies.get("type") != encrypt("Leerkracht"):
         flash("Access denied")
         return redirect("/login")
 
@@ -138,7 +138,7 @@ def toets():
 
 @app.route('/removepunt')
 def removepunt():
-    if request.cookies.get("type") != encrypt("LKR"):
+    if request.cookies.get("type") != encrypt("Leerkracht"):
         flash("Access denied")
         return redirect("/login")
 
@@ -149,7 +149,7 @@ def removepunt():
 
 @app.route('/removetoets')
 def removetoets():
-    if request.cookies.get("type") != encrypt("LKR"):
+    if request.cookies.get("type") != encrypt("Leerkracht"):
         flash("Access denied")
         return redirect("/login")
 
@@ -160,7 +160,7 @@ def removetoets():
 
 @app.route('/removepuntenlijst')
 def removepuntenlijst():
-    if request.cookies.get("type") != encrypt("LKR"):
+    if request.cookies.get("type") != encrypt("Leerkracht"):
         flash("Access denied")
         return redirect("/login")
 
@@ -171,7 +171,7 @@ def removepuntenlijst():
 
 @app.route('/addpuntenlijst', methods=['GET', 'POST'])
 def addpuntenlijst():
-    if request.cookies.get("type") != encrypt("LKR"):
+    if request.cookies.get("type") != encrypt("Leerkracht"):
         flash("Access denied")
         return redirect("/login")
 
@@ -190,7 +190,7 @@ def addpuntenlijst():
 
 @app.route('/addtoets', methods=['GET', 'POST'])
 def addtoets():
-    if request.cookies.get("type") != encrypt("LKR"):
+    if request.cookies.get("type") != encrypt("Leerkracht"):
         flash("Access denied")
         return redirect("/login")
 
@@ -204,7 +204,7 @@ def addtoets():
 
 @app.route('/addpunt', methods=['GET', 'POST'])
 def addpunt():
-    if request.cookies.get("type") != encrypt("LKR"):
+    if request.cookies.get("type") != encrypt("Leerkracht"):
         flash("Access denied")
         return redirect("/login")
 
@@ -218,7 +218,7 @@ def addpunt():
 
 @app.route('/vakken')
 def vakken():
-    if request.cookies.get("type") != encrypt("ADM"):
+    if request.cookies.get("type") != encrypt("System Administrator"):
         flash("Access denied")
         return redirect("/login")
 
@@ -226,7 +226,7 @@ def vakken():
 
 @app.route('/addvak', methods=['GET'])
 def addvak():
-    if request.cookies.get("type") != encrypt("ADM"):
+    if request.cookies.get("type") != encrypt("System Administrator"):
         flash("Access denied")
         return redirect("/login")
 
@@ -238,7 +238,7 @@ def addvak():
 
 @app.route('/removevak')
 def removevak():
-    if request.cookies.get("type") != encrypt("ADM"):
+    if request.cookies.get("type") != encrypt("System Administrator"):
         flash("Access denied")
         return redirect("/login")
 
@@ -250,7 +250,7 @@ def removevak():
 
 @app.route('/leraars')
 def leraars():
-    if request.cookies.get("type") != encrypt("ADM"):
+    if request.cookies.get("type") != encrypt("System Administrator"):
         flash("Access denied")
         return redirect("/login")
 
@@ -258,7 +258,7 @@ def leraars():
 
 @app.route('/addleraar', methods=['GET'])
 def addleraar():
-    if request.cookies.get("type") != encrypt("ADM"):
+    if request.cookies.get("type") != encrypt("System Administrator"):
         flash("Access denied")
         return redirect("/login")
 
@@ -272,7 +272,7 @@ def addleraar():
 
 @app.route('/removeleraar')
 def removeleraar():
-    if request.cookies.get("type") != encrypt("ADM"):
+    if request.cookies.get("type") != encrypt("System Administrator"):
         flash("Access denied")
         return redirect("/login")
 
@@ -283,7 +283,7 @@ def removeleraar():
 
 @app.route('/klassen')
 def klassen():
-    if request.cookies.get("type") != encrypt("ADM"):
+    if request.cookies.get("type") != encrypt("System Administrator"):
         flash("Access denied")
         return redirect("/login")
 
@@ -291,7 +291,7 @@ def klassen():
 
 @app.route('/addklas', methods=['GET'])
 def addklas():
-    if request.cookies.get("type") != encrypt("ADM"):
+    if request.cookies.get("type") != encrypt("System Administrator"):
         flash("Access denied")
         return redirect("/login")
 
@@ -302,7 +302,7 @@ def addklas():
 
 @app.route('/removeklas')
 def removeklas():
-    if request.cookies.get("type") != encrypt("ADM"):
+    if request.cookies.get("type") != encrypt("System Administrator"):
         flash("Access denied")
         return redirect("/login")
 
@@ -313,7 +313,7 @@ def removeklas():
 
 @app.route('/leerlingen')
 def leerlingen():
-    if request.cookies.get("type") != encrypt("ADM"):
+    if request.cookies.get("type") != encrypt("System Administrator"):
         flash("Access denied")
         return redirect("/login")
 
@@ -321,7 +321,7 @@ def leerlingen():
 
 @app.route('/addleerling', methods=['GET'])
 def addleerling():
-    if request.cookies.get("type") != encrypt("ADM"):
+    if request.cookies.get("type") != encrypt("System Administrator"):
         flash("Access denied")
         return redirect("/login")
 
@@ -337,7 +337,7 @@ def addleerling():
 
 @app.route('/removeleerling')
 def removeleerling():
-    if request.cookies.get("type") != encrypt("ADM"):
+    if request.cookies.get("type") != encrypt("System Administrator"):
         flash("Access denied")
         return redirect("/login")
 
@@ -349,7 +349,9 @@ def removeleerling():
 
 @app.route('/getrapport', methods=['GET'])
 def getrapport():
-    if request.cookies.get("type") != encrypt("LRL"):
+    if request.cookies.get("type") != encrypt("Leerling") or \
+            not geheel.isLeerling(decrypt(request.cookies.get("name"))):
+
         return redirect("/login")
 
     zoeksleutel = request.args.get("zoeksleutel")
@@ -362,7 +364,7 @@ def getrapport():
 
 @app.route('/datastructuren')
 def datastructuren():
-    if request.cookies.get("type") != encrypt("ADM"):
+    if request.cookies.get("type") != encrypt("System Administrator"):
         return redirect("/login")
 
     info = geheel.datastructuresinfo()
@@ -373,7 +375,7 @@ def datastructuren():
 
 @app.route('/view', methods=['GET'])
 def view():
-    if request.cookies.get("type") != encrypt("ADM"):
+    if request.cookies.get("type") != encrypt("System Administrator"):
         flash("Access denied.")
         return redirect("/login")
 
@@ -420,7 +422,7 @@ def logout():
 
 @app.route('/ADTchanges', methods=['GET'])
 def ADTchanges():
-    if request.cookies.get("type") != encrypt("ADM"):
+    if request.cookies.get("type") != encrypt("System Administrator"):
         flash("Access denied.")
         return redirect('/login')
 
@@ -460,5 +462,6 @@ if __name__ == '__main__':
     app.debug = True
     app.run()
 
-    # vul hier je local ip in om vanaf een ander toestel op je LAN netwerk de site te bereiken
-    # app.run(host='192.168.0.135')
+    # Server settings, ignore
+    # app.debug = False
+    # app.run(host='192.168.0.116')
