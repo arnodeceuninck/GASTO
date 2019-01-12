@@ -1,0 +1,24 @@
+<header>
+  <ul>
+    <li><a href="/home">Home</a></li>
+    <li><a onclick="goBack()">Back</a></li>
+    <li id="loguit"><a href="/logout">Logout</a></li>
+    <li id="naam">{{ login }}</li>
+  </ul>
+  <script>
+    function goBack() {
+        window.history.back();
+    }
+   </script>
+
+</header>
+
+<div class="sidemenu">
+  <ul>
+    <li><a href="/vakken">Vakken</a></li>
+    <li><a href="/klassen">Klassen</a></li>
+    <li><a href="/leraars">Leraars</a></li>
+    <li><a href="/leerlingen">Leerlingen</a></li>
+    <li><a href="/datastructuren">Datastructuren</a></li>
+  </ul>
+</div>

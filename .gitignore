@@ -79,3 +79,4 @@ fabric.properties
 *.iml
 *.xml
 *.iml
+*.dot
