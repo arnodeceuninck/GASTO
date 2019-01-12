@@ -65,13 +65,13 @@ def home():
     if request.cookies.get('type') == "LKR":
         leerkracht = geheel.retrieveLeeraar(name)[1]
         naam = leerkracht.getNaam() + " " + leerkracht.getAchternaam()
-        return render_template('teacher.html', name=naam, puntenlijsten=geheel.puntenLijstenVanLeerkracht(name))
+        return render_template('teacher.html', name=naam, puntenlijsten=geheel.puntenLijstenVanLeerkracht(name), login=naam)
     elif request.cookies.get("type") == "ADM":
-        return render_template('admin.html')
+        return render_template('admin.html', login="Admin")
     elif request.cookies.get("type") == "LRL":
         leerling = geheel.retrieveLeerling(name)[1]
         naam = leerling.getVoornaam() + " " + leerling.getNaam()
-        return render_template('student.html', name=naam)
+        return render_template('student.html', name=naam, login=naam)
     else:
         flash("No homepage found. Please login first.")
         return redirect('/login')
