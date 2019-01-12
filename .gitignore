@@ -80,3 +80,5 @@ fabric.properties
 *.xml
 *.iml
 *.dot
+
+*.dot.png

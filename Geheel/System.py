@@ -453,7 +453,16 @@ class System:
         return self.vakken.Print()
 
     def printRapport(self):
-        return self.vakken.Print()
+        return self.rapporten.Print()
+
+    def printUndo(self):
+        return self.undoPuntStack.Print()
+
+    def printRedo(self):
+        return self.redoStack.Print()
+
+    def printQueue(self):
+        return self.puntenQueue.Print()
 
     def printInstructies(self, teacher=None):
         if teacher != None:

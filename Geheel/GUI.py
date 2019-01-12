@@ -362,24 +362,27 @@ def view():
         png = geheel.printLeerling()
     elif structuur == "rapport":
         png = geheel.printRapport()
+    elif structuur == "klassen":
+        png = geheel.printKlas()
     elif structuur == "vakken":
         png = geheel.printVak()
+    elif structuur == "undo":
+        png = geheel.printUndo()
+    elif structuur == "redo":
+        png = geheel.printRedo()
+    elif structuur == "instructies":
+        png = geheel.printInstructies()
+    elif structuur == "queue":
+        png = geheel.printQueue()
     else:
         flash("Error: Datastructure not founnd")
         return redirect(request.referrer)
 
-    time.sleep(1)
     (graph, ) = pydot.graph_from_dot_file(png)  # Bewust een halve tuple gedaan
-    graph.write_png('static/test2.png')
-    time.sleep(1)
-    # file = open("static/datastructuur.png")
-    # for line in file:
-    #     print("hi")
-    # file.close()
+    filelocation = "static/" + png + ".png"
+    graph.write_png(filelocation)
 
-    # check_call(['dot', '-Tpng', png, '-o', '/static/datastructuur.png'])
-
-    return render_template("view.html", png="static/test2.png")
+    return render_template("view.html", png=filelocation)
 
 @app.route('/logout')
 def logout():

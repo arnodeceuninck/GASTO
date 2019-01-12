@@ -254,10 +254,7 @@ class TabelWrapper:
                 self.dataStructure.show(name)
             elif self.type == "heap":
                 self.dataStructure.visualize(name)
-            text = open(name)
-            for line in text:
-                print(line)
-            # text.close()
+
             return name
 
     # visit is een functie die telkens toegepast wordt op de root value

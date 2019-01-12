@@ -56,6 +56,14 @@ class stack:
             node = node.below
         return size
 
+    def hash_code(self, str):
+        code = 0
+        for char in str:
+            code += ord(char)*ord(char)
+        return code
+
+        # return str.replace(" ", "")
+
     def print(self, filename):
         # Maakt een .dot file met daarin een visuele representatie van de boom (in .dot language)
 
@@ -64,9 +72,9 @@ class stack:
 
         node = self.stackpointer
         while node is not None:
-            vgraph.add_node(node.value, node.value)
+            vgraph.add_node(str(self.hash_code(node.value)), str(node.value))
             if node.below != None:
-                vgraph.add_connection(node.value, node.below.value)
+                vgraph.add_connection(str(self.hash_code(node.value)), str(self.hash_code(node.below.value)), 0)
             node = node.below
 
         # Alle nodes en verbindingen zijn nu toegevooegd aan vgraph, maak er nu dus het bestand zelf van

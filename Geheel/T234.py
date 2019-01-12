@@ -695,7 +695,7 @@ class T234:
         f.write("digraph 234{")
         f.write(str("node [shape=record];") + '\n')
         f.write(str("edge[splines=" + "line" + "];" + '\n'))
-        if self.isEmpty():
+        if not self.isEmpty():
             self.dotread(f)
         f.write("}")
         f.close()
