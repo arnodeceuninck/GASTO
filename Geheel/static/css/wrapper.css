@@ -4,7 +4,7 @@ body{
   height: 1000px;
   /* background-color: #ddd; */
    /* background-image: url("cube.png"); */
-  /*background-image: url("tim.gif"); */
+  /* background-image: url("tim.gif"); */
   /* als tom inlogt: background-image: url("tom.png"); */
 }
 /*#############HEADER################*/
@@ -86,4 +86,30 @@ header ul li a:hover{
 content{
   float: right;
   width: 94%;
+  /* text-align: center; */
+}
+
+table{
+  border-color: pink;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+
+td{
+  border-color: pink;
+}
+
+
+tr{
+  border-color: pink;
+}
+
+h1{
+  color: pink;
+  text-align: center;
+}
+
+content .Login{
+  margin-top: 5%;
 }

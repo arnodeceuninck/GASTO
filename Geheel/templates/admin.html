@@ -10,9 +10,15 @@
     <header>
       <ul>
         <li><a href="/">Home</a></li>
-        <li><a href="#">Back</a></li>
+        <li><a onclick="goBack()">Back</a></li>
         <li id="loguit"><a href="/logout">Logout</a></li>
       </ul>
+      <script>
+        function goBack() {
+            window.history.back();
+        }
+       </script>
+
     </header>
 
     <div class="sidemenu">
