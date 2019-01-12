@@ -48,11 +48,10 @@ class TweeDrieBoom:
 
     def insertItem(self, TreeItem):
         size = self.size()
-        # if size > 0:
-        #     check = self.zoek(TreeItem.key, False)  # checkt of het element in de 23T zit
-        #     if check[0] == True:
-        #         print("error")
-        # #         return False
+        if size > 0:
+            check = self.zoek(TreeItem.key, False)  # checkt of het element in de 23T zit
+            if check[0] == True:
+                return False
         if len(self.root) == 0 and self.parent == None:
             self.root.append(TreeItem)  #indien er nog geen elementen in de 23T zitten
         elif len(self.root) == 0:
@@ -496,14 +495,14 @@ class TweeDrieBoom:
         if len(self.root) == 1 and self.childrenLeft == self.childrenRight == None and self.root[0].key != key:
             result = (gevonden, None)
             return result
-        elif len(self.root) == 2 and self.childrenLeft == self.childrenRight == self.childrenMiddle == None and self.root[0].key != key and self.root[1].key != key:
+        elif len(self.root) == 2 and self.childrenLeft == self.childrenRight == self.childrenMiddle == None and (self.root[0].key != key or self.root[1].key != key):
             result = (gevonden, None)
             return result
         if key == self.root[0].key:
             gevonden = True
             result = (gevonden, self.root[0])
             return result
-        elif len(self.root) == 2 and self.root[1].key:
+        elif len(self.root) == 2 and self.root[1].key == key:
             gevonden = True
             result = (gevonden, self.root[1])
             return result
@@ -658,23 +657,5 @@ def write_dot(file, tree):  #maakt een dot file van de 23T.
 def create23T():    #maakt een 23T aan.
     return TweeDrieBoom()
 
-test = create23T()
-test.insertItem(TreeItem(1, 1))
-test.insertItem(TreeItem(1, 2))
-test.insertItem(TreeItem(1, 3))
-test.insertItem(TreeItem(1, 4))
-test.insertItem(TreeItem(1, 5))
-test.insertItem(TreeItem(1, 6))
-test.insertItem(TreeItem(1, 7))
-test.insertItem(TreeItem(1, 8))
-test.insertItem(TreeItem(1, 9))
-test.insertItem(TreeItem(1, 10))
-test.insertItem(TreeItem(1, 11))
-test.insertItem(TreeItem(1, 12))
-test.insertItem(TreeItem(1, 13))
-test.insertItem(TreeItem(1, 14))
-test.insertItem(TreeItem(1, 15))
-test.insertItem(TreeItem(1, 16))
-print(test.size())
 
 
