@@ -187,6 +187,77 @@
             </form>
           </td>
         </tr>
+        <tr>
+          <td>Klassen</td>
+          <td>{{ klassen[0] }}</td>
+          <td>
+              <select name="datatypeklassen">
+                <option value="ll">ll</option>
+                <option value="cl">cl</option>
+                <option value="bst">bst</option>
+                <option value="23">23</option>
+                <option value="234">234</option>
+                <option value="rb">rb</option>
+                <option value="hlin">hlin</option>
+                <option value="hquad">hquad</option>
+                <option value="hsep">hsep</option>
+              </select>
+          </td>
+          <td>{{ klassen[1] }}</td>
+          <td>
+            <form action="/view" method="get">
+              <button type="submit" name="view" value="klassen">View</button>
+            </form>
+          </td>
+        </tr>
+        <tr>
+          <td>Undo Stack</td>
+          <td>{{ undo[0] }}</td>
+          <td>
+          </td>
+          <td>{{ undo[1] }}</td>
+          <td>
+            <form action="/view" method="get">
+              <button type="submit" name="view" value="undo">View</button>
+            </form>
+          </td>
+        </tr>
+        <tr>
+          <td>Redo Stack</td>
+          <td>{{ redo[0] }}</td>
+          <td>
+          </td>
+          <td>{{ redo[1] }}</td>
+          <td>
+            <form action="/view" method="get">
+              <button type="submit" name="view" value="redo">View</button>
+            </form>
+          </td>
+        </tr>
+        <tr>
+          <td>Instructies</td>
+          <td>{{ instructies[0] }}</td>
+          <td>
+          </td>
+          <td>{{ instructies[1] }}</td>
+          <td>
+            <form action="/view" method="get">
+              <button type="submit" name="view" value="instructies">View</button>
+            </form>
+          </td>
+        </tr>
+        <tr>
+          <td>Queue</td>
+          <td>{{ queue[0] }}</td>
+          <td>
+          </td>
+          <td>{{ queue[1] }}</td>
+          <td>
+            <form action="/view" method="get">
+              <button type="submit" name="view" value="queue">View</button>
+            </form>
+          </td>
+        </tr>
         </tbody>
       </table>
     </td></tr>

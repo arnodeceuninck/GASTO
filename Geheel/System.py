@@ -625,7 +625,12 @@ class System:
         puntenlijst = [self.puntenlijst.type, self.puntenlijst.getLength()]
         leerling = [self.leerlingen.type, self.leerlingen.getLength()]
         rapport = [self.rapporten.type, self.rapporten.getLength()]
-        return [vakken, leraars, punt, puntenlijst, leerling, rapport]
+        klassen = [self.klassen.type, self.klassen.getLength()]
+        undoStack = [self.undoPuntStack.type, self.undoPuntStack.getLength()]
+        redoStack = [self.redoStack.type, self.redoStack.getLength()]
+        instructies = [self.instructies.type, self.instructies.getLength()]
+        puntenQueue = [self.puntenQueue.type, self.puntenQueue.getLength()]
+        return [vakken, leraars, punt, puntenlijst, leerling, rapport, klassen, undoStack, redoStack, instructies, puntenQueue]
 
     def puntdatatypechange(self, new):
         temp = TabelWrapper(new)
