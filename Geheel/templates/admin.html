@@ -2,17 +2,20 @@
 <html lang="en">
 <head>
     <link rel="stylesheet" href="../static/css/wrapper.css">
-    <!-- <link rel="stylesheet" href="../static/css/sidemenu.css"> -->
+    <link rel="stylesheet" href="../static/css/admin.css">
     <meta charset="UTF-8">
     <title>GASTO</title>
 </head>
 <body>
     <header>
       <ul>
-        <li><a href="/">Home</a></li>
+        <li><a href="/home">Home</a></li>
         <li><a onclick="goBack()">Back</a></li>
+        <li><a onload="getName()"></a> </li>
         <li id="loguit"><a href="/logout">Logout</a></li>
       </ul>
+
+      </script>
       <script>
         function goBack() {
             window.history.back();
@@ -31,7 +34,9 @@
       </ul>
     </div>
     <content>
-      <p>Dit is het main menu voor de leerkracht.</p>
+      <div class="Text">
+        <h2><b>Main menu</b><h2>
+      </div>
     </content>
     <!-- <script type="text/javascript">
         document.getElementById("vakken").onclick = function () {

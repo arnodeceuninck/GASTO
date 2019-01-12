@@ -338,7 +338,8 @@ def datastructuren():
         return redirect("/login")
 
     info = geheel.datastructuresinfo()
-    return render_template('datastructuren.html', vakken=info[0], leraars=info[1], punt=info[2])
+    return render_template('datastructuren.html', vakken=info[0], leraars=info[1], punt=info[2], puntenlijst=info[3],
+                           leerling=info[4], rapport=info[5])
 
 
 @app.route('/view', methods=['GET'])
@@ -373,12 +374,24 @@ def logout():
 
 @app.route('/ADTchanges', methods=['GET'])
 def ADTchanges():
+    vakken = request.args.get("datatypevakken")
     punt = request.args.get("datatypepunt")
     leraar = request.args.get("datatypeleraar")
+    puntenlijst = request.args.get("datatypepuntenlijst")
+    leerlingen = request.args.get("datatypeleerling")
+    rapport = request.args.get("datatyperapport")
     if geheel.punten.type != punt:
         geheel.puntdatatypechange(punt)
     if geheel.leraars.type != leraar:
         geheel.leraardatatypechange(leraar)
+    #if geheel.vakken.type != vakken:
+        #geheel.vakkendatatypechange(vakken)
+    if geheel.leraars.type != puntenlijst:
+        geheel.puntenlijstdatatypechange(puntenlijst)
+    if geheel.leerlingen.type != leerlingen:
+        geheel.leerlingdatatypechange(leerlingen)
+    if geheel.rapporten.type != rapport:
+        geheel.rapportdatatypechange(rapport)
     return redirect(request.referrer)
 
 
