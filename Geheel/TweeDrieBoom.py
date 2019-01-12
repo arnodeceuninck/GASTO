@@ -495,14 +495,14 @@ class TweeDrieBoom:
         if len(self.root) == 1 and self.childrenLeft == self.childrenRight == None and self.root[0].key != key:
             result = (gevonden, None)
             return result
-        elif len(self.root) == 2 and self.childrenLeft == self.childrenRight == self.childrenMiddle == None and self.root[0].key != key and self.root[1].key != key:
+        elif len(self.root) == 2 and self.childrenLeft == self.childrenRight == self.childrenMiddle == None and (self.root[0].key != key or self.root[1].key != key):
             result = (gevonden, None)
             return result
         if key == self.root[0].key:
             gevonden = True
             result = (gevonden, self.root[0])
             return result
-        elif len(self.root) == 2 and self.root[1].key:
+        elif len(self.root) == 2 and self.root[1].key == key:
             gevonden = True
             result = (gevonden, self.root[1])
             return result
@@ -568,13 +568,11 @@ class TweeDrieBoom:
         return (None, index)
 
     def size(self): #Geeft het aantal elementen in de 23T terug
-        if len(self.root) == 0:
-            return 0
-        return self.Size()
-
-    def Size(self):
         size = 0
-        size += len(self.root)
+        if len(self.root) == 1:
+            size = 1
+        elif len(self.root) == 2:
+            size = 2
         if self.childrenLeft != None:
             size += self.childrenLeft.Size()
         if self.childrenMiddle != None:
@@ -582,6 +580,7 @@ class TweeDrieBoom:
         if self.childrenRight != None:
             size += self.childrenRight.Size()
         return size
+
 
     def print(self, filename):
         return write_dot(filename, self)
@@ -657,5 +656,6 @@ def write_dot(file, tree):  #maakt een dot file van de 23T.
 
 def create23T():    #maakt een 23T aan.
     return TweeDrieBoom()
+
 
 
