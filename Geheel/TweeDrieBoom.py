@@ -576,11 +576,11 @@ class TweeDrieBoom:
         size = 0
         size += len(self.root)
         if self.childrenLeft != None:
-            size += self.childrenLeft.size()
+            size += self.childrenLeft.Size()
         if self.childrenMiddle != None:
-            size += self.childrenMiddle.size()
+            size += self.childrenMiddle.Size()
         if self.childrenRight != None:
-            size += self.childrenRight.size()
+            size += self.childrenRight.Size()
         return size
 
     def print(self, filename):

@@ -41,9 +41,17 @@
           <td>Vakken</td>
           <td>{{ vakken[0] }}</td>
           <td>
-            <form action="/change" method="get">
-              <button type="submit" name="change" value="vakken">change</button>
-            </form>
+            <select name="datatypevakken">
+              <option value="ll">ll</option>
+              <option value="cl">cl</option>
+              <option value="bst">bst</option>
+              <option value="23">23</option>
+              <option value="234">234</option>
+              <option value="rb">rb</option>
+              <option value="hlin">hlin</option>
+              <option value="hquad">hquad</option>
+              <option value="hsep">hsep</option>
+            </select>
           </td>
           <td>{{ vakken[1] }}</td>
           <td>
@@ -66,7 +74,6 @@
               <option value="hlin">hlin</option>
               <option value="hquad">hquad</option>
               <option value="hsep">hsep</option>
-              <option value="heap">heap</option>
             </select>
           </td>
         <td>{{ leraars[1] }}</td>
@@ -90,13 +97,81 @@
                 <option value="hlin">hlin</option>
                 <option value="hquad">hquad</option>
                 <option value="hsep">hsep</option>
-                <option value="heap">heap</option>
               </select>
           </td>
           <td>{{ punt[1] }}</td>
           <td>
             <form action="/view" method="get">
               <button type="submit" name="view" value="punt">View</button>
+            </form>
+          </td>
+        </tr>
+        <tr>
+          <td>Puntenlijsten</td>
+          <td>{{ puntenlijst[0] }}</td>
+          <td>
+              <select name="datatypepuntenlijst">
+                <option value="ll">ll</option>
+                <option value="cl">cl</option>
+                <option value="bst">bst</option>
+                <option value="23">23</option>
+                <option value="234">234</option>
+                <option value="rb">rb</option>
+                <option value="hlin">hlin</option>
+                <option value="hquad">hquad</option>
+                <option value="hsep">hsep</option>
+              </select>
+          </td>
+          <td>{{ puntenlijst[1] }}</td>
+          <td>
+            <form action="/view" method="get">
+              <button type="submit" name="view" value="puntenlijst">View</button>
+            </form>
+          </td>
+        </tr>
+        <tr>
+          <td>leerlingen</td>
+          <td>{{ leerling[0] }}</td>
+          <td>
+              <select name="datatypeleerling">
+                <option value="ll">ll</option>
+                <option value="cl">cl</option>
+                <option value="bst">bst</option>
+                <option value="23">23</option>
+                <option value="234">234</option>
+                <option value="rb">rb</option>
+                <option value="hlin">hlin</option>
+                <option value="hquad">hquad</option>
+                <option value="hsep">hsep</option>
+              </select>
+          </td>
+          <td>{{ leerling[1] }}</td>
+          <td>
+            <form action="/view" method="get">
+              <button type="submit" name="view" value="leerling">View</button>
+            </form>
+          </td>
+        </tr>
+        <tr>
+          <td>Rapporten</td>
+          <td>{{ rapport[0] }}</td>
+          <td>
+              <select name="datatyperapport">
+                <option value="ll">ll</option>
+                <option value="cl">cl</option>
+                <option value="bst">bst</option>
+                <option value="23">23</option>
+                <option value="234">234</option>
+                <option value="rb">rb</option>
+                <option value="hlin">hlin</option>
+                <option value="hquad">hquad</option>
+                <option value="hsep">hsep</option>
+              </select>
+          </td>
+          <td>{{ rapport[1] }}</td>
+          <td>
+            <form action="/view" method="get">
+              <button type="submit" name="view" value="rapport">View</button>
             </form>
           </td>
         </tr>

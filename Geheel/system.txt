@@ -43,3 +43,4 @@ punt LAENE verbs 1800001 8 14
 punt LAENE verbs 1800002 10 15
 1 puntenlijst M 1 HOFKT ENG 6WEWI 
 toets 3 radioactiviteit 15
+leraar bob de bouwer
