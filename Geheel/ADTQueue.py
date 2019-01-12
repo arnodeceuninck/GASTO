@@ -49,12 +49,13 @@ class Queue:
             return True, self.Front.target.value
         return False, None
 
-    def getLenght(self):
+    def getLength(self):
         size = 0
         node = self.getFront()
-        while node is not None:
+        while node[1] is not None:
             size += 1
             node = node.next
+        return size
 
     def print(self, filename):
 

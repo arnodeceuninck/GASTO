@@ -340,7 +340,7 @@ def datastructuren():
     info = geheel.datastructuresinfo()
     return render_template('datastructuren.html', vakken=info[0], leraars=info[1], punt=info[2], puntenlijst=info[3],
                            leerling=info[4], rapport=info[5], klassen=info[6], undo=info[7], redo=info[8],
-                           instructies=info[9], puntenqueue=[10])
+                           instructies=info[9], queue=[10])
 
 
 @app.route('/view', methods=['GET'])
