@@ -452,6 +452,9 @@ class System:
     def printVak(self):
         return self.vakken.Print()
 
+    def printRapport(self):
+        return self.vakken.Print()
+
     def printInstructies(self, teacher=None):
         if teacher != None:
             return self.undoPuntStack.retrieve(teacher)[1].Print()
