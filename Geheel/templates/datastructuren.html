@@ -11,7 +11,7 @@
       <ul>
         <li><a href="/home">Home</a></li>
         <li><a onclick="goBack()">Back</a></li>
-        <li id="loguit"><a href="/login">Logout</a></li>
+        <li id="loguit"><a href="/logout">Logout</a></li>
         <li id="naam">{{ login }}</li>
       </ul>
       <script>
@@ -282,5 +282,16 @@
     </table>
   </content>
   </form>
+
+  <!-- Error messages -->
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <ul class=flashes>
+        {% for message in messages %}
+            <li>{{ message }}</li>
+            {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
 </body>
 </html>

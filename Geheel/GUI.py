@@ -375,7 +375,7 @@ def view():
     elif structuur == "queue":
         png = geheel.printQueue()
     else:
-        flash("Error: Datastructure not founnd")
+        flash("Error: Datastructure not found")
         return redirect(request.referrer)
 
     (graph, ) = pydot.graph_from_dot_file(png)  # Bewust een halve tuple gedaan
@@ -416,6 +416,13 @@ def ADTchanges():
     if klassen[0] == "true" and geheel.klassen.type != klassen[1]:
         geheel.klassendatatypechange(klassen[1])
     return redirect(request.referrer)
+
+# Ensure responses aren't cached - fix logout cached in browser history
+# source: https://stackoverflow.com/questions/20652784/flask-back-button-returns-to-session-even-after-logout
+@app.after_request
+def after_request(response):
+    response.headers["Cache-Control"] = "no-cache, no-store, must-revalidate"
+    return response
 
 
 if __name__ == '__main__':
