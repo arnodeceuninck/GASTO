@@ -127,7 +127,7 @@ def toets():
         flash("Access denied")
         return redirect("/login")
 
-    naam = decrypt(request.args.get("naam"))
+    naam = request.args.get("naam")
     punten = geheel.puntenVanToets(naam)
 
     resp = make_response(render_template('toets.html', title=naam, punten=punten))
@@ -153,7 +153,7 @@ def removetoets():
         flash("Access denied")
         return redirect("/login")
 
-    naam = decrypt(request.args.get("naam"))
+    naam = request.args.get("naam")
     geheel.deleteToets(naam)
     geheel.save("system.txt")
     return redirect(request.referrer)
@@ -194,7 +194,7 @@ def addtoets():
         flash("Access denied")
         return redirect("/login")
 
-    naam = decrypt(request.args.get("naam"))
+    naam = request.args.get("naam")
     maximum = request.args.get("maximum")
     puntenlijst = request.cookies.get("puntenlijstID")
     for message in geheel.addToets(puntenlijst, naam, maximum):
@@ -464,4 +464,4 @@ if __name__ == '__main__':
 
     # Server settings, ignore
     # app.debug = False
-    # app.run(host='192.168.0.116')
+    # app.run(host='192.168.0.116', ssl_context='adhoc')
