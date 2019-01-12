@@ -3,8 +3,8 @@
 from System import *
 from flask import Flask, redirect, request, url_for, render_template, make_response, flash
 
-import pydot # Nodig voor datastructuren
-import os # Nodig voor datastructuren
+import pydot  # Nodig voor datastructuren
+import os  # Nodig voor datastructuren
 
 app = Flask(__name__)
 app.secret_key = "9j3faDq"
