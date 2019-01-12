@@ -639,7 +639,8 @@ class System:
 
     def vakkendatatypechange(self, new):
         temp = TabelWrapper(new)
-        self.vakken.traverse(self.transferafkorting, temp)
+        for vak in self.vakken:
+            temp.insert(vak[1], vak[0])
         self.vakken = temp
 
     def puntenlijstdatatypechange(self, new):
@@ -657,17 +658,20 @@ class System:
         self.rapporten.traverse(self.transferzoeksleutel, temp)
         self.rapporten = temp
 
+    def klassendatatypechange(self, new):
+        temp = TabelWrapper(new)
+        for klas in self.klassen:
+            temp.insert(klas[0], klas[1])
+        self.klassen = temp
+
     def transferid(self, value, newadt):
         return newadt.insert(value, value.id)
 
     def transferafkorting(self, value, newadt):
         return newadt.insert(value, value.afkorting)
 
-    def transfervak(self, value, newadt):
-        return newadt.insert(value, value)
-
     def transfernummer(self, value, newadt):
         return newadt.insert(value, value.naam)
 
     def transferzoeksleutel(self, value, newadt):
-        return newadt.insert(value, value.zoeksleutel)
+        return newadt.insert(value, value.Zoeksleutel)

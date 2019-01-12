@@ -67,7 +67,7 @@ def home():
         naam = leerkracht.getNaam() + " " + leerkracht.getAchternaam()
         return render_template('teacher.html', name=naam, puntenlijsten=geheel.puntenLijstenVanLeerkracht(name), login=naam)
     elif request.cookies.get("type") == "ADM":
-        return render_template('admin.html', login="Admin")
+        return render_template('admin.html', login=name)
     elif request.cookies.get("type") == "LRL":
         leerling = geheel.retrieveLeerling(name)[1]
         naam = leerling.getVoornaam() + " " + leerling.getNaam()
@@ -380,18 +380,21 @@ def ADTchanges():
     puntenlijst = request.args.get("datatypepuntenlijst")
     leerlingen = request.args.get("datatypeleerling")
     rapport = request.args.get("datatyperapport")
+    klassen = request.args.get("datatypeklassen")
     if geheel.punten.type != punt:
         geheel.puntdatatypechange(punt)
     if geheel.leraars.type != leraar:
         geheel.leraardatatypechange(leraar)
-    #if geheel.vakken.type != vakken:
-        #geheel.vakkendatatypechange(vakken)
-    if geheel.leraars.type != puntenlijst:
+    if geheel.vakken.type != vakken:
+        geheel.vakkendatatypechange(vakken)
+    if geheel.puntenlijst.type != puntenlijst:
         geheel.puntenlijstdatatypechange(puntenlijst)
     if geheel.leerlingen.type != leerlingen:
         geheel.leerlingdatatypechange(leerlingen)
     if geheel.rapporten.type != rapport:
         geheel.rapportdatatypechange(rapport)
+    if geheel.klassen.type != klassen:
+        geheel.klassendatatypechange(klassen)
     return redirect(request.referrer)
 
 
