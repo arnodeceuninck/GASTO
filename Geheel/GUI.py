@@ -15,6 +15,31 @@ app.secret_key = "9j3faDq"
 geheel = None
 messages = []
 
+# Geen veilige vorm van encryptie, maar doet toch al iets
+def encrypt(str):
+    encryption = ""
+    offset = len(str)*len(str)-len(str)
+    i = 1
+    for char in str:
+        ascii_plaats = ord(char)
+        nieuwe_plaats = ascii_plaats + offset*i
+        newchar = chr(nieuwe_plaats)
+        encryption += newchar
+        i += 1
+    return encryption
+
+# Gebruik deze functie zo weinig mogelijk
+# encrypt(a) = encrypt(b) <=> a=b, enrypt dus liever het 2e lid, dan het eerste te decrypten
+def decrypt(str):
+    decryption = ""
+    offset = len(str)*len(str)-len(str)
+    i = 1
+    for char in str:
+        newchar = chr(ord(char) - offset*i)
+        decryption += newchar
+        i += 1
+    return decryption
+
 @app.route('/')
 def index():
     print("Showing the homepage")
@@ -39,20 +64,20 @@ def verifylogin():
 
     if geheel.isLeerkracht(name):
         resp = make_response(redirect('/home'))
-        resp.set_cookie('name', name)
-        resp.set_cookie('type', "LKR")
+        resp.set_cookie('name', encrypt(name))
+        resp.set_cookie('type', encrypt("LKR"))
         print("Cookie created")
         return resp
     elif geheel.isLeerling(name):
         resp = make_response(redirect('/home'))
-        resp.set_cookie('name', name)
-        resp.set_cookie('type', "LRL")
+        resp.set_cookie('name', encrypt(name))
+        resp.set_cookie('type', encrypt("LRL"))
         print("Cookie created")
         return resp
     elif name == "admin":
         resp = make_response(redirect('/home'))
-        resp.set_cookie('type', "ADM")
-        resp.set_cookie('name', name)
+        resp.set_cookie('type', encrypt("ADM"))
+        resp.set_cookie('name', encrypt(name))
         print("Cookie created")
         return resp
     else:
@@ -64,13 +89,14 @@ def verifylogin():
 def home():
     print("Showing homepage")
     name = request.cookies.get('name') # bv. HOFKT
-    if request.cookies.get('type') == "LKR":
+    name = decrypt(name)
+    if request.cookies.get('type') == encrypt("LKR"):
         leerkracht = geheel.retrieveLeeraar(name)[1]
         naam = leerkracht.getNaam() + " " + leerkracht.getAchternaam()
         return render_template('teacher.html', name=naam, puntenlijsten=geheel.puntenLijstenVanLeerkracht(name), login=naam)
-    elif request.cookies.get("type") == "ADM":
+    elif request.cookies.get("type") == encrypt("ADM"):
         return render_template('admin.html', login=name)
-    elif request.cookies.get("type") == "LRL":
+    elif request.cookies.get("type") == encrypt("LRL"):
         leerling = geheel.retrieveLeerling(name)[1]
         naam = leerling.getVoornaam() + " " + leerling.getNaam()
         return render_template('student.html', name=naam, login=naam)
@@ -81,7 +107,7 @@ def home():
 # @app.route('/puntenlijst?ID=<ID>')
 @app.route('/puntenlijst')
 def puntenlijst():
-    if request.cookies.get("type") != "LKR":
+    if request.cookies.get("type") != encrypt("LKR"):
         flash("Access denied")
         return redirect("/login")
 
@@ -97,11 +123,11 @@ def puntenlijst():
 
 @app.route('/toets')
 def toets():
-    if request.cookies.get("type") != "LKR":
+    if request.cookies.get("type") != encrypt("LKR"):
         flash("Access denied")
         return redirect("/login")
 
-    naam = request.args.get("naam")
+    naam = decrypt(request.args.get("naam"))
     punten = geheel.puntenVanToets(naam)
 
     resp = make_response(render_template('toets.html', title=naam, punten=punten))
@@ -112,7 +138,7 @@ def toets():
 
 @app.route('/removepunt')
 def removepunt():
-    if request.cookies.get("type") != "LKR":
+    if request.cookies.get("type") != encrypt("LKR"):
         flash("Access denied")
         return redirect("/login")
 
@@ -123,18 +149,18 @@ def removepunt():
 
 @app.route('/removetoets')
 def removetoets():
-    if request.cookies.get("type") != "LKR":
+    if request.cookies.get("type") != encrypt("LKR"):
         flash("Access denied")
         return redirect("/login")
 
-    naam = request.args.get("naam")
+    naam = decrypt(request.args.get("naam"))
     geheel.deleteToets(naam)
     geheel.save("system.txt")
     return redirect(request.referrer)
 
 @app.route('/removepuntenlijst')
 def removepuntenlijst():
-    if request.cookies.get("type") != "LKR":
+    if request.cookies.get("type") != encrypt("LKR"):
         flash("Access denied")
         return redirect("/login")
 
@@ -145,7 +171,7 @@ def removepuntenlijst():
 
 @app.route('/addpuntenlijst', methods=['GET', 'POST'])
 def addpuntenlijst():
-    if request.cookies.get("type") != "LKR":
+    if request.cookies.get("type") != encrypt("LKR"):
         flash("Access denied")
         return redirect("/login")
 
@@ -164,11 +190,11 @@ def addpuntenlijst():
 
 @app.route('/addtoets', methods=['GET', 'POST'])
 def addtoets():
-    if request.cookies.get("type") != "LKR":
+    if request.cookies.get("type") != encrypt("LKR"):
         flash("Access denied")
         return redirect("/login")
 
-    naam = request.args.get("naam")
+    naam = decrypt(request.args.get("naam"))
     maximum = request.args.get("maximum")
     puntenlijst = request.cookies.get("puntenlijstID")
     for message in geheel.addToets(puntenlijst, naam, maximum):
@@ -178,7 +204,7 @@ def addtoets():
 
 @app.route('/addpunt', methods=['GET', 'POST'])
 def addpunt():
-    if request.cookies.get("type") != "LKR":
+    if request.cookies.get("type") != encrypt("LKR"):
         flash("Access denied")
         return redirect("/login")
 
@@ -192,7 +218,7 @@ def addpunt():
 
 @app.route('/vakken')
 def vakken():
-    if request.cookies.get("type") != "ADM":
+    if request.cookies.get("type") != encrypt("ADM"):
         flash("Access denied")
         return redirect("/login")
 
@@ -200,7 +226,7 @@ def vakken():
 
 @app.route('/addvak', methods=['GET'])
 def addvak():
-    if request.cookies.get("type") != "ADM":
+    if request.cookies.get("type") != encrypt("ADM"):
         flash("Access denied")
         return redirect("/login")
 
@@ -212,7 +238,7 @@ def addvak():
 
 @app.route('/removevak')
 def removevak():
-    if request.cookies.get("type") != "ADM":
+    if request.cookies.get("type") != encrypt("ADM"):
         flash("Access denied")
         return redirect("/login")
 
@@ -224,7 +250,7 @@ def removevak():
 
 @app.route('/leraars')
 def leraars():
-    if request.cookies.get("type") != "ADM":
+    if request.cookies.get("type") != encrypt("ADM"):
         flash("Access denied")
         return redirect("/login")
 
@@ -232,7 +258,7 @@ def leraars():
 
 @app.route('/addleraar', methods=['GET'])
 def addleraar():
-    if request.cookies.get("type") != "ADM":
+    if request.cookies.get("type") != encrypt("ADM"):
         flash("Access denied")
         return redirect("/login")
 
@@ -246,7 +272,7 @@ def addleraar():
 
 @app.route('/removeleraar')
 def removeleraar():
-    if request.cookies.get("type") != "ADM":
+    if request.cookies.get("type") != encrypt("ADM"):
         flash("Access denied")
         return redirect("/login")
 
@@ -257,7 +283,7 @@ def removeleraar():
 
 @app.route('/klassen')
 def klassen():
-    if request.cookies.get("type") != "ADM":
+    if request.cookies.get("type") != encrypt("ADM"):
         flash("Access denied")
         return redirect("/login")
 
@@ -265,7 +291,7 @@ def klassen():
 
 @app.route('/addklas', methods=['GET'])
 def addklas():
-    if request.cookies.get("type") != "ADM":
+    if request.cookies.get("type") != encrypt("ADM"):
         flash("Access denied")
         return redirect("/login")
 
@@ -276,7 +302,7 @@ def addklas():
 
 @app.route('/removeklas')
 def removeklas():
-    if request.cookies.get("type") != "ADM":
+    if request.cookies.get("type") != encrypt("ADM"):
         flash("Access denied")
         return redirect("/login")
 
@@ -287,7 +313,7 @@ def removeklas():
 
 @app.route('/leerlingen')
 def leerlingen():
-    if request.cookies.get("type") != "ADM":
+    if request.cookies.get("type") != encrypt("ADM"):
         flash("Access denied")
         return redirect("/login")
 
@@ -295,7 +321,7 @@ def leerlingen():
 
 @app.route('/addleerling', methods=['GET'])
 def addleerling():
-    if request.cookies.get("type") != "ADM":
+    if request.cookies.get("type") != encrypt("ADM"):
         flash("Access denied")
         return redirect("/login")
 
@@ -311,7 +337,7 @@ def addleerling():
 
 @app.route('/removeleerling')
 def removeleerling():
-    if request.cookies.get("type") != "ADM":
+    if request.cookies.get("type") != encrypt("ADM"):
         flash("Access denied")
         return redirect("/login")
 
@@ -323,11 +349,11 @@ def removeleerling():
 
 @app.route('/getrapport', methods=['GET'])
 def getrapport():
-    if request.cookies.get("type") != "LRL":
+    if request.cookies.get("type") != encrypt("LRL"):
         return redirect("/login")
 
     zoeksleutel = request.args.get("zoeksleutel")
-    studentennr = request.cookies.get("name")
+    studentennr = decrypt(request.cookies.get("name"))
     klas = geheel.retrieveLeerling(studentennr)[1].getKlas()
     print("Building rapport:", zoeksleutel, klas, studentennr)
     rapport = geheel.buildRapport(zoeksleutel, klas, studentennr)
@@ -336,7 +362,7 @@ def getrapport():
 
 @app.route('/datastructuren')
 def datastructuren():
-    if request.cookies.get("type") != "ADM":
+    if request.cookies.get("type") != encrypt("ADM"):
         return redirect("/login")
 
     info = geheel.datastructuresinfo()
@@ -347,7 +373,7 @@ def datastructuren():
 
 @app.route('/view', methods=['GET'])
 def view():
-    if request.cookies.get("type") != "ADM":
+    if request.cookies.get("type") != encrypt("ADM"):
         flash("Access denied.")
         return redirect("/login")
 
@@ -394,6 +420,10 @@ def logout():
 
 @app.route('/ADTchanges', methods=['GET'])
 def ADTchanges():
+    if request.cookies.get("type") != encrypt("ADM"):
+        flash("Access denied.")
+        return redirect('/login')
+
     vakken = (request.args.get("vakkenchange"), request.args.get("datatypevakken"))
     punt = (request.args.get("puntchange"), request.args.get("datatypepunt"))
     leraar = (request.args.get("leraarschange"), request.args.get("datatypeleraar"))
