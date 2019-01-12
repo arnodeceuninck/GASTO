@@ -340,7 +340,7 @@ def datastructuren():
     info = geheel.datastructuresinfo()
     return render_template('datastructuren.html', vakken=info[0], leraars=info[1], punt=info[2], puntenlijst=info[3],
                            leerling=info[4], rapport=info[5], klassen=info[6], undo=info[7], redo=info[8],
-                           instructies=info[9], queue=[10])
+                           instructies=info[9], queue=info[10])
 
 
 @app.route('/view', methods=['GET'])
@@ -375,27 +375,27 @@ def logout():
 
 @app.route('/ADTchanges', methods=['GET'])
 def ADTchanges():
-    vakken = request.args.get("datatypevakken")
-    punt = request.args.get("datatypepunt")
-    leraar = request.args.get("datatypeleraar")
-    puntenlijst = request.args.get("datatypepuntenlijst")
-    leerlingen = request.args.get("datatypeleerling")
-    rapport = request.args.get("datatyperapport")
-    klassen = request.args.get("datatypeklassen")
-    if geheel.punten.type != punt:
-        geheel.puntdatatypechange(punt)
-    if geheel.leraars.type != leraar:
-        geheel.leraardatatypechange(leraar)
-    if geheel.vakken.type != vakken:
-        geheel.vakkendatatypechange(vakken)
-    if geheel.puntenlijst.type != puntenlijst:
-        geheel.puntenlijstdatatypechange(puntenlijst)
-    if geheel.leerlingen.type != leerlingen:
-        geheel.leerlingdatatypechange(leerlingen)
-    if geheel.rapporten.type != rapport:
-        geheel.rapportdatatypechange(rapport)
-    if geheel.klassen.type != klassen:
-        geheel.klassendatatypechange(klassen)
+    vakken = (request.args.get("vakkenchange"), request.args.get("datatypevakken"))
+    punt = (request.args.get("puntchange"), request.args.get("datatypepunt"))
+    leraar = (request.args.get("leraarschange"), request.args.get("datatypeleraar"))
+    puntenlijst = (request.args.get("puntenlijstchange"), request.args.get("datatypepuntenlijst"))
+    leerlingen = (request.args.get("leerlingchange"), request.args.get("datatypeleerling"))
+    rapport = (request.args.get("rapportchange"), request.args.get("datatyperapport"))
+    klassen = (request.args.get("klassenchange"), request.args.get("datatypeklassen"))
+    if punt[0] == "true" and geheel.punten.type != punt[1]:
+        geheel.puntdatatypechange(punt[1])
+    if leraar[0] == "true" and geheel.leraars.type != leraar[1]:
+        geheel.leraardatatypechange(leraar[1])
+    if vakken[0] == "true" and geheel.vakken.type != vakken[1]:
+        geheel.vakkendatatypechange(vakken[1])
+    if puntenlijst[0] == "true" and geheel.puntenlijst.type != puntenlijst[1]:
+        geheel.puntenlijstdatatypechange(puntenlijst[1])
+    if leerlingen[0] == "true" and geheel.leerlingen.type != leerlingen[1]:
+        geheel.leerlingdatatypechange(leerlingen[1])
+    if rapport[0] == "true" and geheel.rapporten.type != rapport[1]:
+        geheel.rapportdatatypechange(rapport[1])
+    if klassen[0] == "true" and geheel.klassen.type != klassen[1]:
+        geheel.klassendatatypechange(klassen[1])
     return redirect(request.referrer)
 
 

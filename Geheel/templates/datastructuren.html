@@ -43,6 +43,7 @@
               <th>Data</th>
               <th>type</th>
               <th></th>
+              <th>Change</th>
               <th>aantal elementen</th>
               <th></th>
             </tr>
@@ -64,6 +65,7 @@
                 <option value="hsep">hsep</option>
               </select>
             </td>
+            <td><input type="checkbox" name="vakkenchange" value="true"></td>
             <td>{{ vakken[1] }}</td>
             <td>
               <form action="/view" method="get">
@@ -88,6 +90,7 @@
                 <option value="heap">heap</option>
               </select>
             </td>
+            <td><input type="checkbox" name="leraarschange" value="true"></td>
           <td>{{ leraars[1] }}</td>
           <td>
             <form action="/view" method="get">
@@ -96,7 +99,7 @@
           </td>
           </tr>
           <tr>
-            <td>Punt</td>
+            <td>Punten</td>
             <td>{{ punt[0] }}</td>
             <td>
                 <select name="datatypepunt">
@@ -112,6 +115,7 @@
                   <option value="heap">heap</option>
                 </select>
             </td>
+            <td><input type="checkbox" name="puntchange" value="true"></td>
             <td>{{ punt[1] }}</td>
             <td>
               <form action="/view" method="get">
@@ -135,6 +139,7 @@
                 <option value="hsep">hsep</option>
               </select>
           </td>
+          <td><input type="checkbox" name="puntenlijstchange" value="true"></td>
           <td>{{ puntenlijst[1] }}</td>
           <td>
             <form action="/view" method="get">
@@ -158,6 +163,7 @@
                 <option value="hsep">hsep</option>
               </select>
           </td>
+          <td><input type="checkbox" name="leerlingchange" value="true"></td>
           <td>{{ leerling[1] }}</td>
           <td>
             <form action="/view" method="get">
@@ -181,6 +187,7 @@
                 <option value="hsep">hsep</option>
               </select>
           </td>
+          <td><input type="checkbox" name="rapportchange" value="true"></td>
           <td>{{ rapport[1] }}</td>
           <td>
             <form action="/view" method="get">
@@ -204,6 +211,7 @@
                 <option value="hsep">hsep</option>
               </select>
           </td>
+          <td><input type="checkbox" name="klassenchange" value="true"></td>
           <td>{{ klassen[1] }}</td>
           <td>
             <form action="/view" method="get">
@@ -216,6 +224,7 @@
           <td>{{ undo[0] }}</td>
           <td>
           </td>
+          <td></td>
           <td>{{ undo[1] }}</td>
           <td>
             <form action="/view" method="get">
@@ -228,6 +237,7 @@
           <td>{{ redo[0] }}</td>
           <td>
           </td>
+          <td></td>
           <td>{{ redo[1] }}</td>
           <td>
             <form action="/view" method="get">
@@ -240,6 +250,7 @@
           <td>{{ instructies[0] }}</td>
           <td>
           </td>
+          <td></td>
           <td>{{ instructies[1] }}</td>
           <td>
             <form action="/view" method="get">
@@ -252,6 +263,7 @@
           <td>{{ queue[0] }}</td>
           <td>
           </td>
+          <td></td>
           <td>{{ queue[1] }}</td>
           <td>
             <form action="/view" method="get">
@@ -262,7 +274,6 @@
         </tbody>
       </table>
     </td></tr>
-        <td></td>
       <tr id="button">
         <td><button type="submit" name="ADTchanges">commit changes</button></td>
       </tr>
