@@ -1,0 +1,19 @@
+digraph 234{node [shape=record];
+rankdir=LR;
+start[label= start];
+dummyhead[];
+start -> dummyhead;
+dummyhead -> start;
+dummyhead -> HOFKT;
+HOFKT -> dummyhead;
+HOFKT[label="HOFKT - Tom - Hofkens"];
+LAENE[label="LAENE - Els - Laenens"];
+HOFKT -> LAENE;
+LAENE -> HOFKT;
+PAUWS[label="PAUWS - Stephen - Pauwels"];
+LAENE -> PAUWS;
+PAUWS -> LAENE;
+bouwer[label="bouwer - bob - de"];
+PAUWS -> bouwer;
+bouwer -> PAUWS;
+}
