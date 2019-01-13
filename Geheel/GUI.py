@@ -47,7 +47,7 @@ def index():
 
 @app.route('/login')
 def login():
-    print("Showint the login page")
+    print("Showing the login page")
     return render_template('login.html')
 
 @app.route('/back')
@@ -428,8 +428,7 @@ def view():
     elif structuur == "klassen":
         png = geheel.printKlas()
     elif structuur == "vakken":
-        # png = geheel.printVak()
-        png = geheel.printToets()
+        png = geheel.printVak()
     elif structuur == "undo":
         png = geheel.printUndo()
     elif structuur == "redo":
@@ -438,6 +437,8 @@ def view():
         png = geheel.printInstructies()
     elif structuur == "queue":
         png = geheel.printQueue()
+    elif structuur == "toets":
+        png = geheel.printToets()
     else:
         flash("Error: Datastructure not found")
         return redirect(request.referrer)
@@ -453,6 +454,8 @@ def logout():
     resp = make_response(redirect('/login'))
     resp.set_cookie('name', '', expires=0)
     resp.set_cookie('type', '', expires=0)
+    resp.set_cookie('puntenlijstID', '', expires=0)
+    resp.set_cookie('toetsNaam', '', expires=0)
     return resp
 
 
