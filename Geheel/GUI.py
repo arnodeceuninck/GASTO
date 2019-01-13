@@ -405,7 +405,7 @@ def datastructuren():
     info = geheel.datastructuresinfo()
     return render_template('datastructuren.html', vakken=info[0], leraars=info[1], punt=info[2], puntenlijst=info[3],
                            leerling=info[4], rapport=info[5], klassen=info[6], undo=info[7], redo=info[8],
-                           instructies=info[9], queue=info[10], login="Admin")
+                           instructies=info[9], queue=info[10], toetsen=info[11], login="Admin")
 
 
 @app.route('/view', methods=['GET'])
@@ -469,6 +469,7 @@ def ADTchanges():
     leerlingen = (request.args.get("leerlingchange"), request.args.get("datatypeleerling"))
     rapport = (request.args.get("rapportchange"), request.args.get("datatyperapport"))
     klassen = (request.args.get("klassenchange"), request.args.get("datatypeklassen"))
+    toetsen = (request.args.get("toetsenchange"), request.args.get("datatypetoetsen"))
     if punt[0] == "true" and geheel.punten.type != punt[1]:
         geheel.puntdatatypechange(punt[1])
     if leraar[0] == "true" and geheel.leraars.type != leraar[1]:
@@ -483,6 +484,8 @@ def ADTchanges():
         geheel.rapportdatatypechange(rapport[1])
     if klassen[0] == "true" and geheel.klassen.type != klassen[1]:
         geheel.klassendatatypechange(klassen[1])
+    if toetsen[0] == "true" and geheel.toetsen.type != toetsen[1]:
+        geheel.toetsendatatypechange(toetsen[1])
     return redirect(request.referrer)
 
 @app.route("/undo")
