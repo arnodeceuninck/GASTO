@@ -123,21 +123,21 @@ def readLine(line, geheel):
 
     elif words[0] == "ADT":
         if words[1] == "punten":
-            geheel.puntdatatypechange(words[3])
+            geheel.puntdatatypechange(words[2])
         if words[1] == "leraar":
-            geheel.leraardatatypechange(words[3])
+            geheel.leraardatatypechange(words[2])
         if words[1] == "vakken":
-            geheel.vakkendatatypechange(words[3])
+            geheel.vakkendatatypechange(words[2])
         if words[1] == "puntenlijst":
-            geheel.puntenlijstdatatypechange(words[3])
+            geheel.puntenlijstdatatypechange(words[2])
         if words[1] == "leerlingen":
-            geheel.leerlingdatatypechange(words[3])
+            geheel.leerlingdatatypechange(words[2])
         if words[1] == "rapport":
-            geheel.rapportdatatypechange(words[3])
+            geheel.rapportdatatypechange(words[2])
         if words[1] == "klassen":
-            geheel.klassendatatypechange(words[3])
+            geheel.klassendatatypechange(words[2])
         if words[1] == "toetsen":
-            geheel.toetsendatatypechange(words[3])
+            geheel.toetsendatatypechange(words[2])
 
 
     else:

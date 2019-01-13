@@ -32,10 +32,12 @@
         <li><a class="active" href="/datastructuren">Datastructuren</a></li>
       </ul>
     </div>
+              <form action="/ADTchanges">
     <content>
       <h1>Datastructuren</h1>
-      <form action="/ADTchanges"><form></form>
+
     <table>
+
       <tr><td>
 
       <table border="1">
@@ -50,7 +52,9 @@
             </tr>
         </thead>
         <tbody>
+
           <tr>
+
             <td>Vakken</td>
             <td>{{ vakken[0] }}</td>
             <td>
@@ -65,9 +69,11 @@
                 <option value="hquad">hquad</option>
                 <option value="hsep">hsep</option>
               </select>
+
             </td>
             <td><input type="checkbox" name="vakkenchange" value="true"></td>
             <td>{{ vakken[1] }}</td>
+
             <td>
               <form action="/view" method="get">
                 <button type="submit" name="view" value="vakken">View</button>
@@ -294,17 +300,21 @@
             </form>
           </td>
         </tr>
+
         </tbody>
       </table>
     </td></tr>
       <tr id="button">
+
         <td><button type="submit" name="ADTchanges">commit changes</button></td>
       </tr>
-      </form>
+                      </form>
       </tbody>
+
     </table>
+
   </content>
-  </form>
+
 
   <!-- Error messages -->
     {% with messages = get_flashed_messages() %}

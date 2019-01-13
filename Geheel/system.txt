@@ -46,4 +46,7 @@ toets 7 logaritmes 15
 punt HOFKT logaritmes 1800001 13 16
 punt HOFKT logaritmes 1800002 9 17
 8 puntenlijst M 2 HOFKT,LAENE ENG 6WEWI 2
-toets 8 presentation 5
+ADT puntenll 234
+ADT leraar ll 234
+ADT vakken ll bst
+ADT puntenlijst ll bst

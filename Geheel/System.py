@@ -562,7 +562,23 @@ class System:
             print(error)
             return [error]
 
-        elif words[0] == "ADT"
+        elif words[0] == "ADT":
+            if words[1] == "punten":
+                self.puntdatatypechange(words[3])
+            if words[1] == "leraar":
+                self.leraardatatypechange(words[3])
+            if words[1] == "vakken":
+                self.vakkendatatypechange(words[3])
+            if words[1] == "puntenlijst":
+                self.puntenlijstdatatypechange(words[3])
+            if words[1] == "leerlingen":
+                self.leerlingdatatypechange(words[3])
+            if words[1] == "rapport":
+                self.rapportdatatypechange(words[3])
+            if words[1] == "klassen":
+                self.klassendatatypechange(words[3])
+            if words[1] == "toetsen":
+                self.toetsendatatypechange(words[3])
 
         if leerkr == None:
             self.instructies.delete()
