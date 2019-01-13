@@ -472,20 +472,29 @@ def ADTchanges():
     toetsen = (request.args.get("toetsenchange"), request.args.get("datatypetoetsen"))
     if punt[0] == "true" and geheel.punten.type != punt[1]:
         geheel.puntdatatypechange(punt[1])
+        geheel.instructies.insert("ADT punten" + punt[1])
     if leraar[0] == "true" and geheel.leraars.type != leraar[1]:
         geheel.leraardatatypechange(leraar[1])
+        geheel.instructies.insert("ADT leraar" + leraar[1])
     if vakken[0] == "true" and geheel.vakken.type != vakken[1]:
         geheel.vakkendatatypechange(vakken[1])
+        geheel.instructies.insert("ADT vakken" + vakken[1])
     if puntenlijst[0] == "true" and geheel.puntenlijst.type != puntenlijst[1]:
         geheel.puntenlijstdatatypechange(puntenlijst[1])
+        geheel.instructies.insert("ADT puntenlijst" + puntenlijst[1])
     if leerlingen[0] == "true" and geheel.leerlingen.type != leerlingen[1]:
         geheel.leerlingdatatypechange(leerlingen[1])
+        geheel.instructies.insert("ADT leerlingen" + leerlingen[1])
     if rapport[0] == "true" and geheel.rapporten.type != rapport[1]:
         geheel.rapportdatatypechange(rapport[1])
+        geheel.instructies.insert("ADT rapporten" + rapport[1])
     if klassen[0] == "true" and geheel.klassen.type != klassen[1]:
         geheel.klassendatatypechange(klassen[1])
+        geheel.instructies.insert("ADT klassen" + klassen[1])
     if toetsen[0] == "true" and geheel.toetsen.type != toetsen[1]:
         geheel.toetsendatatypechange(toetsen[1])
+        geheel.instructies.insert("ADT toetsen" + toetsen[1])
+    geheel.save("system.txt")
     return redirect(request.referrer)
 
 @app.route("/undo")

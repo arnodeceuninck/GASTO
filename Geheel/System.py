@@ -562,6 +562,8 @@ class System:
             print(error)
             return [error]
 
+        elif words[0] == "ADT"
+
         if leerkr == None:
             self.instructies.delete()
         else:

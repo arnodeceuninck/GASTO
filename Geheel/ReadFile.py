@@ -121,6 +121,25 @@ def readLine(line, geheel):
             return geheel
         geheel.buildRapport("M1", "6WEWI")
 
+    elif words[0] == "ADT":
+        if words[1] == "punten":
+            geheel.puntdatatypechange(words[3])
+        if words[1] == "leraar":
+            geheel.leraardatatypechange(words[3])
+        if words[1] == "vakken":
+            geheel.vakkendatatypechange(words[3])
+        if words[1] == "puntenlijst":
+            geheel.puntenlijstdatatypechange(words[3])
+        if words[1] == "leerlingen":
+            geheel.leerlingdatatypechange(words[3])
+        if words[1] == "rapport":
+            geheel.rapportdatatypechange(words[3])
+        if words[1] == "klassen":
+            geheel.klassendatatypechange(words[3])
+        if words[1] == "toetsen":
+            geheel.toetsendatatypechange(words[3])
+
+
     else:
         pass
 
