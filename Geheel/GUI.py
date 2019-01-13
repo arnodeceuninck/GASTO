@@ -490,9 +490,24 @@ def undo():
     type = request.cookies.get("type")
     if type == encrypt("Leerkracht"):
         naam = decrypt(request.cookies.get("naam"))
-        geheel.undo(naam)
+        for message in geheel.undo(naam):
+            flash(message)
     elif type == encrypt("System Administrator"):
-        geheel.undo()
+        for message in geheel.undo():
+            flash(message)
+    else:
+        flash("Access denied.")
+        return redirect('/login')
+
+    geheel.save("system.txt")
+    return redirect(request.referrer)
+
+@app.route("/redo")
+def redo():
+    type = request.cookies.get("type")
+    if type == encrypt("System Administrator"):
+        for message in geheel.redo():
+            flash(message)
     else:
         flash("Access denied.")
         return redirect('/login')

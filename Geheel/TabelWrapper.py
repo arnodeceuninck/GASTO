@@ -178,7 +178,7 @@ class TabelWrapper:
         if not self.type_assigned:
             return False
         elif self.type == "stack":
-            return self.dataStructure.pop()
+            return self.dataStructure.isEmpty()
         elif self.type == "queue":
             return self.dataStructure.isEmpty()
         elif self.type == "bst":
