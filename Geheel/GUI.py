@@ -144,7 +144,8 @@ def toets():
 
     naam = request.args.get("naam")
     punten = geheel.puntenVanToets(naam)
-    ID = geheel.retrieveToets(naam)[1].getPuntenlijst()
+    toets = geheel.retrieveToets(naam)[1]
+    ID = toets.getPuntenlijst()[1].getID()
 
     name = decrypt(request.cookies.get("name"))
     leerkracht = geheel.retrieveLeeraar(name)[1]
@@ -384,6 +385,14 @@ def getrapport():
     body = rapport[1:len(rapport)-1]
     login = geheel.retrieveLeerling(studentennr)[1].getVoornaam() + " " + geheel.retrieveLeerling(studentennr)[1].getNaam()
     rapporten = geheel.rapportenMetPuntenVanLeerling(studentennr)
+
+    copyrapp = rapporten[:]
+    rapporten = []
+    for rapport in copyrapp:
+        if rapport == zoeksleutel:
+            rapporten.append([rapport, "active"])
+        else:
+            rapporten.append([rapport, ""])
     return render_template("rapport.html", header=header, footer=footer, body=body,
                            login=login, rapporten=rapporten, id=zoeksleutel)
 
