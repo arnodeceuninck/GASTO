@@ -1,19 +1,24 @@
 from Graph import Graph
 
 class node:
+    # De ketting zal bestaan uit meerdere elementen van deze klasse
     def __init__(self, value, key):
         self.value = value
         self.key = key
         self.next = None
+
+    # setter
     def attach_node(self, node):
         self.next = node
 
 class circular_chain:
 
     def __init__(self):
+        # De ketting start met een head-node, zonder value
         self.head = node("head", None)
         self.count = 0
 
+    # zorgen dat for-loops mogelijk zijn
     def __iter__(self):
         self.current = self.head
         self.index = 0
@@ -25,12 +30,14 @@ class circular_chain:
         if self.current.next is None or self.index >= self.getLength():
             raise StopIteration
         else:
+            # niet op het einde, dus naar de volgende node gaan
             self.current = self.current.next
             self.index += 1
             return (self.current.value, self.current.value)
 
     def createList(self):
         self.__init__()
+        return self
 
     def destroyList(self):
         del self
@@ -44,19 +51,22 @@ class circular_chain:
         return self.count
 
     def findIndexAlphaValue(self, key):
+        # Zoekt de index om iets alphabetisch te plaatsen
         index = 0
         currentNode = self.head.next
-        firstNode = currentNode
         while currentNode != None and currentNode.key < key:
             index += 1
             currentNode = currentNode.next
-            if currentNode == firstNode:
+            if index >= self.count:
+            # if currentNode == firstNode:
                 return index
         return index
 
     def insert(self, key, newItem):
         # test if in chain range
         index = self.findIndexAlphaValue(key)
+
+        # Zou nooit waar mogen zijn, aangezien de index zelf berekend wordt, en niet meegegeven wordt
         if index > self.count or index < 0:
             return False
 
@@ -77,6 +87,12 @@ class circular_chain:
             new_node.next = current_node
         previous_node.next = new_node
         if self.getLength() == 1 and index == 0:
+            current_node.next = new_node
+
+        # Speciaal geval: index 0
+        elif index == 0 and self.count>1:
+            for i in range(self.count-1):
+                current_node = current_node.next
             current_node.next = new_node
 
         self.count += 1
@@ -104,6 +120,7 @@ class circular_chain:
                 del current_node
                 self.count -= 1
                 return True
+
             previous_node = None
             current_node2 = self.head
             for i in range(self.getLength()+1):
@@ -118,10 +135,13 @@ class circular_chain:
         return True
 
     def findIndexValue(self, string):
+        # Zoekt de index voor een node met zoeksleutel "string"
         index = 0
         currentNode = self.head.next
         firstNode = currentNode
-        while str(currentNode.value.naam) != string:
+
+        # while str(currentNode.value.naam) != string:
+        while str(currentNode.key) != string:
             index += 1
             currentNode = currentNode.next
             if index >= self.count:
@@ -147,15 +167,17 @@ class circular_chain:
         # loop once through all nodes, and add the nodes and connections to the graph
         firstTime = True
         Done = False
+        index = 0
         while node != None:
-            if node == self.head.next and not firstTime:
+            if index > self.count:
                 break
             if node == self.head.next:
                 firstTime = False
-            self.grafiek.add_node(node.value, node.value, "box")
+            self.grafiek.add_node(node.key, node.value, "box")
             if node.next != None:
-                self.grafiek.add_connection(node.value, node.next.value, "arrow")
+                self.grafiek.add_connection(node.key, node.next.key, "arrow")
             node = node.next
+            index += 1
         self.grafiek.rebuild_file()
 
     def traverse(self, visit, key=None):
