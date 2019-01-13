@@ -1,0 +1,18 @@
+.teacher{
+  height: 200px;
+  width: 200px;
+  border-radius: 50%;
+  text-align: center;
+  background-color: pink;
+  color: white;
+  margin-right: auto;
+  margin-left: auto;
+  margin-top: 15%;
+}
+
+.teacher h2{
+  padding: 0;
+  margin:0;
+  padding-top: 35%;
+  font-size: 28px;
+}

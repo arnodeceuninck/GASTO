@@ -2,9 +2,31 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="../static/css/wrapper.css">
     <title>GASTO - Toets</title>
 </head>
 <body>
+  <header>
+    <ul>
+      <li><a href="/home">Home</a></li>
+      <li><a onclick="goBack()">Back</a></li>
+      <li id="loguit"><a href="/logout">Logout</a></li>
+      <li id="naam">{{ login }}</li>
+    </ul>
+    <script>
+      function goBack() {
+          window.history.back();
+      }
+     </script>
+
+  </header>
+
+  <div class="sidemenu">
+    <ul>
+      <li><a href="/puntenlijsten">Puntenlijsten</a></li>
+      <li><a href="/puntenlijst?ID={{ IDpuntenlijst }}">Toetsen</a></li>
+    </ul>
+  </div>
     <h1>{{ title }}</h1>
 
     <form action="/addpunt" method="get">

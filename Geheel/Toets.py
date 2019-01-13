@@ -10,6 +10,9 @@ class Toets:
                str(self.maximum) + " punten max "+ " - " + \
                str(len(self.verzamelingVanPunten)) + " punten ingegeven"
 
+    def getPuntenlijst(self):
+        return self.puntenlijst
+
     def getNaam(self):
         return self.naam
 

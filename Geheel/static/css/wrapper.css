@@ -36,6 +36,17 @@ header ul li a{
   padding: 5px;
 }
 
+header ul li a:hover{
+  background-color: white;
+  color: black;
+  cursor: pointer;
+}
+
+header ul li a.active{
+  background-color: white;
+  color: black;
+}
+
 #naam{
   float: right;
   padding: 5px;
@@ -49,11 +60,7 @@ header ul li a{
   float: right;
 }
 
-header ul li a:hover{
-  background-color: white;
-  color: black;
-  cursor: pointer;
-}
+
 /*#############SIDEMENU################*/
 .sidemenu{
   float: left;
@@ -90,6 +97,12 @@ header ul li a:hover{
   color: black;
 }
 
+.sidemenu ul li a.active{
+  background-color: white;
+  color: black;
+}
+
+
 /*#############CONTENT################*/
 content{
   float: right;
@@ -117,6 +130,12 @@ h1{
   color: pink;
   text-align: center;
 }
+
+p{
+  color: grey;
+  text-align: center;
+}
+
 
 content .Login{
   margin-top: 5%;

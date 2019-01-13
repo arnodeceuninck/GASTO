@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="../static/css/wrapper.css">
+    <link rel="stylesheet" href="../static/css/teacher_home.css">
+    <meta charset="UTF-8">
+    <title>GASTO - {{ login }}</title>
+</head>
+<body>
+    <!-- <link rel="import" href="/li_algemeen"> -->
+    <header>
+      <ul>
+        <li><a href="/home">Home</a></li>
+        <li><a onclick="goBack()">Back</a></li>
+        <li id="loguit"><a href="/logout">Logout</a></li>
+        <li id="naam">{{ login }}</li>
+      </ul>
+      <script>
+        function goBack() {
+            window.history.back();
+        }
+       </script>
+
+    </header>
+
+    <div class="sidemenu">
+      <ul>
+        <li><a href="/puntenlijsten">Puntenlijsten</a></li>
+      </ul>
+    </div>
+
+    <content>
+      <div class="teacher">
+        <h2><b>Welcome {{ login }}</b><h2>
+      </div>
+    </content>
+</body>
+</html>

@@ -2,9 +2,32 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="../static/css/wrapper.css">
     <title>GASTO - Puntenlijst</title>
 </head>
 <body>
+  <header>
+    <ul>
+      <li><a href="/home">Home</a></li>
+      <li><a onclick="goBack()">Back</a></li>
+      <li id="loguit"><a href="/logout">Logout</a></li>
+      <li id="naam">{{ login }}</li>
+    </ul>
+    <script>
+      function goBack() {
+          window.history.back();
+      }
+     </script>
+
+  </header>
+
+  <div class="sidemenu">
+    <ul>
+      <li><a href="/puntenlijsten">Puntenlijsten</a></li>
+      <li><a class="active" href="">Toetsen</a></li>
+    </ul>
+  </div>
+  <content>
     <h1>{{ title }}</h1>
 
     <form action="/addtoets" method="get">
@@ -58,6 +81,6 @@
             </ul>
         {% endif %}
     {% endwith %}
-
+  </content>
 </body>
 </html>

@@ -93,7 +93,7 @@ def home():
     if request.cookies.get('type') == encrypt("Leerkracht"):
         leerkracht = geheel.retrieveLeeraar(name)[1]
         naam = leerkracht.getNaam() + " " + leerkracht.getAchternaam()
-        return render_template('teacher.html', name=naam, puntenlijsten=geheel.puntenLijstenVanLeerkracht(name), login=naam)
+        return render_template('teacher_home.html', name=naam, puntenlijsten=geheel.puntenLijstenVanLeerkracht(name), login=naam)
     elif request.cookies.get("type") == encrypt("System Administrator"):
         return render_template('admin.html', login=name)
     elif request.cookies.get("type") == encrypt("Leerling"):
@@ -117,11 +117,20 @@ def puntenlijst():
     titel = str(geheel.retrievePuntenlijst(ID)[1])
     toetsen = geheel.toetsenVanPuntenlijst(ID)
 
-    resp = make_response(render_template('puntenlijst.html', title=titel, toetsen=toetsen))
+    resp = make_response(render_template('puntenlijst.html', title=titel, toetsen=toetsen, IDpuntenlijst=ID))
     resp.set_cookie('puntenlijstID', ID)
 
     return resp
 
+@app.route('/puntenlijsten')
+def puntenlijsten():
+    if request.cookies.get("type") != encrypt("Leerkracht"):
+        flash("Access denied")
+        return redirect("/login")
+    name = decrypt(request.cookies.get("name"))
+    leerkracht = geheel.retrieveLeeraar(name)[1]
+    naam = leerkracht.getNaam() + " " + leerkracht.getAchternaam()
+    return render_template('teacher.html', name=naam, puntenlijsten=geheel.puntenLijstenVanLeerkracht(name), login=naam)
 
 @app.route('/toets')
 def toets():
@@ -131,8 +140,9 @@ def toets():
 
     naam = request.args.get("naam")
     punten = geheel.puntenVanToets(naam)
+    ID = geheel.retrieveToets(naam)[1].getPuntenlijst()
 
-    resp = make_response(render_template('toets.html', title=naam, punten=punten))
+    resp = make_response(render_template('toets.html', title=naam, punten=punten, IDpuntenlijst=ID))
     resp.set_cookie('toetsNaam', naam)
 
     return resp
