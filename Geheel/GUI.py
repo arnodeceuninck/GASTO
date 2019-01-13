@@ -393,7 +393,8 @@ def view():
     elif structuur == "klassen":
         png = geheel.printKlas()
     elif structuur == "vakken":
-        png = geheel.printVak()
+        # png = geheel.printVak()
+        png = geheel.printToets()
     elif structuur == "undo":
         png = geheel.printUndo()
     elif structuur == "redo":

@@ -39,6 +39,7 @@ def readLine(line, geheel):
             return geheel
         if len(words) < 3:
             print("Geen 2 parameters gevonden: vak AFK Naam")
+            print(line)
             return geheel
         geheel.addVak(words[1], words[2])
 
@@ -47,6 +48,7 @@ def readLine(line, geheel):
             return geheel
         if len(words) < 2:
             print("Geen 1 parameters gevonden: klas 1RICH")
+            print(line)
             return geheel
         geheel.addKlas(words[1])
 
@@ -55,6 +57,7 @@ def readLine(line, geheel):
             return geheel
         if len(words) < 4:
             print("Geen 3 parameters gevonden: leraar Voornaam Naam AFKOR")
+            print(line)
             return geheel
         geheel.addLeraar(words[3], words[1], words[2])
 
@@ -63,14 +66,16 @@ def readLine(line, geheel):
             return geheel
         if len(words) < 6:
             print("Geen 5 parameters gevonden: leerling Voornaam Naam 1KLAS nr studentennr")
+            print(line)
             return geheel
         geheel.addLeerling(words[2], words[1], words[3], words[4], words[5])
 
     elif len(words) > 1 and words[1] == "puntenlijst":
         if not actiefSysteem(geheel):
             return geheel
-        if len(words) < 8:
-            print("Geen 5 parameters gevonden: leerling Voornaam Naam 1KLAS nr studentennr")
+        if len(words) < 7:
+            print("Geen 6 parameters gevonden: id puntenlijst type periode leerkrachten vak uren")
+            print(line)
             return geheel
         geheel.addPuntenLijst(words[0], words[2], words[3], words[4], words[5], words[6], words[7])
 

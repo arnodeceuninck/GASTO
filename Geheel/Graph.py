@@ -27,7 +27,7 @@ class Graph:
         new_node = node(name, label_elements, shape, extra)
         self.nodes.append(new_node)
 
-    def add_connection(self, fromN, toN, type, extra=None):
+    def add_connection(self, fromN, toN, type=0, extra=None):
         new_connection = connection(fromN, toN, type, extra)
         self.connections.append(new_connection)
 

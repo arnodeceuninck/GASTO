@@ -23,6 +23,7 @@ class BinarySearchTree:
             return (x[0].key, x[0].item)
         else:
             raise StopIteration
+
     def createSearchTree(self):
         self.__init__(None, None, None)
 

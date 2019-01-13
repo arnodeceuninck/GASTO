@@ -20,7 +20,7 @@ class System:
         #  Deze klassen zijn dus een verzameling van als ik het goed begrijp
         self.punten = TabelWrapper("234")  # dit is de create # puntenlijst nog nodig om punten aan te passen
         self.puntenQueue = TabelWrapper("queue")
-        self.toetsen = TabelWrapper("bst")
+        self.toetsen = TabelWrapper("cl")
         self.puntenlijst = TabelWrapper("bst")
         self.vakken = TabelWrapper("ll")  # Key = afkorting, Value = volledige naam
         self.klassen = TabelWrapper("ll")

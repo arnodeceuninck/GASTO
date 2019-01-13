@@ -55,17 +55,17 @@ class HtmlTable:
         tablestring += "</table>\n"
         return tablestring
 
+if __name__ == "__main__":
+    testrapport = HtmlRapport("test.html")
 
-testrapport = HtmlRapport("test.html")
+    testrapport.addStructure(HtmlTitle("Hello World! :-)"))
 
-testrapport.addStructure(HtmlTitle("Hello World! :-)"))
+    tabel = []
+    tabel.append(["Kolom 1", "Kolom 2", "Kolom 3"])
+    tabel.append(["Never", "Gonna", "Give"])
+    tabel.append(["You", "Up", "Never"])
+    tabel.append(["Gonna", "Let", "You"])
+    tabel.append(["Down"])
+    testrapport.addStructure(HtmlTable(tabel))
 
-tabel = []
-tabel.append(["Kolom 1", "Kolom 2", "Kolom 3"])
-tabel.append(["Never", "Gonna", "Give"])
-tabel.append(["You", "Up", "Never"])
-tabel.append(["Gonna", "Let", "You"])
-tabel.append(["Down"])
-testrapport.addStructure(HtmlTable(tabel))
-
-testrapport.buildfile()
+    testrapport.buildfile()

@@ -20,7 +20,6 @@ class TabelWrapper:
         self.grootte = 211
         self.create(structure_type)
 
-    # Currently datastructures supporting iterators: cl, ll, rb, heap
     # !!! Alle iterators returnen een tuple (key, value)
     # Als je niet weet hoe je dit moet implementeren, kijk dan in een van de reeds geimplementeerde
     # https://www.w3schools.com/python/python_iterators.asp
