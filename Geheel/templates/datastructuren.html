@@ -88,7 +88,6 @@
                 <option value="hlin">hlin</option>
                 <option value="hquad">hquad</option>
                 <option value="hsep">hsep</option>
-                <option value="heap">heap</option>
               </select>
             </td>
             <td><input type="checkbox" name="leraarschange" value="true"></td>
@@ -113,7 +112,6 @@
                   <option value="hlin">hlin</option>
                   <option value="hquad">hquad</option>
                   <option value="hsep">hsep</option>
-                  <option value="heap">heap</option>
                 </select>
             </td>
             <td><input type="checkbox" name="puntchange" value="true"></td>
@@ -217,6 +215,30 @@
           <td>
             <form action="/view" method="get">
               <button type="submit" name="view" value="klassen">View</button>
+            </form>
+          </td>
+        </tr>
+        <tr>
+          <td>Toetsen</td>
+          <td>{{ toetsen[0] }}</td>
+          <td>
+              <select name="datatypetoetsen">
+                <option value="ll">ll</option>
+                <option value="cl">cl</option>
+                <option value="bst">bst</option>
+                <option value="23">23</option>
+                <option value="234">234</option>
+                <option value="rb">rb</option>
+                <option value="hlin">hlin</option>
+                <option value="hquad">hquad</option>
+                <option value="hsep">hsep</option>
+              </select>
+          </td>
+          <td><input type="checkbox" name="toetsenchange" value="true"></td>
+          <td>{{ toetsen[1] }}</td>
+          <td>
+            <form action="/view" method="get">
+              <button type="submit" name="view" value="toetsen">View</button>
             </form>
           </td>
         </tr>

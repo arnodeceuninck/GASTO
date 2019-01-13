@@ -562,6 +562,8 @@ class System:
             print(error)
             return [error]
 
+        elif words[0] == "ADT"
+
         if leerkr == None:
             self.instructies.delete()
         else:
@@ -684,12 +686,13 @@ class System:
         leerling = [self.leerlingen.type, self.leerlingen.getLength()]
         rapport = [self.rapporten.type, self.rapporten.getLength()]
         klassen = [self.klassen.type, self.klassen.getLength()]
+        toetsen = [self.toetsen.type, self.toetsen.getLength()]
         undoStack = [self.undoPuntStack.type, self.undoPuntStack.getLength()]
         redoStack = [self.redoStack.type, self.redoStack.getLength()]
         instructies = [self.instructies.type, self.instructies.getLength()]
         puntenQueue = [self.puntenQueue.type, self.puntenQueue.getLength()]
         return [vakken, leraars, punt, puntenlijst, leerling, rapport, klassen, undoStack, redoStack, instructies,
-                puntenQueue]
+                puntenQueue, toetsen]
 
     def puntdatatypechange(self, new):
         temp = TabelWrapper(new)
@@ -706,6 +709,11 @@ class System:
         for vak in self.vakken:
             temp.insert(vak[1], vak[0])
         self.vakken = temp
+
+    def toetsendatatypechange(self, new):
+        temp = TabelWrapper(new)
+        self.toetsen.traverse(self.transfernaam, temp)
+        self.toetsen = temp
 
     def puntenlijstdatatypechange(self, new):
         temp = TabelWrapper(new)
@@ -739,6 +747,9 @@ class System:
 
     def transferzoeksleutel(self, value, newadt):
         return newadt.insert(value, value.Zoeksleutel)
+
+    def transfernaam(self, value, newadt):
+        return newadt.insert(value, value.naam)
 
     def rapportenMetPuntenVanLeerling(self, studentennr):
         rapporten = []
