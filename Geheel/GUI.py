@@ -537,9 +537,14 @@ def after_request(response):
 
 if __name__ == '__main__':
     geheel = readFile("system.txt", None)
-    app.debug = True
-    app.run()
 
-    # Server settings, ignore
-    # app.debug = False
-    # app.run(host='192.168.0.116', ssl_context='adhoc')
+    server = False
+
+    if not server:
+        app.debug = True
+        app.run()
+
+    else:
+        # Server settings, ignore
+        app.debug = False
+        app.run(host='192.168.0.116')
