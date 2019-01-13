@@ -34,6 +34,11 @@ class System:
 
     def addVak(self, afkorting, naam):
         return_messages = []
+        if not isinstance(afkorting, str) or not isinstance(naam, str):
+            return_messages.append("ERROR: naam en afkorting moeten een string zijn.")
+            print(return_messages[0])
+            return return_messages
+
         for vak in self.vakken:
             if vak[0] == afkorting:
                 return_messages.append("ERROR: Er is al een vak met deze afkorting.")
@@ -42,14 +47,22 @@ class System:
         return return_messages
 
     def addKlas(self, naam):
+        if not isinstance(naam, str):
+            return ["ERROR: De naam van een klas moet een string zijn."]
         for klas in self.klassen:
             if klas[0] == naam:
                 return ["ERROR: Er is al een klas met deze naam."]
+
         self.instructies.insert("klas " + str(naam))
         self.klassen.insert(naam)
         return []
 
     def addLeraar(self, afkorting, naam, achternaam):
+        if not isinstance(afkorting, str) or not isinstance(naam, str) or not isinstance(achternaam, str):
+            error = "ERROR: De naam, achternaam en afkorting van een leerkracht moeten een string zijn."
+            print(error)
+            return [error]
+
         for leraar in self.leraars:
             if leraar[0] == leraar:
                 return ["ERROR: Er bestaat al een leerkracht met deze afkorting"]
@@ -60,10 +73,16 @@ class System:
 
     def addLeerling(self, naam, voornaam, klas, klasnummer, studentennummer):
         return_messages = []
+        if not isinstance(naam, str) or not isinstance(voornaam, str) or not isinstance(klas, str) or \
+            not isinstance(klasnummer, [str, int]) or not isinstance(studentennummer, [str, int]):
+            return_messages.append("Incorrect data types")
+            print(return_messages[0])
+            return return_messages
+
         self.instructies.insert("leerling " + str(voornaam) + " " + str(naam) + " " + str(klas) + " " +
                                 str(klasnummer) + " " + str(studentennummer))
         if self.leerlingen.retrieve(studentennummer)[0] is not False:
-            return_messages.append("De gegeven studenten nummer is al in gebruik")
+            return_messages.append("Het gegeven studenten nummer is al in gebruik")
             print(return_messages[0])
             return return_messages
         # Kijk of de klas al is aangemaakt
@@ -103,6 +122,19 @@ class System:
 
     def addPunt(self, stamboeknummer_leerling, naam_toets, Waarde, leerkracht):
         return_messages = []
+        if not isinstance(stamboeknummer_leerling, str) or not isinstance(naam_toets, str) or \
+            not isinstance(Waarde, [str, int, float]) or not isinstance(leerkracht, str):
+            return_messages.append("Incorrect data types")
+            print(return_messages[0])
+            return return_messages
+
+        try:
+            float(Waarde)
+        except:
+            return_messages.append("Waarde is not a number")
+            print(return_messages[0])
+            return return_messages
+
         ID = 0
         while self.puntMetIDExists(ID):
             ID += 1
