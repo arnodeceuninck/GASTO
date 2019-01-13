@@ -18,6 +18,8 @@ class TabelWrapper:
         self.type = None
         self.dataStructure = None
         self.grootte = 211
+        if structure_type not in supportedDataStructures:
+            print("CRITICAL ERROR: Structure " + structure_type + " not found.")
         self.create(structure_type)
 
     # !!! Alle iterators returnen een tuple (key, value)

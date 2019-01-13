@@ -428,8 +428,7 @@ def view():
     elif structuur == "klassen":
         png = geheel.printKlas()
     elif structuur == "vakken":
-        # png = geheel.printVak()
-        png = geheel.printToets()
+        png = geheel.printVak()
     elif structuur == "undo":
         png = geheel.printUndo()
     elif structuur == "redo":
@@ -438,6 +437,8 @@ def view():
         png = geheel.printInstructies()
     elif structuur == "queue":
         png = geheel.printQueue()
+    elif structuur == "toets":
+        png = geheel.printToets()
     else:
         flash("Error: Datastructure not found")
         return redirect(request.referrer)
