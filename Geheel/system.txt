@@ -50,3 +50,6 @@ punt HOFKT logaritmes 1800002 9 17
 toets 8 presentation 5
 punt HOFKT presentation 1800001 4 18
 punt HOFKT presentation 1800002 4.5 19
+1 puntenlijst M 1 HOFKT ENG 6WEWI 3
+9 puntenlijst M 2 HOFKT,LAENE ENG 6WEWI 2
+punt HOFKT afgeleiden 1800003 12 20

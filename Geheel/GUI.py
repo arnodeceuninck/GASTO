@@ -485,6 +485,21 @@ def ADTchanges():
         geheel.klassendatatypechange(klassen[1])
     return redirect(request.referrer)
 
+@app.route("/undo")
+def undo():
+    type = request.cookies.get("type")
+    if type == encrypt("Leerkracht"):
+        naam = decrypt(request.cookies.get("naam"))
+        geheel.undo(naam)
+    elif type == encrypt("System Administrator"):
+        geheel.undo()
+    else:
+        flash("Access denied.")
+        return redirect('/login')
+
+    geheel.save("system.txt")
+    return redirect(request.referrer)
+
 # Ensure responses aren't cached - fix logout cached in browser history
 # source: https://stackoverflow.com/questions/20652784/flask-back-button-returns-to-session-even-after-logout
 @app.after_request

@@ -242,7 +242,7 @@ class System:
 
         for toets in puntenlijst[1].getToetsen():
             if toets.getNaam() == titel:
-                return_messages.append("ERROR: Er bestaad al een toets met dezelfde titel.")
+                return_messages.append("ERROR: Er bestaat al een toets met dezelfde titel.")
                 print(return_messages[0])
                 return return_messages
 
