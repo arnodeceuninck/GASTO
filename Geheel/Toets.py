@@ -32,7 +32,7 @@ class Toets:
         return True
 
     def addPunt(self, punt):
-        if int(punt.waarde) >= 0 and int(punt.waarde) <= int(self.maximum):
+        if 0 <= float(punt.waarde) <= float(self.maximum):
             self.verzamelingVanPunten.append(punt)
             return True
         else:
@@ -47,7 +47,7 @@ class Toets:
     def getGemiddelde(self):
         totaal = 0
         for punt in self.verzamelingVanPunten:
-            totaal += int(punt.waarde)
+            totaal += float(punt.waarde)
         if len(self.verzamelingVanPunten) != 0:
             return totaal/len(self.verzamelingVanPunten)
         return 0

@@ -220,6 +220,7 @@ class System:
             puntenlijst[1].addToets(toets)
         else:
             puntenlijst.addToets(toets)
+        return return_messages
 
     def deletePunt(self, ID):
         # verwijdert een eerder aangemaakt punt
@@ -358,7 +359,7 @@ class System:
 
         rapport.buildfile()
 
-    def buildRapport(self, samengestelde_zoeksleutel, klas, student=None):  # Bv. voor "M2"
+    def buildRapport(self, samengestelde_zoeksleutel, klas, student=None, buildHTML=True):  # Bv. voor "M2"
         # TODO: fix nested for loops
         punten_per_leerling = []  # structuur: [[jan, [wiskunde, 7, 3, 5]]] # 7u, 3/5
         rapport = self.rapporten.retrieve(samengestelde_zoeksleutel)[1]
@@ -387,10 +388,10 @@ class System:
                                     leerling[i][4] += int(max)
                                     break
                             if not vakFound:
-                                leerling.append([vak, aantal_uren, leerkrachten, int(score), int(max)])
+                                leerling.append([vak, aantal_uren, leerkrachten, float(score), int(max)])
                             break
                     if not leerlingFound:
-                        punten_per_leerling.append([leerlingnr, [vak, aantal_uren, leerkrachten, int(score), int(max)]])
+                        punten_per_leerling.append([leerlingnr, [vak, aantal_uren, leerkrachten, float(score), int(max)]])
 
         rapportFile = HtmlMaker.HtmlRapport(
             str("rapport-" + str(samengestelde_zoeksleutel) + "-" + str(klas) + ".html"))
@@ -428,6 +429,8 @@ class System:
                 totaal = totaal_punten / totaal_aantal_uren
                 totaal = str(round(totaal)) + "%"
                 resultaten.append(["Totaal", "", "", totaal])
+                if not buildHTML:
+                    return resultaten
                 rapportFile.addStructure(HtmlMaker.HtmlTable(resultaten))
         return rapportFile.buildfile()
 
@@ -693,3 +696,14 @@ class System:
 
     def transferzoeksleutel(self, value, newadt):
         return newadt.insert(value, value.Zoeksleutel)
+
+    def rapportenMetPuntenVanLeerling(self, studentennr):
+        rapporten = []
+        for zoeksleutel,rapport in self.rapporten:
+            for puntenlijst in rapport.getList():
+                for toets in puntenlijst.getToetsen():
+                    for punt in toets.getVerzamelingVanPunten():
+                        if punt.getStamboekNummer() == studentennr and zoeksleutel not in rapporten:
+                            rapporten.append(zoeksleutel)
+        return rapporten
+

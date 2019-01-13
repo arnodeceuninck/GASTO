@@ -2,9 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>GASTO - Leerling</title>
+    <title>GASTO - Rapport</title>
     <link rel="stylesheet" href="../static/css/wrapper.css">
-    <link rel="stylesheet" href="../static/css/student.css">
 </head>
 <body>
   <header>
@@ -31,9 +30,32 @@
   </div>
   <content>
 
-   <div class="Text">
-        <h2><b>Welkom, {{ name }}</b></h2>
-      </div>
+    <h1>Rapport {{ id }}</h1>
+
+    <table border=1>
+        <thead>
+            <tr>
+                {% for column in header %}
+                <td>{{ column }}</td>
+                {% endfor %}
+            </tr>
+        </thead>
+        <tbody>
+            {% for vak in body %}
+                <tr>
+                    {% for column in vak %}
+                    <td>{{ column }}</td>
+                    {% endfor %}
+                </tr>
+            {% endfor %}
+        </tbody>
+        <tfoot>
+            {% for column in footer %}
+            <td>{{ column }}</td>
+            {% endfor %}
+        </tfoot>
+    </table>
+
 
   </content>
 </body>

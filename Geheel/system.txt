@@ -41,3 +41,12 @@ vak ENG Engels
 toets 6 verbs 10
 punt LAENE verbs 1800001 8 14
 punt LAENE verbs 1800002 10 15
+7 puntenlijst M 2 HOFKT,PAUWS WIS 6WEWI 7
+toets 7 logaritmes 15
+toets 7 logaritmes 15
+punt HOFKT logaritmes 1800001 13 16
+punt HOFKT logaritmes 1800002 9 17
+8 puntenlijst M 2 HOFKT,LAENE ENG 6WEWI 2
+toets 8 presentation 5
+punt HOFKT presentation 1800001 4 18
+punt HOFKT presentation 1800002 4.5 19

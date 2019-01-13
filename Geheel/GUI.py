@@ -98,8 +98,10 @@ def home():
         return render_template('admin.html', login=name)
     elif request.cookies.get("type") == encrypt("Leerling"):
         leerling = geheel.retrieveLeerling(name)[1]
-        naam = leerling.getVoornaam() + " " + leerling.getNaam()
-        return render_template('student.html', name=naam, login=naam)
+        voornaam = leerling.getVoornaam()
+        naam = voornaam + " " + leerling.getNaam()
+        rapporten = geheel.rapportenMetPuntenVanLeerling(name)
+        return render_template('student.html', name=voornaam, login=naam, rapporten=rapporten)
     else:
         flash("No homepage found. Please login first.")
         return redirect('/login')
@@ -211,7 +213,7 @@ def addpunt():
     stamboeknr = request.args.get("stamboeknr")
     waarde = request.args.get("waarde")
     toets = request.cookies.get("toetsNaam")
-    leerkracht = request.cookies.get("name")
+    leerkracht = decrypt(request.cookies.get("name"))
     geheel.addPunt(stamboeknr, toets, waarde, leerkracht)
     geheel.save("system.txt")
     return redirect(request.referrer)
@@ -358,8 +360,14 @@ def getrapport():
     studentennr = decrypt(request.cookies.get("name"))
     klas = geheel.retrieveLeerling(studentennr)[1].getKlas()
     print("Building rapport:", zoeksleutel, klas, studentennr)
-    rapport = geheel.buildRapport(zoeksleutel, klas, studentennr)
-    return rapport
+    rapport = geheel.buildRapport(zoeksleutel, klas, studentennr, buildHTML=False)
+    header = rapport[0]
+    footer = rapport[len(rapport)-1]
+    body = rapport[1:len(rapport)-1]
+    login = geheel.retrieveLeerling(studentennr)[1].getVoornaam() + " " + geheel.retrieveLeerling(studentennr)[1].getNaam()
+    rapporten = geheel.rapportenMetPuntenVanLeerling(studentennr)
+    return render_template("rapport.html", header=header, footer=footer, body=body,
+                           login=login, rapporten=rapporten, id=zoeksleutel)
 
 
 @app.route('/datastructuren')
