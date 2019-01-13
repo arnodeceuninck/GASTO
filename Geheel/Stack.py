@@ -35,6 +35,8 @@ class stack:
         return temp.value
 
     def getTop(self):
+        if self.stackpointer == None:
+            return None
         return self.stackpointer.value
 
     def isEmpty(self):

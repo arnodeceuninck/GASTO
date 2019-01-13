@@ -257,7 +257,7 @@ class System:
     def deletePunt(self, ID):
         # verwijdert een eerder aangemaakt punt
         self.toetsen.traverse(self.puntenDetect, ID)
-        self.punten.delete(ID)
+        self.punten.delete(int(ID))
         return True
 
     def deleteVak(self, afkorting):
@@ -505,15 +505,18 @@ class System:
         return self.instructies.Print()
 
     def redo(self):
+        if self.redoStack.isEmpty():
+            return ["Nothing to redo."]
         instructie = self.redoStack.retrieve()
         print("Redo: " + instructie)
         self = readLine(instructie, self)
         self.redoStack.delete()
+        return ["Done: Redo " + instructie]
 
     def undo(self, leerkr=None):
         if leerkr != None:
             leerkr_stack = self.undoPuntStack.retrieve(leerkr)[1]
-            vorige_instructie = self.leerkr_stack.retrieve()
+            vorige_instructie = leerkr_stack.retrieve()
         else:
             vorige_instructie = self.instructies.retrieve()
         self.redoStack.insert(vorige_instructie)
@@ -521,7 +524,9 @@ class System:
         words = vorige_instructie.split(' ')
 
         if words[0] == "init":
-            print("Instruction \"init\" can't be undone")
+            error = "Instruction \"init\" can't be undone"
+            print(error)
+            return [error]
 
         elif words[0] == "vak":
             self.deleteVak(words[1])
@@ -539,7 +544,9 @@ class System:
             self.deletePuntenlijst(words[0])
 
         elif words[0] == "start":
-            print("Instruction \"start\" can't be undone")
+            error = "Instruction \"start\" can't be undone"
+            print(error)
+            return [error]
 
         elif words[0] == "toets":
             self.deleteToets(words[2])
@@ -548,15 +555,19 @@ class System:
             self.deletePunt(words[5])
 
         elif words[0] == "undo":
-            print("Instruction \"undo\" can't be undone")
+            self.redo()
 
         elif words[0] == "rapport":
-            print("Instruction \"rapport\" can't be undone")
+            error = "Instruction \"rapport\" can't be undone"
+            print(error)
+            return [error]
 
         if leerkr == None:
             self.instructies.delete()
         else:
             self.leerkr_stack.delete()
+
+        return ["Done: Undo " + vorige_instructie]
 
     def save(self, filename):
         filestring = ""

@@ -29,13 +29,15 @@
   </div>
 
 
-    <!-- <script type="text/javascript">
-        document.getElementById("myButton").onclick = function () {
-            location.href = "/login";
-        };
-    </script> -->
-
-    <!-- <p> Je bent altijd welkom om de visuele afwerking te doen van deze site. :-)</p>
-    <p> Deze site gebruikt cookies blablabla... Door op eender welke knop op deze site te klikken ben je hier akkoord mee.</p> -->
+   <!-- Error messages -->
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <ul class=flashes>
+        {% for message in messages %}
+            <li>{{ message }}</li>
+            {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
 </body>
 </html>
