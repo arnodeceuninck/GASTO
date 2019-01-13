@@ -74,7 +74,7 @@ class System:
     def addLeerling(self, naam, voornaam, klas, klasnummer, studentennummer):
         return_messages = []
         if not isinstance(naam, str) or not isinstance(voornaam, str) or not isinstance(klas, str) or \
-            not isinstance(klasnummer, [str, int]) or not isinstance(studentennummer, [str, int]):
+            not isinstance(klasnummer, (str, int)) or not isinstance(studentennummer, (str, int)):
             return_messages.append("Incorrect data types")
             print(return_messages[0])
             return return_messages
@@ -123,7 +123,7 @@ class System:
     def addPunt(self, stamboeknummer_leerling, naam_toets, Waarde, leerkracht):
         return_messages = []
         if not isinstance(stamboeknummer_leerling, str) or not isinstance(naam_toets, str) or \
-            not isinstance(Waarde, [str, int, float]) or not isinstance(leerkracht, str):
+            not isinstance(Waarde, (str, int, float)) or not isinstance(leerkracht, str):
             return_messages.append("Incorrect data types")
             print(return_messages[0])
             return return_messages

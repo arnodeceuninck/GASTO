@@ -117,7 +117,11 @@ def puntenlijst():
     titel = str(geheel.retrievePuntenlijst(ID)[1])
     toetsen = geheel.toetsenVanPuntenlijst(ID)
 
-    resp = make_response(render_template('puntenlijst.html', title=titel, toetsen=toetsen, IDpuntenlijst=ID))
+    name = decrypt(request.cookies.get("name"))
+    leerkracht = geheel.retrieveLeeraar(name)[1]
+    naam = leerkracht.getNaam() + " " + leerkracht.getAchternaam()
+
+    resp = make_response(render_template('puntenlijst.html', title=titel, toetsen=toetsen, IDpuntenlijst=ID, login=naam))
     resp.set_cookie('puntenlijstID', ID)
 
     return resp
@@ -142,7 +146,11 @@ def toets():
     punten = geheel.puntenVanToets(naam)
     ID = geheel.retrieveToets(naam)[1].getPuntenlijst()
 
-    resp = make_response(render_template('toets.html', title=naam, punten=punten, IDpuntenlijst=ID))
+    name = decrypt(request.cookies.get("name"))
+    leerkracht = geheel.retrieveLeeraar(name)[1]
+    naamlkr = leerkracht.getNaam() + " " + leerkracht.getAchternaam()
+
+    resp = make_response(render_template('toets.html', title=naam, punten=punten, IDpuntenlijst=ID, login=naamlkr))
     resp.set_cookie('toetsNaam', naam)
 
     return resp
