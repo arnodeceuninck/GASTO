@@ -47,7 +47,7 @@ def index():
 
 @app.route('/login')
 def login():
-    print("Showint the login page")
+    print("Showing the login page")
     return render_template('login.html')
 
 @app.route('/back')
@@ -454,6 +454,8 @@ def logout():
     resp = make_response(redirect('/login'))
     resp.set_cookie('name', '', expires=0)
     resp.set_cookie('type', '', expires=0)
+    resp.set_cookie('puntenlijstID', '', expires=0)
+    resp.set_cookie('toetsNaam', '', expires=0)
     return resp
 
 
