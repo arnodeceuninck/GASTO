@@ -483,7 +483,7 @@ def ADTchanges():
         geheel.instructies.insert("ADT vakken" + " " + vakken[1] + " " + geheel.vakken.type)
         geheel.vakkendatatypechange(vakken[1])
     if puntenlijst[0] == "true" and geheel.puntenlijst.type != puntenlijst[1]:
-        geheel.instructies.insert("ADT puntenlijst" + " " + puntenlijst[1] + " " + geheel.puntenlijst.type)
+        geheel.instructies.insert("ADT ADTpuntenlijst" + " " + puntenlijst[1] + " " + geheel.puntenlijst.type)
         geheel.puntenlijstdatatypechange(puntenlijst[1])
     if leerlingen[0] == "true" and geheel.leerlingen.type != leerlingen[1]:
         geheel.instructies.insert("ADT leerlingen" + " " + leerlingen[1] + " " + geheel.leerlingen.type)

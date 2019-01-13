@@ -569,7 +569,7 @@ class System:
                 self.leraardatatypechange(words[3])
             if words[1] == "vakken":
                 self.vakkendatatypechange(words[3])
-            if words[1] == "puntenlijst":
+            if words[1] == "ADTpuntenlijst":
                 self.puntenlijstdatatypechange(words[3])
             if words[1] == "leerlingen":
                 self.leerlingdatatypechange(words[3])
