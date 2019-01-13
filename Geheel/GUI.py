@@ -95,7 +95,7 @@ def home():
         naam = leerkracht.getNaam() + " " + leerkracht.getAchternaam()
         return render_template('teacher.html', name=naam, puntenlijsten=geheel.puntenLijstenVanLeerkracht(name), login=naam)
     elif request.cookies.get("type") == encrypt("System Administrator"):
-        return render_template('admin.html', login=name)
+        return render_template('admin.html', login="Admin")
     elif request.cookies.get("type") == encrypt("Leerling"):
         leerling = geheel.retrieveLeerling(name)[1]
         voornaam = leerling.getVoornaam()
@@ -224,7 +224,7 @@ def vakken():
         flash("Access denied")
         return redirect("/login")
 
-    return render_template('vakken.html', vakken=geheel.tabelVakken())
+    return render_template('vakken.html', vakken=geheel.tabelVakken(), login="Admin")
 
 @app.route('/addvak', methods=['GET'])
 def addvak():
@@ -256,7 +256,7 @@ def leraars():
         flash("Access denied")
         return redirect("/login")
 
-    return render_template('leraars.html', leraars=geheel.tabelLeraars())
+    return render_template('leraars.html', leraars=geheel.tabelLeraars(), login="Admin")
 
 @app.route('/addleraar', methods=['GET'])
 def addleraar():
@@ -289,7 +289,7 @@ def klassen():
         flash("Access denied")
         return redirect("/login")
 
-    return render_template('klassen.html', klassen=geheel.tabelKlassen())
+    return render_template('klassen.html', klassen=geheel.tabelKlassen(), login="Admin")
 
 @app.route('/addklas', methods=['GET'])
 def addklas():
@@ -319,7 +319,7 @@ def leerlingen():
         flash("Access denied")
         return redirect("/login")
 
-    return render_template('leerlingen.html', leerlingen=geheel.tabelLeerlingen())
+    return render_template('leerlingen.html', leerlingen=geheel.tabelLeerlingen(), login="Admin")
 
 @app.route('/addleerling', methods=['GET'])
 def addleerling():
@@ -378,7 +378,7 @@ def datastructuren():
     info = geheel.datastructuresinfo()
     return render_template('datastructuren.html', vakken=info[0], leraars=info[1], punt=info[2], puntenlijst=info[3],
                            leerling=info[4], rapport=info[5], klassen=info[6], undo=info[7], redo=info[8],
-                           instructies=info[9], queue=info[10])
+                           instructies=info[9], queue=info[10], login="Admin")
 
 
 @app.route('/view', methods=['GET'])
@@ -419,7 +419,7 @@ def view():
     filelocation = "static/" + png + ".png"
     graph.write_png(filelocation)
 
-    return render_template("view.html", png=filelocation)
+    return render_template("view.html", png=filelocation, login="Admin")
 
 @app.route('/logout')
 def logout():
