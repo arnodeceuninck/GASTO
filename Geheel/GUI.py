@@ -504,7 +504,7 @@ def ADTchanges():
 def undo():
     type = request.cookies.get("type")
     if type == encrypt("Leerkracht"):
-        naam = decrypt(request.cookies.get("naam"))
+        naam = decrypt(request.cookies.get("name"))
         for message in geheel.undo(naam):
             flash(message)
     elif type == encrypt("System Administrator"):

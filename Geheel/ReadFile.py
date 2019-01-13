@@ -140,7 +140,26 @@ def readLine(line, geheel):
             geheel.toetsendatatypechange(words[2])
 
 
-    else:
+    elif words[0] == "delete":
+        if len(words) < 2:
+            print("ERROR: geen parameters gevonden")
+            print(line)
+            return geheel
+        else:
+            if words[1] == "punt" and len(words) > 5:
+                geheel.deletePunt(words[6])
+            elif words[1] == "vak" and len(words) > 2:
+                geheel.deleteVak(words[3])
+            elif words[1] == "klas" and len(words) > 2:
+                geheel.deleteKlas(words[2])
+            elif words[1] == "leerling" and len(words) > 5:
+                geheel.deleteLeerling(words[6])
+            elif len(words) > 2 and words[2] == "puntenlijst":
+                geheel.deletePuntenlijst(words[1])
+            elif words[1] == "toets" and len(words) > 3:
+                geheel.deleteToets(words[4])
+            elif words[1] == "leraar" and len(words) > 4:
+                geheel.deleteLeraar(words[5])
         pass
 
     return geheel

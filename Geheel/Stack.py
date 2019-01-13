@@ -1,9 +1,11 @@
 from Graph import *
+from random import randint
 
 class Node:
     def __init__(self, value):
         self.value = value
         self.below = None
+        self.identifier = randint(0, 10000)  # Vermijdt problemen bij visualisatie als er 2 dezelfde items inzitten
 
 
 class stack:
@@ -74,9 +76,10 @@ class stack:
 
         node = self.stackpointer
         while node is not None:
-            vgraph.add_node(str(self.hash_code(node.value)), str(node.value))
+            vgraph.add_node(str(self.hash_code(node.value)+node.identifier), str(node.value))
             if node.below != None:
-                vgraph.add_connection(str(self.hash_code(node.value)), str(self.hash_code(node.below.value)), 0)
+                vgraph.add_connection(str(self.hash_code(node.value)+node.identifier),
+                                      str(self.hash_code(node.below.value)+node.below.identifier), 0)
             node = node.below
 
         # Alle nodes en verbindingen zijn nu toegevooegd aan vgraph, maak er nu dus het bestand zelf van
