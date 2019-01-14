@@ -459,7 +459,7 @@ class TweeDrieBoom:
                     if len(self.parent.childrenRight.root) == 2:
                         self.root.append(self.parent.root[1])
                         self.parent.root.remove(self.parent.root[1])
-                        self.parent.root.insert(0, self.parent.childrenRight.root[0])
+                        self.parent.root.append(self.parent.childrenRight.root[0])
                         self.parent.childrenRight.root.remove(self.parent.childrenRight.root[0])
                 else:
                     nodemiddle = TweeDrieBoom()
