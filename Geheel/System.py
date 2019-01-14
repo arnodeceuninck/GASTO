@@ -327,6 +327,7 @@ class System:
                                     leerling.getKlas() + " " + leerling.getKlasNummer() + " " + leerling.getNummer())
         self.instructies.insert("startUndo")
 
+    #TODO: alle deletes op deze manier doen
     def puntenstamboomdeleter(self, stamboomnummer):
         for punt in self.punten:
             if punt[1].stamboomnummer == stamboomnummer:
@@ -366,15 +367,26 @@ class System:
         self.instructies.insert("endUndo")
         leraar = self.retrieveLeeraar(naam)
         if leraar[0]:
-            self.puntenlijst.traverse(self.puntenlijstleerkrachtdetect, naam)
-            #TODO: (note to self) temp fix
-            self.puntenlijst.traverse(self.puntenlijstleerkrachtdetect, naam)
-
+            self.puntenlijstleerkrachtdeleter(naam)
             leraar = leraar[1]
             self.instructies.insert("delete leraar " + leraar.getNaam() + " " + leraar.getAchternaam() + " " +
                                     leraar.getAfkorting())
             self.leraars.delete(naam)
             self.instructies.insert("startUndo")
+
+    def puntenlijstleerkrachtdeleter(self, naam):
+        for puntenlijst in self.puntenlijst:
+            for i in range(len(puntenlijst[1].naamcodes)):
+                if puntenlijst[1].getnaamcodes[i] == naam:
+                    puntenlijst[1].deleteNamecodes(naam)
+                    if len(puntenlijst[1].naamcodes[i]) == 0:
+                        self.deletePuntenlijst(puntenlijst[1].getID())
+
+        for puntenlijst in self.puntenlijst:
+            for i in range(len(puntenlijst[1].naamcodes)):
+                if puntenlijst[1].getnaamcodes[i] == naam:
+                    self.puntenlijstleerkrachtdeleter(naam)
+        return
 
     def removeAllPunten(self):
         # Verwijdert alle punten in het systeem (in theorie nooit nodig)
@@ -393,11 +405,6 @@ class System:
 
     def puntenDetect(self, item, key):
         item.removePunt(key)
-
-    def puntenlijstleerkrachtdetect(self, item, key):
-        item.deleteNamecodes(key)
-        if len(item.getNameCodes()) == 0:
-            self.deletePuntenlijst(item.getID())
 
     def puntenlijstVakDelete(self, item, key):
         if item.getVakcode() == key:

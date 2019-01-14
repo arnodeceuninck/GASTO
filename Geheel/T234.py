@@ -511,28 +511,36 @@ class T234:
         if self.parent is None:
             self.item1 = self.left.item1
             self.left.item1 = None
-            self.left.mleft.parent = self
-            self.mleft = self.left.mleft
-            self.left.mleft = None
+            if self.left.mleft is not None:
+                self.left.mleft.parent = self
+                self.mleft = self.left.mleft
+                self.left.mleft = None
+
             if self.left.item2 is not None:
                 self.item2 = self.left.item2
                 self.left.item2 = None
-                self.left.mright.parent = self
-                self.mright = self.left.mright
-                self.left.mright = None
+                if self.left.mright is not None:
+                    self.left.mright.parent = self
+                    self.mright = self.left.mright
+                    self.left.mright = None
 
             if self.left.item3 is not None:
                 self.item3 = self.left.item3
                 self.left.item3 = None
-                self.left.right.parent = self
-                self.right = self.left.right
-                self.left.right = None
-            self.left.left.parent = self
-            temp = self.left
-            self.left = self.left.left
-            temp.left = None
-            temp.parent = None
-            del temp
+                if self.left.right is not None:
+                    self.left.right.parent = self
+                    self.right = self.left.right
+                    self.left.right = None
+
+            if self.left.left is not None:
+                self.left.left.parent = self
+                temp = self.left
+                self.left = self.left.left
+                temp.left = None
+                temp.parent = None
+                del temp
+            else:
+                self.left = None
 
         else:
 
