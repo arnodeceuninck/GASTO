@@ -836,8 +836,8 @@ class System:
 
     def leerlingdatatypechange(self, new):
         temp = TabelWrapper(new)
-        self.puntenlijst.traverse(self.transferid, temp)
-        self.puntenlijst = temp
+        self.leerlingen.traverse(self.transfernummer, temp)
+        self.leerlingen = temp
 
     def rapportdatatypechange(self, new):
         temp = TabelWrapper(new)
@@ -857,7 +857,7 @@ class System:
         return newadt.insert(value, value.afkorting)
 
     def transfernummer(self, value, newadt):
-        return newadt.insert(value, value.naam)
+        return newadt.insert(value, value.nummer)
 
     def transferzoeksleutel(self, value, newadt):
         return newadt.insert(value, value.Zoeksleutel)
