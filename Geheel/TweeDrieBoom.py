@@ -318,8 +318,9 @@ class TweeDrieBoom:
                             nodemiddle.childrenMiddle = self.parent.childrenRight.childrenLeft
                             nodemiddle.childrenRight = self.parent.childrenRight.childrenRight
                             self.childrenMiddle.parent = nodemiddle
-                            self.parent.childrenRight.childrenLeft.parent = nodemiddle
-                            self.parent.childrenRight.childrenRight.parent = nodemiddle
+                            nodemiddle.childrenLeft.parent = nodemiddle
+                            nodemiddle.childrenRight.parent = nodemiddle
+                            nodemiddle.childrenMiddle.parent = nodemiddle
                             self.parent.root.clear()
                             self.parent.childrenMiddle = nodemiddle
                             self.parent.childrenLeft = None
@@ -331,8 +332,9 @@ class TweeDrieBoom:
                         nodemiddle.childrenMiddle = self.parent.childrenMiddle.childrenLeft
                         nodemiddle.childrenRight = self.parent.childrenMiddle.childrenRight
                         self.childrenMiddle.parent = nodemiddle
-                        self.parent.childrenMiddle.childrenLeft.parent = nodemiddle
-                        self.parent.childrenMiddle.childrenRight.parent = nodemiddle
+                        nodemiddle.childrenLeft.parent = nodemiddle
+                        nodemiddle.childrenRight.parent = nodemiddle
+                        nodemiddle.childrenMiddle.parent = nodemiddle
                         self.parent.childrenMiddle = None
                         self.parent.childrenLeft = nodemiddle
                 elif self == self.parent.childrenRight: #als de node het rechterkind is van de parent
@@ -355,8 +357,9 @@ class TweeDrieBoom:
                             nodemiddle.childrenMiddle = self.parent.childrenLeft.childrenRight
                             nodemiddle.childrenRight = self.childrenMiddle
                             self.childrenMiddle.parent = nodemiddle
-                            self.parent.childrenRight.childrenLeft.parent = nodemiddle
-                            self.parent.childrenRight.childrenRight.parent = nodemiddle
+                            nodemiddle.childrenLeft.parent = nodemiddle
+                            nodemiddle.childrenRight.parent = nodemiddle
+                            nodemiddle.childrenMiddle.parent = nodemiddle
                             self.parent.root.clear()
                             self.parent.childrenMiddle = nodemiddle
                             self.parent.childrenLeft = None
@@ -369,8 +372,9 @@ class TweeDrieBoom:
                         nodemiddle.childrenMiddle = self.parent.childrenMiddle.childrenRight
                         nodemiddle.childrenRight = self.childrenMiddle
                         self.childrenMiddle.parent = nodemiddle
-                        self.parent.childrenMiddle.childrenLeft.parent = nodemiddle
-                        self.parent.childrenMiddle.childrenRight.parent = nodemiddle
+                        nodemiddle.childrenLeft.parent = nodemiddle
+                        nodemiddle.childrenRight.parent = nodemiddle
+                        nodemiddle.childrenMiddle.parent = nodemiddle
                         self.parent.childrenMiddle = None
                         self.parent.childrenRight = nodemiddle
                 else:   #als de node het middelste kind is van de parent
