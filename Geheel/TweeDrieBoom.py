@@ -447,7 +447,7 @@ class TweeDrieBoom:
                         self.parent.root.clear()
                         self.parent.root.append(self.parent.childrenLeft.root[1])
                         self.parent.root.append(self.parent.childrenMiddle.root[0])
-                        self.parent.childrenRight.root.remove(self.parent.childrenLeft.root[1])
+                        self.parent.childrenLeft.root.remove(self.parent.childrenLeft.root[1])
                         self.parent.childrenMiddle.root.remove(self.parent.childrenMiddle.root[0])
                     else:
                         self.root.append(self.parent.root[1])
