@@ -104,6 +104,8 @@ class BinarySearchTree:
         returns the (sub-)BinarySearchTree with the given key. Recursive
         """
         # base case
+        if self.root == None:
+            return (False, None)
         if self.root.key == searchKey:
             return (True, self.root.item) # item found
         elif searchKey < self.root.key:

@@ -309,13 +309,14 @@ class System:
     def deletePuntenlijst(self, key):
         self.instructies.insert("endUndo")
         puntenlijst = self.puntenlijst.retrieve(key)
-        for i in range(len(puntenlijst[1].getToetsen()) - 1, -1, -1):
-            self.deleteToets(puntenlijst[1].toetsen[i].getNaam())
-        self.instructies.insert("delete " + puntenlijst[1].getID() + " puntenlijst " + puntenlijst[1].getType() + " " +
-                                puntenlijst[1].getPeriode() + " " + puntenlijst[1].getLeerkrachtenStr() + " " +
-                                str(puntenlijst[1].getVakcode()) + " " + puntenlijst[1].getKlas() + " " +
-                                puntenlijst[1].getUren())
-        self.puntenlijst.delete(key)
+        if puntenlijst[0]:
+            for i in range(len(puntenlijst[1].getToetsen()) - 1, -1, -1):
+                self.deleteToets(puntenlijst[1].toetsen[i].getNaam())
+            self.instructies.insert("delete " + puntenlijst[1].getID() + " puntenlijst " + puntenlijst[1].getType() + " " +
+                                    puntenlijst[1].getPeriode() + " " + puntenlijst[1].getLeerkrachtenStr() + " " +
+                                    str(puntenlijst[1].getVakcode()) + " " + puntenlijst[1].getKlas() + " " +
+                                    puntenlijst[1].getUren())
+            self.puntenlijst.delete(key)
         self.instructies.insert("startUndo")
 
     def deleteToets(self, naam):

@@ -149,7 +149,7 @@ def readLine(line, geheel):
             if words[1] == "punt" and len(words) > 5:
                 geheel.deletePunt(words[6])
             elif words[1] == "vak" and len(words) > 2:
-                geheel.deleteVak(words[3])
+                geheel.deleteVak(words[2])
             elif words[1] == "klas" and len(words) > 2:
                 geheel.deleteKlas(words[2])
             elif words[1] == "leerling" and len(words) > 5:
