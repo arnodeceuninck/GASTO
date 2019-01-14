@@ -10,6 +10,7 @@
     <ul>
       <li><a href="/home">Home</a></li>
       <li><a onclick="goBack()">Back</a></li>
+        <li><a href="/undo">Undo</a></li>
       <li id="loguit"><a href="/logout">Logout</a></li>
       <li id="naam">{{ login }}</li>
     </ul>
@@ -27,7 +28,7 @@
       <li><a class="active" href="/klassen">Klassen</a></li>
       <li><a href="/leraars">Leraars</a></li>
       <li><a href="/leerlingen">Leerlingen</a></li>
-      <li><a href="/datastructuren">Datastructuren</a></li>
+      <li><a href="/datastructuren">ADT's</a></li>
     </ul>
   </div>
     <content>
@@ -59,6 +60,16 @@
     </table>
     </form>
     </table>
+    <!-- Error messages -->
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <ul class=flashes>
+        {% for message in messages %}
+            <li>{{ message }}</li>
+            {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
   </content>
 
 </body>

@@ -47,7 +47,7 @@ def index():
 
 @app.route('/login')
 def login():
-    print("Showint the login page")
+    print("Showing the login page")
     return render_template('login.html')
 
 @app.route('/back')
@@ -144,7 +144,8 @@ def toets():
 
     naam = request.args.get("naam")
     punten = geheel.puntenVanToets(naam)
-    ID = geheel.retrieveToets(naam)[1].getPuntenlijst()
+    toets = geheel.retrieveToets(naam)[1]
+    ID = toets.getPuntenlijst()[1].getID()
 
     name = decrypt(request.cookies.get("name"))
     leerkracht = geheel.retrieveLeeraar(name)[1]
@@ -384,6 +385,14 @@ def getrapport():
     body = rapport[1:len(rapport)-1]
     login = geheel.retrieveLeerling(studentennr)[1].getVoornaam() + " " + geheel.retrieveLeerling(studentennr)[1].getNaam()
     rapporten = geheel.rapportenMetPuntenVanLeerling(studentennr)
+
+    copyrapp = rapporten[:]
+    rapporten = []
+    for rapport in copyrapp:
+        if rapport == zoeksleutel:
+            rapporten.append([rapport, "active"])
+        else:
+            rapporten.append([rapport, ""])
     return render_template("rapport.html", header=header, footer=footer, body=body,
                            login=login, rapporten=rapporten, id=zoeksleutel)
 
@@ -396,7 +405,7 @@ def datastructuren():
     info = geheel.datastructuresinfo()
     return render_template('datastructuren.html', vakken=info[0], leraars=info[1], punt=info[2], puntenlijst=info[3],
                            leerling=info[4], rapport=info[5], klassen=info[6], undo=info[7], redo=info[8],
-                           instructies=info[9], queue=info[10], login="Admin")
+                           instructies=info[9], queue=info[10], toetsen=info[11], login="Admin")
 
 
 @app.route('/view', methods=['GET'])
@@ -419,8 +428,7 @@ def view():
     elif structuur == "klassen":
         png = geheel.printKlas()
     elif structuur == "vakken":
-        # png = geheel.printVak()
-        png = geheel.printToets()
+        png = geheel.printVak()
     elif structuur == "undo":
         png = geheel.printUndo()
     elif structuur == "redo":
@@ -429,6 +437,8 @@ def view():
         png = geheel.printInstructies()
     elif structuur == "queue":
         png = geheel.printQueue()
+    elif structuur == "toets":
+        png = geheel.printToets()
     else:
         flash("Error: Datastructure not found")
         return redirect(request.referrer)
@@ -444,6 +454,8 @@ def logout():
     resp = make_response(redirect('/login'))
     resp.set_cookie('name', '', expires=0)
     resp.set_cookie('type', '', expires=0)
+    resp.set_cookie('puntenlijstID', '', expires=0)
+    resp.set_cookie('toetsNaam', '', expires=0)
     return resp
 
 
@@ -460,20 +472,62 @@ def ADTchanges():
     leerlingen = (request.args.get("leerlingchange"), request.args.get("datatypeleerling"))
     rapport = (request.args.get("rapportchange"), request.args.get("datatyperapport"))
     klassen = (request.args.get("klassenchange"), request.args.get("datatypeklassen"))
+    toetsen = (request.args.get("toetsenchange"), request.args.get("datatypetoetsen"))
     if punt[0] == "true" and geheel.punten.type != punt[1]:
+        geheel.instructies.insert("ADT punten" + punt[1] + " " + geheel.punten.type)
         geheel.puntdatatypechange(punt[1])
     if leraar[0] == "true" and geheel.leraars.type != leraar[1]:
+        geheel.instructies.insert("ADT leraar" + " " + leraar[1] + " " + geheel.leraars.type)
         geheel.leraardatatypechange(leraar[1])
     if vakken[0] == "true" and geheel.vakken.type != vakken[1]:
+        geheel.instructies.insert("ADT vakken" + " " + vakken[1] + " " + geheel.vakken.type)
         geheel.vakkendatatypechange(vakken[1])
     if puntenlijst[0] == "true" and geheel.puntenlijst.type != puntenlijst[1]:
+        geheel.instructies.insert("ADT ADTpuntenlijst" + " " + puntenlijst[1] + " " + geheel.puntenlijst.type)
         geheel.puntenlijstdatatypechange(puntenlijst[1])
     if leerlingen[0] == "true" and geheel.leerlingen.type != leerlingen[1]:
+        geheel.instructies.insert("ADT leerlingen" + " " + leerlingen[1] + " " + geheel.leerlingen.type)
         geheel.leerlingdatatypechange(leerlingen[1])
     if rapport[0] == "true" and geheel.rapporten.type != rapport[1]:
+        geheel.instructies.insert("ADT rapporten" + " " + rapport[1] + " " + geheel.rapporten.type)
         geheel.rapportdatatypechange(rapport[1])
     if klassen[0] == "true" and geheel.klassen.type != klassen[1]:
+        geheel.instructies.insert("ADT klassen" + " " + klassen[1] + " " + geheel.klassen.type)
         geheel.klassendatatypechange(klassen[1])
+    if toetsen[0] == "true" and geheel.toetsen.type != toetsen[1]:
+        geheel.instructies.insert("ADT toetsen" + " " + toetsen[1] + " " + geheel.toetsen.type)
+        geheel.toetsendatatypechange(toetsen[1])
+    geheel.save("system.txt")
+    return redirect(request.referrer)
+
+@app.route("/undo")
+def undo():
+    type = request.cookies.get("type")
+    if type == encrypt("Leerkracht"):
+        naam = decrypt(request.cookies.get("name"))
+        for message in geheel.undo(naam):
+            flash(message)
+    elif type == encrypt("System Administrator"):
+        for message in geheel.undo():
+            flash(message)
+    else:
+        flash("Access denied.")
+        return redirect('/login')
+
+    geheel.save("system.txt")
+    return redirect(request.referrer)
+
+@app.route("/redo")
+def redo():
+    type = request.cookies.get("type")
+    if type == encrypt("System Administrator"):
+        for message in geheel.redo():
+            flash(message)
+    else:
+        flash("Access denied.")
+        return redirect('/login')
+
+    geheel.save("system.txt")
     return redirect(request.referrer)
 
 # Ensure responses aren't cached - fix logout cached in browser history
@@ -486,9 +540,14 @@ def after_request(response):
 
 if __name__ == '__main__':
     geheel = readFile("system.txt", None)
-    app.debug = True
-    app.run()
 
-    # Server settings, ignore
-    # app.debug = False
-    # app.run(host='192.168.0.116', ssl_context='adhoc')
+    server = False
+
+    if not server:
+        app.debug = True
+        app.run()
+
+    else:
+        # Server settings, ignore
+        app.debug = False
+        app.run(host='192.168.0.116')

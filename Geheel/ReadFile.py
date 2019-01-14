@@ -121,7 +121,45 @@ def readLine(line, geheel):
             return geheel
         geheel.buildRapport("M1", "6WEWI")
 
-    else:
+    elif words[0] == "ADT":
+        if words[1] == "punten":
+            geheel.puntdatatypechange(words[2])
+        if words[1] == "leraar":
+            geheel.leraardatatypechange(words[2])
+        if words[1] == "vakken":
+            geheel.vakkendatatypechange(words[2])
+        if words[1] == "ADTpuntenlijst":
+            geheel.puntenlijstdatatypechange(words[2])
+        if words[1] == "leerlingen":
+            geheel.leerlingdatatypechange(words[2])
+        if words[1] == "rapport":
+            geheel.rapportdatatypechange(words[2])
+        if words[1] == "klassen":
+            geheel.klassendatatypechange(words[2])
+        if words[1] == "toetsen":
+            geheel.toetsendatatypechange(words[2])
+
+
+    elif words[0] == "delete":
+        if len(words) < 2:
+            print("ERROR: geen parameters gevonden")
+            print(line)
+            return geheel
+        else:
+            if words[1] == "punt" and len(words) > 5:
+                geheel.deletePunt(words[6])
+            elif words[1] == "vak" and len(words) > 2:
+                geheel.deleteVak(words[3])
+            elif words[1] == "klas" and len(words) > 2:
+                geheel.deleteKlas(words[2])
+            elif words[1] == "leerling" and len(words) > 5:
+                geheel.deleteLeerling(words[6])
+            elif len(words) > 2 and words[2] == "puntenlijst":
+                geheel.deletePuntenlijst(words[1])
+            elif words[1] == "toets" and len(words) > 3:
+                geheel.deleteToets(words[4])
+            elif words[1] == "leraar" and len(words) > 4:
+                geheel.deleteLeraar(words[5])
         pass
 
     return geheel

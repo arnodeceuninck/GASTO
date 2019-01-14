@@ -33,7 +33,7 @@ class circular_chain:
             # niet op het einde, dus naar de volgende node gaan
             self.current = self.current.next
             self.index += 1
-            return (self.current.value, self.current.value)
+            return (self.current.key, self.current.value)
 
     def createList(self):
         self.__init__()

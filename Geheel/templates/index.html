@@ -27,5 +27,19 @@
     <h2><b>Welkom</b></h2>
   </div>
 
+<<<<<<< HEAD
+=======
+
+   <!-- Error messages -->
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <ul class=flashes>
+        {% for message in messages %}
+            <li>{{ message }}</li>
+            {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+>>>>>>> e6fcb27386c52112c792c3e517e04bf58fafd038
 </body>
 </html>

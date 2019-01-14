@@ -49,7 +49,7 @@ header ul li a.active{
   display: block;
   text-align: center;
   /* background-color: white; */
-  color: black;
+  color: white;
 }
 
 #loguit{
@@ -130,6 +130,13 @@ h1{
 p{
   color: grey;
   text-align: center;
+}
+
+img{
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: auto;
 }
 
 

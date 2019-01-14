@@ -84,6 +84,16 @@ class PuntenLijst:
         self.toetsen = toetsen
         return True
 
+    def getLeerkrachtenStr(self):
+        string = ""
+        i = 0
+        for leerkracht in self.namecodes:
+            i += 1
+            string += leerkracht
+            if i != len(self.namecodes):
+                string += ","
+        return string
+
 
 def createPuntenLijst(id, type, periode, namecodes, vakcode, klas, uren, toetsen):
     return PuntenLijst(id, type, periode, namecodes, vakcode, klas, uren, toetsen)
