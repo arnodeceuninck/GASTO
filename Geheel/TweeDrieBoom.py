@@ -301,17 +301,29 @@ class TweeDrieBoom:
                 if self == self.parent.childrenLeft:    #als de node het linkerkind is van de parent
                     nodemiddle.root.append(self.parent.root[0])
                     if len(self.parent.root) == 1:  #als de parent uit 1 element bestaat
-                        nodemiddle.root.append(self.parent.childrenRight.root[0])
-                        nodemiddle.childrenLeft = self.childrenMiddle
-                        nodemiddle.childrenMiddle = self.parent.childrenRight.childrenLeft
-                        nodemiddle.childrenRight = self.parent.childrenRight.childrenRight
-                        self.childrenMiddle.parent = nodemiddle
-                        self.parent.childrenRight.childrenLeft.parent = nodemiddle
-                        self.parent.childrenRight.childrenRight.parent = nodemiddle
-                        self.parent.root.clear()
-                        self.parent.childrenMiddle = nodemiddle
-                        self.parent.childrenLeft = None
-                        self.parent.childrenRight = None
+                        if len(self.parent.childrenRight.root) == 2:
+                            self.root.append(self.parent.root[0])
+                            self.parent.root.clear()
+                            self.childrenLeft = self.childrenMiddle
+                            self.parent.root.append(self.parent.childrenRight.root[0])
+                            self.parent.childrenRight.root.remove(self.parent.childrenRight.root[1])
+                            self.childrenRight = self.parent.childrenRight.childrenLeft
+                            self.childrenRight.parent = self
+                            self.parent.childrenRight.childrenLeft = self.parent.childrenRight.childrenMiddle
+                            self.childrenMiddle = None
+                            self.parent.childrenRight.childrenMiddle = None
+                        else:
+                            nodemiddle.root.append(self.parent.childrenRight.root[0])
+                            nodemiddle.childrenLeft = self.childrenMiddle
+                            nodemiddle.childrenMiddle = self.parent.childrenRight.childrenLeft
+                            nodemiddle.childrenRight = self.parent.childrenRight.childrenRight
+                            self.childrenMiddle.parent = nodemiddle
+                            self.parent.childrenRight.childrenLeft.parent = nodemiddle
+                            self.parent.childrenRight.childrenRight.parent = nodemiddle
+                            self.parent.root.clear()
+                            self.parent.childrenMiddle = nodemiddle
+                            self.parent.childrenLeft = None
+                            self.parent.childrenRight = None
                     else:   #als de parent uit 2 elementen bestaat
                         nodemiddle.root.append(self.parent.childrenMiddle.root[0])
                         self.parent.root.remove(self.parent.root[0])
@@ -325,18 +337,30 @@ class TweeDrieBoom:
                         self.parent.childrenLeft = nodemiddle
                 elif self == self.parent.childrenRight: #als de node het rechterkind is van de parent
                     if len(self.parent.root) == 1:  #als de parent uit 1 element bestaat
-                        nodemiddle.root.append(self.parent.root[0])
-                        nodemiddle.root.insert(0, self.parent.childrenLeft.root[0])
-                        nodemiddle.childrenLeft = self.parent.childrenLeft.childrenLeft
-                        nodemiddle.childrenMiddle = self.parent.childrenLeft.childrenRight
-                        nodemiddle.childrenRight = self.childrenMiddle
-                        self.childrenMiddle.parent = nodemiddle
-                        self.parent.childrenRight.childrenLeft.parent = nodemiddle
-                        self.parent.childrenRight.childrenRight.parent = nodemiddle
-                        self.parent.root.clear()
-                        self.parent.childrenMiddle = nodemiddle
-                        self.parent.childrenLeft = None
-                        self.parent.childrenRight = None
+                        if len(self.parent.childrenLeft.root) == 2:
+                            self.root.append(self.parent.root[0])
+                            self.parent.root.clear()
+                            self.childrenRight = self.childrenMiddle
+                            self.parent.root.append(self.parent.childrenLeft.root[1])
+                            self.parent.childrenLeft.root.remove(self.parent.childrenLeft.root[1])
+                            self.childrenLeft = self.parent.childrenLeft.childrenRight
+                            self.childrenLeft.parent = self
+                            self.parent.childrenLeft.childrenRight = self.parent.childrenLeft.childrenMiddle
+                            self.childrenMiddle = None
+                            self.parent.childrenLeft.childrenMiddle = None
+                        else:
+                            nodemiddle.root.append(self.parent.root[0])
+                            nodemiddle.root.insert(0, self.parent.childrenLeft.root[0])
+                            nodemiddle.childrenLeft = self.parent.childrenLeft.childrenLeft
+                            nodemiddle.childrenMiddle = self.parent.childrenLeft.childrenRight
+                            nodemiddle.childrenRight = self.childrenMiddle
+                            self.childrenMiddle.parent = nodemiddle
+                            self.parent.childrenRight.childrenLeft.parent = nodemiddle
+                            self.parent.childrenRight.childrenRight.parent = nodemiddle
+                            self.parent.root.clear()
+                            self.parent.childrenMiddle = nodemiddle
+                            self.parent.childrenLeft = None
+                            self.parent.childrenRight = None
                     else:   #als de parent uit 2 elementen bestaat
                         nodemiddle.root.append(self.parent.root[1])
                         nodemiddle.root.insert(0, self.parent.childrenMiddle.root[0])
@@ -427,12 +451,12 @@ class TweeDrieBoom:
                         self.parent.root.append(self.parent.childrenMiddle.root[1])
                         self.parent.childrenMiddle.root.remove(self.parent.childrenMiddle.root[1])
                 elif self == self.parent.childrenMiddle and (len(self.parent.childrenLeft.root) == 2 or len(self.parent.childrenRight.root) == 2) and len(self.parent.root) == 2:
-                    if len(self.parent.childrenRight.root) == 2:
+                    if len(self.parent.childrenLeft.root) == 2:
                         self.root.append(self.parent.root[0])
                         self.parent.root.remove(self.parent.root[0])
                         self.parent.root.insert(0, self.parent.childrenLeft.root[1])
                         self.parent.childrenLeft.root.remove(self.parent.childrenLeft.root[1])
-                    if len(self.parent.childrenLeft.root) == 2:
+                    if len(self.parent.childrenRight.root) == 2:
                         self.root.append(self.parent.root[1])
                         self.parent.root.remove(self.parent.root[1])
                         self.parent.root.insert(0, self.parent.childrenRight.root[0])
@@ -466,7 +490,11 @@ class TweeDrieBoom:
                             self.parent.childrenMiddle.root.clear()
                             self.parent.childrenMiddle = None
                         else:   #indien de parent uit 1 element bestaat
-                            self.parent.root.insert(0, self.parent.childrenLeft.root[0])
+                            nodemiddle.root.append(self.parent.childrenLeft.root[0])
+                            nodemiddle.root.append(self.parent.root[0])
+                            self.parent.root.clear()
+                            # self.parent.root.insert(0, self.parent.childrenLeft.root[0])
+                            self.parent.childrenMiddle = nodemiddle
                             self.parent.childrenLeft = None
                             self.parent.childrenRight = None
                     self.parent.fix()
@@ -495,9 +523,12 @@ class TweeDrieBoom:
         if len(self.root) == 1 and self.childrenLeft == self.childrenRight == None and self.root[0].key != key:
             result = (gevonden, None)
             return result
-        elif len(self.root) == 2 and self.childrenLeft == self.childrenRight == self.childrenMiddle == None and (self.root[0].key != key or self.root[1].key != key):
-            result = (gevonden, None)
-            return result
+        elif len(self.root) == 2 and self.childrenLeft == self.childrenRight == self.childrenMiddle == None and self.root[0].key != key:
+            if self.root[1].key != key:
+                result = (gevonden, None)
+                return result
+            else:
+                pass
         if key == self.root[0].key:
             gevonden = True
             result = (gevonden, self.root[0])
@@ -657,5 +688,37 @@ def write_dot(file, tree):  #maakt een dot file van de 23T.
 def create23T():    #maakt een 23T aan.
     return TweeDrieBoom()
 
+ttt = TweeDrieBoom()
+ttt.insertItem(TreeItem(0, 0))
+ttt.insertItem(TreeItem(0, 1))
+ttt.insertItem(TreeItem(0, 2))
+ttt.insertItem(TreeItem(0, 3))
+ttt.insertItem(TreeItem(0, 4))
+ttt.insertItem(TreeItem(0, 5))
+ttt.insertItem(TreeItem(0, 6))
+ttt.insertItem(TreeItem(0, 7))
+ttt.insertItem(TreeItem(0, 8))
+ttt.insertItem(TreeItem(0, 9))
+ttt.insertItem(TreeItem(0, 10))
+ttt.insertItem(TreeItem(0, 11))
+ttt.insertItem(TreeItem(0, 12))
+ttt.insertItem(TreeItem(0, 13))
+ttt.insertItem(TreeItem(0, 14))
+ttt.insertItem(TreeItem(0, 15))
+ttt.insertItem(TreeItem(0, 16))
+ttt.insertItem(TreeItem(0, 17))
+ttt.delete(1)
+ttt.delete(3)
+# write_dot("test23T.dot", ttt)
+ttt.delete(5)
+ttt.delete(7)
+
+ttt.delete(9)
+# write_dot("test23T.dot", ttt)
+ttt.delete(11)
+ttt.delete(13)
+ttt.delete(15)
+ttt.delete(17)
+write_dot("test23T.dot", ttt)
 
 
