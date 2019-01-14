@@ -260,7 +260,7 @@ class System:
             puntenlijst.addToets(toets)
         return return_messages
 
-    def deletePunt(self, ID):
+    def deletePunt(self, ID, leerkracht=None):
         self.instructies.insert("endUndo")
         # verwijdert een eerder aangemaakt punt
         # self.toetsen.traverse(self.puntenDetect, ID)
@@ -269,7 +269,15 @@ class System:
             punt = punt[1]
             toets = self.retrieveToets(punt.getNaam())
             if toets[0]:
-                toets[1].removePunt(ID) # Mutable? Waarom werkt dit dan ni
+                toets[1].removePunt(int(ID)) # Mutable? Waarom werkt dit dan ni
+
+            if leerkracht != None:
+                leerkr_stack = self.undoPuntStack.retrieve(leerkracht)[1]
+                leerkr_stack.insert("delete punt " + leerkracht + " " +
+                                    punt.getNaam() + " " +
+                                    punt.getStamboekNummer() + " " + str(punt.getWaarde()) + " " +
+                                    str(ID))
+
             self.instructies.insert("delete punt ADMIN " +
                                     punt.getNaam() + " " +
                                     punt.getStamboekNummer() + " " + str(punt.getWaarde()) + " " +

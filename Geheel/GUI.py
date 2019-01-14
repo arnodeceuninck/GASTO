@@ -164,7 +164,8 @@ def removepunt():
         return redirect("/login")
 
     ID = request.args.get("ID")
-    geheel.deletePunt(ID)
+    naam = decrypt(request.cookies.get("name"))
+    geheel.deletePunt(ID, naam)
     geheel.save("system.txt")
     return redirect(request.referrer)
 
