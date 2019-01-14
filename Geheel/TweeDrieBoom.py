@@ -520,7 +520,7 @@ class TweeDrieBoom:
     def retrieve(self, key):    #Zoekt een Treeitem op basis van een key en geeft een tuple terug met True of False als het niet gevonden is en geeft het TreeItem terug.
         result = self.zoek(key, False)
         if result[0] == False:
-            return False
+            return (False, None)
         else:
             return result
 

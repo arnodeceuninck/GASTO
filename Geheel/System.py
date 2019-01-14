@@ -18,7 +18,7 @@ from ReadFile import *
 class System:
     def __init__(self):
         #  Deze klassen zijn dus een verzameling van als ik het goed begrijp
-        self.punten = TabelWrapper("bst")  # dit is de create # puntenlijst nog nodig om punten aan te passen
+        self.punten = TabelWrapper("23")  # dit is de create # puntenlijst nog nodig om punten aan te passen
         self.puntenQueue = TabelWrapper("queue")
         self.toetsen = TabelWrapper("ll")
         self.puntenlijst = TabelWrapper("bst")
@@ -263,10 +263,13 @@ class System:
     def deletePunt(self, ID):
         self.instructies.insert("endUndo")
         # verwijdert een eerder aangemaakt punt
-        self.toetsen.traverse(self.puntenDetect, ID)
+        # self.toetsen.traverse(self.puntenDetect, ID)
         punt = self.punten.retrieve(int(ID))
         if punt[0]:
             punt = punt[1]
+            toets = self.retrieveToets(punt.getNaam())
+            if toets[0]:
+                toets[1].removePunt(ID) # Mutable? Waarom werkt dit dan ni
             self.instructies.insert("delete punt ADMIN " +
                                     punt.getNaam() + " " +
                                     punt.getStamboekNummer() + " " + str(punt.getWaarde()) + " " +
@@ -692,7 +695,9 @@ class System:
         if leerkr == None:
             self.instructies.delete()
         else:
-            self.leerkr_stack.delete()
+            stack = self.undoPuntStack.retrieve(leerkr)
+            if stack[0]:
+                stack[1].delete()
 
         return ["Done: Undo " + vorige_instructie]
 
