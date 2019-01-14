@@ -447,7 +447,7 @@ class TweeDrieBoom:
                         self.parent.root.clear()
                         self.parent.root.append(self.parent.childrenLeft.root[1])
                         self.parent.root.append(self.parent.childrenMiddle.root[0])
-                        self.parent.childrenRight.root.remove(self.parent.childrenLeft.root[1])
+                        self.parent.childrenLeft.root.remove(self.parent.childrenLeft.root[1])
                         self.parent.childrenMiddle.root.remove(self.parent.childrenMiddle.root[0])
                     else:
                         self.root.append(self.parent.root[1])
@@ -560,7 +560,10 @@ class TweeDrieBoom:
             return result
 
     def traverse(self, visit, key=None):    #Doorloopt de 23T
-        return self.inorderTraverse(visit, key)
+        if len(self.root) == 0:
+            return False, None
+        else:
+            return self.inorderTraverse(visit, key)
 
     def inorderTraverse(self, visit, key=None): #Voert een inorderTraverse uit op de 23T
         if self.childrenLeft != None:
