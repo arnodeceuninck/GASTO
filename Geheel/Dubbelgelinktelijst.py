@@ -114,7 +114,7 @@ class DGL:
             return (False, None)
 
         while True:
-            debug = node.key
+            # debug = node.key
             if str(node.key) == str(key):
                 return (True, node.value)
             elif node.next is None:
