@@ -318,7 +318,7 @@ class System:
     def deleteLeerling(self, key):
         self.instructies.insert("endUndo")
         # de punten die gelinkt zijn aan het stamboom nummer verwijderen
-        self.punten.traverse(self.collector, key)
+        self.puntenstamboomdeleter(key)
         leerling = self.leerlingen.retrieve(key)
         if leerling[0]:
             leerling = leerling[1]
@@ -326,6 +326,15 @@ class System:
             self.instructies.insert("delete leerling " + leerling.getVoornaam() + " " + leerling.getNaam() + " " +
                                     leerling.getKlas() + " " + leerling.getKlasNummer() + " " + leerling.getNummer())
         self.instructies.insert("startUndo")
+
+    def puntenstamboomdeleter(self, stamboomnummer):
+        for punt in self.punten:
+            if punt[1].stamboomnummer == stamboomnummer:
+                self.deletePunt(punt[0])
+        for punt in self.punten:
+            if punt[1].stamboomnummer == stamboomnummer:
+                self.puntenstamboomdeleter(stamboomnummer)
+        return
 
     def deletePuntenlijst(self, key):
         self.instructies.insert("endUndo")
@@ -376,7 +385,6 @@ class System:
         # debug = item.getStamboekNummer()
         if item is not None and item.getStamboekNummer() == key:
             self.deletePunt(item.getID())
-            self.punten.traverse(self.collector, key)
         else:
             return False
 

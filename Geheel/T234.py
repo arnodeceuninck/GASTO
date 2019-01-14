@@ -167,8 +167,8 @@ class T234:
                         self.item3 = None
                         self.left.parent = self.parent.mright
                         self.mleft.parent = self.parent.mright
-                        self.mleft = self.mright
-                        self.left = self.right
+                        self.left = self.mright
+                        self.mleft = self.right
                         self.mright = None
                         self.right = None
                         return True
@@ -432,10 +432,12 @@ class T234:
     def mergeitemmright(self):
         self.parent.mleft.item2 = self.parent.item2
         self.parent.item2 = None
-        self.mright = None
+        self.parent.mright = None
         if self.parent.item3 is not None:
             self.parent.item2 = self.parent.item3
             self.parent.item3 = None
+            self.parent.mright = self.parent.right
+            self.parent.right = None
 
     def mergeitemright(self):
         self.parent.mright.item2 = self.parent.item3
@@ -858,3 +860,26 @@ class T234:
 def createSearchTree():
     return T234(None, None, None, None, None, None, None, None)
 
+test = T234(None, None, None, None, None, None, None, None)
+test.T234Insert(TreeItem(None, 0))
+test.T234Insert(TreeItem(None, 1))
+test.T234Insert(TreeItem(None, 2))
+test.T234Insert(TreeItem(None, 3))
+test.T234Insert(TreeItem(None, 4))
+test.T234Insert(TreeItem(None, 5))
+test.T234Insert(TreeItem(None, 6))
+test.T234Insert(TreeItem(None, 7))
+test.T234Insert(TreeItem(None, 8))
+test.T234Insert(TreeItem(None, 9))
+test.T234Insert(TreeItem(None, 10))
+test.T234Insert(TreeItem(None, 11))
+test.T234Insert(TreeItem(None, 12))
+test.print("test0.dot")
+test.T234Insert(TreeItem(None, 13))
+test.print("test1.dot")
+test.T234Insert(TreeItem(None, 14))
+test.print("test2.dot")
+test.T234Insert(TreeItem(None, 15))
+test.print("test3.dot")
+test.T234Insert(TreeItem(None, 16))
+test.print("test4.dot")
