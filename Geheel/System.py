@@ -18,9 +18,9 @@ from ReadFile import *
 class System:
     def __init__(self):
         #  Deze klassen zijn dus een verzameling van als ik het goed begrijp
-        self.punten = TabelWrapper("23")  # dit is de create # puntenlijst nog nodig om punten aan te passen
+        self.punten = TabelWrapper("ll")  # dit is de create # puntenlijst nog nodig om punten aan te passen
         self.puntenQueue = TabelWrapper("queue")
-        self.toetsen = TabelWrapper("ll")
+        self.toetsen = TabelWrapper("bst")
         self.puntenlijst = TabelWrapper("bst")
         self.vakken = TabelWrapper("cl")  # Key = afkorting, Value = volledige naam
         self.klassen = TabelWrapper("rb")
@@ -28,7 +28,7 @@ class System:
         self.leerlingen = TabelWrapper("234")
         self.rapporten = TabelWrapper("rb")
         self.instructies = TabelWrapper("stack")  # NOTE: Don't change this ADT
-        self.undoPuntStack = TabelWrapper("ll")  # Dit bevat als zoeksleutel een leerkracht, als value een stack
+        self.undoPuntStack = TabelWrapper("bst")  # Dit bevat als zoeksleutel een leerkracht, als value een stack
         self.instructies.insert("init")
         self.redoStack = TabelWrapper("stack")
 
@@ -371,6 +371,7 @@ class System:
         # Cannot be undone (Wrm hebben wij deze functie zelfs?)
 
     def collector(self, item, key):
+        debug = item.getStamboekNummer()
         if item is not None and item.getStamboekNummer() == key:
             self.deletePunt(item.getID())
             self.punten.traverse(self.collector, key)
