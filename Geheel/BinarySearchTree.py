@@ -147,6 +147,7 @@ class BinarySearchTree:
         if self.left is not None:
             self.left.inorderTraverse(visit, key)
         if self.root is not None:
+            # debug = self.root.item
             visit(self.root.item, key)
         if self.right is not None:
             self.right.inorderTraverse(visit, key)

@@ -52,6 +52,7 @@ class DGL:
     def traverse(self, visit, key=None):
         node = self.dummy.next
         while node is not None:
+            debug = node.value
             visit(node.value, key)
             node = node.next
 
@@ -93,12 +94,14 @@ class DGL:
                 if node.next is None:
                     node.back.next = None
                     node.back = None
+                    del node
                     return True
                 else:
                     node.back.next = node.next
                     node.next.back = node.back
                     node.next = None
                     node.back = None
+                    del node
                     return True
             elif node.next is None:
                 return False
@@ -111,7 +114,8 @@ class DGL:
             return (False, None)
 
         while True:
-            if str(node.key) == key:
+            # debug = node.key
+            if str(node.key) == str(key):
                 return (True, node.value)
             elif node.next is None:
                 return (False, None)
