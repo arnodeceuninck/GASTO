@@ -18,7 +18,7 @@ from ReadFile import *
 class System:
     def __init__(self):
         #  Deze klassen zijn dus een verzameling van als ik het goed begrijp
-        self.punten = TabelWrapper("23")  # dit is de create # puntenlijst nog nodig om punten aan te passen
+        self.punten = TabelWrapper("bst")  # dit is de create # puntenlijst nog nodig om punten aan te passen
         self.puntenQueue = TabelWrapper("queue")
         self.toetsen = TabelWrapper("ll")
         self.puntenlijst = TabelWrapper("bst")
@@ -69,6 +69,7 @@ class System:
         self.instructies.insert("leraar " + str(naam) + " " + str(achternaam) + " " + str(afkorting))
         self.leraars.insert(Leraar.Leraar(afkorting, naam, achternaam), afkorting)
         self.undoPuntStack.insert(TabelWrapper("stack"), afkorting)
+
         return []
 
     def addLeerling(self, naam, voornaam, klas, klasnummer, studentennummer):
@@ -142,8 +143,13 @@ class System:
         instructie = "punt " + str(leerkracht) + " " + str(naam_toets) + " " + \
                      str(stamboeknummer_leerling) + " " + str(Waarde) + " " + str(ID)
         self.instructies.insert(instructie)
-        stack_leerkr = self.undoPuntStack.retrieve(leerkracht)[1]
-        stack_leerkr.insert(instructie)
+        stack_leerkr = self.undoPuntStack.retrieve(leerkracht)
+        # if not stack_leerkr[0]:
+        #     self.undoPuntStack.insert(TabelWrapper("stack"), leerkracht)
+        #     stack_leerkr = self.undoPuntStack.retrieve(leerkracht)
+        if stack_leerkr[1]: # Moet niet bij ADMIN
+            stack_leerkr = stack_leerkr[1]
+            stack_leerkr.insert(instructie)
 
         # maakt een nieuw punt aan met een uniek ID, Stamboomnummer, Naam, Waarde en Timestamp
         toets = self.toetsen.retrieve(naam_toets)[1]
@@ -157,7 +163,7 @@ class System:
                                                                             "Gelieve deze eerst aan te maken.")
             print(return_messages[0])
             return False
-        if self.PermissionCheckLeerkracht(naam_toets, leerkracht) is False:
+        if leerkracht != "ADMIN" and self.PermissionCheckLeerkracht(naam_toets, leerkracht) is False:
             return_messages.append("ERROR: De leerkracht: " + leerkracht + " Heeft geen toesteming om dit punt toe te voegen")
             print(return_messages[0])
             return return_messages
@@ -178,7 +184,7 @@ class System:
                     print(return_messages[0])
                     return return_messages
             # Controleer of er al een punt voor deze toets en deze leerkracht in de lijst met punten zit
-            self.punten.insert(current_punt, ID)  # Key
+            self.punten.insert(current_punt, int(ID))  # Key
             self.puntenQueue.delete()  # Verwwijder het eerste element van de queue
         # DONE: de retrieve van een LL geeft een tuple terug ma is da echt nodig?
         # JHAAAA, alle retrieves returnen een tuple
@@ -258,12 +264,14 @@ class System:
         self.instructies.insert("endUndo")
         # verwijdert een eerder aangemaakt punt
         self.toetsen.traverse(self.puntenDetect, ID)
-        punt = self.punten.retrieve(int(ID))[1]
-        self.instructies.insert("delete punt ADMIN " +
-                                punt.getNaam() + " " +
-                                punt.getStamboekNummer() + " " + str(punt.getWaarde()) + " " +
-                                str(ID))
-        self.punten.delete(int(ID))
+        punt = self.punten.retrieve(int(ID))
+        if punt[0]:
+            punt = punt[1]
+            self.instructies.insert("delete punt ADMIN " +
+                                    punt.getNaam() + " " +
+                                    punt.getStamboekNummer() + " " + str(punt.getWaarde()) + " " +
+                                    str(ID))
+            self.punten.delete(int(ID))
         self.instructies.insert("startUndo")
         return True
 
@@ -301,9 +309,11 @@ class System:
         # de punten die gelinkt zijn aan het stamboom nummer verwijderen
         self.punten.traverse(self.collector, key)
         leerling = self.leerlingen.retrieve(key)
-        self.leerlingen.delete(key)
-        self.instructies.insert("delete leerling " + leerling.getVoornaam() + " " + leerling.getNaam() + " " +
-                                leerling.getKlas() + " " + leerling.getKlasNummer() + " " + leerling.getNummer())
+        if leerling[0]:
+            leerling = leerling[1]
+            self.leerlingen.delete(key)
+            self.instructies.insert("delete leerling " + leerling.getVoornaam() + " " + leerling.getNaam() + " " +
+                                    leerling.getKlas() + " " + leerling.getKlasNummer() + " " + leerling.getNummer())
         self.instructies.insert("startUndo")
 
     def deletePuntenlijst(self, key):
@@ -559,7 +569,8 @@ class System:
             while redocount > 0:
                 self.redoStack.delete() # Verwijder startRedo
                 instructie = self.redoStack.retrieve()
-                return_messages.append("Redo: " + instructie)
+                if instructie != "endRedo" and instructie != "startRedo":
+                    return_messages.append("Redo: " + instructie)
 
                 if instructie == "startRedo":
                     redocount += 1

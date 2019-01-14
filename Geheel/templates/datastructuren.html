@@ -313,10 +313,7 @@
 
     </table>
 
-  </content>
-
-
-  <!-- Error messages -->
+    <!-- Error messages -->
     {% with messages = get_flashed_messages() %}
       {% if messages %}
         <ul class=flashes>
@@ -326,5 +323,8 @@
             </ul>
         {% endif %}
     {% endwith %}
+
+  </content>
+
 </body>
 </html>
