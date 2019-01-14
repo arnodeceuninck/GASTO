@@ -548,25 +548,52 @@ class System:
         return self.instructies.Print()
 
     def redo(self):
+        return_messages = []
         if self.redoStack.isEmpty():
             return ["Nothing to redo."]
         instructie = self.redoStack.retrieve()
         if instructie == "startRedo":
-            while instructie != "endRedo":
+            self.instructies.insert("endUndo")
+            redocount = 1
+            while redocount > 0:
                 self.redoStack.delete() # Verwijder startRedo
                 instructie = self.redoStack.retrieve()
-                print("Redo: " + instructie)
+                return_messages.append("Redo: " + instructie)
+
+                if instructie == "startRedo":
+                    redocount += 1
+                if instructie == "endRedo":
+                    redocount -= 1
 
                 self = readLine(instructie, self)
 
             self.redoStack.delete()
+            self.instructies.insert("startUndo")
         else:
-            print("Redo: " + instructie)
+            return_messages.append("Redo: " + instructie)
             self = readLine(instructie, self)
             self.redoStack.delete()
-        return ["Done: Redo " + instructie]
+        return return_messages
 
-    def undo(self, leerkr=None):
+    def fixRedoStack(self):
+        endRedos = 0
+        queue = TabelWrapper("queue")
+
+        while True:
+            instructie = self.redoStack.delete()
+            queue.insert(instructie)
+            if instructie == "endRedo":
+                endRedos += 1
+            if instructie == "startRedo":
+                endRedos -= 1
+            if endRedos <= 0:
+                break
+        while not queue.isEmpty():
+            instructie = queue.delete()[0]
+            self.redoStack.insert(instructie)
+
+
+    def undo(self, leerkr=None, first=True):
         if leerkr != None:
             leerkr_stack = self.undoPuntStack.retrieve(leerkr)[1]
             vorige_instructie = leerkr_stack.retrieve()
@@ -575,11 +602,13 @@ class System:
         if vorige_instructie == "startUndo":
             errors = []
             self.instructies.delete()  # Verwijder de startUndo
-            self.redoStack.insert("endRedo")
+            self.redoStack.insert("startRedo")
             # Momenteel geen leerkrachtenstacks ondersteund
             while self.instructies.retrieve() != "endUndo":
-                errors += self.undo(leerkr)
-            self.redoStack.insert("startRedo")
+                errors += self.undo(leerkr, False) # first op False zetten zodat de redostack niet wordt omgedraaid
+            self.redoStack.insert("endRedo")
+            if first:
+                self.fixRedoStack()  # Omdraaien
             self.instructies.delete() # Verwijder de endUndo
             return errors
 
