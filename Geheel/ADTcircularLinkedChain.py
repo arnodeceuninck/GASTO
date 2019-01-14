@@ -141,7 +141,7 @@ class circular_chain:
         firstNode = currentNode
 
         # while str(currentNode.value.naam) != string:
-        while str(currentNode.key) != string:
+        while str(currentNode.key) != str(string):
             index += 1
             currentNode = currentNode.next
             if index >= self.count:
