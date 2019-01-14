@@ -1,12 +1,16 @@
 import Graph
+from random import randint
 class Pointer:
     def __init__(self, target):
         self.target = target
 
 class Node:
-    def __init__(self, value):
+    def __init__(self, value, identifier=None):
         self.value = value
         self.next = None
+        if identifier == None:
+            identifier = randint(200, 100000)
+        self.identifier = identifier  # required for unique node-keys in visualisation
 
 class Queue:
     def createQueue(self):
@@ -24,8 +28,8 @@ class Queue:
         else:
             return False
 
-    def enqueue(self, value):
-        newNode = Node(value)
+    def enqueue(self, value, identifier=None):
+        newNode = Node(value, identifier)
         self.Last = self.Back.target
         if self.Front.target is None:
             self.Front.target = newNode
@@ -51,8 +55,8 @@ class Queue:
 
     def getLength(self):
         size = 0
-        node = self.getFront()
-        while node[1] is not None:
+        node = self.Front.target
+        while node is not None:
             size += 1
             node = node.next
         return size
@@ -66,9 +70,9 @@ class Queue:
 
         node = self.Front.target
         while node is not None:
-            vgraph.add_node(node.value, node.value)
+            vgraph.add_node(node.identifier, node.value)
             if node.next != None:
-                vgraph.add_connection(node.value, node.next.value, 0)
+                vgraph.add_connection(node.identifier, node.next.identifier, 0)
             node = node.next
 
         # Alle nodes en verbindingen zijn nu toegevooegd aan vgraph, maak er nu dus het bestand zelf van

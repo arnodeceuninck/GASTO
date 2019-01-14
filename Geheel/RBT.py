@@ -37,6 +37,9 @@ class RoodZwartBoom:
         return self.root.isEmpty()
 
     def insert(self, newItem):
+        # Enkel mogelijk na verwijderen van items
+        if self.root == None:
+            self.createRBT()
         # Steek een nieuw item in de boom
         success = self.root.insert(newItem)
         # Tijdens het inserten kan de root veranderd worden
@@ -75,7 +78,8 @@ class RoodZwartBoom:
         return self.root
 
     def traverse(self, visit, key=None):
-        return self.root.inorderTraverse(visit, key)
+        if self.root != None:
+            return self.root.inorderTraverse(visit, key)
 
     def size(self):
         if self.root == None:
@@ -384,10 +388,12 @@ class RBTNode:
         if self.parent == None:
             self.left_connection = 1
             self.right_connection = 1
-            self.left_tree.left_connection = 0
-            self.right_tree.left_connection = 0
-            self.left_tree.right_connection = 0
-            self.right_tree.right_connection = 0
+            if self.left_tree != None:
+                self.left_tree.left_connection = 0
+                self.left_tree.right_connection = 0
+            if self.right_tree != None:
+                self.right_tree.left_connection = 0
+                self.right_tree.right_connection = 0
 
         # Tekening 1b
         elif self.parent.checkTwoNode() \
@@ -658,7 +664,8 @@ class RBTNode:
     def inorderTraverse(self, visit, key):
         if self.left_tree is not None:
             self.left_tree.inorderTraverse(visit, key)
-        visit(self.root.value, key)
+        if self.root != None:
+            visit(self.root.value, key)
         if self.right_tree is not None:
             self.right_tree.inorderTraverse(visit, key)
 

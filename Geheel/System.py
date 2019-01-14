@@ -18,7 +18,7 @@ from ReadFile import *
 class System:
     def __init__(self):
         #  Deze klassen zijn dus een verzameling van als ik het goed begrijp
-        self.punten = TabelWrapper("234")  # dit is de create # puntenlijst nog nodig om punten aan te passen
+        self.punten = TabelWrapper("bst")  # dit is de create # puntenlijst nog nodig om punten aan te passen
         self.puntenQueue = TabelWrapper("queue")
         self.toetsen = TabelWrapper("bst")
         self.puntenlijst = TabelWrapper("bst")
@@ -171,6 +171,19 @@ class System:
         punt = Punt.createPunt(ID, stamboeknummer_leerling, naam_toets, Waarde,
                                datetime.datetime.now())  # https://stackoverflow.com/questions/415511/how-to-get-the-current-time-in-python
         self.puntenQueue.insert(punt)
+        dequeue_result = self.dequeuePunten()
+        if dequeue_result[0]:
+            # er waren errors
+            return_messages += dequeue_result[1]
+            return return_messages
+        # DONE: de retrieve van een LL geeft een tuple terug ma is da echt nodig?
+        # JHAAAA, alle retrieves returnen een tuple
+
+        return return_messages
+
+    def dequeuePunten(self):
+        return_messages = []
+        error = False
         while not self.puntenQueue.isEmpty():
             current_punt = self.puntenQueue.retrieve()[1]
             stamboeknummer_leerling = current_punt.getStamboekNummer()
@@ -178,19 +191,19 @@ class System:
             for punt2 in self.punten:
                 punt2 = punt2[1]
                 if punt2.getStamboekNummer() == stamboeknummer_leerling and punt2.getNaam() == naam_toets:
-                    return_messages.append("Error bij punt: " + str(punt) +
-                                           "Punt voor deze leerling en toets al in puntenlijst. "
+                    return_messages.append("Error bij punt: " + str(punt2) +
+                                           " Punt voor deze leerling en toets al in puntenlijst. "
                                            "Gelieve het vorige punt eerst te verwijderen ")
                     print(return_messages[0])
-                    return return_messages
+                    error = True
+                    return error, return_messages
             # Controleer of er al een punt voor deze toets en deze leerkracht in de lijst met punten zit
-            self.punten.insert(current_punt, int(ID))  # Key
+            self.punten.insert(current_punt, int(current_punt.getID()))  # Key
+            toets = self.toetsen.retrieve(naam_toets)[1]
+            toets.addPunt(current_punt)
             self.puntenQueue.delete()  # Verwwijder het eerste element van de queue
-        # DONE: de retrieve van een LL geeft een tuple terug ma is da echt nodig?
-        # JHAAAA, alle retrieves returnen een tuple
 
-        toets.addPunt(punt)
-        return return_messages
+        return error, return_messages
 
     def addPuntenLijst(self, ID, type, periode, namecodes, vak_afkorting, klas, uren):
         return_messages = []
@@ -283,6 +296,7 @@ class System:
                                     punt.getStamboekNummer() + " " + str(punt.getWaarde()) + " " +
                                     str(ID))
             self.punten.delete(int(ID))
+            self.dequeuePunten()
         self.instructies.insert("startUndo")
         return True
 
@@ -847,8 +861,12 @@ class System:
         redoStack = [self.redoStack.type, self.redoStack.getLength()]
         instructies = [self.instructies.type, self.instructies.getLength()]
         puntenQueue = [self.puntenQueue.type, self.puntenQueue.getLength()]
+        undolkr = []
+        for leerkracht in self.undoPuntStack:
+            info = [leerkracht[0], leerkracht[1].getLength()]
+            undolkr.append(info)
         return [vakken, leraars, punt, puntenlijst, leerling, rapport, klassen, undoStack, redoStack, instructies,
-                puntenQueue, toetsen]
+                puntenQueue, toetsen, undolkr]
 
     def puntdatatypechange(self, new):
         temp = TabelWrapper(new)

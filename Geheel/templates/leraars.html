@@ -40,6 +40,7 @@
             <tr>
                 <td>Naamcode</td>
                 <td>Naam</td>
+                <td>Stack</td>
                 <td><form></form></td>
             </tr>
         </thead>
@@ -48,6 +49,11 @@
                 <tr>
                     <td>{{ leraar[0] }}</td>
                     <td>{{ leraar[1] }}</td>
+                    <td>
+                       <form action="/viewundo" method="get">
+                        <button name="lkr" type="submit" value={{ leraar[0] }}>View</button>
+                      </form>
+                    </td>
                     <td>
                       <form action="/removeleraar" method="get">
                         <button name="naamcode" type="submit" value={{ leraar[0] }}>Delete</button>
@@ -59,6 +65,7 @@
         <tfoot> <!-- Aparte foot of mee in body steken? -->
             <td><input type="text" name="naamcode"></td>
             <td><input type="text" name="naam"></td>
+            <td></td>
             <td><input type="submit" value="Add"></td>
         </tfoot>
     </table>

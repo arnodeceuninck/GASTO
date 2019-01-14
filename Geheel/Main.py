@@ -51,7 +51,7 @@ while True:
             print(str(geheel.retrieveToets(input("Naam: "))[1]))
         elif input_str == "7":
             geheel.printPunt()
-            print(str(geheel.retrievePunt(input("ID: "))[1]))
+            print(str(geheel.retrievePunt(int(input("ID: ")))[1]))
         elif input_str == "8":
             geheel.buildRapport(input("Samengestelde zoeksleutel TP: "), input("Klas: "))
             print("Done. Je kan het rapport terugvinden tussen je bestanden.")
@@ -74,6 +74,7 @@ while True:
                           "(5) Puntenlijst, "
                           "(6) Toets, "
                           "(7) Punt, "
+                          "(8) Redo,"
                           "(c) Cancel" + '\n')
 
         if input_str == "1":
@@ -108,6 +109,8 @@ while True:
                            input("Naam: "),
                            input("Waarde: "),
                            input("Afkorting leerkracht: "))
+        elif input_str == "8":
+            geheel.redo()
         elif input_str == "c":
             continue  # Ga terug naar het begin van de While-loop
 
@@ -139,7 +142,11 @@ while True:
         elif input_str == "7":
             geheel.deletePunt(input("ID: "))
         elif input_str == "z":
-            geheel.undo()
+            leerkr = input("Leerkracht (optional): ")
+            if leerkr == "":
+                geheel.undo()
+            else:
+                geheel.undo(leerkr)
         elif input_str == "c":
             continue  # Ga terug naar het begin van de While-loop
         pass

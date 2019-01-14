@@ -80,7 +80,7 @@ class TabelWrapper:
         if not self.type_assigned:
             return False
         elif self.type == "stack":
-            return self.dataStructure.push(Stack.Node(value))
+            return self.dataStructure.push(Stack.Node(value, self.dataStructure.getLength()))
         elif self.type == "queue":
             return self.dataStructure.enqueue(key)
         elif self.type == "bst":

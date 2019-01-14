@@ -140,6 +140,9 @@ class circular_chain:
         currentNode = self.head.next
         firstNode = currentNode
 
+        if currentNode == None:
+            return None
+
         # while str(currentNode.value.naam) != string:
         while str(currentNode.key) != str(string):
             index += 1

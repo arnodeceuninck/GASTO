@@ -459,6 +459,16 @@ def logout():
     resp.set_cookie('toetsNaam', '', expires=0)
     return resp
 
+@app.route('/viewundo', methods=["GET"])
+def viewundo():
+    lkr = request.args.get("lkr")
+    stack = geheel.undoPuntStack.retrieve(lkr)[1]
+    png = stack.Print()
+    (graph,) = pydot.graph_from_dot_file(png)  # Bewust een halve tuple gedaan
+    filelocation = "static/" + png + ".png"
+    graph.write_png(filelocation)
+    return render_template("view.html", png=filelocation, login="Admin")
+
 
 @app.route('/ADTchanges', methods=['GET'])
 def ADTchanges():
