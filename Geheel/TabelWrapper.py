@@ -114,7 +114,11 @@ class TabelWrapper:
         elif self.type == "ll":
             return self.dataStructure.retrieve(key)
         elif self.type == "23":
-            return self.dataStructure.retrieve(key) #geeft een tuple terug (bool, TreeItem)
+            value = self.dataStructure.retrieve(key) #geeft een tuple terug (bool, TreeItem)
+            if value[0]:
+                return (value[0], value[1].value)
+            else:
+                return (value[0], None)
         elif self.type == "234":
             return self.dataStructure.retrieve(key)
         elif self.type == "rb":

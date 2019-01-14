@@ -43,9 +43,14 @@ class Toets:
             return False
 
     def removePunt(self, ID):
-        for i in range(len(self.verzamelingVanPunten)-1, -1, -1):
+        # Wat proberen jullie hier zelfs te doen in het deel dat ik gecomment heb????
+        # for i in range(len(self.verzamelingVanPunten)-1, -1, -1):
+        #     if self.verzamelingVanPunten[i].id == ID:
+        #         del self.verzamelingVanPunten[i]
+        for i in range(len(self.verzamelingVanPunten)):
             if self.verzamelingVanPunten[i].id == ID:
-                del self.verzamelingVanPunten[i]
+                self.verzamelingVanPunten.pop(i)
+                break
 
     def getGemiddelde(self):
         totaal = 0

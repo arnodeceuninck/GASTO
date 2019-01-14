@@ -32,12 +32,12 @@
         <li><a class="active" href="/datastructuren">ADT's</a></li>
       </ul>
     </div>
-              <form action="/ADTchanges">
+
     <content>
       <h1>Datastructuren</h1>
 
     <table>
-
+      <form action="/ADTchanges"><form></form>
       <tr><td>
 
       <table border="1">
@@ -308,15 +308,12 @@
 
         <td><button type="submit" name="ADTchanges">commit changes</button></td>
       </tr>
-                      </form>
-      </tbody>
 
+      </tbody>
+    </form>
     </table>
 
-  </content>
-
-
-  <!-- Error messages -->
+    <!-- Error messages -->
     {% with messages = get_flashed_messages() %}
       {% if messages %}
         <ul class=flashes>
@@ -326,5 +323,8 @@
             </ul>
         {% endif %}
     {% endwith %}
+
+  </content>
+
 </body>
 </html>

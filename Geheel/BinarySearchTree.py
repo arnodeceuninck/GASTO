@@ -104,6 +104,8 @@ class BinarySearchTree:
         returns the (sub-)BinarySearchTree with the given key. Recursive
         """
         # base case
+        if self.root == None:
+            return (False, None)
         if self.root.key == searchKey:
             return (True, self.root.item) # item found
         elif searchKey < self.root.key:
@@ -145,6 +147,7 @@ class BinarySearchTree:
         if self.left is not None:
             self.left.inorderTraverse(visit, key)
         if self.root is not None:
+            # debug = self.root.item
             visit(self.root.item, key)
         if self.right is not None:
             self.right.inorderTraverse(visit, key)

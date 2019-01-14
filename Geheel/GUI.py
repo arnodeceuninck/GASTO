@@ -107,7 +107,7 @@ def home():
         return redirect('/login')
 
 # @app.route('/puntenlijst?ID=<ID>')
-@app.route('/puntenlijst')
+@app.route('/puntenlijst', methods=['GET'])
 def puntenlijst():
     if request.cookies.get("type") != encrypt("Leerkracht"):
         flash("Access denied")
@@ -136,7 +136,7 @@ def puntenlijsten():
     naam = leerkracht.getNaam() + " " + leerkracht.getAchternaam()
     return render_template('teacher.html', name=naam, puntenlijsten=geheel.puntenLijstenVanLeerkracht(name), login=naam)
 
-@app.route('/toets')
+@app.route('/toets', methods=['GET'])
 def toets():
     if request.cookies.get("type") != encrypt("Leerkracht"):
         flash("Access denied")
@@ -157,18 +157,19 @@ def toets():
     return resp
 
 
-@app.route('/removepunt')
+@app.route('/removepunt', methods=['GET'])
 def removepunt():
     if request.cookies.get("type") != encrypt("Leerkracht"):
         flash("Access denied")
         return redirect("/login")
 
     ID = request.args.get("ID")
-    geheel.deletePunt(ID)
+    naam = decrypt(request.cookies.get("name"))
+    geheel.deletePunt(ID, naam)
     geheel.save("system.txt")
     return redirect(request.referrer)
 
-@app.route('/removetoets')
+@app.route('/removetoets', methods=['GET'])
 def removetoets():
     if request.cookies.get("type") != encrypt("Leerkracht"):
         flash("Access denied")
@@ -179,7 +180,7 @@ def removetoets():
     geheel.save("system.txt")
     return redirect(request.referrer)
 
-@app.route('/removepuntenlijst')
+@app.route('/removepuntenlijst', methods=['GET'])
 def removepuntenlijst():
     if request.cookies.get("type") != encrypt("Leerkracht"):
         flash("Access denied")
@@ -257,7 +258,7 @@ def addvak():
     geheel.save("system.txt")
     return redirect(request.referrer)
 
-@app.route('/removevak')
+@app.route('/removevak', methods=['GET'])
 def removevak():
     if request.cookies.get("type") != encrypt("System Administrator"):
         flash("Access denied")
@@ -291,7 +292,7 @@ def addleraar():
     geheel.save("system.txt")
     return redirect(request.referrer)
 
-@app.route('/removeleraar')
+@app.route('/removeleraar', methods=['GET'])
 def removeleraar():
     if request.cookies.get("type") != encrypt("System Administrator"):
         flash("Access denied")
@@ -321,7 +322,7 @@ def addklas():
     geheel.save("system.txt")
     return redirect(request.referrer)
 
-@app.route('/removeklas')
+@app.route('/removeklas', methods=['GET'])
 def removeklas():
     if request.cookies.get("type") != encrypt("System Administrator"):
         flash("Access denied")
@@ -356,7 +357,7 @@ def addleerling():
     geheel.save("system.txt")
     return redirect(request.referrer)
 
-@app.route('/removeleerling')
+@app.route('/removeleerling', methods=['GET'])
 def removeleerling():
     if request.cookies.get("type") != encrypt("System Administrator"):
         flash("Access denied")
