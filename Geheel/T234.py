@@ -414,20 +414,20 @@ class T234:
             self.parent.mright= self.parent.right
             self.parent.right = None
 
-    def mergeitemmleft(self, sibling, parent):
-        sibling.item2 = parent.item1
-        parent.item1 = None
-        parent.mleft = None
-        if parent.item2 is not None:
-            parent.item1 = parent.item2
-            parent.item2 = None
-            parent.mleft = parent.mright
-            parent.mright = None
-        if parent.item3 is not None:
-            parent.item2 = parent.item3
-            parent.item3 = None
-            parent.mright = parent.right
-            parent.right = None
+    def mergeitemmleft(self):
+        self.parent.left.item2 = self.parent.item1
+        self.parent.item1 = None
+        self.parent.mleft = None
+        if self.parent.item2 is not None:
+            self.parent.item1 = self.parent.item2
+            self.parent.item2 = None
+            self.parent.mleft = self.parent.mright
+            self.parent.mright = None
+        if self.parent.item3 is not None:
+            self.parent.item2 = self.parent.item3
+            self.parent.item3 = None
+            self.parent.mright = self.parent.right
+            self.parent.right = None
 
     def mergeitemmright(self):
         self.parent.mleft.item2 = self.parent.item2
@@ -451,6 +451,7 @@ class T234:
         self.parent.left.mright = self.parent.left.mleft
         self.parent.left.mleft = self.parent.left.left
         self.parent.left.left = self.left
+        self.left.parent = self.parent.left
         if self.parent.item2 is not None:
             self.parent.item1 = self.parent.item2
             self.parent.item2 = None
@@ -528,6 +529,8 @@ class T234:
             temp = self.left
             self.left = self.left.left
             temp.left = None
+            temp.parent = None
+            del temp
 
         else:
 
@@ -582,7 +585,7 @@ class T234:
                     if self.left is not None:
                         self.mergeInternalmleft()
                     else:
-                        self.mergeitemmleft(self.parent.left, self.parent)
+                        self.mergeitemmleft()
                 elif self.parent.mright == self:
                     if self.left is not None:
                         self.mergeInternalmright()
@@ -598,6 +601,7 @@ class T234:
                 self.parent = None
                 if parent.item1 is None:
                     parent.fixtree()
+                self.left = None # mogelijk een probleem
                 del self
 
 
@@ -853,3 +857,4 @@ class T234:
 
 def createSearchTree():
     return T234(None, None, None, None, None, None, None, None)
+

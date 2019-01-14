@@ -48,3 +48,7 @@ punt HOFKT logaritmes 1800002 9 17
 8 puntenlijst M 2 HOFKT,LAENE ENG 6WEWI 2
 endUndo
 delete 8 puntenlijst M 2 HOFKT,LAENE ENG 6WEWI 2
+startUndo
+endUndo
+ADT punten 234 23
+startUndo

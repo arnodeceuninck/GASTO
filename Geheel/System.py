@@ -666,7 +666,7 @@ class System:
                 self.puntenlijstdatatypechange(words[3])
             if words[1] == "leerlingen":
                 self.leerlingdatatypechange(words[3])
-            if words[1] == "rapport":
+            if words[1] == "rapporten":
                 self.rapportdatatypechange(words[3])
             if words[1] == "klassen":
                 self.klassendatatypechange(words[3])

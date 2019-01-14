@@ -476,9 +476,9 @@ def ADTchanges():
     if punt[0] is None and vakken[0] is None and leraar[0] is None and puntenlijst[0] is None and leerlingen[0] is None and \
             rapport[0] is None and klassen[0] is None and toetsen[0] is None:
         return redirect(request.referrer)
-    geheel.instructies.insert("INSTRUCTIONstart")
+    geheel.instructies.insert("endUndo")
     if punt[0] == "true" and geheel.punten.type != punt[1]:
-        geheel.instructies.insert("ADT punten" + punt[1] + " " + geheel.punten.type)
+        geheel.instructies.insert("ADT punten" + " " + punt[1] + " " + geheel.punten.type)
         geheel.puntdatatypechange(punt[1])
     if leraar[0] == "true" and geheel.leraars.type != leraar[1]:
         geheel.instructies.insert("ADT leraar" + " " + leraar[1] + " " + geheel.leraars.type)
@@ -501,7 +501,7 @@ def ADTchanges():
     if toetsen[0] == "true" and geheel.toetsen.type != toetsen[1]:
         geheel.instructies.insert("ADT toetsen" + " " + toetsen[1] + " " + geheel.toetsen.type)
         geheel.toetsendatatypechange(toetsen[1])
-    geheel.instructies.insert("INSTRUCTIONend")
+    geheel.instructies.insert("startUndo")
     geheel.save("system.txt")
     return redirect(request.referrer)
 
