@@ -5,3 +5,12 @@
 content{
   width: 100%;
 }
+
+#naam{
+  text-align: right;
+}
+
+#knop{
+  text-align: right;
+
+}

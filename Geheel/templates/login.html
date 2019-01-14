@@ -31,12 +31,19 @@
     </header>
     <content>
     <form class="Login" action="/verifylogin" method="post">
-      <label> Naam: </label><br>
-      <input type="text" name="name" placeholder="Rob van Capelle"><br>
-      <label>Wachtwoord: </label><br>
-      <input type="password" name="password" placeholder="Wachtwoord"><br>
-
-      <input class="submit" type="submit" value="Login"><br>
+      <table>
+        <tr>
+          <td  id="naam"><label> Naam: </label></td>
+          <td><input type="text" name="name" placeholder="Rob van Capelle"><br></td>
+        </tr>
+        <tr>
+          <td  id="naam"><label>Wachtwoord: </label></td>
+          <td><input type="password" name="password" placeholder="Wachtwoord"><br></td>
+        </tr>
+        <tr id="knop">
+          <td><input class="submit" type="submit" value="Login"><br></td>
+        </tr>
+      </table>
     </form>
     <!-- Error messages -->
     {% with messages = get_flashed_messages() %}
