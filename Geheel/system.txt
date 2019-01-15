@@ -46,81 +46,10 @@ toets 7 logaritmes 15
 punt HOFKT logaritmes 1800001 13 16
 punt HOFKT logaritmes 1800002 9 17
 8 puntenlijst M 2 HOFKT,LAENE ENG 6WEWI 2
-endUndo
-delete 8 puntenlijst M 2 HOFKT,LAENE ENG 6WEWI 2
-startUndo
-endUndo
-endUndo
-endUndo
-endUndo
-delete punt ADMIN radioactiviteit 1800001 12 6
-startUndo
-delete toets 3 radioactiviteit 15
-startUndo
-delete 3 puntenlijst M 1  FYS 6WEWI 3
-startUndo
-endUndo
-endUndo
-endUndo
-delete punt ADMIN celorganellen 1800001 8 12
-startUndo
-delete toets 5 celorganellen 15
-startUndo
-endUndo
-endUndo
-delete punt ADMIN overerving 1800001 12 10
-startUndo
-delete toets 5 overerving 15
-startUndo
-delete 5 puntenlijst M 1  BIO 6WEWI 2
-startUndo
-delete leraar Tom Hofkens HOFKT
-startUndo
-endUndo
-endUndo
-endUndo
-endUndo
-delete punt ADMIN opstel 1800001 5 4
-startUndo
-delete toets 2 opstel 5
-startUndo
-delete 2 puntenlijst M 1  NED 6WEWI 4
-startUndo
-endUndo
-endUndo
-endUndo
-delete punt ADMIN verbs 1800001 8 14
-startUndo
-delete toets 6 verbs 10
-startUndo
-delete 6 puntenlijst M 1  ENG 6WEWI 2
-startUndo
-delete leraar Els Laenens LAENE
-startUndo
-endUndo
-endUndo
-endUndo
-endUndo
-delete punt ADMIN integralen 1800001 15 2
-startUndo
-delete toets 1 integralen 20
-startUndo
-endUndo
+4.3 puntenlijst M 3 HOFKT WIS 6WEWI 7
 endUndo
 delete punt ADMIN afgeleiden 1800001 5 0
 startUndo
-delete toets 1 afgeleiden 10
-startUndo
-delete 1 puntenlijst M 1  WIS 6WEWI 7
-startUndo
 endUndo
-endUndo
-endUndo
-delete punt ADMIN logaritmes 1800001 13 16
-startUndo
-delete toets 7 logaritmes 15
-startUndo
-delete 7 puntenlijst M 2  WIS 6WEWI 7
-startUndo
-delete leraar Stephen Pauwels PAUWS
+ADT punten 234 23
 startUndo

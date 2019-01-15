@@ -189,7 +189,7 @@ def removepuntenlijst():
         return redirect("/login")
 
     ID = request.args.get("ID")
-    geheel.deletePunt(ID)
+    geheel.deletePuntenlijst(ID)
     geheel.save("system.txt")
     return redirect(request.referrer)
 
