@@ -72,7 +72,10 @@ class BinarySearchTree:
             elif self.left != None and self.right == None:
                 self.root = self.left.root
                 self.left = self.left.left
-                self.right = self.left.right
+                if self.left != None:
+                    self.right = self.left.right
+                else:
+                    self.right = None
                 # Te verwijderen variabele werd zonet overschreven
             else:
                 previous = self
