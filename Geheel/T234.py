@@ -212,14 +212,16 @@ class T234:
                 else: #als de key groter is dan alle andere is het item als laatste
                     self.item2 = treeitem
                     return True
-        elif treeitem.key < self.item1.key:
+        elif treeitem.key < self.item1.key:     #Als we naar de linker boom moeten inserten
             self.left.T234Insert(treeitem)
-        elif self.item2 is None or treeitem.key > self.item1.key and treeitem.key < self.item2.key:
+        elif self.item2 is None or treeitem.key > self.item1.key and treeitem.key < self.item2.key:    #als we naar de mleft tree moeten
             self.mleft.T234Insert(treeitem)
-        elif self.item3 is None or treeitem.key > self.item2.key and treeitem.key < self.item3.key:
+        elif self.item3 is None or treeitem.key > self.item2.key and treeitem.key < self.item3.key:     #als we naar de mright tree moeten
             self.mright.T234Insert(treeitem)
-        elif treeitem.key > self.item3.key:
+        elif treeitem.key > self.item3.key:     # als we in de rechter tree moeten zijn
             self.right.T234Insert(treeitem)
+
+    #we zoeken van elk elment steeds het meest rechtste elementen
 
     def inorder1(self):
         target = self.mleft
@@ -238,6 +240,12 @@ class T234:
         while target.left is not None:
             target = target.left
         return target
+
+    #Voor elke redistribute
+    #We verplaatsen de parent item naar de node
+    #we verplaatsen de sibling node naar de parent
+    #we verschuiven de items in de sibling
+    #als de sibling nog een derde kind heeft dan schuiven we deze ook een plaats op
 
     def redistributeleft(self):
         self.item1 = self.parent.item1
@@ -298,6 +306,15 @@ class T234:
                 self.parent.right.item1 = self.parent.right.item2
                 self.parent.right.item2 = self.parent.right.item3
                 self.parent.mright.item3 = None
+
+    #geld voor alle distributeinternal
+    #we nemen een item van de parent en steken ze in de node
+    #we nemen een item van de sibling en steken deze in de parent
+    #we verplaatsen het kind van de sibling naar de node
+    #we passen de parent pointer aan van dit kind
+    #we schuiven de rest van de kinderen van de sibling op
+    #we kijken of de sibling meer dan 2 items heeft
+    #en verschuiven de rest als dit nodig is
 
     def redistributeInternalleft(self):
         self.item1 = self.parent.item1
@@ -398,6 +415,13 @@ class T234:
             self.parent.mright.right.parent = self
             self.parent.mright.right = None
 
+    #dit geld voor alle merges
+    #we schuiven de elemten op om plaats te maken voor de sibling elementen
+    #we brengen de sibling elementen over naar de parent
+    #we zetten het het kind waar de node stond op None
+    #(we schuiven de sibling op als we het over een mergeleft hebben)
+    #als de parent meerdere items heeft dan schuiven we deze ook op om de juiste structuur te behouden
+
     def mergeitemleft(self):
         self.parent.mleft.item2 = self.parent.mleft.item1
         self.parent.mleft.item1 = self.parent.item1
@@ -444,6 +468,14 @@ class T234:
         self.parent.mright.item2 = self.parent.item3
         self.parent.item3 = None
         self.parent.right = None
+
+    # dit geld voor alle mergeinternals
+    # we schuiven de elemten op om plaats te maken voor de parent elementen
+    # we brengen de parent elementen over naar de sibling
+    # we zetten het het kind waar de node stond op None
+    # (we schuiven de sibling op als we het over een mergeleft hebben)
+    # we brengen de kinderen van de node over naar de sibling en verschuiven deze als het nodig is
+    # als de parent meerdere items heeft dan schuiven we deze ook op om de juiste structuur te behouden
 
     def mergeInternalLeft(self):
         self.parent.mleft.item2 = self.parent.mleft.item1
@@ -508,16 +540,16 @@ class T234:
 
     def fixtree(self):
         if self.parent is None and self.left is None and self.item1 is None:
-            return True
-        if self.parent is None:
-            self.item1 = self.left.item1
+            return True                          #als er geen tree is om de fix op uittevoeren word er true teruggeven
+        if self.parent is None:     #als we in de root zitten en het dus over een lege root hebben
+            self.item1 = self.left.item1    #we brengen alle items van het linker kind over
             self.left.item1 = None
-            if self.left.mleft is not None:
+            if self.left.mleft is not None:    #als het kind zelf ook kinderen heeft worden deze ook overgebracht
                 self.left.mleft.parent = self
                 self.mleft = self.left.mleft
                 self.left.mleft = None
 
-            if self.left.item2 is not None:
+            if self.left.item2 is not None:    #We kijken of het kind meerdere items heeft, zo ja dan voeren we de instructies uit om ze allemaal uit te voeren
                 self.item2 = self.left.item2
                 self.left.item2 = None
                 if self.left.mright is not None:
@@ -543,20 +575,20 @@ class T234:
             else:
                 self.left = None
 
-        else:
+        else:       #als we niet in de root zitten
 
-            if self.parent.left is not None and self == self.parent.left and self.parent.mleft.item2 is not None:
-                if self.left is None:
+            if self.parent.left is not None and self == self.parent.left and self.parent.mleft.item2 is not None:   #als we het over het linker kind hebben en de sibling heeft meerdere items dan zullen we redistributen
+                if self.left is None:       #of de node kinderen heeft of niet zal ook zeggen of er een internal word uitgevoerd of niet
                     self.redistributeleft()
                 else:
                     self.redistributeInternalleft()
 
-            elif self.parent.mleft is not None and self == self.parent.mleft and (self.parent.left.item2 is not None
+            elif self.parent.mleft is not None and self == self.parent.mleft and (self.parent.left.item2 is not None  #als we het over het mlinker kind hebben en een sibling heeft meerdere items dan zullen we redistributen
                                                                              or (self.parent.mright is not None and
                                                                                  self.parent.mright.item2
                                                                                  is not None)):
-                if self.left is None:
-                    if self.parent.left.item2 is not None:
+                if self.left is None: #of de node kinderen heeft of niet zal ook zeggen of er een internal word uitgevoerd of niet
+                    if self.parent.left.item2 is not None:  #we kijken ook welke met welke sibling we kunnen redistributen
                         self.redistributemleft(self.parent.left)
                     elif self.parent.mright is not None and self.parent.mright.item2 is not None:
                         self.redistributemleft(self.parent.mright)
@@ -566,12 +598,12 @@ class T234:
                     elif self.parent.mright is not None and self.parent.mright.item2 is not None:
                         self.redistributeInternalmleft(self.parent.mright)
 
-            elif self.parent.mright is not None and self == self.parent.mright and (self.parent.mleft.item2 is not None
+            elif self.parent.mright is not None and self == self.parent.mright and (self.parent.mleft.item2 is not None #als we het over het mrechter kind hebben en een sibling heeft meerdere items dan zullen we redistributen
                                                                                     or (self.parent.right is not None
                                                                                         and self.parent.right.item2
                                                                                         is not None)):
-                if self.left is None:
-                    if self.parent.mleft is not None:
+                if self.left is None: #of de node kinderen heeft of niet zal ook zeggen of er een internal word uitgevoerd of niet
+                    if self.parent.mleft is not None: #we kijken ook welke met welke sibling we kunnen redistributen
                         self.redistributemright(self.parent.mleft)
                     elif self.parent.right is not None and self.parent.right.item2 is not None:
                         self.redistributemright(self.parent.right)
@@ -581,13 +613,13 @@ class T234:
                     elif self.parent.right is not None and self.parent.right.item2 is not None:
                         self.redistributeInternalmright(self.parent.right)
 
-            elif self.parent.right is not None and self == self.parent.right and self.parent.mright.item2 is not None:
-                if self.left is None:
+            elif self.parent.right is not None and self == self.parent.right and self.parent.mright.item2 is not None: #als we het over het rechter kind hebben en de sibling heeft meerdere items dan zullen we redistributen
+                if self.left is None: #of de node kinderen heeft of niet zal ook zeggen of er een internal word uitgevoerd of niet
                     self.redistributeright()
                 else:
                     self.redistributeInternalright()
-            else:
-                if self.parent.left == self:
+            else:   #als we geen redistrubet kunnen uitvoeren dan gaan we mergen
+                if self.parent.left == self:        #we kijken met welk kind de node overeenkomt en of ze kinderen heeft om op de juiste plek te mergen of internal te mergen
                     if self.left is not None:
                         self.mergeInternalLeft()
                     else:
@@ -608,18 +640,18 @@ class T234:
                     else:
                         self.mergeitemmright()
 
-                parent = self.parent
+                parent = self.parent            #we kijken naar de parent
                 self.parent = None
-                if parent.item1 is None:
+                if parent.item1 is None:        #als de parent geen items meer heeft dan gaan we de fix op de parent uitvoeren
                     parent.fixtree()
-                self.left = None # mogelijk een probleem
+                self.left = None                # we verwijderen de nu lege node
                 del self
 
 
     def T234Delete(self, key):
-        if self.item1.key == key:
-            if self.left is None:
-                if self.item2 is None:
+        if self.item1.key == key:           #als het te delete item op de eerste locatie zit dan delete we deze
+            if self.left is None:           #als er geen kinderen zijn is er geen probleem
+                if self.item2 is None:      # we kijken hoevelee elementen er na deleteitem komt en schuiven ze op
                     self.item1 = None
                 elif self.item3 is not None:
                     self.item1 = self.item2
@@ -628,14 +660,15 @@ class T234:
                 else:
                     self.item1 = self.item2
                     self.item2 = None
-            else:
-                inordernode = self.inorder1()
-                temp = self.item1
+            else:       #als er wel kinderen zijn moeten we de inorder succesor vinden
+                inordernode = self.inorder1()       #we zoeken de inorder succesor
+                temp = self.item1                   # we swapppen het item
                 self.item1 = inordernode.item1
                 inordernode.item1 = temp
-                inordernode.T234Delete(key)
+                inordernode.T234Delete(key)         #we delete het item nu in het blad
+                                                    #dit herhaalt zich voor de andere items
 
-            if self.item1 is None:
+            if self.item1 is None:                  #als de node hierdoor nu leeg is dan word de boom gehersgtructeerd
                 self.fixtree()
 
         elif self.item2 is not None and self.item2.key == key:
@@ -661,7 +694,7 @@ class T234:
                 self.item2 = inordernode.item1
                 inordernode.item1 = temp
                 inordernode.T234Delete(key)
-        elif key < self.item1.key:
+        elif key < self.item1.key:          # we kijken in welke boom we moeten deleten
             self.left.T234Delete(key)
 
         elif self.item2 is None or key < self.item2.key:
@@ -674,13 +707,13 @@ class T234:
             self.right.T234Delete(key)
 
     def retrieve(self, key):
-        if self.item1 is not None and self.item1.key == key:
+        if self.item1 is not None and self.item1.key == key:            # we kijken of het gewenste item in het blad zit
             return (True, self.item1.item)
         elif self.item2 is not None and self.item2.key == key:
             return (True, self.item2.item)
         elif self.item3 is not None and self.item3.key == key:
             return (True, self.item3.item)
-        elif self.left is not None and key < self.item1.key:
+        elif self.left is not None and key < self.item1.key:            # zo niet dan gaan we verder in de boom zoeken
             return self.left.retrieve(key)
 
         elif self.mleft is not None and (self.item2 is None or key < self.item2.key):
@@ -696,7 +729,7 @@ class T234:
             return (False, None)
 
     def getRoot(self):
-        if self.item1 is None:
+        if self.item1 is None:      # we geven de items van de root terug
             return
         elif self.item2 is None:
             return tuple(self.item1)
@@ -706,8 +739,8 @@ class T234:
             return tuple(self.item1, self.item2, self.item3)
 
     def print(self, nummer):
-        f = open(nummer, "w")
-        f.write("digraph 234{")
+        f = open(nummer, "w")           #we opennen een nieuwe bestand met als naam de variabele nummer
+        f.write("digraph 234{")         # we zetten het begin klaar
         f.write(str("node [shape=record];") + '\n')
         f.write(str("edge[splines=" + "line" + "];" + '\n'))
         if not self.isEmpty():
@@ -716,7 +749,7 @@ class T234:
         f.close()
 
     def dotread(self, file):
-        if self.item3 is not None:
+        if self.item3 is not None:      #voor elk item in de node schrijven we waar het staat met de left middle right
             file.write(str(self.item1.key) + str("[label=" + '"' + "<left> " + str(self.item1.key) +
                                                  "|<middle> " + str(self.item2.key) + "|<right> " + str(self.item3.key) +
                                                  '"' + "];") + '\n')
@@ -728,7 +761,7 @@ class T234:
         else:
             return
 
-        if self.left is not None:
+        if self.left is not None:       # voor elke connectie word er een -> tussen de nodes gezet
             self.left.dotread(file)
             file.write(str(self.item1.key) + " -> " + str(self.left.item1.key) + ";" + '\n')
 
@@ -745,7 +778,7 @@ class T234:
             file.write(str(self.item1.key) + "-> " + str(self.right.item1.key) + ";" + '\n')
 
     def destroySearchtree(self):
-        if self.left is not None:
+        if self.left is not None:               # we gaan elk kind van de boom af en maken de nodes ervan kapot
             self.left.destroySearchtree()
 
         if self.mleft is not None:
@@ -763,7 +796,7 @@ class T234:
         self.inorderTraversal(visit, key)
 
     def inorderTraversal(self, visit, key=None):
-        if self.left is not None:
+        if self.left is not None:                       #gaat de boom in een inorder manier af en past de functie erop toe
             self.left.inorderTraversal(visit, key)
         if self.item1 is not None:
             visit(self.item1.item, key)
@@ -779,7 +812,7 @@ class T234:
             self.right.inorderTraversal(visit, key)
 
     def preorderTraversal(self, visit, key=None):
-        if self.item1 is not None:
+        if self.item1 is not None:          #gaat de boom in een preorder manier af en past de functie erop toe
             visit(self.item1.item, key)
         if self.left is not None:
             self.left.preorderTraversal(visit, key)
@@ -795,7 +828,7 @@ class T234:
             self.right.preoderTraversal(visit, key)
 
     def postorderTraversal(self, visit, key=None):
-        if self.left is not None:
+        if self.left is not None:           #gaat de boom in een postorder manier af en past de functie erop toe
             self.left.postorderTraversal(visit, key)
         if self.mleft is not None:
             self.mleft.postorderTraversal(visit, key)
@@ -812,23 +845,23 @@ class T234:
 
     def getIndex(self, index):
         temp = index
-        if self.item1 is not None:
+        if self.item1 is not None:      # als er een item op 1 staat en de index is niet 0 dan gaat er 1 van de index af
             if index == 0:
                 return (self.item1, index)
             temp = index - 1
-        if self.item2 is not None:
+        if self.item2 is not None:      # als er een item op 2 staat en de index is niet 0 dan gaat er 1 van de index af
             if index == 1:
                 return (self.item2, index)
             temp -= 1
-        if self.item3 is not None:
+        if self.item3 is not None:      # als er een item op 3 staat en de index is niet 0 dan gaat er 1 van de index af
             if index == 2:
                 return (self.item3, index)
             temp -= 1
-        index = temp
+        index = temp                    #als het item nog niet gevonden is dan zal de index aangepas worden
         if self.left != None:
-            returned = self.left.getIndex(index)
-            index = returned[1]
-            if returned[0] != None:
+            returned = self.left.getIndex(index)       # we gaan naar het linkerkind
+            index = returned[1]         #de index word aangepast naar het aantal elementen dat in de linker boom doorlopen zijn
+            if returned[0] != None:     #als er iets staat op de 1ste plek van het tuple dan hebben we onze waarde gevonden
                 return returned
         if self.mleft != None:
             returned = self.mleft.getIndex(index)
@@ -845,17 +878,17 @@ class T234:
             index = returned[1]
             if returned[0] != None:
                 return returned
-        return (None, index)
+        return (None, index)                #als we niets hebben gevonden word er None terug gegeven en de index
 
     def size(self):
-        size = 0
-        if self.item3 is not None:
+        size = 0                    # we zetten de size op 0 om te beginnen
+        if self.item3 is not None:  # als we een 3de item is dan zetten we de size op 3
             size = 3
-        elif self.item2 is not None:
+        elif self.item2 is not None: #als we een 2de item is dan zetten we de size op 2
             size = 2
-        elif self.item1 is not None:
+        elif self.item1 is not None: #als we een 1ste item is dan zetten we de size op 1
             size = 1
-        if self.left is not None:
+        if self.left is not None:   # we tellen de groote van alle bomen bij de size op
             size += self.left.size()
         if self.mleft is not None:
             size += self.mleft.size()
