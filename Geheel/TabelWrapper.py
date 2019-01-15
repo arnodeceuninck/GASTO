@@ -125,7 +125,7 @@ class TabelWrapper:
         elif self.type == "hlin" or self.type == "hquad":
             return self.dataStructure.retrieve(key) #enkel voor lin en quad, sep heeft ook item nodig
         elif self.type == "hsep":
-            return self.dataStructure.retrieve(key, value)
+            return self.dataStructure.retrieve(key)
         elif self.type == "heap":
             print("Retrieve is niet mogelijk bij een heap")  # Not implemented
             return False
