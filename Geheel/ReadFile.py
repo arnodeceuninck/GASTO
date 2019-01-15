@@ -132,7 +132,7 @@ def readLine(line, geheel):
             geheel.puntenlijstdatatypechange(words[2])
         if words[1] == "leerlingen":
             geheel.leerlingdatatypechange(words[2])
-        if words[1] == "rapport":
+        if words[1] == "rapporten":
             geheel.rapportdatatypechange(words[2])
         if words[1] == "klassen":
             geheel.klassendatatypechange(words[2])
