@@ -274,11 +274,13 @@ class System:
         return return_messages
 
     def deletePunt(self, ID, leerkracht=None):
-        self.instructies.insert("endUndo")
+
         # verwijdert een eerder aangemaakt punt
         # self.toetsen.traverse(self.puntenDetect, ID)
         punt = self.punten.retrieve(int(ID))
+
         if punt[0]:
+            self.instructies.insert("endUndo")
             punt = punt[1]
             toets = self.retrieveToets(punt.getNaam())
             if toets[0]:
@@ -297,7 +299,28 @@ class System:
                                     str(ID))
             self.punten.delete(int(ID))
             self.dequeuePunten()
-        self.instructies.insert("startUndo")
+            self.instructies.insert("startUndo")
+        else:
+            newQueue = TabelWrapper("queue")
+            while not self.puntenQueue.isEmpty():
+                punt = self.puntenQueue.delete()[0]
+                if int(punt.getID()) == int(ID):
+                    self.instructies.insert("endUndo")
+                    if leerkracht != None:
+                        leerkr_stack = self.undoPuntStack.retrieve(leerkracht)[1]
+                        leerkr_stack.insert("delete punt " + leerkracht + " " +
+                                            punt.getNaam() + " " +
+                                            punt.getStamboekNummer() + " " + str(punt.getWaarde()) + " " +
+                                            str(ID))
+
+                    self.instructies.insert("delete punt ADMIN " +
+                                            punt.getNaam() + " " +
+                                            punt.getStamboekNummer() + " " + str(punt.getWaarde()) + " " +
+                                            str(ID))
+                    self.instructies.insert("startUndo")
+                else:
+                    newQueue.insert(punt)
+            self.puntenQueue = newQueue
         return True
 
     def deleteVak(self, afkorting):
@@ -330,16 +353,17 @@ class System:
             print("ERROR: Klas" + naam + "Zit niet in het systeem")
 
     def deleteLeerling(self, key):
-        self.instructies.insert("endUndo")
-        # de punten die gelinkt zijn aan het stamboom nummer verwijderen
-        self.puntenstamboomdeleter(key)
+
         leerling = self.leerlingen.retrieve(key)
         if leerling[0]:
+            self.instructies.insert("endUndo")
+            # de punten die gelinkt zijn aan het stamboom nummer verwijderen
+            self.puntenstamboomdeleter(key)
             leerling = leerling[1]
             self.leerlingen.delete(key)
             self.instructies.insert("delete leerling " + leerling.getVoornaam() + " " + leerling.getNaam() + " " +
                                     leerling.getKlas() + " " + leerling.getKlasNummer() + " " + leerling.getNummer())
-        self.instructies.insert("startUndo")
+            self.instructies.insert("startUndo")
 
     #TODO: alle deletes op deze manier doen
     def puntenstamboomdeleter(self, stamboomnummer):
@@ -352,9 +376,9 @@ class System:
         return
 
     def deletePuntenlijst(self, key):
-        self.instructies.insert("endUndo")
         puntenlijst = self.puntenlijst.retrieve(key)
         if puntenlijst[0]:
+            self.instructies.insert("endUndo")
             for i in range(len(puntenlijst[1].getToetsen()) - 1, -1, -1):
                 self.deleteToets(puntenlijst[1].toetsen[i].getNaam())
             self.instructies.insert("delete " + puntenlijst[1].getID() + " puntenlijst " + puntenlijst[1].getType() + " " +
@@ -362,12 +386,12 @@ class System:
                                     str(puntenlijst[1].getVakcode()) + " " + puntenlijst[1].getKlas() + " " +
                                     puntenlijst[1].getUren())
             self.puntenlijst.delete(key)
-        self.instructies.insert("startUndo")
+            self.instructies.insert("startUndo")
 
     def deleteToets(self, naam):
-        self.instructies.insert("endUndo")
         toets = self.retrieveToets(naam)
         if toets[0]:
+            self.instructies.insert("endUndo")
             for punt in toets[1].getVerzamelingVanPunten():
                 self.deletePunt(punt.getID())
             self.puntenlijst.traverse(self.puntenlijstToetsenDetect, naam)
@@ -375,12 +399,12 @@ class System:
             self.instructies.insert("delete toets " + str(toets.getPuntenlijst()[1].getID()) + " " + toets.getNaam() + " " +
                                     toets.getMaximum())
             self.toetsen.delete(naam)
-        self.instructies.insert("startUndo")
+            self.instructies.insert("startUndo")
 
     def deleteLeraar(self, naam):
-        self.instructies.insert("endUndo")
         leraar = self.retrieveLeeraar(naam)
         if leraar[0]:
+            self.instructies.insert("endUndo")
             self.puntenlijstleerkrachtdeleter(naam)
             leraar = leraar[1]
             self.instructies.insert("delete leraar " + leraar.getNaam() + " " + leraar.getAchternaam() + " " +
@@ -401,11 +425,6 @@ class System:
                 if puntenlijst[1].getNameCodes()[i] == naam:
                     self.puntenlijstleerkrachtdeleter(naam)
         return
-
-    def removeAllPunten(self):
-        # Verwijdert alle punten in het systeem (in theorie nooit nodig)
-        self.punten.destroy()
-        # Cannot be undone (Wrm hebben wij deze functie zelfs?)
 
     def collector(self, item, key):
         # debug = item.getStamboekNummer()

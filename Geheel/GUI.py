@@ -31,6 +31,8 @@ def encrypt(str):
 # Gebruik deze functie zo weinig mogelijk
 # encrypt(a) = encrypt(b) <=> a=b, enrypt dus liever het 2e lid, dan het eerste te decrypten
 def decrypt(str):
+    if str is None:
+        str = "None"
     decryption = ""
     offset = len(str)*len(str)-len(str)
     i = 1
