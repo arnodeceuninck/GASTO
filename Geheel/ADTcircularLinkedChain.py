@@ -191,14 +191,3 @@ class circular_chain:
 
 def createList():
     return circular_chain()
-
-# chain = circular_chain()
-# chain.insert(0, "first")
-# chain.insert(0, "newFirst")
-# chain.insert(1, "second")
-# chain.insert(2, "third")
-# chain.insert(3, "fourth")
-# chain.insert(4, "fifth")
-# chain.delete(chain.getLength()-1)
-# chain.visualize()
-#
