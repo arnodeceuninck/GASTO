@@ -34,7 +34,7 @@ class T234:
             self = self.parent
 
     def isEmpty(self):
-        if self.item1 is None and self.item2 is None and self.item3 is None and self.left is None and self.parent is None:
+        if self.item1 is None and self.item2 is None and self.item3 is None and self.left is None:
             return True                 #als de boom geen items, kinderen en parent heeft returned de functie true
         return False
 
@@ -183,33 +183,33 @@ class T234:
 
 
     def T234Insert(self, treeitem):
-        if self.isEmpty():
+        if self.isEmpty():  #als de boom leeg is dan maken we een node aan
             self.item1 = treeitem
             return True
         if self.item1 is not None and self.item2 is not None and self.item3 is not None:
-            self.split()
-            if self.parent is not None:
+            self.split()        #als we een 4-node tegekomen bij het inserten zullen we deze splitten omde structuur te behouden
+            if self.parent is not None:     #we gaan terug naar de parent omdat de structuur van de boom is veranderd
                 self = self.parent
-        if self.left is None:
-            if self.item2 is not None:
-                if treeitem.key < self.item1.key:
-                    self.item3 = self.item2
+        if self.left is None:   #als we geen kinderen hebben
+            if self.item2 is not None: #als er een 2de element is
+                if treeitem.key < self.item1.key:   # als het item voor het huidige eerste item moet
+                    self.item3 = self.item2     # De items worden opgeschoven
                     self.item2 = self.item1
                     self.item1 = treeitem
                     return True
-                elif treeitem.key < self.item2.key:
+                elif treeitem.key < self.item2.key: #als het item in het middem moet staan
                     self.item3 = self.item2
                     self.item2 = treeitem
                     return True
-                else:
+                else:   #als de key groter is dan alle andere is het item als laatste
                     self.item3 = treeitem
                     return True
-            else:
-                if treeitem.key < self.item1.key:
+            else: #als er maar 1 element is
+                if treeitem.key < self.item1.key: # als het item voor het huidige eerste item moet
                     self.item2 = self.item1
                     self.item1 = treeitem
                     return True
-                else:
+                else: #als de key groter is dan alle andere is het item als laatste
                     self.item2 = treeitem
                     return True
         elif treeitem.key < self.item1.key:
