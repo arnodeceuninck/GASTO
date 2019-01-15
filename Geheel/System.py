@@ -755,20 +755,28 @@ class System:
         elif words[0] == "ADT":
             if words[1] == "punten":
                 self.puntdatatypechange(words[3])
+                self.instructies.delete()
             if words[1] == "leraar":
                 self.leraardatatypechange(words[3])
+                self.instructies.delete()
             if words[1] == "vakken":
                 self.vakkendatatypechange(words[3])
+                self.instructies.delete()
             if words[1] == "ADTpuntenlijst":
                 self.puntenlijstdatatypechange(words[3])
+                self.instructies.delete()
             if words[1] == "leerlingen":
                 self.leerlingdatatypechange(words[3])
+                self.instructies.delete()
             if words[1] == "rapporten":
                 self.rapportdatatypechange(words[3])
+                self.instructies.delete()
             if words[1] == "klassen":
                 self.klassendatatypechange(words[3])
+                self.instructies.delete()
             if words[1] == "toetsen":
                 self.toetsendatatypechange(words[3])
+                self.instructies.delete()
 
         elif words[0] == "delete":
             self = readLine(vorige_instructie[7:], self)
