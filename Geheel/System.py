@@ -142,9 +142,7 @@ class System:
                      str(stamboeknummer_leerling) + " " + str(Waarde) + " " + str(ID)
         self.instructies.insert(instructie)
         stack_leerkr = self.undoPuntStack.retrieve(leerkracht)
-        # if not stack_leerkr[0]:
-        #     self.undoPuntStack.insert(TabelWrapper("stack"), leerkracht)
-        #     stack_leerkr = self.undoPuntStack.retrieve(leerkracht)
+
         if stack_leerkr[1]: # Moet niet bij ADMIN
             stack_leerkr = stack_leerkr[1]
             stack_leerkr.insert(instructie)
@@ -171,11 +169,8 @@ class System:
         self.puntenQueue.insert(punt)
         dequeue_result = self.dequeuePunten()
         if dequeue_result[0]:
-            # er waren errors
             return_messages += dequeue_result[1]
             return return_messages
-        # DONE: de retrieve van een LL geeft een tuple terug ma is da echt nodig?
-        # JHAAAA, alle retrieves returnen een tuple
 
         return return_messages
 
@@ -509,9 +504,6 @@ class System:
 
     def retrieveLeeraar(self, afkorting):
         return self.leraars.retrieve(afkorting)
-
-    # def retrieveKlas(self, naam):   #waarom 2 keer retrieveKlas??
-    #     return naam
 
     def retrieveVak(self, afkorting):
         return self.vakken.retrieve(afkorting)
