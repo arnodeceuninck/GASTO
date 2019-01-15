@@ -21,9 +21,19 @@
 // Precondition: Je wilt controleren of een leerkracht toestemming heeft om punten in te geven.
 // Postcondition: Geeft True terug indien de leerkracht toestemming heeft en False terug indien niet.
 
++puntMetIDExist(ID: string) boolean
+// Precondition: Je wilt weten of een  punt bestaat met de ID: ID.
+// Postcondition: Geeft True terug indien er een punt bestaat met ID: ID,
+// indien er geen punt bestaat met ID: ID geeft het False terug
+
 +addPunt(stamboeknummer_leerling: integer, naam_toets: string, Waarde: integer, leerkracht: leerkracht)
 // Precondition: Je wilt een punt toevoegen aan een toets.
 // Postcondition: Voegt een punt toe aan de toets met naam_toets: naam_toets en stamboeknummer_leerling. stamboeknummer_leerling, met waarde: waarde.
+
++dequeuePunten():   (boolean, string)
+// Precondition: Je wilt een punt verwijderen dat je juist hebt ingevoerd
+// Postcondition:   Verwijdert het punt en geeft een tuple terug met een boolean en een message.
+// boolean is True indien het succesvol is.
 
 +addPuntenLijst(ID: string, type: string, periode: string, namecodes: string, vak_afkorting: string, klas: klas, uren: integer)
 // Precondition: Je wilt een puntenlijst toevoegen.
@@ -39,6 +49,11 @@
 // Precondition: Je wilt een punt verwijderen met ID: ID
 // Postcondition: Er is een punt verwijdert met ID: ID.
 
++deleteVak(string: afkorting) boolean
+// Precondition: Je wilt een vak verwijderen.
+// Postcondition: Geeft True terug indien het vak succesvol is verwijdert,
+// geeft false terug indien het niet succesvol was.
+
 +deleteKlas(naam: string)
 // Precondition: Je wilt een klas verwijderen met naam: naam.
 // Postcondition: Er is een klas verwijdert met naam: naam.
@@ -47,17 +62,46 @@
 // Precondition: je wilt leerling verwijderen met key: key.
 // Postcondition: Een leerling is verwijdert met key: key.
 
++puntenstamboomdeleter(int: stamboomnummer)
+// Precondition: Je wilt alle punten van leerling met stamboomnummer: stamboomnummer.
+// Postoncondition: Alle punten worden verwijdert met stamboomnummer: stamboomnummer.
+
 +deletePuntenlijst(key: integer)
 // Precondition: Je wilt een puntenlijst verwijderen met key: key.
 // Postcondition: Er is een puntenlijst verwijderen met key: key.
+
++deleteToets(string: naam)
+// Precondition: Je wilt een toets verwijderen met naam: naam.
+// Postondition: de toets met naam: naam is verwijdert.
 
 +deleteLeraar(naam: string)
 // Precondition: Je wilt een leraar verwijderen met naam: naam.
 // Postcondition: Er is een leraar verwijdert met naam: naam.
 
-+removeAllPunten()
-// Precondition: Je wilt alle punten in het systeem verwijderen.
-// Postcondition: Alle punten worden uit het systeem verwijdert.
++puntenlijstleerkrachtdeleter(string: naam)
+// Precondition: Je wilt de naam van de leerkracht verwijderen uit alle puntenlijsten.
+// Postcondition: De naam: naam wordt verwijdert uit de puntenlijsten en indien er geen naam meer is
+// wordt de puntenlijst verwijdert.
+
++collector(item: item, int: key) boolean
+// Precondition: zoekt de punten die je wilt verwijderen
+// Postcondition: verwijdert de gezochte punten.
+
++puntenlijstVakDelete(item: item, int: key)
+// precondition: Je wilt de puntenlijsten van een vak verwijderen.
+// Postcondition: Verwijdert de puntenlijsten van het vak met key: key
+
++puntenlijstKlasdelete(item: item, int: key)
+// precondition: Je wilt de puntenlijsten van een klas verwijderen.
+// Postcondition: Verwijdert de puntenlijsten van de klas met key: key
+
++leerlingKlasdelete(item: item, int: key)
+// precondition: Je wilt de leerlingen van een klas verwijderen.
+// Postcondition: Verwijdert de leerlingen van de klas met key: key
+
++rapportKlasdetect(item: item, int: key)
+// precondition: Je wilt de rapporten van een klas verwijderen.
+// Postcondition: Verwijdert de rapporten van de klas met key: key
 
 +retrievePunt(key: integer)
 // Precondition: Je wilt een punt ophalen met key: key.
@@ -97,31 +141,47 @@
 
 +printPunt()
 // Precondition: Je wilt een dotfile maken van een punt.
-// Postcondition: Maakt een dotfile aan van een punt:
+// Postcondition: Maakt een dotfile aan van een punt.
 
 +printToets()
 // Precondition: Je wilt een dotfile maken van een Toets.
-// Postcondition: Maakt een dotfile aan van een Toets:
+// Postcondition: Maakt een dotfile aan van een Toets.
 
 +printKlas()
 // Precondition: Je wilt een dotfile maken van een Klas.
-// Postcondition: Maakt een dotfile aan van een Klas:
+// Postcondition: Maakt een dotfile aan van een Klas.
 
 +printPuntenlijst()
 // Precondition: Je wilt een dotfile maken van een Puntenlijst.
-// Postcondition: Maakt een dotfile aan van een Puntenlijst:
+// Postcondition: Maakt een dotfile aan van een Puntenlijst.
 
 +printLeerling()
 // Precondition: Je wilt een dotfile maken van een Leerling.
-// Postcondition: Maakt een dotfile aan van een Leerling:
+// Postcondition: Maakt een dotfile aan van een Leerling.
 
 +printLeeraar()
 // Precondition: Je wilt een dotfile maken van een Leeraar.
-// Postcondition: Maakt een dotfile aan van een Leeraar:
+// Postcondition: Maakt een dotfile aan van een Leeraar.
 
 +printVak()
 // Precondition: Je wilt een dotfile maken van een Vak.
-// Postcondition: Maakt een dotfile aan van een Vak:
+// Postcondition: Maakt een dotfile aan van een Vak.
+
++printRapport()
+// Precondition: Je wilt een dotfile maken van een rapport.
+// Postcondition: Maakt een dotfile aan van een rapport.
+
++printUndo()
+// Precondition: Je wilt een dotfile maken van de Undo.
+// Postcondition: Maakt een dotfile aan van de Undo.
+
++printRedo()
+// Precondition: Je wilt een dotfile maken van de Redo.
+// Postcondition: Maakt een dotfile aan van de Redo.
+
++printQueue()
+// Precondition: Je wilt een dotfile maken van de Queue.
+// Postcondition: Maakt een dotfile aan van de Queue.
 
 +printInstructies()
 // Precondition: Je wilt een dotfile maken van Instructies.
@@ -131,10 +191,14 @@
 // Precondition: Je wilt een undo omkeren.
 // Postcondition: De Undo is omgekeerd.
 
++fixRedoStack()
+// Precondition: Je wilt de stack omdraaien
+// Postcondition: De stack wordt omgedraaid.
+
 +undo(leerkr: leerkracht or None)
 // Precondition: Je wilt een insert undoen
 // Postcondition: het laatste item dat geinsert is wordt verwijdert
 
-save(filename: string)
++save(filename: string)
 // Precondition: Je wilt alle waarden opslaan in txt bestand.
 // Postcondition: Savet alle waarden in een txt bestand met naam filename.

@@ -44,7 +44,6 @@ class TabelWrapper:
             return False
         else:
             self.type = structure_type
-            # return self.dataStructure
         if not self.type_assigned:
             return False
         elif self.type == "stack":
@@ -209,23 +208,18 @@ class TabelWrapper:
             return False
         elif self.type == "stack":
             return self.dataStructure.getLength()
-            # return self.dataStructure.getLength()
         elif self.type == "queue":
             return self.dataStructure.getLength()
-            # return self.dataStructure.getLength()
         elif self.type == "bst":
             return self.dataStructure.size()
-            # return self.dataStructure.getLength()
         elif self.type == "cl":
             return self.dataStructure.getLength()
         elif self.type == "ll":
             return self.dataStructure.getLength()
         elif self.type == "23":
             return self.dataStructure.size()
-            # return self.dataStructure.getLength()
         elif self.type == "234":
             return self.dataStructure.size()
-            # return self.dataStructure.getLength()
         elif self.type == "rb":
             return self.dataStructure.size()
         elif self.type == "hlin" or self.type == "hquad" or self.type == "hsep":
@@ -303,29 +297,3 @@ class TabelWrapper:
             count += 1
             string = self.type + '-' + str(count) + ".dot"
 
-# bob = Dubbelgelinktelijst.createLinkedChain()
-# bob.insert(Dubbelgelinktelijst.Node(70, 1))  # Value - key
-#
-# bob2 = TabelWrapper("234")
-# bob2.insert(70, 1)  # Value - key
-#
-# bob.destroyList()
-# bob2.destroy()
-#
-#
-# bob3 = TabelWrapper("bst")
-# bob3.insert("tien", 10)
-# bob3.insert("twee", 2)
-# bob3.insert("vier", 4)
-#
-# # bob3.traverse(print)
-#
-# iterator = iter(bob3)
-# print(next(iterator)[0])
-# print(next(iterator)[0])
-# print(next(iterator)[0])
-# print()
-#
-# for root in bob3:
-#     print(root[0])
-# pass

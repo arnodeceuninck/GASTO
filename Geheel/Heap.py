@@ -61,12 +61,6 @@ class HeapNode:
         self.right_tree = None
         self.root = None
 
-    # Niet meer nodig omdat de root van de top alleen verandert, en niet de top zelf
-    # def findNewTop(self):
-    #     if(self.parent == None):
-    #         return self
-    #     else: return self.parent.findNewTop()
-
     def destroy(self):
         self.parent = None
         self.left_tree = None
@@ -223,17 +217,3 @@ class HeapNode:
 
 def createHeap():
     return Heap()
-
-# hoera = createHeap() # Heap heap heap, Hoera!
-# hoera.insert(KeyValueItem(5, "vijf"))
-# hoera.insert(KeyValueItem(4, "vier"))
-# hoera.insert(KeyValueItem(2, "twee"))
-# hoera.insert(KeyValueItem(3, "drie"))
-# hoera.insert(KeyValueItem(6, "zes"))
-# hoera.insert(KeyValueItem(7, "zeven"))
-# hoera.insert(KeyValueItem(8, "acht"))
-# hoera.insert(KeyValueItem(9, "negen"))
-# hoera.insert(KeyValueItem(10, "tien"))
-# hoera.remove()
-# hoera.visualize()
-# pass
