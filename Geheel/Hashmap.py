@@ -3,6 +3,7 @@ class TreeItem():
         self.item = item
         self.key = key
         self.next = None
+        self.prev = None
 
 class Hashmap():
     def __init__(self, size, type):
@@ -10,7 +11,7 @@ class Hashmap():
         self.hashTable = [None] * (self.tableSize)
         self.step = 1
         self.type = type  # 1 lineair, 2 quadratic, 3 bucketing
-        self.count = 0
+        self.count = 0      #houden een count bij zodat er niet meer geinsert kan worden dan de hashmap groot is
 
     def __iter__(self):
         self.index = 0
@@ -37,8 +38,9 @@ class Hashmap():
             else:
                 self.index += 1
                 return index_place.key, index_place.item
-            
+
     def hashf(self, key):
+        """ Als de key een woord is dan gaan we de hashfunctie nemen van het totaal van alle ascii codes """
         num = 0
         if type(key) != int:
             for char in key:
@@ -48,6 +50,7 @@ class Hashmap():
             return key % self.tableSize
 
     def herHashf(self, key):
+        """ Deze functie wordt gebruikt bij lineair of quadratic probing, wanneer een element op een bezete index komt """
         num = 0
         if type(key) != int:
             for char in key:
@@ -59,19 +62,35 @@ class Hashmap():
         elif self.type == 2:
             return int((key + (self.step)**2) % self.tableSize)
 
+
+    def insert(self, key, item):
+        self.count += 1
+        if self.type == 3:      #bij seperate chaining gebruiken we een andere insert functie
+            self.ll_insert(item, key)
+        elif self.count < self.tableSize + 1:
+            treeItem = TreeItem(item, key)
+            self.step = 1
+            self.hashTable[self.getPosition(key)] = treeItem    #getPosition wordt aangeroepen om de juiste positie te bepalen waar een item moet komen
+                                                                #en op deze locatie wordt dan het item toegevoegd
+        else:
+            print("Je kan maximaal %s items inserten! Item (%s, %s) is niet geinsert geweest." %(self.tableSize, key, item))
+            self.count -= 1
+
     def ll_insert(self, item, key):
         treeItem = TreeItem(item, key)
         index = self.hashf(key)
-        if self.hashTable[index] == None:
+        if self.hashTable[index] == None:       #als er niets op de eerst bekomen index zit, wordt het item hier toegevoegd
             self.hashTable[index] = treeItem
         else:
-            if self.hashTable[index].next == None:
+            if self.hashTable[index].next == None:      #als de bezette index niet gekoppeld is aan een item gaan we het item hieraan toevoegen
                 self.hashTable[index].next = treeItem
+                self.hashTable[index].next.prev = self.hashTable[index]
             else:
-                self.nu = self.hashTable[index].next
+                self.nu = self.hashTable[index].next    #extra var aangemaakt zodat we makkelijk kunnen loopen door de lijst
                 while True:
-                    if self.nu.next == None:
+                    if self.nu.next == None:            #de loop blijft doorgaan totdat we een node hebben gevonden waar nog geen item is
                         self.nu.next = treeItem
+                        self.nu.next.prev = self.nu
                         return False
                     self.nu = self.nu.next
 
@@ -80,23 +99,26 @@ class Hashmap():
         if self.hashTable[index] == None:
             return (False, None) # Not found
         elif self.hashTable[index].key == key:
+            print(True, self.hashTable[index].item)
             return (True, self.hashTable[index].item)
         else:
             currentItem = self.hashTable[index]
             while currentItem.next is not None:
                 currentItem = currentItem.next
                 if currentItem.key == key:
+                    print(True, currentItem.item)
                     return (True, currentItem.item)
+            print(False, None)
             return (False, None)
 
 
     def getPosition(self, key):
         index = self.hashf(key)
-        if self.hashTable[index] == None:
+        if self.hashTable[index] == None:   #als op de huidie plaats in de hasmap niks zit wordt deze plaats terug meegegeven
             return index
         else:
             if self.hashTable[index] != None:
-                while self.hashTable[index] != None:
+                while self.hashTable[index] != None:        #loop die doorgaat tot er een vrije plaats is gevonden
                     if self.hashTable[index] == None:
                         return index
                     else:
@@ -120,7 +142,6 @@ class Hashmap():
                     while root[i].next != None:
                         if root[i].next == None:
                             break
-                        print("Yay")
                         root[i].next = self.reserve.next
 
 
@@ -142,17 +163,10 @@ class Hashmap():
             return " | " + i
 
     def size(self):
+        print(self.count)
         return self.count
 
     def show(self, name):
-        # i = 0
-        # while i < self.tableSize:
-        #     if self.hashTable[i] != None:
-        #         print("Op plaats %s staat: %s" %(i, self.hashTable[i].item))
-        #     else:
-        #         print("Op plaats %s staat niets" %i)
-        #     i += 1
-        # print("\n")
         leeg = ""
         count = 0
         f = open(name, "w+")
@@ -172,30 +186,41 @@ class Hashmap():
         self.hashTable.clear()
         self.count = 0
 
-    def delete_sep(self, key):
+    def delete_sep(self, plaats, key):
         index = self.hashf(key)
-        if self.hashTable[index].next == None:
-            self.hashTable[index] = None
-            return False
+        if self.hashTable[index].key == key:
+            if self.hashTable[index].next != None:
+                #eerste node
+                #vewijder deze en zet de vorige zijn next naar deze zijn next
+                self.hashTable[index] = self.hashTable[index].next
+            else:
+                self.hashTable[index] = None
+            return True
         else:
-            self.nu = self.hashTable[index].next
-            count = 0
-            while True:
-                if self.nu.next == None and self.nu.key == key:
-                    next_str = ".next"
-                    for i in range(count+1):
-                        self.aj = "self.hashTable[index].next" + next_str
-                    self.aj = None
-                    return False
-                else:
-                    count += 1
-                    self.nu = self.nu.next
+            node = self.hashTable[index].next
+            while node != None:
+                if node.key == key:
+                    #verwijder node
+                    if node.next != None:
+                        #verwijder een node in het midden en zet de next pointer van de vorige node op deze zijn next
+                        node.prev.next = node.next
+                    else:
+                        #laatste node
+                        #de vorige zijn next laten verwijzen naar None
+                        node.prev.next = None
+
+                    return True
+                node = node.next
+
 
     def delete(self, key):
-        legeNode = TreeItem(None, -1)
         self.count -= 1
+        self.step = 1
         if self.type == 3:
-            self.delete_sep(key)
+            index = self.hashf(key)
+            plaats = self.hashTable[index]
+            plekje_in_de_lijst = 0
+            self.delete_sep(plaats, key)
         else:
             index = self.hashf(key)
             if len(self.hashTable) == 0:
@@ -203,15 +228,18 @@ class Hashmap():
             if self.hashTable[index].key != key:
                 while self.hashTable[index].key != key:
                     index = self.herHashf(index)
-                self.hashTable[index] = legeNode
+                # self.hashTable[index] = legeNode
+                self.hashTable[index] = None
             else:
-                self.hashTable[index] = legeNode
+                # self.hashTable[index] = legeNode
+                self.hashTable[index] = None
 
     def isEmpty(self):
         leeg = True
         for i in self.hashTable:
             if i != None:
                 leeg = False
+        print(leeg)
         return leeg
 
     def getRetrievePosition(self, key):
@@ -244,6 +272,8 @@ class Hashmap():
             return self.ll_retrieve(key)
 
         index = self.hashf(key)
+        while self.hashTable[index] == None:
+            self.herHashf(key)
         if self.count == 0:
             return (False, None)
         if self.hashTable[index].key != key:
@@ -251,25 +281,18 @@ class Hashmap():
             if index == -1:
                 return False, None
             else:
+                print(True, self.hashTable[index].item)
                 return True, self.hashTable[index].item
-
+        print(True, self.hashTable[index].item)
         return True, self.hashTable[index].item
 
-    def insert(self, key, item):
-        self.count += 1
-        if self.type == 3:
-            self.ll_insert(item, key)
-        elif self.count < self.tableSize + 1:
-            treeItem = TreeItem(item, key)
-            self.step = 1
-            self.hashTable[self.getPosition(key)] = treeItem
-        else:
-            print("Je kan maximaal %s items inserten! Item (%s, %s) is niet geinsert geweest." %(self.tableSize, key, item))
-            self.count -= 1
 
+
+""" Voor het aanmaken van een hashmap """
 def createHashmap(size, type):
     return Hashmap(int(size), int(type))
 
+""" Voor wanneer er vanuit een file ingelezen moet worden """
 def lees(file, size):
     for i in file:
         if i[0] != "#" or i[0] != "\n":
@@ -291,3 +314,37 @@ def lees(file, size):
                     h.show()
                 if words[0] == "delete":
                     h.delete(int(words[1]))
+
+h = createHashmap(11, 3)
+h.size()
+h.isEmpty()
+# h.insert(leerling, punt)
+h.insert(88, 0)
+h.insert(48, 4)
+h.insert(90, 2)
+h.insert(12, 1)
+h.insert(33, 0)
+h.insert(44, 0)
+h.insert(107, 8)
+h.insert(49, 5)
+h.insert(4, 4)
+h.insert(201, 3)
+# h.delete(33)
+h.insert(99, 0) #geeft inf loop maar komt door pech, 98 werkt wel bv(bij lin en sep)
+h.size()
+h.show("Pimpampom")
+h.delete(33)
+h.size()
+h.isEmpty()
+
+h.retrieve(49)
+h.retrieve(88)
+h.retrieve(33)
+h.retrieve(201)
+h.retrieve(99)
+
+print("")
+
+h.destroy()
+h.size()
+h.isEmpty()
