@@ -45,11 +45,3 @@ punt LAENE verbs 1800002 10 15
 toets 7 logaritmes 15
 punt HOFKT logaritmes 1800001 13 16
 punt HOFKT logaritmes 1800002 9 17
-8 puntenlijst M 2 HOFKT,LAENE ENG 6WEWI 2
-4.3 puntenlijst M 3 HOFKT WIS 6WEWI 7
-endUndo
-delete punt ADMIN afgeleiden 1800001 5 0
-startUndo
-endUndo
-ADT punten 234 23
-startUndo
