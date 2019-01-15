@@ -73,7 +73,6 @@ class Hashmap():
             self.hashTable[self.getPosition(key)] = treeItem    #getPosition wordt aangeroepen om de juiste positie te bepalen waar een item moet komen
                                                                 #en op deze locatie wordt dan het item toegevoegd
         else:
-            print("Je kan maximaal %s items inserten! Item (%s, %s) is niet geinsert geweest." %(self.tableSize, key, item))
             self.count -= 1
 
     def ll_insert(self, item, key):
@@ -99,16 +98,13 @@ class Hashmap():
         if self.hashTable[index] == None:
             return (False, None) # Not found
         elif self.hashTable[index].key == key:
-            print(True, self.hashTable[index].item)
             return (True, self.hashTable[index].item)
         else:
             currentItem = self.hashTable[index]
             while currentItem.next is not None:
                 currentItem = currentItem.next
                 if currentItem.key == key:
-                    print(True, currentItem.item)
                     return (True, currentItem.item)
-            print(False, None)
             return (False, None)
 
 
@@ -133,11 +129,8 @@ class Hashmap():
     def traverse_sep(self, root):
         self.reserve = TreeItem(None, None)
         if root != None:
-            print(root)
             for i in range(len(root)):
-                print(root[i])
                 if root[i] != None:
-                    print(root[i].key, root[i].item)
                     self.reserve = root[i]
                     while root[i].next != None:
                         if root[i].next == None:
@@ -163,7 +156,6 @@ class Hashmap():
             return " | " + i
 
     def size(self):
-        print(self.count)
         return self.count
 
     def show(self, name):
@@ -178,7 +170,6 @@ class Hashmap():
             else:
                 leeg += self.addNodeForDot("Leeg", count)
             count += 1
-        print(leeg)
         f.write('Hashmap [label = "{%s}"]\n' % leeg)
         f.write("}")
 
@@ -239,7 +230,6 @@ class Hashmap():
         for i in self.hashTable:
             if i != None:
                 leeg = False
-        print(leeg)
         return leeg
 
     def getRetrievePosition(self, key):
@@ -281,9 +271,7 @@ class Hashmap():
             if index == -1:
                 return False, None
             else:
-                print(True, self.hashTable[index].item)
                 return True, self.hashTable[index].item
-        print(True, self.hashTable[index].item)
         return True, self.hashTable[index].item
 
 
