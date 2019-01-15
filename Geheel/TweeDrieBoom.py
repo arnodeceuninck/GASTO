@@ -524,7 +524,10 @@ class TweeDrieBoom:
         return node
 
     def zoek(self, key, gevonden):  #Zoekt een TreeItem op basis van een key
-        if len(self.root) == 1 and self.childrenLeft == self.childrenRight == None and self.root[0].key != key:
+        if len(self.root) == 0:
+            result = (gevonden, None)
+            return result
+        elif len(self.root) == 1 and self.childrenLeft == self.childrenRight == None and self.root[0].key != key:
             result = (gevonden, None)
             return result
         elif len(self.root) == 2 and self.childrenLeft == self.childrenRight == self.childrenMiddle == None and self.root[0].key != key:
