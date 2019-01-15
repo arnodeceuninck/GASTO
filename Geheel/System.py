@@ -379,6 +379,12 @@ class System:
         puntenlijst = self.puntenlijst.retrieve(key)
         if puntenlijst[0]:
             self.instructies.insert("endUndo")
+            for rapport in self.rapporten:
+                zoeksleutel = str(puntenlijst[1].getType()) + str(puntenlijst[1].getPeriode())
+                if rapport[0] == zoeksleutel:
+                    rapport[1].deletePuntenLijst(key)
+                if len(rapport[1].getList()) == 0:
+                    self.rapporten.delete(key)
             for i in range(len(puntenlijst[1].getToetsen()) - 1, -1, -1):
                 self.deleteToets(puntenlijst[1].toetsen[i].getNaam())
             self.instructies.insert("delete " + puntenlijst[1].getID() + " puntenlijst " + puntenlijst[1].getType() + " " +
