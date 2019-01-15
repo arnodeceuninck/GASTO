@@ -83,13 +83,3 @@ class stack:
 
 def createstack():
     return stack()
-
-test = createstack()
-test.push(Node(70))
-test.push(Node(80))
-test.push(Node(45))
-test.pop()
-test.push(Node(90))
-# print(test.pop())
-test.pop()
-# print("End")

@@ -142,8 +142,7 @@ class circular_chain:
 
         if currentNode == None:
             return None
-
-        # while str(currentNode.value.naam) != string:
+        
         while str(currentNode.key) != str(string):
             index += 1
             currentNode = currentNode.next
@@ -152,8 +151,6 @@ class circular_chain:
         return index
 
     def retrieve(self, key):
-        # if index > self.count or index < 0:
-        #     return False
         index = self.findIndexValue(key)
         if index == None:
             return False, None

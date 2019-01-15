@@ -68,7 +68,6 @@ class BinarySearchTree:
                 self.root = self.right.root
                 self.left = self.right.left
                 self.right = self.right.right
-                # Te verwijderen variabele werd zonet overschreven
             elif self.left != None and self.right == None:
                 self.root = self.left.root
                 self.left = self.left.left
@@ -76,7 +75,6 @@ class BinarySearchTree:
                     self.right = self.left.right
                 else:
                     self.right = None
-                # Te verwijderen variabele werd zonet overschreven
             else:
                 previous = self
                 inorder_successor = self.right
@@ -155,13 +153,6 @@ class BinarySearchTree:
         if self.right is not None:
             self.right.inorderTraverse(visit, key)
 
-        # if (not self.isEmpty()):
-        #     if self.left != None:
-        #         self.left.preorderTraverse()
-        #     print(self.root.item)
-        #     if self.right != None:
-        #         self.right.preorderTraverse()
-
     def traverse(self, visit, key=None):
         return self.inorderTraverse(visit, key)
 
@@ -224,24 +215,3 @@ class TreeItem:
     def __init__(self, item, key):
         self.item = item
         self.key = key
-
-
-#ItemsToInsert = [561, 23, 624, 26, 324, 743, 11, 874, 325, 634]
-#ItemsToInsert = [10, 5, 15, 2, 7, 13, 17, 1, 3, 6, 8, 12, 14, 16, 18, 11]
-# ItemsToInsert = [12, 11, 13, 10.5,11.5, 11.75, 11.25]
-# sample_tree = BinarySearchTree(None, None, None)
-#
-# vgraph = Graph()
-# vgraph.change_rankdir("TB")
-#
-# for item in ItemsToInsert:
-#     sample_tree.searchTreeInsert(TreeItem(item, item))
-#
-#
-# # sample_tree.searchTreeDelete(12)
-#
-#
-# sample_tree.preorderTraverse()
-#
-# sample_tree.createVisualisation(vgraph)
-# vgraph.rebuild_file()
