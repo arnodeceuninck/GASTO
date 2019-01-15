@@ -142,7 +142,7 @@ class circular_chain:
 
         if currentNode == None:
             return None
-        
+
         while str(currentNode.key) != str(string):
             index += 1
             currentNode = currentNode.next
