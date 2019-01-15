@@ -919,42 +919,50 @@ class System:
                 puntenQueue, toetsen, undolkr]
 
     def puntdatatypechange(self, new):
+        self.instructies.insert("ADT punten" + " " + new + " " + self.punten.type)
         temp = TabelWrapper(new)
         self.punten.traverse(self.transferid, temp)
         self.punten = temp
 
     def leraardatatypechange(self, new):
+        self.instructies.insert("ADT leraar" + " " + new + " " + self.leraars.type)
         temp = TabelWrapper(new)
         self.leraars.traverse(self.transferafkorting, temp)
         self.leraars = temp
 
     def vakkendatatypechange(self, new):
+        self.instructies.insert("ADT vakken" + " " + new + " " + self.vakken.type)
         temp = TabelWrapper(new)
         for vak in self.vakken:
             temp.insert(vak[1], vak[0])
         self.vakken = temp
 
     def toetsendatatypechange(self, new):
+        self.instructies.insert("ADT toetsen" + " " + new + " " + self.toetsen.type)
         temp = TabelWrapper(new)
         self.toetsen.traverse(self.transfernaam, temp)
         self.toetsen = temp
 
     def puntenlijstdatatypechange(self, new):
+        self.instructies.insert("ADT ADTpuntenlijst" + " " + new + " " + self.puntenlijst.type)
         temp = TabelWrapper(new)
         self.puntenlijst.traverse(self.transferid, temp)
         self.puntenlijst = temp
 
     def leerlingdatatypechange(self, new):
+        self.instructies.insert("ADT leerlingen" + " " + new + " " + self.leerlingen.type)
         temp = TabelWrapper(new)
         self.leerlingen.traverse(self.transfernummer, temp)
         self.leerlingen = temp
 
     def rapportdatatypechange(self, new):
+        self.instructies.insert("ADT rapporten" + " " + new + " " + self.rapporten.type)
         temp = TabelWrapper(new)
         self.rapporten.traverse(self.transferzoeksleutel, temp)
         self.rapporten = temp
 
     def klassendatatypechange(self, new):
+        self.instructies.insert("ADT klassen" + " " + new + " " + self.klassen.type)
         temp = TabelWrapper(new)
         for klas in self.klassen:
             temp.insert(klas[0], klas[1])

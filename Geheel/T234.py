@@ -647,7 +647,6 @@ class T234:
                 self.left = None                # we verwijderen de nu lege node
                 del self
 
-
     def T234Delete(self, key):
         if self.item1.key == key:           #als het te delete item op de eerste locatie zit dan delete we deze
             if self.left is None:           #als er geen kinderen zijn is er geen probleem

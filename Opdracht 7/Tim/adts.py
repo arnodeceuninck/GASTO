@@ -25,7 +25,7 @@ else:
                 input.append(str(line[j]))
             input = ''.join(input)
 
-            tree._234TInsert(T234.TreeItem("test", int(input)))
+            tree.T234Insert(T234.TreeItem("test", int(input)))
 
         elif "delete" in line:
             for i in range(len(line)):
@@ -33,11 +33,12 @@ else:
                     start = i+1
                 if line[i] == '\n':
                     stop = i-1
-            tree._234TDelete(int(str(line[start] + line[stop])))
+            tree.T234Delete(int(str(line[start] + line[stop])))
 
         elif "print" in line:
             printcount += 1
-            tree.print(printcount)
+            name = "234T - " + str(printcount) + ".dot"
+            tree.print(name)
 
 # parameters meegeven in pycharm
 # - klik in het menu op Run

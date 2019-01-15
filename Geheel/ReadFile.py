@@ -158,8 +158,8 @@ def readLine(line, geheel):
                 geheel.deletePuntenlijst(words[1])
             elif words[1] == "toets" and len(words) > 4:
                 geheel.deleteToets(words[4])
-            elif words[1] == "leraar" and len(words) > 5:
-                geheel.deleteLeraar(words[5])
+            elif words[1] == "leraar" and len(words) > 4:
+                geheel.deleteLeraar(words[4])
         pass
 
     return geheel
