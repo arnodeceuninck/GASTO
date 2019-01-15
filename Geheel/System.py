@@ -409,7 +409,7 @@ class System:
                 if rapport[0] == zoeksleutel:
                     rapport[1].deletePuntenLijst(key)
                 if len(rapport[1].getList()) == 0:
-                    self.rapporten.delete(key)
+                    self.rapporten.delete(zoeksleutel)
             for i in range(len(puntenlijst[1].getToetsen()) - 1, -1, -1):
                 self.deleteToets(puntenlijst[1].toetsen[i].getNaam())
             self.instructies.insert("delete " + str(puntenlijst[1].getID()) + " puntenlijst " + puntenlijst[1].getType() + " " +
