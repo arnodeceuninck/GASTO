@@ -306,7 +306,7 @@ class TweeDrieBoom:
                             self.parent.root.clear()
                             self.childrenLeft = self.childrenMiddle
                             self.parent.root.append(self.parent.childrenRight.root[0])
-                            self.parent.childrenRight.root.remove(self.parent.childrenRight.root[1])
+                            self.parent.childrenRight.root.remove(self.parent.childrenRight.root[0])
                             self.childrenRight = self.parent.childrenRight.childrenLeft
                             self.childrenRight.parent = self
                             self.parent.childrenRight.childrenLeft = self.parent.childrenRight.childrenMiddle
@@ -717,17 +717,29 @@ def create23T():    #maakt een 23T aan.
 # ttt.insertItem(TreeItem(0, 15))
 # ttt.insertItem(TreeItem(0, 16))
 # ttt.insertItem(TreeItem(0, 17))
-#
-# ttt.delete(1)
-# ttt.delete(3)
-# ttt.delete(5)
+# #
 # ttt.delete(7)
-# ttt.delete(9)
+# ttt.delete(3)
+# ttt.delete(1)
 # ttt.delete(11)
+# ttt.delete(17)
+# ttt.delete(9)
+# ttt.delete(5)
 # ttt.delete(13)
 # ttt.delete(15)
-# ttt.delete(17)
-#
+
+
+
+
+
+
+
+
+
+
+
+
+
 # ttt.delete(0)
 # ttt.delete(2)
 # ttt.delete(4)
@@ -737,7 +749,7 @@ def create23T():    #maakt een 23T aan.
 # ttt.delete(12)
 # ttt.delete(14)
 # ttt.delete(16)
-#
+# print(ttt.size())
 #
 # write_dot("test23T.dot", ttt)
 
