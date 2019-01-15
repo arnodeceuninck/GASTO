@@ -390,15 +390,15 @@ class System:
 
     def puntenlijstleerkrachtdeleter(self, naam):
         for puntenlijst in self.puntenlijst:
-            for i in range(len(puntenlijst[1].naamcodes)):
-                if puntenlijst[1].getnaamcodes[i] == naam:
+            for i in range(len(puntenlijst[1].getNameCodes())-1, -1, -1):
+                if puntenlijst[1].getNameCodes()[i] == naam:
                     puntenlijst[1].deleteNamecodes(naam)
-                    if len(puntenlijst[1].naamcodes[i]) == 0:
-                        self.deletePuntenlijst(puntenlijst[1].getID())
+            if len(puntenlijst[1].getNameCodes()) == 0:
+                self.deletePuntenlijst(puntenlijst[1].getID())
 
         for puntenlijst in self.puntenlijst:
-            for i in range(len(puntenlijst[1].naamcodes)):
-                if puntenlijst[1].getnaamcodes[i] == naam:
+            for i in range(len(puntenlijst[1].getNameCodes())-1):
+                if puntenlijst[1].getNameCodes()[i] == naam:
                     self.puntenlijstleerkrachtdeleter(naam)
         return
 
