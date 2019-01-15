@@ -2,9 +2,7 @@ import Leerling
 import Punt
 import Leraar
 import Rapport
-import Stack
 import Toets
-import ADTQueue
 import Puntenlijst
 
 import datetime
@@ -209,6 +207,15 @@ class System:
         return_messages = []
         self.instructies.insert(str(ID) + " puntenlijst " + str(type) + " " + str(periode) + " " +
                                 str(namecodes) + " " + str(vak_afkorting) + " " + str(klas) + " " + str(uren))
+
+        try:
+            ID = int(ID)
+        except:
+            return_messages.append(
+                "ERROR: ID moet een int zijn.")
+            print(return_messages[0])
+            return return_messages
+
         if self.klassen.retrieve(klas) is None:
             return_messages.append("ERROR: De klas waaraan je wil dat de leeraar les geeft (" + klas + "), bestaat nog niet. "
                   "Gelieve deze eerst aan te maken.")
@@ -252,7 +259,16 @@ class System:
     def addToets(self, puntenlijst_id, titel, maxscore):
         return_messages = []
         self.instructies.insert("toets " + str(puntenlijst_id) + " " + str(titel) + " " + str(maxscore))
-        puntenlijst = self.puntenlijst.retrieve(puntenlijst_id)
+
+        try:
+            puntenlijst_id = int(puntenlijst_id)
+        except:
+            return_messages.append(
+                "ERROR: ID moet een int zijn.")
+            print(return_messages[0])
+            return return_messages
+
+        puntenlijst = self.puntenlijst.retrieve(int(puntenlijst_id))
         if puntenlijst[1] is None:
             return_messages.append("ERROR: De puntenlijst met id " + puntenlijst_id + " werd niet teruggevonden in het systeem. "
                                                  "Gelieve deze eerst aan te maken")
@@ -376,7 +392,16 @@ class System:
         return
 
     def deletePuntenlijst(self, key):
-        puntenlijst = self.puntenlijst.retrieve(key)
+        return_messages = []
+        try:
+            key = int(key)
+        except:
+            return_messages.append(
+                "ERROR: ID moet een int zijn.")
+            print(return_messages[0])
+            return return_messages
+
+        puntenlijst = self.puntenlijst.retrieve(int(key))
         if puntenlijst[0]:
             self.instructies.insert("endUndo")
             for rapport in self.rapporten:
@@ -387,10 +412,10 @@ class System:
                     self.rapporten.delete(key)
             for i in range(len(puntenlijst[1].getToetsen()) - 1, -1, -1):
                 self.deleteToets(puntenlijst[1].toetsen[i].getNaam())
-            self.instructies.insert("delete " + puntenlijst[1].getID() + " puntenlijst " + puntenlijst[1].getType() + " " +
-                                    puntenlijst[1].getPeriode() + " " + puntenlijst[1].getLeerkrachtenStr() + " " +
-                                    str(puntenlijst[1].getVakcode()) + " " + puntenlijst[1].getKlas() + " " +
-                                    puntenlijst[1].getUren())
+            self.instructies.insert("delete " + str(puntenlijst[1].getID()) + " puntenlijst " + puntenlijst[1].getType() + " " +
+                                    str(puntenlijst[1].getPeriode()) + " " + puntenlijst[1].getLeerkrachtenStr() + " " +
+                                    str(puntenlijst[1].getVakcode()) + " " + str(puntenlijst[1].getKlas()) + " " +
+                                    str(puntenlijst[1].getUren()))
             self.puntenlijst.delete(key)
             self.instructies.insert("startUndo")
 
