@@ -1,4 +1,0 @@
-graph hashmap{
-node[shape=record];
-Hashmap [label = "{0 | 1 | 2 | 3 | 4 | 5 | Leeg | Leeg | 8 | Leeg | Leeg}"]
-}
