@@ -497,7 +497,7 @@ class System:
         return self.klassen.retrieve(naam)
 
     def retrievePuntenlijst(self, ID):
-        return self.puntenlijst.retrieve(ID)
+        return self.puntenlijst.retrieve(int(ID))
 
     def retrieveLeerling(self, studentennr):
         return self.leerlingen.retrieve(studentennr)
