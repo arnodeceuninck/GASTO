@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="../static/css/wrapper.css">
+    <link rel="stylesheet" href="../static/css/index.css">
+    <meta charset="UTF-8">
+    <title>GASTO</title>
+</head>
+
+<body>
+    
+
+  <header>
+    <ul>
+      <li><a class="active" href="/">Home</a></li>
+      <li><a onclick="goBack()">Back</a></li>
+      <li id="loguit"><a href="/login">Login</a></li>
+    </ul>
+
+    <script>
+        function goBack() {
+            window.history.back();
+        }
+    </script>
+
+  </header>
+  <div class="welcome">
+    <h2><b>Welkom</b></h2>
+  </div>
+
+
+   <!-- Error messages -->
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <ul class=flashes>
+        {% for message in messages %}
+            <li>{{ message }}</li>
+            {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+</body>
+</html>

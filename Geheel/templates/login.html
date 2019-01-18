@@ -2,23 +2,37 @@
 <html lang="en">
 <head>
     <link rel="stylesheet" href="../static/css/wrapper.css">
+    <link rel="stylesheet" href="../static/bootstrap/css/bootstrap.css">
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="../static/bootstrap/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="../static/css/login.css">
     <meta charset="UTF-8">
     <title>GASTO</title>
 </head>
 <body>
-    <header>
-      <ul>
-        <li><a href="/">Home</a></li>
-        <li><a onclick="goBack()">Back</a></li>
-        <li id="loguit"><a class="active" href="/login">Login</a></li>
-      </ul>
-      <script>
-        function goBack() {
-            window.history.back();
-        }
-       </script>
-    </header>
+    <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: pink;">
+      <a class="navbar-brand" href="#">GASTO</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+            <li class="nav-item"><a class="nav-link" onclick="goBack()" style="">Back</a></li>
+
+        </ul>
+        <ul class="navbar-nav" >
+            <li class="nav-item active"><a class="nav-link" href="/login">Login</a></li>
+        </ul>
+        <script>
+            function goBack() {
+                window.history.back();
+            }
+        </script>
+      </div>
+    </nav>
+
+
     <content>
     <form class="Login" action="/verifylogin" method="post">
       <table>
@@ -27,7 +41,7 @@
           <td><input type="text" name="name"><br></td>
         </tr>
         <tr>
-          <td  id="naam"><label>Wachtwoord: </label></td>
+          <td  id="wachtwoord"><label>Wachtwoord: </label></td>
           <td><input type="password" name="password"><br></td>
         </tr>
         <tr id="knop">
@@ -35,7 +49,9 @@
         </tr>
       </table>
     </form>
-    <!-- Error messages -->
+
+
+        <!-- Error messages -->
     {% with messages = get_flashed_messages() %}
       {% if messages %}
         <ul class=flashes>

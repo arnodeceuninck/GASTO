@@ -2,30 +2,74 @@
 <html lang="en">
 <head>
     <link rel="stylesheet" href="../static/css/wrapper.css">
+    <link rel="stylesheet" href="../static/bootstrap/css/bootstrap.css">
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="../static/bootstrap/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="../static/css/admin.css">
     <meta charset="UTF-8">
     <title>GASTO</title>
 </head>
-<body>
-    <!-- <link rel="import" href="/li_algemeen"> -->
-    <header>
-      <ul>
-        <li><a href="/home">Home</a></li>
-        <li><a onclick="goBack()">Back</a></li>
-        <li><a href="/undo">Undo</a></li>
-        <li><a href="/redo">Redo</a></li>
-        <li id="loguit"><a href="/logout">Logout</a></li>
-        <li id="naam">{{ login }}</li>
-      </ul>
-      <script>
-        function goBack() {
-            window.history.back();
-        }
-       </script>
+<body onresize="hideSidemenu()">
+    <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: pink;">
+      <a class="navbar-brand" href="#">GASTO</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item"><a class="nav-link" onclick="toggleSidebar()">Menu</a></li>
+            <li class="nav-item"><a class="nav-link" href="/home">Home</a></li>
+            <li class="nav-item"><a class="nav-link" onclick="goBack()" style="">Back</a></li>
+            <li class="nav-item"><a class="nav-link" href="/undo">Undo</a></li>
+            <li class="nav-item"><a class="nav-link" href="/redo">Redo</a></li>
+        </ul>
 
-    </header>
+        <div id="side_elements" class="side_elements">
+        <ul class="navbar-nav order-0">
+            <li class="nav-item"><a class="nav-link" href="/vakken">Vakken</a></li>
+            <li class="nav-item"><a class="nav-link" href="/klassen">Klassen</a></li>
+            <li class="nav-item"><a class="nav-link" href="/leraars">Leraars</a></li>
+            <li class="nav-item"><a class="nav-link" href="/leerlingen">Leerlingen</a></li>
+            <li class="nav-item"><a class="nav-link" href="/datastructuren">ADT's</a></li>
+        </ul>
+        </div>
 
-    <div class="sidemenu">
+          <ul class="navbar-nav" >
+            <li class="nav-item"><a class="nav-link" href="/home">{{ login }}</a></li>
+            <li class="nav-item"><a class="nav-link" href="/logout">Logout</a></li>
+        </ul>
+        <script>
+            function goBack() {
+                window.history.back();
+            }
+
+            function toggleSidebar() {
+                var x = document.getElementById("sidemenu");
+                if (x.style.display === "none") {
+                    x.style.display = "block";
+                } else {
+                    x.style.display = "none";
+                }
+            }
+
+        </script>
+        <style>
+            @media screen and (min-width: 0px) and (max-width: 400px) {
+              #sidemenu{ display: block;}  /* show it on smaller screen */
+              #side_elements{ display: none;}
+              #content{ width: 100%}
+            }
+            @media screen and (min-width: 401px) and (max-width: 1024px) {
+              #sidemenu{ display: none; }   /* hide it on larger screens */
+              #side_elements{ display: block;}
+              #content{ width: 90%}
+            }
+
+        </style>
+      </div>
+    </nav>
+
+    <div class="sidemenu" id="sidemenu">
       <ul>
         <li><a href="/vakken">Vakken</a></li>
         <li><a href="/klassen">Klassen</a></li>
@@ -35,7 +79,7 @@
       </ul>
     </div>
 
-    <content>
+    <content id="content">
       <div class="Text">
         <h2><b>Hoofdmenu</b></h2>
       </div>
