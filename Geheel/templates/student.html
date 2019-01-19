@@ -25,7 +25,7 @@
         <div id="side_elements" class="side_elements">
         <ul class="navbar-nav order-0">
             {% for rapport in rapporten %}
-                <li class="nav-item"><a class="nav-link" href="/getrapport?zoeksleutel={{ rapport[0] }}">{{ rapport[0] }}</a></li>
+                <li class="nav-item"><a class="nav-link" href="/getrapport?zoeksleutel={{ rapport }}">{{ rapport }}</a></li>
             {% endfor %}
         </ul>
         </div>
