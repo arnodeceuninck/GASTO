@@ -75,7 +75,7 @@
 
     <!-- Heel de table is een gigantische form, zodat onderaan iets getypt kan worden -->
     <form action="/addpuntenlijst" method="get">
-    <table border=1>
+    <table class="table table-responsive">
         <thead>
             <tr>
                 <td>ID</td>
@@ -111,12 +111,12 @@
             {% endfor %}
         </tbody>
         <tfoot> <!-- Aparte foot of mee in body steken? -->
-            <td><input type="text" name="ID"></td>
-            <td><input type="text" name="klas"></td>
-            <td><input type="text" name="vak"></td>
-            <td><input type="text" name="rapport"></td>
+            <td><input type="text" name="ID" size="1"></td>
+            <td><input type="text" name="klas" size="5"></td>
+            <td><input type="text" name="vak" size="3"></td>
+            <td><input type="text" name="rapport" size="2"></td>
             <td><input type="text" name="leerkrachten"></td>
-            <td><input type="text" name="uren"></td>
+            <td><input type="text" name="uren" size="1"></td>
             <td></td>
             <td><input type="submit" value="Add"></td>
         </tfoot>

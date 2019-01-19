@@ -81,7 +81,7 @@
 
     <content id="content">      <h1>Klassen</h1>
     <form action="/addklas" method="get">
-    <table border="1">
+    <table class="table table-responsive">
         <thead>
             <tr>
                 <td>Klas</td>
@@ -101,7 +101,7 @@
             {% endfor %}
         </tbody>
         <tfoot> <!-- Aparte foot of mee in body steken? -->
-            <td><input type="text" name="klas"></td>
+            <td><input type="text" name="klas" size="5"></td>
             <td><input type="submit" value="Add"></td>
         </tfoot>
     </table>

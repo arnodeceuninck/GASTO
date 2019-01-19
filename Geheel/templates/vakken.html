@@ -81,9 +81,11 @@
 
     <content id="content">
 
-    <form action="/addvak" method="get">
+
       <h1>Vakken</h1>
-    <table border=1>
+        <table>
+    <form action="/addvak" method="get">
+            <table class="table table-responsive">
         <thead>
             <tr>
                 <td>Afkorting</td>
@@ -105,13 +107,15 @@
             {% endfor %}
         </tbody>
         <tfoot> <!-- Aparte foot of mee in body steken? -->
-            <td><input type="text" name="afkorting"></td>
-            <td><input type="text" name="vak"></td>
+            <td><input type="text" name="afkorting" size="3"></td>
+            <td><input type="text" name="vak" size="12"></td>
             <td><input type="submit" value="Add"></td>
         </tfoot>
     </table>
     </form>
-    </table>
+        </table>
+
+
     <!-- Error messages -->
     {% with messages = get_flashed_messages() %}
       {% if messages %}

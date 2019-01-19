@@ -75,7 +75,7 @@
         <h1>{{ title }}</h1>
 
     <form action="/addtoets" method="get">
-    <table border=1>
+    <table class="table table-responsive">
         <thead>
             <tr>
                 <td>Naam</td>
@@ -105,8 +105,8 @@
             {% endfor %}
         </tbody>
         <tfoot> <!-- Aparte foot of mee in body steken? -->
-            <td><input type="text" name="naam"></td>
-            <td><input type="text" name="maximum"></td>
+            <td><input type="text" name="naam" size="10"></td>
+            <td><input type="text" name="maximum" size="1"></td>
             <td></td>
             <td></td>
             <td><input type="submit" value="Add"></td>

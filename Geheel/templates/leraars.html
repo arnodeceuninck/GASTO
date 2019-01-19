@@ -83,7 +83,7 @@
     <h1>Leraars</h1>
 
     <form action="/addleraar" method="get">
-    <table border=1>
+    <table class="table table-responsive">
         <thead>
             <tr>
                 <td>Naamcode</td>
@@ -111,8 +111,8 @@
             {% endfor %}
         </tbody>
         <tfoot> <!-- Aparte foot of mee in body steken? -->
-            <td><input type="text" name="naamcode"></td>
-            <td><input type="text" name="naam"></td>
+            <td><input type="text" name="naamcode" size="5"></td>
+            <td><input type="text" name="naam" size="15"></td>
             <td></td>
             <td><input type="submit" value="Add"></td>
         </tfoot>

@@ -3,6 +3,7 @@ body{
   margin: 0;
   height: 1000px;
 }
+
 /*#############HEADER################*/
 
 header{
@@ -108,6 +109,9 @@ header ul li a.active{
 content{
   float: right;
   width: 90%;
+  /*padding-right: 5%;*/
+  padding-left: auto;
+  padding-right: auto;
   /*text-align: center;*/
 }
 
@@ -135,6 +139,10 @@ h1{
 p{
   color: grey;
   text-align: center;
+}
+
+input{
+  width: fit-content;
 }
 
 img{
