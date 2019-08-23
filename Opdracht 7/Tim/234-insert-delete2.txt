@@ -1,0 +1,45 @@
+type=234
+insert 10
+insert 20
+insert 25
+insert 30
+insert 40
+insert 50
+insert 60
+insert 70
+insert 80
+insert 45
+insert 15
+print
+delete 25
+print
+insert 27
+insert 28
+insert 26
+insert 90
+print
+insert 91
+print
+insert 92
+insert 93
+insert 94
+insert 95
+insert 96
+insert 97
+insert 1
+insert 2
+insert 46
+insert 47
+insert 48
+insert 49
+insert 24
+insert 23
+insert 22
+insert 21
+print
+delete 60
+print
+delete 27
+print
+delete 28
+print

@@ -1,6 +1,7 @@
 import sys
 import NewT234
 import subprocess
+import os
 
 if len(sys.argv) != 2:
     print('Usage: adts.py <inputfile>')
@@ -12,6 +13,10 @@ else:
     for line in f:
         i = 0
         j = 0
+
+        if '#' in line:
+            continue
+
         if "type=234" in line:
             tree = NewT234.T234()
 
@@ -48,6 +53,14 @@ else:
             name = "234T-" + str(printcount) + ".dot"
             tree.print(name)
 
+            if os.name == "posix":
+                subprocess.call("./dotToPngLinux.sh")
+            else:
+                subprocess.call([r'D:\School\Git\GASTO\GASTO\Opdracht 7\Tim\dotToPng.bat'])
+
+if os.name == "posix":
+    subprocess.call("./dotToPngLinux.sh")
+else:
     subprocess.call([r'D:\School\Git\GASTO\GASTO\Opdracht 7\Tim\dotToPng.bat'])
 
 # parameters meegeven in pycharm

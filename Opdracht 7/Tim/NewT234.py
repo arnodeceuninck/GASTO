@@ -1,3 +1,11 @@
+def keyinitem(key, items):
+    for i in range(len(items)):
+        if items[i].key == key:
+            return True
+
+def sortkey(item):
+    return item.key
+
 class TreeItem:
     def __init__(self, key, item):
         self.key = key
@@ -9,6 +17,18 @@ class T234Node:
         self.items = items
         self.children = children
         self.parent = parent
+
+    def __getsiblings(self,location):
+        if location == 0:
+            return [self.parent.children[1]]
+        elif location == len(self.parent.children)-1:
+            return [self.parent.children[location-1]]
+        else:
+            return [self.parent.children[location-1], self.parent.children[location+1]]
+
+    def __childsetter(self):
+        for i in self.children:
+            i.parent = self
 
     def dotread(self, file):
         itemcount = len(self.items)
@@ -39,6 +59,9 @@ class T234Node:
         if childrencount == 4:
             self.children[3].dotread(file)
             file.write(str(self.items[0].key) + "-> " + str(self.children[3].items[0].key) + ";" + '\n')
+
+        if self.parent:
+            file.write(str(self.items[0].key) + "-> " + str(self.parent.items[0].key) + ";" + '\n')
 
     def insert(self, item):
         itemcount = len(self.items)
@@ -78,34 +101,43 @@ class T234Node:
             if self.parent.children[0] == self:
                 self.parent.items.insert(0, self.items.pop(1))
                 self.parent.children.insert(1, T234Node([self.items.pop(1)], [], self.parent))
-                if self.children:
+                if len(self.children) != 0:
                     self.parent.children[1].children = [self.children.pop(2), self.children.pop(2)]
+                    self.parent.children[1].children[0].parent = self.parent.children[1]
+                    self.parent.children[1].children[1].parent = self.parent.children[1]
             elif self.parent.children[1] == self:
                 self.parent.items.append(self.items.pop(1))
                 self.parent.children.insert(1, T234Node([self.items.pop(0)], [], self.parent))
-                if self.children:
+                if len(self.children) != 0:
                     self.parent.children[1].children = [self.children.pop(0), self.children.pop(0)]
+                    self.parent.children[1].children[0].parent = self.parent.children[1]
+                    self.parent.children[1].children[1].parent = self.parent.children[1]
         elif len(self.parent.items) == 2:
             if self.parent.children[0] == self:
-                self.parent.items.insert(self.items.pop(1))
+                self.parent.items.insert(0,self.items.pop(1))
                 self.parent.children.insert(1,
                                             T234Node([self.items.pop(1)], [],
                                                      self.parent))
-                if self.children:
+                if len(self.children) != 0:
                     self.parent.children[1].children = [self.children.pop(2), self.children.pop(2)]
+                    self.parent.children[1].children[0].parent = self.parent.children[1]
+                    self.parent.children[1].children[1].parent = self.parent.children[1]
             elif self.parent.children[1] == self:
-                self.parent.items.insert(self.items.pop(1))
+                self.parent.items.insert(1,self.items.pop(1))
                 self.parent.children.insert(2,
                                             T234Node([self.items.pop(1)], [],
                                                      self.parent))
-                if self.children:
+                if len(self.children) != 0:
                     self.parent.children[2].children = [self.children.pop(2), self.children.pop(2)]
+                    self.parent.children[2].children[0].parent = self.parent.children[2]
+                    self.parent.children[2].children[1].parent = self.parent.children[2]
             elif self.parent.children[2] == self:
                 self.parent.items.append(self.items.pop(1))
-                self.parent.children.append(
-                    T234Node([self.items.pop(1)], [], self.parent))
-                if self.children:
+                self.parent.children.append(T234Node([self.items.pop(1)], [], self.parent))
+                if len(self.children) != 0:
                     self.parent.children[3].children = [self.children.pop(2), self.children.pop(2)]
+                    self.parent.children[3].children[0].parent = self.parent.children[3]
+                    self.parent.children[3].children[1].parent = self.parent.children[3]
 
     def __inorder(self, number):
         target = self.children[number + 1]
@@ -145,43 +177,62 @@ class T234Node:
             #self.__fixnode()
         itemcount = len(self.items)
 
-        if self.items[0].key == key:
-            if self.children:
-                self.__inorder(0).T234delete(key)
+        if self.parent is not None and len(self.items) == 1:
+            location = self.parent.children.index(self)
+            siblings = self.__getsiblings(location)
+            if len(siblings[0].items) > 1 or (len(siblings) == 2 and len(siblings[1].items) > 1):
+                if location-1 >= 0 and len(self.parent.children[location-1].items) > 1:
+                    self.items.insert(0, self.parent.items.pop(location-1))
+                    self.parent.items.insert(location-1, self.parent.children[location-1].items.pop(-1))
+                    if self.children:
+                        self.children.insert(0, self.parent.children[location-1].children.pop(-1))
+                        self.children[0].parent = self
+                elif location+1 <= 3 and len(self.parent.children[location+1].items) > 1:
+                    self.items.append(self.parent.items.pop(location))
+                    self.parent.items.insert(location, self.parent.children[location+1].items.pop(0))
+                    if self.children:
+                        self.children.append(self.parent.children[location+1].children.pop(0))
+                        self.children[-1].parent = self
+            elif len(siblings[0].items) == 1 and (len(siblings) == 1 or (len(siblings) == 2 and len(siblings[1].items) == 1))\
+                    and len(self.parent.items) > 1:
+                if location-1 >= 0:
+                    self.items.insert(0, self.parent.items.pop(location-1))
+                    self.items.insert(0, siblings[0].items.pop(0))
+                    self.children = siblings[0].children + self.children
+                    self.__childsetter()
+                    self.parent.children.remove(siblings[0])
+                elif location == 0:
+                    self.items.append(self.parent.items.pop(0))
+                    self.items.append(siblings[0].items.pop(0))
+                    self.children = self.children + siblings[0].children
+                    self.__childsetter()
+                    self.parent.children.remove(siblings[0])
             else:
-                self.items.pop(0)
+                newitems = [siblings[0].items.pop(0), self.parent.items.pop(0), self.items[0]]
+                newitems.sort(key = sortkey)
+                self.items = newitems
+                if(location > 0):
+                    self.children = siblings[0].children + self.children
+                else:
+                    self.children = self.children + siblings[0].children
+                self.__childsetter()
+                self.parent.children.remove(siblings[0])
+                self.parent = None
 
-        elif itemcount >= 2 and self.items[1].key == key:
-            if self.children:
-                self.__inorder(1).T234delete(key)
+            if keyinitem(key, self.items):
+                if len(self.children) != 0:
+                    print("indorder")
+                else:
+                    self.items.remove()
+
+            if key < self.items[0].key:
+                self.children[0].T234delete(key)
+            elif (len(self.items) == 1 and key > self.items[0].key) or key < self.items[1].key:
+                self.children[1].T234delete(key)
+            elif (len(self.items) == 2 and key > self.items[1].key) or key < self.items[2].key:
+                self.children[2].T234delete(key)
             else:
-                self.items.pop(1)
-
-        elif itemcount == 3 and self.items[2].key == key:
-            if self.children:
-                self.__inorder(2).T234delete(key)
-            else:
-                self.items.pop(2)
-
-        elif key < self.items[0].key:
-            if len(self.children[0].items) == 1 and len(self.children[1].items) == 2:
-                self.children[0].items.append(self.items.pop(0))
-                self.items.append(self.children[1].items.pop(1))
-            elif len(self.children[0].items) == 1 and len(self.children[1].items) == 1:
-                self.children[0].items.append(self.items.pop(0))
-                self.children[0].items.append(self.children[1].items.pop(0))
-                if self.children[1].children:
-                    self.children.extend(self.children[1].children)
-                self.children.remove(1)
-
-
-            self.children[0].T234delete(key)
-        elif key < self.items[1].key:
-            self.children[1].T234delte(key)
-        elif key < self.items[2].key:
-            self.children[2].T234delete(key)
-        else:
-            self.children[3].T234delete(key)
+                self.children[3].T234delete(key)
 
 class T234:
     def __init__(self):
@@ -206,3 +257,9 @@ class T234:
 
     def delete(self, key):
         self.root.T234delete(key)
+        if len(self.root.items) == 0:
+            old = self.root
+            self.root = self.root.children[0]
+            old.children = None
+            del old
+
