@@ -53,15 +53,15 @@ else:
             name = "234T-" + str(printcount) + ".dot"
             tree.print(name)
 
-            if os.name == "posix":
-                subprocess.call("./dotToPngLinux.sh")
-            else:
-                subprocess.call([r'D:\School\Git\GASTO\GASTO\Opdracht 7\Tim\dotToPng.bat'])
+            # if os.name == "posix":
+            #     subprocess.call("./dotToPngLinux.sh")
+            # else:
+            #     subprocess.call([r'C:\Users\Tim\Documents\GitHub\GASTO\Opdracht 7\Tim\dotToPng.bat'])
 
 if os.name == "posix":
     subprocess.call("./dotToPngLinux.sh")
 else:
-    subprocess.call([r'D:\School\Git\GASTO\GASTO\Opdracht 7\Tim\dotToPng.bat'])
+    subprocess.call([r'C:\Users\Tim\Documents\GitHub\GASTO\Opdracht 7\Tim\dotToPng.bat'])
 
 # parameters meegeven in pycharm
 # - klik in het menu op Run

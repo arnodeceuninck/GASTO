@@ -60,9 +60,6 @@ class T234Node:
             self.children[3].dotread(file)
             file.write(str(self.items[0].key) + "-> " + str(self.children[3].items[0].key) + ";" + '\n')
 
-        if self.parent:
-            file.write(str(self.items[0].key) + "-> " + str(self.parent.items[0].key) + ";" + '\n')
-
     def insert(self, item):
         itemcount = len(self.items)
         if itemcount == 0:
@@ -140,18 +137,27 @@ class T234Node:
                     self.parent.children[3].children[1].parent = self.parent.children[3]
 
     def __inorder(self, number):
-        target = self.children[number + 1]
+        start = self.items[number]
+        target = self.children[number]
         while target.children:
-            target = target.children[0]
-        temp = self.items[number]
-        self.items[number] = target.item[0]
-        target.item[0] = temp
+            target.__fixnode()
+            for i in range(len(target.items) - 1, -1, -1):
+                if target.items[i].key < start.key:
+                    target = target.children[i+1]
+                    break
+                #target = target.children[-1]
+        target.__fixnode()
         return target
 
     def __calcposition(self):
         for i in range(len(self.parent.children)):
             if self.parent.children[i] == self:
                 return i
+
+    def __keyposition(self, key):
+        for i in range(len(self.items)):
+            if self.items[i].key == key:
+                return tuple((i, self.items[i]))
 
     def __parentsibling2node(self, sibling):
         self.items.append(self.parent.children[sibling].items[0])
@@ -163,20 +169,6 @@ class T234Node:
                 self.children = self.parent.children[sibling].children
 
     def __fixnode(self):
-        if self.parent:
-            numberself = self.calcposition()
-
-        if len(self.parent.children) == 2 and len(self.parent.children[0].children) == 2 and len(self.parent.children[1].children):
-            if numberself == 0:
-                self.__parentsibling2node(1)
-            else:
-                self.__parentsibling2node(0)
-
-    def T234delete(self, key):
-        #if len(self.children) == 2:
-            #self.__fixnode()
-        itemcount = len(self.items)
-
         if self.parent is not None and len(self.items) == 1:
             location = self.parent.children.index(self)
             siblings = self.__getsiblings(location)
@@ -219,20 +211,50 @@ class T234Node:
                 self.parent.children.remove(siblings[0])
                 self.parent = None
 
-            if keyinitem(key, self.items):
-                if len(self.children) != 0:
-                    print("indorder")
-                else:
-                    self.items.remove()
 
-            if key < self.items[0].key:
-                self.children[0].T234delete(key)
-            elif (len(self.items) == 1 and key > self.items[0].key) or key < self.items[1].key:
-                self.children[1].T234delete(key)
-            elif (len(self.items) == 2 and key > self.items[1].key) or key < self.items[2].key:
-                self.children[2].T234delete(key)
+
+    def T234delete(self, key):
+        #if len(self.children) == 2:
+            #self.__fixnode()
+        itemcount = len(self.items)
+
+        self.__fixnode()
+        if self.parent is None and len(self.items) == 0:
+            self = self.children[0]
+
+        if keyinitem(key, self.items):
+            if len(self.children) != 0:
+                target = self.__keyposition(key)
+                inorderPredecessor = self.__inorder(target[0])
+                if self.parent is None and len(self.items) == 0:
+                    self = self.children[0]
+                if not keyinitem(key, self.items): #or self.items[target[0]] != target[1]:
+                    return self.T234delete(key)
+                elif len(self.children) == 0:
+                    del self.items[self.__keyposition(key)[0]]
+                    return
+                else:
+                    target = self.__keyposition(key)
+                    temp = self.items[target[0]]
+                    self.items[target[0]] = inorderPredecessor.items[-1]
+                    inorderPredecessor.items[-1] = temp
+                    del inorderPredecessor.items[-1]
+                    return
+                #del inorderPredecessor.items[inorderPredecessor.__keyposition(key)]
             else:
-                self.children[3].T234delete(key)
+                for i in range(len(self.items)):
+                    if self.items[i].key == key:
+                        del self.items[i]
+                        return
+
+        if key < self.items[0].key:
+            self.children[0].T234delete(key)
+        elif (len(self.items) == 1 and key > self.items[0].key) or key < self.items[1].key:
+            self.children[1].T234delete(key)
+        elif (len(self.items) == 2 and key > self.items[1].key) or key < self.items[2].key:
+            self.children[2].T234delete(key)
+        else:
+            self.children[3].T234delete(key)
 
 class T234:
     def __init__(self):
@@ -259,7 +281,10 @@ class T234:
         self.root.T234delete(key)
         if len(self.root.items) == 0:
             old = self.root
-            self.root = self.root.children[0]
-            old.children = None
-            del old
+            if self.root.children:
+                self.root = self.root.children[0]
+                old.children = None
+                del old
+            else:
+                return
 
